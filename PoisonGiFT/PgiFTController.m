@@ -481,21 +481,25 @@
 
 - (void)checkConfFiles
 {
-    [self check:@""];	// -> ~/Library/Application Support/Poisoned
+    BOOL setRandomPorts=NO;
+    if (![self check:@""]) setRandomPorts=YES;	// -> ~/Library/Application Support/Poisoned
     if (![self check:@"/giftd.conf"]) {
         // giftd.conf wasn't there already, so it's possible that the user still has an old gift.conf
         // if so, we have to save the old prefs form gift.conf into giftd.conf
         PGiFTConf *gift_conf = [PGiFTConf singleton];
         [gift_conf restoreOldPrefs];
     }
-    [self check:@"/OpenFT"];
-    if (![self check:@"/OpenFT/OpenFT.conf"]) {
+    if (![self check:@"/OpenFT"]) setRandomPorts=YES;
+    if (![self check:@"/OpenFT/OpenFT.conf"]) setRandomPorts=YES;
+    
+    if (setRandomPorts) {
         // OpenFT.conf wasn't there already, this means "port" and "http_port" still have the default values
         // we replace them with random values
         // we should take these two values into the prefs so the user can change these
         POpenFTConf *openft_conf = [POpenFTConf singleton];
         [openft_conf setRandomValues];
     }
+    
     [self check:@"/Gnutella"];
     [self check:@"/Gnutella/Gnutella.conf"];
     [self check:@"/FastTrack"];
