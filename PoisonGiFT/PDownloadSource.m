@@ -468,6 +468,7 @@ void playsonginitunes(void)
 					[pathExtension isEqualToString:@"aiff"])
 				{
 					itunesimport([path fileSystemRepresentation]);
+                                        // check for error in playsong script
 					if ([userDefaults boolForKey:@"PPlayFile"])
 						playsonginitunes();
 					if ([userDefaults boolForKey:@"PDeleteFile"])
