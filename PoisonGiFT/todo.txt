@@ -21,7 +21,8 @@
 **delete sources/downloads/uploads with the delete key
 **make textfields in download prefs editable. this will require code to save the pref after the textfield has been edited
 --allow people to sort search results by two (or more?) columns, for example, first you sort by artist and then you sort by album
---save search terms
+**save search terms (drawer)
+--save search terms (search text field menu?)
 ++fix itunes importing into classic version of itunes "this is a situation caused by people who use both classic and cocoa itunes we can only call the application the OS knows to be itunes. these users should stop using OS9, its dead. Or just stop using itunes in OS9 at the very least. This is like asking us to fix loading of classic IE when they have classic IE as their default browser."
 --make poisoned localizable
 **fix downloading files with international character file names
