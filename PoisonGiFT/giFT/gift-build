@@ -103,6 +103,13 @@ def build_fasttrack():
 	new_install_name = "@executable_path/../lib/libgiftproto.0.dylib"
 	os.spawnlp(os.P_WAIT, "install_name_tool", "install_name_tool", "-change", old_install_name, new_install_name, file)
 
+def build_opennap():
+	# http://developer.berlios.de/projects/gift-opennap/
+	os.chdir(root + "/build/giFT-OpenNap")
+	os.spawnlp(os.P_WAIT, "./autogen.sh", "./autogen.sh", prefix_arg)
+	os.spawnlp(os.P_WAIT, "make", "make")
+	os.spawnlp(os.P_WAIT, "make", "make", "install")
+	
 def build_pkgs(pkgs):
 	# save time
 	start_time = time.time()
@@ -118,18 +125,19 @@ def build_pkgs(pkgs):
 def main():
 	global build_dict
 	
-	build_order = ("pkgconfig", "libdb", "libogg", "libvorbis", "libtool", "gift", "openft", "gnutella", "fasttrack")
+	build_order = ("pkgconfig", "libdb", "libogg", "libvorbis", "libtool", "gift", "openft", "gnutella", "fasttrack", "opennap")
 	build_dict = {"pkgconfig" : build_pkgconfig, "libdb" : build_libdb,
 					"libogg" : build_libogg, "libvorbis" : build_libvorbis,
 					"libtool" : build_libtool, "gift" : build_gift,
 					"openft" : build_openft, "gnutella" : build_gnutella,
-					"fasttrack" : build_fasttrack}
+					"fasttrack" : build_fasttrack, "opennap" : build_opennap}
 	
 	# first setup the environment
 	os.environ['PATH'] = root + "/install/bin:" + os.environ['PATH']
 	os.environ['CPPFLAGS'] = "-I" + root + "/install/include"
 	os.environ['LDFLAGS'] = "-L" + root + "/install/lib -headerpad_max_install_names"
 	os.environ['MACOSX_DEPLOYMENT_TARGET'] = "10.2"
+	os.environ['ACLOCAL_FLAGS'] = "-I " + root + "/install/share/aclocal/"
 
 	if len(sys.argv) == 1:
 		build_pkgs(build_order)
@@ -167,6 +175,9 @@ def main():
 		# clean fasttrack
 		os.chdir(root + "/build/giFT-FastTrack")
 		os.spawnlp(os.P_WAIT, "make", "make", "distclean")
+		# clean opennap
+		os.chdir(root + "/build/giFT-OpenNap")
+		os.spawnlp(os.P_WAIT, "make", "make", "distclean")
 		
 		# delete install directory
 		#os.rmdir(root + "/install")
@@ -184,6 +195,8 @@ def main():
 		# gift daemon
 		os.spawnlp(os.P_NOWAIT, "cp", "cp", os.path.join(root,"install", "bin", "giftd"), os.path.join(install_root, "bin", "giftd"))
 		# plugins
+		os.spawnlp(os.P_NOWAIT, "cp", "cp", os.path.join(root, "install", "lib", "giFT", "libOpenNap.la"), os.path.join(install_root, "lib", "giFT", "libOpenNap.la"))
+		os.spawnlp(os.P_NOWAIT, "cp", "cp", os.path.join(root , "install", "lib", "giFT", "libOpenNap.so"), os.path.join(install_root, "lib", "giFT", "libOpenNap.so"))
 		os.spawnlp(os.P_NOWAIT, "cp", "cp", os.path.join(root, "install", "lib", "giFT", "libFastTrack.la"), os.path.join(install_root, "lib", "giFT", "libFastTrack.la"))
 		os.spawnlp(os.P_NOWAIT, "cp", "cp", os.path.join(root , "install", "lib", "giFT", "libFastTrack.so"), os.path.join(install_root, "lib", "giFT", "libFastTrack.so"))
 		os.spawnlp(os.P_NOWAIT, "cp", "cp", os.path.join(root, "install", "lib", "giFT", "libGnutella.la"), os.path.join(install_root, "lib", "giFT", "libGnutella.la"))
