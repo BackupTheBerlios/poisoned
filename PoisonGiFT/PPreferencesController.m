@@ -74,14 +74,14 @@
 - (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar
 {
     return [NSArray arrayWithObjects:
-        @"general",@"download",@"upload",@"protos",@"daemon",
+        @"general",NSToolbarSeparatorItemIdentifier,@"download",@"upload",@"protos",@"daemon",
         nil];
 }
 
 - (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
 {
     return [NSArray arrayWithObjects:
-        @"general",@"download",@"upload",@"protos",@"daemon",
+        @"general",NSToolbarSeparatorItemIdentifier,@"download",@"upload",@"protos",@"daemon",
         nil];
 }
 
