@@ -39,9 +39,8 @@
     if ([userDefaults boolForKey:@"PImportToiTunes"]) [importToiTunes setState:NSOnState];
     else [importToiTunes setState:NSOffState];
 
-    if ([userDefaults boolForKey:@"PImportToPlaylist"]) [importToPlaylist setState:NSOnState];
-    else [importToPlaylist setState:NSOffState];
-    
+    [self importPrefsChanged:NULL];
+	
     if ([userDefaults boolForKey:@"PPlayFile"]) [playFile setState:NSOnState];
     else [playFile setState:NSOffState];    
 
@@ -102,8 +101,20 @@
 
 - (IBAction)importPrefsChanged:(id)sender
 {
-    if ([importToiTunes state]==NSOnState) [userDefaults setBool:YES forKey:@"PImportToiTunes"];
-    else [userDefaults setBool:NO forKey:@"PImportToiTunes"];
+    if ([importToiTunes state]==NSOnState)
+	{
+		[userDefaults setBool:YES forKey:@"PImportToiTunes"];
+		[importToPlaylist setEnabled:YES];
+		[playFile setEnabled:YES];
+		[deleteFile setEnabled:YES];
+    }
+	else
+	{
+		[userDefaults setBool:NO forKey:@"PImportToiTunes"];
+		[importToPlaylist setEnabled:NO];
+		[playFile setEnabled:NO];
+		[deleteFile setEnabled:NO];
+	}
 }
 
 - (IBAction)importPlaylistChanged:(id)sender
