@@ -2963,7 +2963,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /usr/bin/python;
-			shellScript = "import os, sys, string\n\nbinary = os.environ['BUILD_PATH'] + \"/\" + os.environ['INNER_PRODUCT_SUBPATH']\nfd = os.popen(\"otool -L \" + binary)\nlines = fd.readlines()\nfd.close()\nfor line in lines:\n\tlibname = \"libgift.0.dylib\"\n\tpos = string.find(line, libname)\n\tif pos is not -1:\n\t\tstartpos = string.find(line, \"/\")\n\t\told_install_name = line[startpos:pos + len(libname)]\n\t\tnew_install_name = \"@executable_path/../Resources/giFT/lib/libgift.0.dylib\"\n\t\tos.spawnlp(os.P_WAIT, \"install_name_tool\", \"install_name_tool\", \"-change\", old_install_name, new_install_name, binary)\n\t\tbreak";
+			shellScript = "import os, sys, string\n\nbinary = os.environ['BUILD_DIR'] + \"/\" + os.environ['INNER_PRODUCT_SUBPATH']\nfd = os.popen(\"otool -L \" + binary)\nlines = fd.readlines()\nfd.close()\nfor line in lines:\n\tlibname = \"libgift.0.dylib\"\n\tpos = string.find(line, libname)\n\tif pos is not -1:\n\t\tstartpos = string.find(line, \"/\")\n\t\told_install_name = line[startpos:pos + len(libname)]\n\t\tnew_install_name = \"@executable_path/../Resources/giFT/lib/libgift.0.dylib\"\n\t\tos.spawnlp(os.P_WAIT, \"install_name_tool\", \"install_name_tool\", \"-change\", old_install_name, new_install_name, binary)\n\t\tbreak";
 		};
 		96211DAD04D857F5004C44A8 = {
 			fileEncoding = 30;
