@@ -107,7 +107,7 @@
 - (IBAction)cancel:(id)sender
 {
     int button = NSRunCriticalAlertPanel(@"Cancel selected download(s)?",
-        [NSString stringWithFormat:@"This will cancel the slected download(s), this is unrecoverable."], @"OK", @"Cancel", nil);
+        [NSString stringWithFormat:@"This will cancel the selected download(s), this is unrecoverable."], @"OK", @"Cancel", nil);
     if (button==NSOKButton)
     {
         NSEnumerator *enumerator = [table selectedRowEnumerator];
@@ -116,9 +116,8 @@
         while (num=[enumerator nextObject]) {
             item = [table itemAtRow:[num intValue]];
             if ([item objectForKey:@"hash"]) [hashes removeObject:[item objectForKey:@"hash"]];
+            [dataSource cancel:commander];
         }
-        
-        [dataSource cancel:commander];
     }
 }
 
