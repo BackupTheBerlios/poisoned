@@ -2930,6 +2930,7 @@
 				96B87E1E04D7255D00A24CA2,
 				96B87E2104D725EE00A24CA2,
 				96B87E2804D7260D00A24CA2,
+				96211DC004D85904004C44A8,
 				96B87E2D04D7267600A24CA2,
 			);
 			buildSettings = {
@@ -3269,6 +3270,82 @@
 //962
 //963
 //964
+		96211DAD04D857F5004C44A8 = {
+			expectedFileType = text;
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			path = libFastTrack.la;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		96211DAE04D857F5004C44A8 = {
+			expectedFileType = "compiled.mach-o.bundle";
+			isa = PBXFileReference;
+			path = libFastTrack.so;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		96211DB504D8580F004C44A8 = {
+			fileRef = 96211DAD04D857F5004C44A8;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		96211DB604D85812004C44A8 = {
+			fileRef = 96211DAE04D857F5004C44A8;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		96211DB904D858E2004C44A8 = {
+			children = (
+				96211DBA04D858E2004C44A8,
+				96211DBB04D858E2004C44A8,
+			);
+			isa = PBXGroup;
+			path = FastTrack;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		96211DBA04D858E2004C44A8 = {
+			expectedFileType = text;
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			path = FastTrack.conf;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		96211DBB04D858E2004C44A8 = {
+			expectedFileType = text;
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			path = nodes;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		96211DC004D85904004C44A8 = {
+			buildActionMask = 2147483647;
+			dstPath = giFT/share/FastTrack;
+			dstSubfolderSpec = 7;
+			files = (
+				96211DC304D85919004C44A8,
+				96211DC404D8591D004C44A8,
+			);
+			isa = PBXCopyFilesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96211DC304D85919004C44A8 = {
+			fileRef = 96211DBA04D858E2004C44A8;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		96211DC404D8591D004C44A8 = {
+			fileRef = 96211DBB04D858E2004C44A8;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		96B0387E04D7A988004FA6C4 = {
 			expectedFileType = "compiled.mach-o.dylib";
 			isa = PBXFileReference;
@@ -3348,6 +3425,8 @@
 			children = (
 				96B87DDB04D7231100A24CA2,
 				96B87DDC04D7231100A24CA2,
+				96211DAD04D857F5004C44A8,
+				96211DAE04D857F5004C44A8,
 			);
 			isa = PBXGroup;
 			path = giFT;
@@ -3382,6 +3461,7 @@
 				96B87DEC04D7231100A24CA2,
 				96B87DED04D7231100A24CA2,
 				96B87DF204D7231100A24CA2,
+				96211DB904D858E2004C44A8,
 			);
 			isa = PBXGroup;
 			path = share;
@@ -3487,6 +3567,8 @@
 			files = (
 				96B87E1F04D7257700A24CA2,
 				96B87E2004D7257700A24CA2,
+				96211DB504D8580F004C44A8,
+				96211DB604D85812004C44A8,
 			);
 			isa = PBXCopyFilesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
