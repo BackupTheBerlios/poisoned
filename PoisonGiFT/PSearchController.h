@@ -66,8 +66,10 @@
     
     NSMutableArray *recentSearches;
 
-	NSMutableArray *_newItems;
-	NSTimer *_refreshTimer;
+    NSMutableArray *_newItems;
+    NSTimer *_refreshTimer;
+
+    
 }
 
 - (void)saveSearches;

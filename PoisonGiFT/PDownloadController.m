@@ -189,6 +189,7 @@
     NSString *hash;
     if (!data) return;
     hash = [[data objectAtIndex:2] objectForKey:@"hash"];
+    NSLog(hash);
     [commander removeTicket:[data objectAtIndex:1]];
     [dataSource ADDDOWNLOAD:data];
     if (hash) {

@@ -326,6 +326,7 @@
 
     NSDictionary *tmp = [data objectAtIndex:2];
     NSString *hash = [tmp objectForKey:@"hash"];
+
     if (hash && [downloading_hashes containsObject:hash]) {
         NSString *query = [NSString stringWithFormat:@"ADDSOURCE user(%@) hash(%@) size(%@) url(%@) save(%@)",
             [commander prepare:[tmp objectForKey:@"user"]],
@@ -574,6 +575,7 @@
                 [commander prepare:[tmp objectForKey:@"file"]]
                 ];
         }
+        NSLog(query);
         [commander cmd:query];
     }
 }

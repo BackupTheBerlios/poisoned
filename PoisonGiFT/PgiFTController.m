@@ -589,17 +589,17 @@
             tmpSize = [[[tmp objectAtIndex:2] objectForKey:@"size"] doubleValue];
             
             NSString *Size = [self CommaizeDouble:tmpSize];
-            NSLog(Size);
+           // NSLog(Size);
             
             long tmpUsers = 0;
             tmpUsers = (long)[[[tmp objectAtIndex:2] objectForKey:@"users"] intValue];
             NSString *Users = [self Commaize:tmpUsers];
-            NSLog(Users);
+            //NSLog(Users);
             
             long tmpFiles = 0;
             tmpFiles = (long)[[[tmp objectAtIndex:2] objectForKey:@"files"] intValue];
             NSString *Files = [self Commaize:tmpFiles];
-            NSLog(Files);
+           // NSLog(Files);
             /* end commaize hack */
         
                     

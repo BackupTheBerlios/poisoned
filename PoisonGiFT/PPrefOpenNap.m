@@ -134,7 +134,7 @@
 }
 - (IBAction)napigatorIPChanged:(id)sender
 {
-    [opennap_conf setValue:[NSNumber numberWithInt:[sender intValue]] forKey:@"napigator_ip"];
+    [opennap_conf setValue:[sender stringValue] forKey:@"napigator_ip"];
     [self readConfFiles];
 }
 
