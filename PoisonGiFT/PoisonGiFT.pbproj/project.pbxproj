@@ -1095,12 +1095,12 @@
 				1DA96F900498938200000002,
 				1DAB5FCC049CCF5100000002,
 				1DAB5FCD049CCF5100000002,
-				1DDA9C1104BA3F8200000002,
 				1DDA9C2504BB1C3900000002,
 				1D099A1B04C7819D00000002,
 				1D099A1C04C7819D00000002,
 				96C77C0B04DAF43E00BC13BF,
 				FFED4EB1051802B800E8282B,
+				FFFF2ECE05277E0F00000038,
 			);
 			isa = PBXGroup;
 			name = Icons;
@@ -1810,17 +1810,6 @@
 			isa = PBXGroup;
 			name = Conf.Files;
 			refType = 4;
-		};
-		1DDA9C1104BA3F8200000002 = {
-			isa = PBXFileReference;
-			path = poison.icns;
-			refType = 4;
-		};
-		1DDA9C1204BA3F8200000002 = {
-			fileRef = 1DDA9C1104BA3F8200000002;
-			isa = PBXBuildFile;
-			settings = {
-			};
 		};
 		1DDA9C1504BA55B000000002 = {
 			fileEncoding = 30;
@@ -2538,6 +2527,7 @@
 				1D49BBA5046D182C00000002,
 				96B87DD604D7231100A24CA2,
 			);
+			comments = ...;
 			isa = PBXGroup;
 			name = PoisonGiFT;
 			path = "";
@@ -2561,7 +2551,7 @@
 		};
 		29B97317FDCFA39411CA2CEA = {
 			children = (
-				29B97318FDCFA39411CA2CEA,
+				29B97319FDCFA39411CA2CEA,
 				1D49BBAB046D626F00000002,
 				089C165CFE840E0CC02AAC07,
 				FF5C5CE80514415100000037,
@@ -2571,22 +2561,9 @@
 			path = "";
 			refType = 4;
 		};
-		29B97318FDCFA39411CA2CEA = {
-			children = (
-				29B97319FDCFA39411CA2CEA,
-				FF5C5CE00514406200000037,
-				FF5C5CE10514407600000037,
-				FF5C5CE20514408500000037,
-			);
-			isa = PBXVariantGroup;
-			name = MainMenu.nib;
-			path = "";
-			refType = 4;
-		};
 		29B97319FDCFA39411CA2CEA = {
 			isa = PBXFileReference;
-			name = English;
-			path = English.lproj/MainMenu.nib;
+			path = MainMenu.nib;
 			refType = 4;
 		};
 		29B97323FDCFA39411CA2CEA = {
@@ -2635,7 +2612,7 @@
 				GCC_VERSION = 3.3;
 				HEADER_SEARCH_PATHS = giFT/include;
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = giFT/lib;
+				LIBRARY_SEARCH_PATHS = "giFT/lib /Users/jayashton/PoisonGiFT/giFT/lib /Users/jayashton/PoisonGiFT/giFT/lib/giFT";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-headerpad_max_install_names";
 				PRECOMPILE_PREFIX_HEADER = YES;
@@ -2669,11 +2646,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.48</string>
+	<string>0.481</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>0.48</string>
+	<string>0.481</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
@@ -2803,7 +2780,6 @@
 				1D87096E049DE47C00000002,
 				1D870970049DE81F00000002,
 				1DE1027204A31E3F00000002,
-				1DDA9C1204BA3F8200000002,
 				1DDA9C2004BAFEA400000002,
 				1DDA9C2604BB1C3900000002,
 				1DDA9C2804BB213F00000002,
@@ -2834,7 +2810,8 @@
 				FFED4EAD051801B200E8282B,
 				FFED4EAF051801D700E8282B,
 				FFED4EB2051802B800E8282B,
-				FFD9AC5E0519B2BC00668C5C,
+				FFFE3BA80528923B00A211DF,
+				FFFF2ECF05277E0F00000038,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3237,6 +3214,7 @@
 				96B87DDD04D7231100A24CA2,
 				96B0387E04D7A988004FA6C4,
 				96B0387F04D7A988004FA6C4,
+				FFFF2F5D0528014B00000038,
 			);
 			isa = PBXGroup;
 			path = lib;
@@ -3625,24 +3603,6 @@
 			settings = {
 			};
 		};
-		FF5C5CE00514406200000037 = {
-			isa = PBXFileReference;
-			name = German;
-			path = German.lproj/MainMenu.nib;
-			refType = 4;
-		};
-		FF5C5CE10514407600000037 = {
-			isa = PBXFileReference;
-			name = Spanish;
-			path = Spanish.lproj/MainMenu.nib;
-			refType = 4;
-		};
-		FF5C5CE20514408500000037 = {
-			isa = PBXFileReference;
-			name = French;
-			path = French.lproj/MainMenu.nib;
-			refType = 4;
-		};
 		FF5C5CE60514414100000037 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -3777,12 +3737,6 @@
 			settings = {
 			};
 		};
-		FFD9AC5E0519B2BC00668C5C = {
-			fileRef = 29B97318FDCFA39411CA2CEA;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		FFED4EAC051801B200E8282B = {
 			isa = PBXFileReference;
 			path = network.tiff;
@@ -3815,6 +3769,28 @@
 			isa = PBXBuildFile;
 			settings = {
 			};
+		};
+		FFFE3BA80528923B00A211DF = {
+			fileRef = 29B97319FDCFA39411CA2CEA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		FFFF2ECE05277E0F00000038 = {
+			isa = PBXFileReference;
+			path = poison.icns;
+			refType = 4;
+		};
+		FFFF2ECF05277E0F00000038 = {
+			fileRef = FFFF2ECE05277E0F00000038;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		FFFF2F5D0528014B00000038 = {
+			isa = PBXFileReference;
+			path = libxml2.2.dylib;
+			refType = 4;
 		};
 	};
 	rootObject = 29B97313FDCFA39411CA2CEA;

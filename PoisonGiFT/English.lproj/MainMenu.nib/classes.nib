@@ -12,19 +12,21 @@
                 downbrowsehost = id; 
                 expand = id; 
                 findMoreSources = id; 
+                openFile = id; 
                 pause = id; 
                 resume = id; 
-                reveal = id; 
             }; 
             CLASS = PDownloadController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
                 contextualMenu = NSMenu; 
+                controller = id; 
                 "m_browse" = NSMenuItem; 
                 "m_cancel" = NSMenuItem; 
                 "m_cleanup" = NSMenuItem; 
                 "m_delsource" = NSMenuItem; 
                 "m_findsources" = NSMenuItem; 
+                "m_openFile" = NSMenuItem; 
                 "m_pause" = NSMenuItem; 
                 "m_resume" = NSMenuItem; 
                 "m_reveal" = NSMenuItem; 
