@@ -118,7 +118,7 @@
     [scanner scanUpToString:@"://" intoString:&proto];
 
     [item setObject:proto forKey:@"PProto"];
-
+    BOOL matchesFilter = [self matchesFilter:item];
 
     if (sources) { //------------------------------------- new source for existing file
         NSMutableArray *sourcesArray = [sources objectForKey:@"array"];
@@ -144,7 +144,8 @@
 
         [sources setObject:item forKey:user];
 
-        if (selected_column && [[selected_column identifier] isEqualToString:@"user"]) {
+        // totally forgot to check here if the filter matches, fixed now
+        if (matchesFilter && selected_column && [[selected_column identifier] isEqualToString:@"user"]) {
             [source removeObject:sourcesArray];
             [self insertObject:sourcesArray source:source];
             if (isFiltered) {
@@ -154,7 +155,6 @@
         }
     }
     else { //--------------------------------------------  new file
-        BOOL matchesFilter = [self matchesFilter:item];
         [item setObject:[icon_shop iconForProto:proto] forKey:@"PProtoIcon"];
         [item setObject:[icon_shop iconForFileType:[[item objectForKey:@"file"] pathExtension]] forKey:@"icon"];
         NSMutableArray *newFileArray = [NSMutableArray arrayWithObjects:item,nil];
