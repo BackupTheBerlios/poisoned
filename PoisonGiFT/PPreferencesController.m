@@ -123,14 +123,14 @@
     else if ([itemIdentifier isEqualToString:@"protos"]) {
         [item setLabel:@"Protocols"];
         [item setPaletteLabel:@"Protocols"];
-        [item setImage:[NSImage imageNamed:@"proto.tiff"]];
+        [item setImage:[NSImage imageNamed:@"network.tiff"]];
         [item setTarget:self];
         [item setAction:@selector(switchToProtos:)];
     }
     else if ([itemIdentifier isEqualToString:@"plugins"]) {
         [item setLabel:@"Plugins"];
         [item setPaletteLabel:@"Plugins"];
-        [item setImage:[NSImage imageNamed:@"plugin.tiff"]];
+        [item setImage:[NSImage imageNamed:@"ref_plugins.png"]];
         [item setTarget:self];
         [item setAction:@selector(switchToPlugins:)];
     }
