@@ -1122,7 +1122,7 @@ _cfsocketCallback( CFSocketRef inCFSocketRef, CFSocketCallBackType inType, CFDat
 			}
 			else
 			{
-				NSLog(@"connect error: %d", *((unsigned int *)inData));
+				//NSLog(@"connect error: %d", *((unsigned int *)inData));
 				[netsocket _cfsocketDisconnected];
 			}
 			break;
