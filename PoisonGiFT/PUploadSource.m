@@ -129,10 +129,10 @@
     NSNumber *num;
     NSMutableDictionary *item;
     while (num=[enumerator nextObject]) {
-        item = [table itemAtRow:[num intValue]];
-        [deletedDownloads addObject:[item objectForKey:@"PTicket"]];
+        item = [source objectAtIndex:[num intValue]];
+        [deletedUploads addObject:[item objectForKey:@"PTicket"]];
         if ([[item objectForKey:@"PStatus"] intValue]>1) {
-            [deletedDownloads addObject:[item objectForKey:@"PTicket"]];
+            [deletedUploads addObject:[item objectForKey:@"PTicket"]];
             [tmpcmd appendString:[NSString stringWithFormat:@";\nTRANSFER(%@) action(cancel)",[item objectForKey:@"PTicket"]]];
         }
     }

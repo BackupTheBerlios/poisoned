@@ -43,7 +43,7 @@
     
     BOOL sortAscending;
     
-    id giftCommander
+    id giftCommander;
 }
 
 - (id)initWithTable:(PTableView *)_table;
