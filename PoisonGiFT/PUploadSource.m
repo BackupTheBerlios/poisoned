@@ -489,6 +489,11 @@
     NSString *ticket = [data objectAtIndex:1];
     if (!ticket) return;
     NSMutableDictionary *item = [tickets objectForKey:ticket];
+    
+    // it's possible that we already removed the upload from the table
+    // if the user cancelled with delete key
+    if (!item) return;
+    
     if ([[item objectForKey:@"PStatus"] intValue] == PCOMPLETED) {
         if ([userDefaults boolForKey:@"PRemoveCompletedUploads"]) {
             [source removeObject:[tickets objectForKey:ticket]];
