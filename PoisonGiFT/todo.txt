@@ -23,5 +23,4 @@
 --save search terms
 --fix itunes importing into classic version of itunes
 --make poisoned localizable
-**fix downloading files with international character file names (fixed with using lossy conversion)
-    --fix without using lossy conversion
+**fix downloading files with international character file names
