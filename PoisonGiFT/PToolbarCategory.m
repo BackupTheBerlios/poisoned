@@ -261,7 +261,7 @@
     else if ([itemIdentifier isEqualToString:@"iTMS"]) {
         [item setLabel:@"Buy"];
         [item setPaletteLabel:@"Buy"];
-        [item setImage:[currentTool objectForKey:@"resume"]];
+        [item setImage:[NSImage imageNamed:@"iTMS.tiff"]];
         [item setTarget:search];
         [item setAction:@selector(buyAtiTMS:)];
         [item setToolTip:@"Buy at the iTunes Music Store"];
