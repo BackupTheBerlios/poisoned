@@ -22,67 +22,6 @@
 #import "PMainController.h"
 #import "PTableMenu.h"
 
-// this code is from
-
-void buysong(char *title, char *artist, char *album, char *filename)
-{
-        int i,i1=0;
-        
-        if (artist=="" && title=="" && album=="") 
-        {
-            for (i=0;i<strlen(filename);i++) 
-              if (filename[i]=='-') 
-                 i1=i+1;
-            for (i=0;i<strlen(filename);i++) 
-            {
-                if (filename[i]=='.')
-                    filename[i]=0;
-                title=&filename[i1];
-            }
-        }
-        
-
-        NSString *scriptSource = [NSString stringWithFormat:[NSString stringWithCString:
-        "to parse_spaces_in(x)\n"
-        "	set a to text of x\n"
-        "	set b to {}\n"
-        "	repeat with i from 1 to length of a\n"
-        "		if character i of a is space then\n"
-        "			copy \"%%20\" to end of b\n"
-        "		else\n"
-        "			copy character i of a to end of b\n"
-        "		end if\n"
-        "	end repeat\n"
-        "	return b as string\n"
-        "end parse_spaces_in\n"
-        "copy my parse_spaces_in(\"%s\") to theParsedArtist\n"
-        "copy my parse_spaces_in(\"%s\") to theParsedTrack\n"
-        "copy my parse_spaces_in(\"%s\") to theParsedAlbum\n"
-        "set searchpage to \"itms://phobos.apple.com/WebObjects/MZSearch.woa/wa/advancedSearchResults?\"\n"
-        "set searchpage to searchpage & \"songTerm=\" & theParsedTrack & \"&\"\n"
-        "set searchpage to searchpage & \"artistTerm=\" & theParsedArtist & \"&\"\n"
-        "set searchpage to searchpage & \"albumTerm=\" & theParsedAlbum & \"&\"\n"
-        "open location searchpage\n"], artist, title, album];
-	
-        
-        NSLog(@"scriptSource: %@", scriptSource);
-        
-	NSAppleScript *script = [[[NSAppleScript alloc] initWithSource:scriptSource] autorelease];
-	NSDictionary *status = NULL;
-	NSAppleEventDescriptor *descriptor = [script executeAndReturnError:&status];
-	if ([descriptor descriptorType] == 'obj ')
-		NSLog(@"Buysong in iTunes script run successfully");
-	else if ([descriptor descriptorType] == typeNull)
-	{
-		NSLog(@"Buysong in iTunes script is still running");
-	}
-	else
-	{
-		NSLog(@"Buysong in iTunes script returned error: %@", [status objectForKey: @"NSAppleScriptErrorMessage"]);
-	}
-	// non destructive if error is returned so no need to check at this time
-}
-
 @implementation PSearchController
 
 - (void)awakeFromNib
@@ -613,31 +552,46 @@ void buysong(char *title, char *artist, char *album, char *filename)
     return NO;
 }
 
+
 // FOR TESTING...
 - (void)buyAtiTMS:(id)sender
 {
     if ([r_table numberOfSelectedRows]!=1) return;
-    NSString *title = nil;	char *c_title="";
-    NSString *artist = nil;	char *c_artist="";
-    NSString *album = nil;	char *c_album="";
-    NSString *filename = nil;	char *c_filename="";
+    char *filename;
+    NSString* artistTerm;
+    NSString* titleTerm;
+    NSString* albumTerm;
+    NSString* title;
+    NSURL* url;
+    int i,i1=0;
     NSDictionary *item = [r_table itemAtRow:[r_table selectedRow]];
+
+        filename = (char *)[[item objectForKey:@"file"] cString];
         
-    title	= [item objectForKey:@"title"];
-    artist	= [item objectForKey:@"artist"];
-    album	= [item objectForKey:@"album"];
-    filename	= [item objectForKey:@"file"];
+        if (![item objectForKey:@"artist"] && ![item objectForKey:@"title"] && ![item objectForKey:@"album"]) 
+        {
+            for (i=0;i<strlen(filename);i++) 
+              if (filename[i]=='-') 
+                 i1=i+1;
+            for (i=0;i<strlen(filename);i++) 
+            {
+                if (filename[i]=='.')
+                    filename[i]=0;
+                title=[NSString stringWithFormat:@"%s", &filename[i1]];
+            }
+            titleTerm=(NSString*)CFURLCreateStringByAddingPercentEscapes(0, title,0,0,kCFStringEncodingISOLatin1);
+            url=[NSURL URLWithString:[NSString stringWithFormat:@"itms://phobos.apple.com/WebObjects/MZSearch.woa/wa/advancedSearchResults?songTerm=%@", titleTerm]];
+        } else {
+        
+            artistTerm=(NSString*)CFURLCreateStringByAddingPercentEscapes(0,[item objectForKey:@"artist"],0,0,kCFStringEncodingISOLatin1);
+            titleTerm=(NSString*)CFURLCreateStringByAddingPercentEscapes(0,[item objectForKey:@"title"],0,0,kCFStringEncodingISOLatin1);                                                                        
+            albumTerm=(NSString*)CFURLCreateStringByAddingPercentEscapes(0,[item objectForKey:@"album"],0,0,kCFStringEncodingISOLatin1);
     
-    if (filename) 
-        c_filename	= (char *)[filename cString];
-    if (artist)
-        c_artist	= (char *)[artist cString];
-    if (title)
-        c_title		= (char *)[title cString];
-    if (album)
-        c_album		= (char *)[album cString];
-    
-    buysong(c_title,c_artist,c_album,c_filename);
+            url=[NSURL URLWithString:[NSString stringWithFormat:@"itms://phobos.apple.com/WebObjects/MZSearch.woa/wa/advancedSearchResults?songTerm=%@&artistTerm=%@&albumTerm=%@", titleTerm, artistTerm, albumTerm]];
+        }
+        
+        [[NSWorkspace sharedWorkspace] openURL:url];
+
 }
 
 @end
