@@ -190,6 +190,16 @@
         else
             return YES;
     }
+    else if ([title isEqualToString:@"Pause/Resume"]){
+        if ([s_table numberOfSelectedRows]<=0) return NO;
+        else
+            return YES;
+    }
+    else if ([title isEqualToString:@"Delete Search"]){
+        if ([s_table numberOfSelectedRows]<=0) return NO;
+        else
+            return YES;
+    }
     else if ([title isEqualToString:@"Browse Host..."]){
         if ([r_table numberOfSelectedRows]==1 && ![[r_table itemAtRow:[r_table selectedRow]] objectForKey:@"PExpandable"]) return YES;
         else return NO;
