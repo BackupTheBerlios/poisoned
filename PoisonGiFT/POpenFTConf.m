@@ -87,4 +87,14 @@ static POpenFTConf *singleton;
     [super dealloc];
 }
 
+- (void)setRandomValues
+{
+    [self read];
+    srandom((long)[[NSDate date] timeIntervalSinceReferenceDate]);
+    // port 	    : random (1215, 2215)
+    [self setValue:[NSNumber numberWithInt:(random()%1000)+1215] forKey:@"port"];
+    // http_port    : random (2216, 3216)
+    [self setValue:[NSNumber numberWithInt:(random()%1000)+2216] forKey:@"http_port"];
+}
+
 @end
