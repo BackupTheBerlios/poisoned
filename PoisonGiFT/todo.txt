@@ -6,7 +6,7 @@
 --fix the text at the top of the main windows so that it is
 	black and not grey.
 --save the drawer size
---put new results at top of search list
+**put new results at top of search list
 **Upload and Download throttling
 --fixing the with drawer after hiding the window
 --a slider with two knobs for the size filter
