@@ -65,6 +65,9 @@ def build_openft():
 	os.spawnlp(os.P_WAIT, "make", "make")
 	os.spawnlp(os.P_WAIT, "make", "make", "install")
 	file = root + "/install/lib/giFT/libOpenFT.so"
+	old_install_name = root + "/install/lib/libgift.0.dylib"
+	new_install_name = "@executable_path/../lib/libgift.0.dylib"
+	os.spawnlp(os.P_WAIT, "install_name_tool", "install_name_tool", "-change", old_install_name, new_install_name, file)
 	old_install_name = root + "/install/lib/libgiftproto.0.dylib"
 	new_install_name = "@executable_path/../lib/libgiftproto.0.dylib"
 	os.spawnlp(os.P_WAIT, "install_name_tool", "install_name_tool", "-change", old_install_name, new_install_name, file)
@@ -95,6 +98,9 @@ def build_fasttrack():
 	file = root + "/install/lib/giFT/libFastTrack.so"
 	old_install_name = root + "/install/lib/libgift.0.dylib"
 	new_install_name = "@executable_path/../lib/libgift.0.dylib"
+	os.spawnlp(os.P_WAIT, "install_name_tool", "install_name_tool", "-change", old_install_name, new_install_name, file)
+	old_install_name = root + "/install/lib/libgiftproto.0.dylib"
+	new_install_name = "@executable_path/../lib/libgiftproto.0.dylib"
 	os.spawnlp(os.P_WAIT, "install_name_tool", "install_name_tool", "-change", old_install_name, new_install_name, file)
 
 def build_pkgs(pkgs):
