@@ -129,6 +129,7 @@
         [userDefaults setBool:NO forKey:@"PImportToiTunes"];
         [userDefaults setBool:NO forKey:@"PImportToPlaylist"];
         [userDefaults setBool:NO forKey:@"PPlayFile"];
+        [userDefaults setBool:NO forKey:@"PNoFilePlayFile"];
         [userDefaults setBool:NO forKey:@"PDeleteFile"];
         [userDefaults setBool:NO forKey:@"PSwitchToDownloads"];
         
