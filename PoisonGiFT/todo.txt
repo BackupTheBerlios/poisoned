@@ -15,3 +15,4 @@
 **added play music only if itunes is not playing option
 **rewrite to the itunes scripting so it works a little better
 **randomize port and http_port in OpenFT.conf
+**add port and http_port to the OpenFT prefs

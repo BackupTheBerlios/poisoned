@@ -40,12 +40,16 @@
 - (void)enable
 {
         [alias setEnabled:YES];
+        [port setEnabled:YES];
+        [http_port setEnabled:YES];
         [nodeClass setEnabled:YES];
 }
 
 - (void)disable
 {
         [alias setEnabled:NO];
+        [port setEnabled:NO];
+        [http_port setEnabled:NO];
         [nodeClass setEnabled:NO];
         [tabView selectTabViewItemAtIndex:0];
 }
@@ -61,6 +65,10 @@
     [openft_conf read];
     
     [alias setStringValue:[openft_conf optionForKey:@"alias"]];
+    
+    [port setIntValue:[[openft_conf optionForKey:@"port"] intValue]];
+    [http_port setIntValue:[[openft_conf optionForKey:@"http_port"] intValue]];
+
     int class = [[openft_conf optionForKey:@"class"] intValue];
     switch (class) {
         case 1:
@@ -107,11 +115,15 @@
 
 - (IBAction)helpClasses:(id)sender
 {
-    [self displayHelp:@"OpenFTConfNodeClasses" title:@"Help: Node Classes"];
+    [self displayHelp:@"OpenFTConfNodeClasses" title:@"OpenFT Help: Node Classes"];
 }
 - (IBAction)helpSEARCH:(id)sender
 {
-    [self displayHelp:@"OpenFTSEARCH" title:@"Help: SEARCH Node"];
+    [self displayHelp:@"OpenFTSEARCH" title:@"OpenFT Help: SEARCH Node"];
+}
+- (IBAction)helpPorts:(id)sender
+{
+    [self displayHelp:@"OpenFTPorts" title:@"OpenFT Help: Ports"];
 }
 
 // Had to change all actions for setAction: to newAction:
@@ -119,6 +131,16 @@
 - (IBAction)newAlias:(id)sender
 {
     [openft_conf setValue:[alias stringValue] forKey:@"alias"];
+}
+
+- (IBAction)newPort:(id)sender
+{
+    [openft_conf setValue:[NSNumber numberWithInt:[sender intValue]] forKey:@"port"];
+}
+
+- (IBAction)newHTTP_port:(id)sender
+{
+    [openft_conf setValue:[NSNumber numberWithInt:[sender intValue]] forKey:@"http_port"];
 }
 
 - (IBAction)newNodeClass:(id)sender

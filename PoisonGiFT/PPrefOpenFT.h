@@ -31,6 +31,8 @@
     IBOutlet NSButton *private_env;
     IBOutlet NSTabView *tabView;
     IBOutlet NSSlider *totalCacheSize;
+    IBOutlet NSTextField *port;
+    IBOutlet NSTextField *http_port;
     
     IBOutlet NSPanel *helpPanel;
     IBOutlet NSTextView *helpTextView;
@@ -46,8 +48,13 @@
 - (void)displayHelp:(NSString *)file title:(NSString *)title;
 - (IBAction)helpClasses:(id)sender;
 - (IBAction)helpSEARCH:(id)sender;
+- (IBAction)helpPorts:(id)sender;
 
 - (IBAction)newAlias:(id)sender;
+
+- (IBAction)newPort:(id)sender;
+- (IBAction)newHTTP_port:(id)sender;
+
 - (IBAction)newNodeClass:(id)sender;
 
 // SEARCH node settings
