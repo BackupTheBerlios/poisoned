@@ -123,7 +123,6 @@
     }
     else [self initWindow:AQUAFIED];
     
-    [drawer open];
     [toolbarSearch retain];
     [toolbarSearchRealm retain];
 
@@ -176,7 +175,10 @@
         // set max length for recent searches list to 15
         [userDefaults setInteger:15 forKey:@"PMaxRecentSearchesListCount"];
     }
-
+    
+    /* drawer open works best here - ashton */
+    [drawer open];
+    
     if (firstRun) {
         [giFT checkConfFiles];
         [self openPrefs:self];
@@ -663,6 +665,8 @@
 /* set our application defaults, used for first run or poisoned reset - ashton */
 -(void)setDefaults
 {
+    [drawer setContentSize:NSMakeSize(138,138)];
+    
     [userDefaults setBool:NO forKey:@"PFirstRun"];
     [userDefaults setInteger:AQUAFIED forKey:@"PAppearance"];
 
@@ -690,6 +694,7 @@
     [userDefaults setBool:NO forKey:@"PRemoveCancelledUploads"];
 
     [userDefaults setBool:YES forKey:@"PAutoVersionCheck"];
+
 }
 
 @end

@@ -31,7 +31,7 @@
                 @"giFTConnect",NSToolbarFlexibleSpaceItemIdentifier,@"giFTLaunch",nil],
             [NSArray arrayWithObjects:
                 @"navigation",@"drawer",NSToolbarSeparatorItemIdentifier,
-                @"searchBrowse"/*,@"iTMS"*/,@"searchDownload",@"searchField",@"searchRealm",@"searchStop",nil],
+                @"searchBrowse",@"iTMS",@"searchDownload",@"searchField",@"searchRealm",@"searchStop",nil],
             [NSArray arrayWithObjects:
                 @"navigation",@"drawer",NSToolbarSeparatorItemIdentifier,
                 @"downCancel",@"downPause",@"downResume",NSToolbarSeparatorItemIdentifier,
@@ -56,7 +56,7 @@
                 @"giFTConnect",@"giFTLaunch",nil],
             [NSArray arrayWithObjects:
                 @"navigation",@"drawer",
-                @"searchField",@"searchRealm",@"searchBrowse",@"searchDownload",@"searchStop"/*,@"iTMS" only for testing */,nil],
+                @"searchField",@"searchRealm",@"searchBrowse",@"searchDownload",@"searchStop",@"iTMS" /*only for testing */,nil],
             [NSArray arrayWithObjects:@"navigation",@"drawer",
                 @"downExpand",@"downCollapse",
                 @"downCancel",@"downPause",@"downResume",@"downDelSource",@"downBrowseHost",@"downClean",nil],
@@ -258,14 +258,14 @@
     }
     
     // THIS IS ONLY FOR TESTING...
-    /*else if ([itemIdentifier isEqualToString:@"iTMS"]) {
+    else if ([itemIdentifier isEqualToString:@"iTMS"]) {
         [item setLabel:@"Buy"];
         [item setPaletteLabel:@"Buy"];
         [item setImage:[NSImage imageNamed:@"iTMS.tiff"]];
         [item setTarget:search];
         [item setAction:@selector(buyAtiTMS:)];
         [item setToolTip:@"Buy at the iTunes Music Store"];
-    }*/
+    }
     return [item autorelease];
 }
 
