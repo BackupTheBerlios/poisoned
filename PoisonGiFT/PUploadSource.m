@@ -49,6 +49,11 @@
     [super dealloc];
 }
 
+- (void)setCommander:(id)_giftCommander
+{
+    giftCommander = _giftCommander;
+}
+
 - (void)disconnected
 {
     [tickets removeAllObjects];
@@ -109,6 +114,39 @@
         if (![tmp objectForKey:@"PExpandable"] || [[tmp objectForKey:@"PStatus"] intValue] != PPAUSED) return NO;
     }*/
     return YES;
+}
+
+- (void)deleteEvent:(id)sender
+{
+    // this array stores the tickets of the deleted downloads
+    // so we don't have to delete their sources, if they are selected too
+    NSMutableArray *deletedUploads = [[[NSMutableArray alloc] init] autorelease];
+        
+    // we store all commands in one string, and send it at once
+    NSMutableString *tmpcmd = [[[NSMutableString alloc] initWithString:@""] autorelease];
+    
+    NSEnumerator *enumerator = [table selectedRowEnumerator];
+    NSNumber *num;
+    NSMutableDictionary *item;
+    while (num=[enumerator nextObject]) {
+        item = [table itemAtRow:[num intValue]];
+        [deletedDownloads addObject:[item objectForKey:@"PTicket"]];
+        if ([[item objectForKey:@"PStatus"] intValue]>1) {
+            [deletedDownloads addObject:[item objectForKey:@"PTicket"]];
+            [tmpcmd appendString:[NSString stringWithFormat:@";\nTRANSFER(%@) action(cancel)",[item objectForKey:@"PTicket"]]];
+        }
+    }
+    
+    // now we just have to remove the deleted uploads from the table
+    NSString *ticket;
+    int i, count = [deletedUploads count];
+    for (i=0;i<count;i++) {
+        ticket = [deletedUploads objectAtIndex:i];
+        [source removeObject:[tickets objectForKey:ticket]];
+        [tickets removeObjectForKey:tickets];
+        [table reloadData];
+    }
+    [giftCommander performSelector:@selector(cmd:) withObject:[tmpcmd substringFromIndex:2]];
 }
 
 - (void)cancel:(id)commander

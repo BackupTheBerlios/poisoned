@@ -42,9 +42,13 @@
     NSUserDefaults *userDefaults;
     
     BOOL sortAscending;
+    
+    id giftCommander
 }
 
 - (id)initWithTable:(PTableView *)_table;
+
+- (void)setCommander:(id)_giftCommander;
 
 - (id)itemAtRow:(int)row;
 
@@ -68,6 +72,9 @@
 - (int)numberOfDownloads;
 
 - (void)disconnected;
+
+// respond to delete key...
+- (void)deleteEvent:(id)sender;
 
 - (void)cancel:(id)commander;
 - (void)pause:(id)commander;
