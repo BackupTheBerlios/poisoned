@@ -23,13 +23,20 @@
 
 #include <unistd.h>
 
-int iTunesPlaylistImport(const char *filenamewithpath)
-{    
+int iTunesPlaylistImport(const char *filenamewithpath, int playlistmode)
+{
+        NSString *playstring;
+
+        if (playlistmode) 
+           playstring=@"Poisoned";
+        else 
+           playstring=@"Library";
+
 	NSString *scriptSource = [NSString stringWithFormat:[NSString stringWithCString:
 	"tell application \"iTunes\"\n"
 	"   launch\n"
 	"   set Tester to \"0\"\n"
-	"   set playlist_name to (\"Poisoned\")\n"
+	"   set playlist_name to (\"%@\")\n"
 	"   repeat with i in playlists\n"
 	"		set currentPlaylist to name of i as string\n"
 	"		if currentPlaylist is equal to playlist_name then\n"
@@ -41,7 +48,9 @@ int iTunesPlaylistImport(const char *filenamewithpath)
 	"		set name of new_playlist to playlist_name\n"
 	"   end if\n"
 	"   add POSIX file \"%s\" to playlist playlist_name\n"
-	"end tell"], filenamewithpath];
+	"end tell"], playstring, filenamewithpath];
+        
+        NSLog(@"scriptSource: %@", scriptSource);
     
 	NSAppleScript *script = [[[NSAppleScript alloc] initWithSource:scriptSource] autorelease];
 	NSDictionary *status = NULL;
@@ -50,7 +59,7 @@ int iTunesPlaylistImport(const char *filenamewithpath)
 		NSLog(@"Import to iTunes Playlist script run successfully");
 	else if ([descriptor descriptorType] == typeNull)
 	{
-		NSLog(@"Import to iTunes Playlist failed");
+		NSLog(@"Import to iTunes Playlist is still running");
 		return 0;
 	}
 	else
@@ -61,46 +70,44 @@ int iTunesPlaylistImport(const char *filenamewithpath)
 	return 1;
 }
 
-int iTunesLibraryImport(const char *filenamewithpath)
-{    
-        
-	NSString *scriptSource = [NSString stringWithFormat:[NSString stringWithCString:
-	"tell application \"iTunes\"\n"
-	"   launch\n"
-	"	add POSIX file \"%s\" to playlist \"Library\"\n"
-	"end tell"], filenamewithpath];
-    
-	NSAppleScript *script = [[[NSAppleScript alloc] initWithSource:scriptSource] autorelease];
-	NSDictionary *status = NULL;
-	NSAppleEventDescriptor *descriptor = [script executeAndReturnError:&status];
-	if ([descriptor descriptorType] == 'obj ')
-		NSLog(@"Import to iTunes Library script run successfully");
-	else if ([descriptor descriptorType] == typeNull)
-	{
-		NSLog(@"Import to iTunes Library failed");
-		return 0;
-	}
-	else
-	{
-		NSLog(@"Import to iTunes Library script returned error: %@", [status objectForKey: @"NSAppleScriptErrorMessage"]);
-		return 0;
-	}
-	
-    return 1;
-}
 
-void playsongifnotplaying(void)
+
+void playsonginitunes(int playlistmode, int noplaywhenplaying)
 {
+        NSString *playstring;
+        NSString *noplaystring;
 
-        NSString *scriptSource = [NSString stringWithCString:
+        if (playlistmode) 
+           playstring=@"Poisoned";
+        else 
+           playstring=@"Library";
+           
+        if (noplaywhenplaying)
+           noplaystring=@"if player state is not playing then\n";
+        else 
+           noplaystring=@"if stash is 0 then\n";
+        
+        NSString *scriptSource = [NSString stringWithFormat:[NSString stringWithCString:
+        "set cd to (get current date)\n"
+        "set stash to 0\n"
         "tell application \"iTunes\"\n"
-	"  launch\n"
-        "  if player state is not playing then\n"
-        "    tell playlist \"Poisoned\"\n"
-	"      play last track\n"
-        "    end tell\n"
-        "  end if\n"
-	"end tell"];
+        "launch\n"
+        "%@"
+	"set theLib to playlist \"%@\"\n"
+	"repeat with t from 1 to (count every track of theLib)\n"
+	"	tell track t of theLib\n"
+	"		set tDif to (cd - (get date added))\n"
+	"		if stash is 0 or stash is greater than tDif then\n"
+	"			copy tDif to stash\n"
+	"			set theLoc to location\n"
+	"		end if\n"
+	"	end tell\n"
+	"end repeat\n"
+	"play theLoc\n"
+        "end if\n"
+	"end tell"], noplaystring, playstring];
+        
+        NSLog(@"scriptSource: %@", scriptSource);
         
 	NSAppleScript *script = [[[NSAppleScript alloc] initWithSource:scriptSource] autorelease];
 	NSDictionary *status = NULL;
@@ -109,34 +116,7 @@ void playsongifnotplaying(void)
 		NSLog(@"Play in iTunes script run successfully");
 	else if ([descriptor descriptorType] == typeNull)
 	{
-		NSLog(@"Play in iTunes script run failed");
-	}
-	else
-	{
-		NSLog(@"Play in iTunes script returned error: %@", [status objectForKey: @"NSAppleScriptErrorMessage"]);
-	}
-	// non destructive if error is returned so no need to check at this time
-}
-
-void playsonginitunes(void)
-{
-          
-        NSString *scriptSource = [NSString stringWithCString:
-	"tell application \"iTunes\"\n"
-	"   launch\n"
-        "    tell playlist \"Poisoned\"\n"
-	"      play last track\n"
-        "    end tell\n"
-	"end tell"];
-        
-	NSAppleScript *script = [[[NSAppleScript alloc] initWithSource:scriptSource] autorelease];
-	NSDictionary *status = NULL;
-	NSAppleEventDescriptor *descriptor = [script executeAndReturnError:&status];
-	if ([descriptor descriptorType] == 'obj ')
-		NSLog(@"Play in iTunes script run successfully");
-	else if ([descriptor descriptorType] == typeNull)
-	{
-		NSLog(@"Play in iTunes script run failed");
+		NSLog(@"Play in iTunes script is still running");
 	}
 	else
 	{
@@ -546,28 +526,16 @@ void playsonginitunes(void)
 					[pathExtension isEqualToString:@"aif"] ||
 					[pathExtension isEqualToString:@"aiff"])
 				{
-					if ([userDefaults boolForKey:@"PImportToPlaylist"])
-						importGood=iTunesPlaylistImport([path fileSystemRepresentation]);
-					else 
-						importGood=iTunesLibraryImport([path fileSystemRepresentation]);
-					if (importGood && [userDefaults boolForKey:@"PImportToPlaylist"])
-					{
-						if ([userDefaults boolForKey:@"PPlayFile"]) 
-                                                {
-                                                    if ([userDefaults boolForKey:@"PNoFilePlayFile"])
-                                                        playsongifnotplaying();
-                                                    else
-							playsonginitunes();
-                                                }
-				
-					}
-                                        if (importGood && [userDefaults boolForKey:@"PDeleteFile"])
-                                        {
-                                            if (unlink([path fileSystemRepresentation])==0)
-                                                NSLog(@"deleting: %s", [path fileSystemRepresentation]);
-                                            else
-                                                NSLog(@"could not delete file: %s", [path fileSystemRepresentation]);
-                                        }
+                                    importGood=iTunesPlaylistImport([path fileSystemRepresentation], [userDefaults boolForKey:@"PImportToPlaylist"]);
+                                    if (importGood && [userDefaults boolForKey:@"PPlayFile"]) 
+                                        playsonginitunes([userDefaults boolForKey:@"PImportToPlaylist"], [userDefaults boolForKey:@"PNoFilePlayFile"]);
+                                    if (importGood && [userDefaults boolForKey:@"PDeleteFile"])
+                                    {
+                                        if (unlink([path fileSystemRepresentation])==0)
+                                            NSLog(@"deleting: %s", [path fileSystemRepresentation]);
+                                        else
+                                            NSLog(@"could not delete file: %s", [path fileSystemRepresentation]);
+                                    }
 				}
 			}
         }
