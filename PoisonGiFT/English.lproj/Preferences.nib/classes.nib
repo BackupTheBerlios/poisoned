@@ -39,6 +39,7 @@
                 importPlaylistChanged = id; 
                 importPrefsChanged = id; 
                 incomingChanged = id; 
+                oggSupportChanged = id; 
                 playFileIfNoFilePrefsChanged = id; 
                 playfilePrefsChanged = id; 
                 switchToDownloadPrefsChanged = id; 
@@ -53,6 +54,7 @@
                 importToPlaylist = NSButton; 
                 importToiTunes = NSButton; 
                 incoming = NSTextField; 
+                oggSupport = NSButton; 
                 playFile = NSButton; 
                 playFileIfNoFile = NSButton; 
                 removeCancelled = NSButton; 
