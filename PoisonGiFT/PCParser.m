@@ -214,13 +214,15 @@
                 keystring = [NSString stringWithCString:key];
                 //argstring = [NSString stringWithCString:arg];
                 
-                // when using NSNonLossyASCIIStringEncoding also umlauts etc. get displayed correctly in the results
+                // when using NSISOLatin1StringEncoding also umlauts etc. get displayed correctly in the results
+                // it still could be the wrong encoding, but it seems to work best so far
+                // this means no problems for me so far - rizzi
                 argstring = [[[NSString alloc] 
                     initWithData:[NSData dataWithBytes:arg length:strlen(arg)]
-                    encoding:NSNonLossyASCIIStringEncoding
+                    encoding:NSISOLatin1StringEncoding
                 ] autorelease];
                 
-                [[parsed objectAtIndex:2] setObject:argstring forKey:keystring];
+               [[parsed objectAtIndex:2] setObject:argstring forKey:keystring];
                 if ([keystring isEqualToString:@"size"])
                     [[parsed objectAtIndex:2] setObject:[self calcSize:argstring] forKey:@"calcsize"];
                 else if ([keystring isEqualToString:@"file"])
