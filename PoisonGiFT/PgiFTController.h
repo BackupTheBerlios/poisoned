@@ -24,6 +24,7 @@
 #import "PgiFTCommands.h"
 #import "PAppKit.h"
 #import "PUIConf.h"
+#import "POpenFTConf.h"
 
 @interface PgiFTController : NSObject <PControllerProto,PgiFTCommands>
 {
@@ -74,7 +75,7 @@
 
 - (void)connected;
 - (void)connectionFailed;
-// - (void)disconnected:(id)sender
+// - (void)disconnected:(id)sender -> this is already defined in PControllerProto.h
 
 - (IBAction)launch:(id)sender;			// startgift button
 - (void)startDaemon;
@@ -87,7 +88,8 @@
 - (IBAction)connectRemote:(id)sender;
 - (IBAction)cancelSheet:(id)sender;
 
+// conf files
 - (void)checkConfFiles;
-- (void)check:(NSString *)path;
+- (BOOL)check:(NSString *)path;
 
 @end
