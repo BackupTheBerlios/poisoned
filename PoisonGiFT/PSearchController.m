@@ -734,12 +734,9 @@
 
 // search field delegate
 - (NSMenu *)willPopUpMenuForTextField:(PTextField *)textfield
-{
-    // NOTE: didn't find a way to make the menu items display small (???) - rizzi
-    // NOTE: I did - j.ashton
-    
+{   
     NSMenu *menu = [[[NSMenu alloc] init] autorelease];
-    /* set this menu small - j.ashton */
+    /* set this menu small - ashton */
     [menu setMenuRepresentation: [[[NSMenuView alloc]
     initWithFrame: NSZeroRect] autorelease]];
     [[menu menuRepresentation] setFont: [NSFont menuFontOfSize:

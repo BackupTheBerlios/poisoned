@@ -35,10 +35,6 @@
 
 	[drawerButton retain];
     commander = [[PCommand alloc] init];
-    
-   
-	// THIS IS TESTING - jjt
-	//[self activate:NULL];
 	
 	// Notifications
     // ---------------------------------------------------------------
@@ -481,8 +477,7 @@
 
 - (IBAction)drawerAction:(id)sender
 {
-    if ([drawer state]==NSOffState) [drawer open];
-    else [drawer close];
+    [drawer toggle:self];
 }
 
 - (IBAction)switchAppearance:(id)sender

@@ -99,7 +99,7 @@
         [item setLabel:@"Navigation"];
         [item setPaletteLabel:@"Navigation"];
         [item setView:navigation];
-        [item setMinSize:NSMakeSize(109,24)];
+        [item setMinSize:NSMakeSize(109,23)];
         [item setMaxSize:NSMakeSize(109,32)];
         [item setEnabled:YES];
     }
@@ -107,8 +107,8 @@
         [item setLabel:@"Drawer"];
         [item setPaletteLabel:@"Drawer"];
         [item setView:drawerButton];
-        [item setMinSize:NSMakeSize(32,24)];
-        [item setMaxSize:NSMakeSize(32,24)];
+        [item setMinSize:NSMakeSize(32,23)];
+        [item setMaxSize:NSMakeSize(32,32)];
         [item setEnabled:YES];
         [item setToolTip:@"Toggle drawer"];
     }
@@ -132,7 +132,7 @@
         [item setLabel:@"Search"];
         [item setPaletteLabel:@"Search"];
         [item setView:toolbarSearch];
-        [item setMinSize:NSMakeSize(100,24)];
+        [item setMinSize:NSMakeSize(100,23)];
         [item setMaxSize:NSMakeSize(2000,32)];
         [item setEnabled:YES];
     }
@@ -140,7 +140,7 @@
         [item setLabel:@"Realm"];
         [item setPaletteLabel:@"Realm"];
         [item setView:toolbarSearchRealm];
-        [item setMinSize:NSMakeSize(97,24)];
+        [item setMinSize:NSMakeSize(97,23)];
         [item setMaxSize:NSMakeSize(97,32)];
         [item setEnabled:YES];
     }
