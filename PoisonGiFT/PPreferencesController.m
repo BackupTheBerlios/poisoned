@@ -123,7 +123,7 @@
     else if ([itemIdentifier isEqualToString:@"protos"]) {
         [item setLabel:@"Protocols"];
         [item setPaletteLabel:@"Protocols"];
-        [item setImage:[NSImage imageNamed:@"protos.tiff"]];
+        [item setImage:[NSImage imageNamed:@"proto.tiff"]];
         [item setTarget:self];
         [item setAction:@selector(switchToProtos:)];
     }
