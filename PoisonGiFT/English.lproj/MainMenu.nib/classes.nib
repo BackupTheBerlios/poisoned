@@ -78,6 +78,7 @@
         {
             ACTIONS = {
                 browse = id; 
+                deleteEvent = id; 
                 download = id; 
                 search = id; 
                 showhideTableColumn = id; 
@@ -87,11 +88,13 @@
             LANGUAGE = ObjC; 
             OUTLETS = {
                 contextualMenu = NSMenu; 
+                controller = id; 
                 filter = PSearchFilterController; 
                 "r_table" = POutlineView; 
                 "s_table" = PSearchTableView; 
                 "search_field" = PTextField; 
                 "search_realm" = NSPopUpButton; 
+                tableMenu = NSMenu; 
                 "tc_album" = NSTableColumn; 
                 "tc_artist" = NSTableColumn; 
                 "tc_bitrate" = NSTableColumn; 
