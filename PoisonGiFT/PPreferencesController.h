@@ -39,7 +39,7 @@
 
 - (void)initTabView;
 
-- (NSRect)calcFrame:(int)height;
+- (NSRect)calcFrame:(float)height;
 
 - (void)switchToGeneral:(id)sender;
 - (void)switchToDaemon:(id)sender;

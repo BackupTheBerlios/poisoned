@@ -126,13 +126,13 @@
     return [item autorelease];
 }
 
-- (NSRect)calcFrame:(int)height
+- (NSRect)calcFrame:(float)height
 {
     NSRect frame = [prefWindow frame];
     NSRect content = [[prefWindow contentView] frame];
-    int dif = frame.size.height-content.size.height;
-    frame.origin.y = frame.origin.y+content.size.height-height;
-    frame.size.height = height+dif;
+    float dif = frame.size.height-content.size.height;
+    frame.origin.y = frame.origin.y+content.size.height-height+1;
+    frame.size.height = height+dif-1;
     return frame;
 }
 
