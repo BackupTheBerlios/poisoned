@@ -31,7 +31,7 @@
                 @"giFTConnect",NSToolbarFlexibleSpaceItemIdentifier,@"giFTLaunch",nil],
             [NSArray arrayWithObjects:
                 @"navigation",@"drawer",NSToolbarSeparatorItemIdentifier,
-                @"searchBrowse",@"searchRealm",@"searchDownload",@"searchField",@"searchStop",nil],
+                @"searchBrowse",@"searchDownload",@"searchField",@"searchRealm",@"searchStop",nil],
             [NSArray arrayWithObjects:
                 @"navigation",@"drawer",NSToolbarSeparatorItemIdentifier,
                 @"downCancel",@"downPause",@"downResume",NSToolbarSeparatorItemIdentifier,
