@@ -166,8 +166,8 @@
 				1D059B2904793FDC00000002,
 				1DA96F8C0497E61B00000002,
 				1DA96F8D0497E61B00000002,
-				FFED4E8005177DDA00E8282B,
-				FFED4E8205177DFF00E8282B,
+				FFED4EAC051801B200E8282B,
+				FFED4EAE051801D700E8282B,
 			);
 			isa = PBXGroup;
 			name = Preferences;
@@ -1105,7 +1105,7 @@
 				1D099A1B04C7819D00000002,
 				1D099A1C04C7819D00000002,
 				96C77C0B04DAF43E00BC13BF,
-				FF04F43305147E6800000037,
+				FFED4EB1051802B800E8282B,
 			);
 			isa = PBXGroup;
 			name = Icons;
@@ -2837,9 +2837,9 @@
 				96C77C0C04DAF43E00BC13BF,
 				1D8963F804F3F9A700000002,
 				FF5C5CE90514415100000037,
-				FF04F43405147E6800000037,
-				FFED4E8105177DDA00E8282B,
-				FFED4E8305177DFF00E8282B,
+				FFED4EAD051801B200E8282B,
+				FFED4EAF051801D700E8282B,
+				FFED4EB2051802B800E8282B,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3582,17 +3582,6 @@
 //FF2
 //FF3
 //FF4
-		FF04F43305147E6800000037 = {
-			isa = PBXFileReference;
-			path = badge.tiff;
-			refType = 4;
-		};
-		FF04F43405147E6800000037 = {
-			fileRef = FF04F43305147E6800000037;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		FF04F43505148FF200000037 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -3791,24 +3780,35 @@
 			settings = {
 			};
 		};
-		FFED4E8005177DDA00E8282B = {
+		FFED4EAC051801B200E8282B = {
 			isa = PBXFileReference;
-			path = proto.tiff;
+			path = network.tiff;
 			refType = 4;
 		};
-		FFED4E8105177DDA00E8282B = {
-			fileRef = FFED4E8005177DDA00E8282B;
+		FFED4EAD051801B200E8282B = {
+			fileRef = FFED4EAC051801B200E8282B;
 			isa = PBXBuildFile;
 			settings = {
 			};
 		};
-		FFED4E8205177DFF00E8282B = {
+		FFED4EAE051801D700E8282B = {
 			isa = PBXFileReference;
-			path = plugin.tiff;
+			path = pref_plugins.png;
 			refType = 4;
 		};
-		FFED4E8305177DFF00E8282B = {
-			fileRef = FFED4E8205177DFF00E8282B;
+		FFED4EAF051801D700E8282B = {
+			fileRef = FFED4EAE051801D700E8282B;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		FFED4EB1051802B800E8282B = {
+			isa = PBXFileReference;
+			path = badge.tiff;
+			refType = 4;
+		};
+		FFED4EB2051802B800E8282B = {
+			fileRef = FFED4EB1051802B800E8282B;
 			isa = PBXBuildFile;
 			settings = {
 			};
