@@ -53,11 +53,13 @@
 
 - (void)disconnected
 {
+
     if ([collexp state]==NSOnState) {
         [collexp setState:NSOffState];
         [self collexp:nil];
     }
     [collexp setEnabled:NO];
+
 }
 
 - (void)setDataSource:(PResultSource *)_datasource

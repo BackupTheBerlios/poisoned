@@ -200,6 +200,7 @@
 
 - (void)disconnected:(id)sender
 {
+/*
     if (current_src) [current_src cleanUpTableHeaders];
     current_src = nil;
     int i,count=[searches count];
@@ -214,6 +215,7 @@
     [r_table reloadData];
     [filter setDataSource:nil];
     [filter disconnected];
+*/
 }
 
 // process ITEM from the daemon
