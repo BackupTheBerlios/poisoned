@@ -264,7 +264,7 @@
         [item setImage:[currentTool objectForKey:@"resume"]];
         [item setTarget:search];
         [item setAction:@selector(buyAtiTMS:)];
-        [item setToolTip:@"But at the iTunes Music Store (only for testing)"];
+        [item setToolTip:@"Buy at the iTunes Music Store (only for testing)"];
     }
     return [item autorelease];
 }

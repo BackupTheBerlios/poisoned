@@ -55,15 +55,13 @@ void buysong(char *title, char *artist, char *album, char *filename)
         "	end repeat\n"
         "	return b as string\n"
         "end parse_spaces_in\n"
-        "tell application \"iTunes\"\n"
-        "       copy my parse_spaces_in(\"%s\") to theParsedArtist\n"
-        "	copy my parse_spaces_in(\"%s\") to theParsedTrack\n"
-        "       copy my parse_spaces_in(\"%s\") to theParsedAlbum\n"
-        "	set searchpage to \"itms://phobos.apple.com/WebObjects/MZSearch.woa/wa/advancedSearchResults?\"\n"
-        "       set searchpage to searchpage & \"songTerm=\" & theParsedTrack & \"&\"\n"
-        "       set searchpage to searchpage & \"artistTerm=\" & theParsedArtist & \"&\"\n"
-        "       set searchpage to searchpage & \"albumTerm=\" & theParsedAlbum & \"&\"\n"        
-        "end tell\n"
+        "copy my parse_spaces_in(\"%s\") to theParsedArtist\n"
+        "copy my parse_spaces_in(\"%s\") to theParsedTrack\n"
+        "copy my parse_spaces_in(\"%s\") to theParsedAlbum\n"
+        "set searchpage to \"itms://phobos.apple.com/WebObjects/MZSearch.woa/wa/advancedSearchResults?\"\n"
+        "set searchpage to searchpage & \"songTerm=\" & theParsedTrack & \"&\"\n"
+        "set searchpage to searchpage & \"artistTerm=\" & theParsedArtist & \"&\"\n"
+        "set searchpage to searchpage & \"albumTerm=\" & theParsedAlbum & \"&\"\n"
         "open location searchpage\n"], artist, title, album];
 	
         
