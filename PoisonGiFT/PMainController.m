@@ -626,6 +626,9 @@
 {
     if ([userDefaults boolForKey:@"PStopGiFT"]&&[commander connected]) [commander cmd:@"QUIT"];
     
+    // save the searches
+    [search saveSearches];
+    
     // saving the drawer's size and state
     [userDefaults setInteger:[drawer contentSize].width forKey:@"PDrawerWidth"];
     // we add 1 to the state so we always have values > 0
