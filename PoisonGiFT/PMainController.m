@@ -190,6 +190,12 @@
         NSFileManager *manager = [NSFileManager defaultManager];
         if ([manager removeFileAtPath:[@"~/Library/Application Support/Poisoned/Gnutella/Gnutella.conf" stringByExpandingTildeInPath] handler:nil])
             NSLog(@"removed old Gnutella.conf");
+        
+        // OpenFT's local nodes cache must be replaced w/ the new default
+        // one so that connection to the new network will not have to scan
+        if ([manager removeFileAtPath:[@"~/Library/Application Support/Poisoned/OpenFT/nodes" stringByExpandingTildeInPath] handler:nil])
+            NSLog(@"removed OpenFT nodes cache");
+
         // it wouldn't be necesseary to check all files again, but it the easiest way ;)
         [giFT checkConfFiles];
         
