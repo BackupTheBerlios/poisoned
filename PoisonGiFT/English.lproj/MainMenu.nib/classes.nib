@@ -20,7 +20,6 @@
             LANGUAGE = ObjC; 
             OUTLETS = {
                 contextualMenu = NSMenu; 
-                controller = id; 
                 "m_browse" = NSMenuItem; 
                 "m_cancel" = NSMenuItem; 
                 "m_cleanup" = NSMenuItem; 
@@ -88,7 +87,6 @@
             LANGUAGE = ObjC; 
             OUTLETS = {
                 contextualMenu = NSMenu; 
-                controller = id; 
                 filter = PSearchFilterController; 
                 "r_table" = POutlineView; 
                 "s_table" = PSearchTableView; 
