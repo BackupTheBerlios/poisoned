@@ -144,11 +144,11 @@
 
         [sources setObject:item forKey:user];
 
-        // totally forgot to check here if the filter matches, fixed now
-        if (matchesFilter && selected_column && [[selected_column identifier] isEqualToString:@"user"]) {
+        if (selected_column && [[selected_column identifier] isEqualToString:@"user"]) {
             [source removeObject:sourcesArray];
             [self insertObject:sourcesArray source:source];
-            if (isFiltered) {
+            // totally forgot to check here if the filter matches, should be here, fixed now
+            if (matchesFilter && isFiltered) {
                 [filtered removeObject:sourcesArray];
                 [self insertObject:sourcesArray source:filtered];
             }
