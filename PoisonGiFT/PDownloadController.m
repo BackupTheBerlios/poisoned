@@ -78,6 +78,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disconnected:) name:@"PoisonConnectionClosed" object:commander];
     // datasource needs the commander for cancelling downloads etc...
     [dataSource setCommander:commander];
+    // datasource needs the downloading hashses set
+    // when the user cancels a download with the del key
+    [dataSource setHashes:hashes];
 }
 
 - (NSView *)view
