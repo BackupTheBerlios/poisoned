@@ -50,9 +50,7 @@
 {
 	if (data)
 	{
-		//[dispatcher processOutput:[self parse:data]];
-		NSArray *parsedData = [self parse:data];
-		[dispatcher performSelectorOnMainThread:@selector(processOutput:) withObject:parsedData waitUntilDone:NO];
+		[dispatcher processOutput:[self parse:data]];
 	}
 }
 

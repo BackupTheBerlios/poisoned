@@ -21,9 +21,6 @@
 #import "PCommand.h"
 
 @interface PCommand(Private)
-- (void)doConnected;
-- (void)doConnectionTimedOut;
-- (void)doDisconnected;
 @end
 
 @implementation PCommand
@@ -85,29 +82,9 @@
 
 - (BOOL)connect:(NSString *)address withPort:(int)port
 {
-	NSArray *args = [NSArray arrayWithObjects:address, [NSNumber numberWithInt:port], NULL];
-	[NSThread detachNewThreadSelector:@selector(networkThread:) toTarget:self withObject:args];
-	return YES;
-}
-
-- (void)networkThread:(NSArray *)inArgs
-{
-    // NSAutoreleasePool prevents these "just leaking" errors
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	[socket open];
 	[socket scheduleOnCurrentRunLoop];
-	if ([socket connectToHost: [inArgs objectAtIndex:0]
-		port:[[inArgs objectAtIndex:1] intValue]
-		timeout:(NSTimeInterval)[[NSUserDefaults standardUserDefaults] integerForKey:@"PConnectToDaemonTimeout"]])
-	{
-		[[NSRunLoop currentRunLoop] run];
-	}
-	else
-	{
-		[self netsocketDisconnect:socket];
-	}
-    [pool release];
-    return;
+	return [socket connectToHost: address port:port timeout:(NSTimeInterval)[[NSUserDefaults standardUserDefaults] integerForKey:@"PConnectToDaemonTimeout"]];
 }
 
 - (void)closeConnection
@@ -152,17 +129,17 @@
 
 - (void)netsocketConnected:(NetSocket*)inNetSocket
 {
-	[self performSelectorOnMainThread:@selector(doConnected) withObject:NULL waitUntilDone:NO];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"PoisonConnectedToCore" object:self];
 }
 
 - (void)netsocket:(NetSocket*)inNetSocket connectionTimedOut:(NSTimeInterval)inTimeout
 {
-	[self performSelectorOnMainThread:@selector(doConnectionTimedOut) withObject:NULL waitUntilDone:NO];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"PoisonConnectionTimedOut" object:self];
 }
 
 - (void)netsocketDisconnected:(NetSocket*)inNetSocket
 {
-	[self performSelectorOnMainThread:@selector(doDisconnected) withObject:NULL waitUntilDone:NO];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"PoisonConnectionClosed" object:self];
 }
 
 - (void)netsocket:(NetSocket*)inNetSocket dataAvailable:(unsigned)inAmount
@@ -175,19 +152,5 @@
 	free(buffer);
 }
 
-- (void)doConnected
-{
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"PoisonConnectedToCore" object:self];
-}
-
-- (void)doConnectionTimedOut
-{
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"PoisonConnectionTimedOut" object:self];
-}
-
-- (void)doDisconnected
-{
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"PoisonConnectionClosed" object:self];
-}
 
 @end
