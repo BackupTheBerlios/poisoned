@@ -25,30 +25,36 @@
 
 int iTunesPlaylistImport(const char *filenamewithpath, int playlistmode)
 {
-	NSString *playstring;
+	NSString *scriptSource;
 
 	if (playlistmode) 
-		playstring=@"Poisoned";
-	else 
-		playstring=@"Library";
-
-	NSString *scriptSource = [NSString stringWithFormat:[NSString stringWithCString:
-	"tell application \"iTunes\"\n"
-	"   launch\n"
-	"   set Tester to \"0\"\n"
-	"   set playlist_name to (\"%@\")\n"
-	"   repeat with i in playlists\n"
-	"		set currentPlaylist to name of i as string\n"
-	"		if currentPlaylist is equal to playlist_name then\n"
-	"			set Tester to \"1\"\n"
-	"		end if\n"
-	"   end repeat\n"
-	"   if Tester is equal to \"0\" then\n"
-	"		set new_playlist to (make new playlist)\n"
-	"		set name of new_playlist to playlist_name\n"
-	"   end if\n"
-	"   add POSIX file \"%s\" to playlist playlist_name\n"
-	"end tell"], playstring, filenamewithpath];
+        {
+            scriptSource = [NSString stringWithFormat:[NSString stringWithCString:
+            "tell application \"iTunes\"\n"
+            "   launch\n"
+            "   set Tester to \"0\"\n"
+            "   set playlist_name to (\"Poisoned\")\n"
+            "   repeat with i in playlists\n"
+            "		set currentPlaylist to name of i as string\n"
+            "		if currentPlaylist is equal to playlist_name then\n"
+            "			set Tester to \"1\"\n"
+            "		end if\n"
+            "   end repeat\n"
+            "   if Tester is equal to \"0\" then\n"
+            "		set new_playlist to (make new playlist)\n"
+            "		set name of new_playlist to playlist_name\n"
+            "   end if\n"
+            "   add POSIX file \"%s\" to playlist playlist_name\n"
+            "end tell"], filenamewithpath];
+        }
+        else 
+        {
+            scriptSource = [NSString stringWithFormat:[NSString stringWithCString:
+                "tell application \"iTunes\"\n"
+                "   launch\n"
+                "	add POSIX file \"%s\" to library playlist 1\n"
+                "end tell"], filenamewithpath];
+        }
         
     //    NSLog(@"scriptSource: %@", scriptSource);
     
@@ -78,9 +84,9 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
 	NSString *noplaystring;
 
 	if (playlistmode) 
-		playstring=@"Poisoned";
+		playstring=@"playlist \"Poisoned\"";
 	else 
-		playstring=@"Library";
+		playstring=@"library playlist 1";
 		
 	if (noplaywhenplaying)
 		noplaystring=@"if player state is not playing then\n";
@@ -93,7 +99,7 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
 	"tell application \"iTunes\"\n"
 	"launch\n"
 	"%@"
-	"set theLib to playlist \"%@\"\n"
+	"set theLib to %@\n"
 	"repeat with t from 1 to (count every track of theLib)\n"
 	"	tell track t of theLib\n"
 	"		set tDif to (cd - (get date added))\n"
