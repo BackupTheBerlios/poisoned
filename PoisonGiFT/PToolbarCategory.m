@@ -56,7 +56,7 @@
                 @"giFTConnect",@"giFTLaunch",nil],
             [NSArray arrayWithObjects:
                 @"navigation",@"drawer",
-                @"searchField",@"searchRealm",@"searchBrowse",@"searchDownload",@"searchStop",nil],
+                @"searchField",@"searchRealm",@"searchBrowse",@"searchDownload",@"searchStop",@"iTMS"/* only for testing */,nil],
             [NSArray arrayWithObjects:@"navigation",@"drawer",
                 @"downExpand",@"downCollapse",
                 @"downCancel",@"downPause",@"downResume",@"downDelSource",@"downBrowseHost",@"downClean",nil],
@@ -255,6 +255,16 @@
         [item setTarget:upload];
         [item setAction:@selector(cleanUp:)];
         [item setToolTip:@"Remove completed and cancelled uploads"];
+    }
+    
+    // THIS IS ONLY FOR TESTING...
+    else if ([itemIdentifier isEqualToString:@"iTMS"]) {
+        [item setLabel:@"iTMS"];
+        [item setPaletteLabel:@"iTMS"];
+        [item setImage:[currentTool objectForKey:@"resume"]];
+        [item setTarget:search];
+        [item setAction:@selector(buyAtiTMS:)];
+        [item setToolTip:@"But at the iTunes Music Store (only for testing)"];
     }
     return [item autorelease];
 }
