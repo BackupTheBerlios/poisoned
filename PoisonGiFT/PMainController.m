@@ -170,6 +170,7 @@
     [self controlTintChanged:self];		// insert the right icons (depending on the control tint)
 
     [mainWindow makeKeyAndOrderFront:self];	// window setup finished -> make it visible
+    [self setSavedDrawerSize];
     // ---------------------------------------------------------------
 
 
@@ -374,6 +375,7 @@
 
     if (currentView>-1) [mainWindow makeKeyAndOrderFront:self];
     [drawer setParentWindow:mainWindow];
+    [self setSavedDrawerSize];
 }
 
 - (void)initTabView
@@ -396,6 +398,23 @@
     [_download release];
     [_upload release];
 }
+
+
+- (void)setSavedDrawerSize
+{
+    int drawer_width = [userDefaults integerForKey:@"PDrawerWidth"];
+    int drawer_state = [userDefaults integerForKey:@"PDrawerState"];
+    if (drawer_state) {
+        NSSize d_size = [drawer contentSize];
+        d_size.width=drawer_width;
+        [drawer setContentSize:d_size];
+        
+        drawer_state--; // this is the actual value for the state since we increased it by 1 when saving
+        if (drawer_state==NSDrawerOpenState) [drawer open];
+        else [drawer close];
+    }
+}
+
 // --------------------------------------------------------------------------------------------------
 
 
@@ -599,6 +618,13 @@
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
     if ([userDefaults boolForKey:@"PStopGiFT"]&&[commander connected]) [commander cmd:@"QUIT"];
+    
+    // saving the drawer's size and state
+    [userDefaults setInteger:[drawer contentSize].width forKey:@"PDrawerWidth"];
+    // we add 1 to the state so we always have values > 0
+    // and 0 then just would mean that we don't have set this pref yet
+    [userDefaults setInteger:([drawer state]+1) forKey:@"PDrawerState"];
+    
     [mainWindow saveFrameUsingName:@"theMainWindow"];
     [self saveToolbarConfiguration];
     return NSTerminateNow;

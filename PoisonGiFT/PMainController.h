@@ -104,6 +104,7 @@
 
 - (void)initWindow:(unsigned int)style;
 - (void)initTabView;
+- (void)setSavedDrawerSize;
 
 - (IBAction)poisonWeb:(id)sender;
 - (IBAction)giftWeb:(id)sender;
