@@ -579,6 +579,13 @@
     return YES;
 }
 
+- (void)windowDidBecomeKey:(NSNotification *)aNotification
+{
+    // this is a workaround for the drawer becoming white when we open the window...
+    [drawer toggle:nil];
+    [drawer toggle:nil];
+}
+
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
     if ([userDefaults boolForKey:@"PStopGiFT"]&&[commander connected]) [commander cmd:@"QUIT"];

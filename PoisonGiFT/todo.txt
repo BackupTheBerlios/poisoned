@@ -8,7 +8,7 @@
 --save the drawer size
 **put new results at top of search list
 **Upload and Download throttling
---fixing the with drawer after hiding the window
+**fixing the with drawer after hiding the window
 --a slider with two knobs for the size filter
 --update to 0.11.2 of gift  (i'm not at home for one day but will work on this while i'm away - rizzi)
 **fix filtering for incoming search results
