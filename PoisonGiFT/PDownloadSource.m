@@ -91,15 +91,14 @@ int iTunesLibraryImport(const char *filenamewithpath)
 
 void playsongifnotplaying(void)
 {
-	//enter in the applescript for playing a song if a current song isnt playing.
 
-	NSString *scriptSource = [NSString stringWithCString:
-	"tell application \"iTunes\"\n"
+        NSString *scriptSource = [NSString stringWithCString:
+        "tell application \"iTunes\"\n"
 	"  launch\n"
         "  if player state is not playing then\n"
-	"    set new_playlist to playlist (\"Poisoned\")\n"
-	"    set the_total to count tracks in new_playlist\n"
-	"    play track the_total of new_playlist\n"
+        "    tell playlist \"Poisoned\"\n"
+	"      play last track\n"
+        "    end tell\n"
         "  end if\n"
 	"end tell"];
         
@@ -110,7 +109,7 @@ void playsongifnotplaying(void)
 		NSLog(@"Play in iTunes script run successfully");
 	else if ([descriptor descriptorType] == typeNull)
 	{
-		NSLog(@"Play in iTunes failed");
+		NSLog(@"Play in iTunes script run failed");
 	}
 	else
 	{
@@ -121,12 +120,13 @@ void playsongifnotplaying(void)
 
 void playsonginitunes(void)
 {
-	NSString *scriptSource = [NSString stringWithCString:
+          
+        NSString *scriptSource = [NSString stringWithCString:
 	"tell application \"iTunes\"\n"
 	"   launch\n"
-	"   set new_playlist to playlist (\"Poisoned\")\n"
-	"   set the_total to count tracks in new_playlist\n"
-	"   play track the_total of new_playlist\n"
+        "    tell playlist \"Poisoned\"\n"
+	"      play last track\n"
+        "    end tell\n"
 	"end tell"];
         
 	NSAppleScript *script = [[[NSAppleScript alloc] initWithSource:scriptSource] autorelease];
@@ -136,7 +136,7 @@ void playsonginitunes(void)
 		NSLog(@"Play in iTunes script run successfully");
 	else if ([descriptor descriptorType] == typeNull)
 	{
-		NSLog(@"Play in iTunes failed");
+		NSLog(@"Play in iTunes script run failed");
 	}
 	else
 	{
@@ -550,7 +550,7 @@ void playsonginitunes(void)
 						importGood=iTunesPlaylistImport([path fileSystemRepresentation]);
 					else 
 						importGood=iTunesLibraryImport([path fileSystemRepresentation]);
-					if (importGood)
+					if (importGood && [userDefaults boolForKey:@"PImportToPlaylist"])
 					{
 						if ([userDefaults boolForKey:@"PPlayFile"]) 
                                                 {
@@ -559,16 +559,15 @@ void playsonginitunes(void)
                                                     else
 							playsonginitunes();
                                                 }
-                                                if ([userDefaults boolForKey:@"PNoFilePlayFile"])
-                                                        playsongifnotplaying();
-						if ([userDefaults boolForKey:@"PDeleteFile"])
-						{
-							if (unlink([path fileSystemRepresentation])==0)
-								NSLog(@"deleting: %s", [path fileSystemRepresentation]);
-							else
-								NSLog(@"could not delete file: %s", [path fileSystemRepresentation]);
-						}
+				
 					}
+                                        if (importGood && [userDefaults boolForKey:@"PDeleteFile"])
+                                        {
+                                            if (unlink([path fileSystemRepresentation])==0)
+                                                NSLog(@"deleting: %s", [path fileSystemRepresentation]);
+                                            else
+                                                NSLog(@"could not delete file: %s", [path fileSystemRepresentation]);
+                                        }
 				}
 			}
         }
