@@ -291,7 +291,7 @@
 		NSMutableDictionary *envDict = [[NSProcessInfo processInfo] environment];
 		[envDict setObject: [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"giFT/lib/"] forKey:@"DYLD_LIBRARY_PATH"];
 		[envDict setObject: [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"giFT/share/"] forKey: @"GIFT_DATA_DIR"];
-		[envDict setObject: [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"giFT/share/"] forKey: @"GIFT_LOCAL_DIR"];
+		[envDict setObject: [@"~/Library/Application Support/Poisoned" stringByExpandingTildeInPath] forKey: @"GIFT_LOCAL_DIR"];
 		[envDict setObject: [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"giFT/lib/giFT"] forKey: @"GIFT_PLUGIN_DIR"];
 		//NSLog(@"environment: %@", envDict);
 		[task setEnvironment:envDict];
@@ -482,14 +482,19 @@
 - (void)checkConfFiles
 {
     [self check:@""];	// -> ~/Library/Application Support/Poisoned
-    [self check:@"/gift.conf"];
+    if (![self check:@"/giftd.conf"]) {
+        // giftd.conf wasn't there already, so it's possible that the user still has an old gift.conf
+        // if so, we have to save the old prefs form gift.conf into giftd.conf
+        PGiFTConf *gift_conf = [PGiFTConf singleton];
+        [gift_conf restoreOldPrefs];
+    }
     [self check:@"/OpenFT"];
     if (![self check:@"/OpenFT/OpenFT.conf"]) {
         // OpenFT.conf wasn't there already, this means "port" and "http_port" still have the default values
         // we replace them with random values
         // we should take these two values into the prefs so the user can change these
-        POpenFTConf *conf = [POpenFTConf singleton];
-        [conf setRandomValues];
+        POpenFTConf *openft_conf = [POpenFTConf singleton];
+        [openft_conf setRandomValues];
     }
     [self check:@"/Gnutella"];
     [self check:@"/Gnutella/Gnutella.conf"];
@@ -508,7 +513,7 @@
                                     stringByAppendingPathComponent:@"Library"]
                                     stringByAppendingPathComponent:@"Application Support"]
                                     stringByAppendingPathComponent:@"Poisoned"];
-    NSString *shared = 		[[NSBundle mainBundle] sharedSupportPath];
+    NSString *shared = 		[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"giFT/share"];
 
     if (![manager fileExistsAtPath:[gift stringByAppendingString:path]]) {
         NSLog(@"%@ not found: copying...",[gift stringByAppendingString:path]);

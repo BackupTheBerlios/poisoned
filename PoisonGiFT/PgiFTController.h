@@ -23,6 +23,7 @@
 #import "PCommand.h"
 #import "PgiFTCommands.h"
 #import "PAppKit.h"
+#import "PGiFTConf.h"
 #import "PUIConf.h"
 #import "POpenFTConf.h"
 
