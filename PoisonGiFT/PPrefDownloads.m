@@ -46,6 +46,9 @@
 	
     if ([userDefaults boolForKey:@"PPlayFile"]) [playFile setState:NSOnState];
     else [playFile setState:NSOffState];    
+    
+    if ([userDefaults boolForKey:@"PNoFilePlayFile"]) [playFileIfNoFile setState:NSOnState];
+    else [playFileIfNoFile setState:NSOffState];    
 
     if ([userDefaults boolForKey:@"PDeleteFile"]) [deleteFile setState:NSOnState];
     else [deleteFile setState:NSOffState];   
@@ -109,6 +112,7 @@
 		[userDefaults setBool:YES forKey:@"PImportToiTunes"];
 		[importToPlaylist setEnabled:YES];
 		[playFile setEnabled:YES];
+                [playFileIfNoFile setEnabled:YES];
 		[deleteFile setEnabled:YES];
     }
 	else
@@ -116,6 +120,7 @@
 		[userDefaults setBool:NO forKey:@"PImportToiTunes"];
 		[importToPlaylist setEnabled:NO];
 		[playFile setEnabled:NO];
+                [playFileIfNoFile setEnabled:YES];
 		[deleteFile setEnabled:NO];
 	}
 }
@@ -130,6 +135,12 @@
 {
     if ([playFile state]==NSOnState) [userDefaults setBool:YES forKey:@"PPlayFile"];
     else [userDefaults setBool:NO forKey:@"PPlayFile"];
+}
+
+- (IBAction)playFileIfNoFilePrefsChanged:(id)sender
+{
+    if ([playFileIfNoFile state]==NSOnState) [userDefaults setBool:YES forKey:@"PNoFilePlayFile"];
+    else [userDefaults setBool:NO forKey:@"PNoFilePlayFile"];
 }
 
 - (IBAction)deletefilePrefsChanged:(id)sender

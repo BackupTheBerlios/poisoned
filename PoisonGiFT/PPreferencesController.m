@@ -157,7 +157,7 @@
 - (void)switchToDownloads:(id)sender
 {
     [prefWindow setTitle:@"Downloads"];
-    NSRect frame = [self calcFrame:311];
+    NSRect frame = [self calcFrame:331];
     [tabView selectFirstTabViewItem:self];
     [prefWindow setFrame:frame display:YES animate:YES];
     [tabView selectTabViewItemWithIdentifier:@"download"];
