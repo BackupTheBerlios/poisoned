@@ -76,6 +76,8 @@
     NSDictionary *currentTool;
 }
 
+- (int)currentView;
+
 - (void)controlTintChanged:(id)sender;
 
 - (void)activate:(id)sender;
