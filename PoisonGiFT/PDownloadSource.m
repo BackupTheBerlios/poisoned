@@ -19,7 +19,6 @@
 // ---------------------------------------------------------------------------
 
 #import "PDownloadSource.h"
-#import <Carbon/Carbon.h>
 #import "PGiFTConf.h"
 
 #include <unistd.h>
