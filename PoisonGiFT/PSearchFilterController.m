@@ -39,7 +39,7 @@
     [check setContinuous:YES];
     [[protoTable tableColumnWithIdentifier:@"proto"] setDataCell:check];
     [minSize setToolTip:@"Use this slider to set the minimal size."];
-    [maxSize setToolTip:@"Use this slider to set the maximale size."];
+    [maxSize setToolTip:@"Use this slider to set the maximum size."];
     [keywordField setToolTip:@"Keyword filter"];
     [de_activate setToolTip:@"Enable/disable filtering"];
 }
