@@ -190,7 +190,8 @@
     commander = _commander;
     [commander registerController:self forCommands:[NSArray arrayWithObjects:
         @"ITEM",nil]];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disconnected:) name:@"PoisonConnectionClosed" object:commander];
+    // notification from PGiFTController, tells us user disconnected or giftd crashed
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disconnected:) name:@"PConnectionClosedNotification" object:nil];
 }
 
 - (void)setDownloadingHashes:(NSSet *)_hashes
@@ -200,22 +201,32 @@
 
 - (void)disconnected:(id)sender
 {
-/*
-    if (current_src) [current_src cleanUpTableHeaders];
-    current_src = nil;
-    int i,count=[searches count];
-    for (i=count-1;i>=0;i--) {
-        [commander freeTicket:[[searches objectAtIndex:i] objectForKey:@"ticket"]];
+    NSDictionary *userInfo = [(NSNotification *)sender userInfo];
+    id crash = [userInfo objectForKey:@"crash"];
+    id userDisconnected = [userInfo objectForKey:@"userDisconnected"];
+    if (crash) { // giftd crashed -> set all search inactive
+        int i,count=[searches count];
+        for (i=count-1;i>=0;i--) {
+            [[datasources objectForKey:[[searches objectAtIndex:i] objectForKey:@"ticket"]]
+                setActive:NO];
+        }
     }
-    [searches removeAllObjects];
-    [datasources removeAllObjects];
-    [s_table reloadData];
-    [r_table setDataSource:self];
-    [r_table setDelegate:self];
-    [r_table reloadData];
-    [filter setDataSource:nil];
-    [filter disconnected];
-*/
+    else if (userDisconnected) { // -> remove all searches
+        if (current_src) [current_src cleanUpTableHeaders];
+        current_src = nil;
+        int i,count=[searches count];
+        for (i=count-1;i>=0;i--) {
+            [commander freeTicket:[[searches objectAtIndex:i] objectForKey:@"ticket"]];
+        }
+        [searches removeAllObjects];
+        [datasources removeAllObjects];
+        [s_table reloadData];
+        [r_table setDataSource:self];
+        [r_table setDelegate:self];
+        [r_table reloadData];
+        [filter setDataSource:nil];
+        [filter disconnected];
+    }
 }
 
 // process ITEM from the daemon
@@ -229,6 +240,8 @@
 
     if ([[data objectAtIndex:2] count]==0) {
         [[datasources objectForKey:ticket] setActive:NO];
+        
+        // find more sources has finished, we can delete this search now
         if (hidden) {
             [commander freeTicket:ticket];
             [datasources removeObjectForKey:ticket];
@@ -337,16 +350,18 @@
     PResultSource *_new = [[PResultSource alloc] initWithHashes:downloading_hashes andTable:r_table hidden:_hidden];
     [datasources setObject:_new forKey:_ticket];
     if (!_hidden) {
-        [searches addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:
-            _ticket,@"ticket",
-    	   _query,@"query",
-            _info,@"info",
-            @"0",@"count",nil
+        // insert the new search at the top of the list
+        [searches insertObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:
+                _ticket,@"ticket",
+                _query,@"query",
+                _info,@"info",
+                @"0",@"count",nil
             ]
-        ];
+            atIndex:0];
     
         [s_table reloadData];
-        [s_table selectRow:[searches count]-1 byExtendingSelection:NO];
+        // select the new search at the top of the list
+        [s_table selectRow:0 byExtendingSelection:NO];
         [self loadResultTable];
     }
 }
