@@ -1045,6 +1045,17 @@
 			settings = {
 			};
 		};
+		1D8963F704F3F9A700000002 = {
+			isa = PBXFileReference;
+			path = iTMS.tiff;
+			refType = 4;
+		};
+		1D8963F804F3F9A700000002 = {
+			fileRef = 1D8963F704F3F9A700000002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		1D8DEEBA04EBAAB900000002 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
@@ -2289,6 +2300,7 @@
 				1DFC7E9404588CCC00000002,
 				1D63F0450481665600000002,
 				1DECEEEE048D420100000002,
+				1D8963F704F3F9A700000002,
 			);
 			isa = PBXGroup;
 			name = Toolbar;
@@ -2638,11 +2650,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.401</string>
+	<string>0.41</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>0.401</string>
+	<string>0.41</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
@@ -2795,6 +2807,7 @@
 				1D4E455504CEDB5000000002,
 				1DCEE6E504D863FF00000002,
 				96C77C0C04DAF43E00BC13BF,
+				1D8963F804F3F9A700000002,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
