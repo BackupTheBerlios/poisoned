@@ -64,6 +64,13 @@
             SUPERCLASS = NSObject; 
         }, 
         {
+            ACTIONS = {clearNodesFile = id; newAlias = id; }; 
+            CLASS = PPrefFastTrack; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {alias = NSTextField; clearNodes = NSButton; }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
             ACTIONS = {autoVersionPrefsChanged = id; switchAppearance = id; }; 
             CLASS = PPrefGeneral; 
             LANGUAGE = ObjC; 
