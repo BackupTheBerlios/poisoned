@@ -695,6 +695,8 @@
 
     [userDefaults setBool:YES forKey:@"PAutoVersionCheck"];
 
+    [userDefaults setObject:@"Poisoned" forKey:@"PImportPlaylistName"];
+
 }
 
 @end

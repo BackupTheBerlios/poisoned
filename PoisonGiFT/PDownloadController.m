@@ -35,6 +35,10 @@
     [table setDataSource:dataSource];
     [table setDelegate:dataSource];
     [table setDrawsGrid:YES];
+    [table setAllowsColumnSelection:NO];
+    //[table setTarget:self];
+    //[table setDelegate:self];
+    
     cols = [table tableColumns];
     count=[cols count];
     for (i=0;i<count;i++) [[[cols objectAtIndex:i] dataCell] setDrawsBackground:NO];
@@ -102,15 +106,20 @@
 
 - (IBAction)cancel:(id)sender
 {
-    NSEnumerator *enumerator = [table selectedRowEnumerator];
-    NSNumber *num;
-    NSMutableDictionary *item;
-    while (num=[enumerator nextObject]) {
-        item = [table itemAtRow:[num intValue]];
-        if ([item objectForKey:@"hash"]) [hashes removeObject:[item objectForKey:@"hash"]];
+    int button = NSRunCriticalAlertPanel(@"Cancel selected download(s)?",
+        [NSString stringWithFormat:@"This will cancel the slected download(s), this is unrecoverable."], @"OK", @"Cancel", nil);
+    if (button==NSOKButton)
+    {
+        NSEnumerator *enumerator = [table selectedRowEnumerator];
+        NSNumber *num;
+        NSMutableDictionary *item;
+        while (num=[enumerator nextObject]) {
+            item = [table itemAtRow:[num intValue]];
+            if ([item objectForKey:@"hash"]) [hashes removeObject:[item objectForKey:@"hash"]];
+        }
+        
+        [dataSource cancel:commander];
     }
-
-    [dataSource cancel:commander];
 }
 
 - (IBAction)pause:(id)sender
@@ -191,7 +200,7 @@
     hash = [[data objectAtIndex:2] objectForKey:@"hash"];
     [commander removeTicket:[data objectAtIndex:1]];
     [dataSource ADDDOWNLOAD:data];
-    if (hash) {
+   if (hash) { //opennap hack
         [hashes addObject:[[hash copy] autorelease]];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"PTransferSetChanged" object:self];
     }
@@ -345,5 +354,30 @@
     }
 }
 
+// dummy datasource for download table...
+/*- (id)outlineView:(NSOutlineView *)outlineView child:(int)index ofItem:(id)item
+{
+    return nil;
+}
 
+- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
+{
+    return NO;
+}
+
+- (int)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
+{
+    return 0;
+}
+
+- (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
+{
+    return nil;
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectTableColumn:(NSTableColumn *)tableColumn
+{
+    return NO;
+}
+*/
 @end

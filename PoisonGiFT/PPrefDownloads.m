@@ -29,6 +29,11 @@
     gift_conf = [PGiFTConf singleton];    
     
     [self readConfFiles];
+
+    /* if this key is not valid, we have to add it because of upgrades - ashton */
+    if(![userDefaults objectForKey:@"PImportPlaylistName"])
+       [userDefaults setObject:@"Poisoned" forKey:@"PImportPlaylistName"];
+       
     
     if ([userDefaults boolForKey:@"PRemoveCompletedDownloads"]) [removeCompleted setState:NSOnState];
     else [removeCompleted setState:NSOffState];
@@ -57,7 +62,9 @@
     else [oggSupport setState:NSOffState]; 
     
     if ([userDefaults boolForKey:@"PSwitchToDownloads"]) [switchToDownload setState:NSOnState];
-    else [switchToDownload setState:NSOffState];   
+    else [switchToDownload setState:NSOffState];
+
+    [importPlaylistName setStringValue:[userDefaults objectForKey:@"PImportPlaylistName"]];
      
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(readConfFiles) name:@"PUpdateFromConfFiles" object:nil];
 
@@ -114,6 +121,8 @@
 	{
 		[userDefaults setBool:YES forKey:@"PImportToiTunes"];
 		[importToPlaylist setEnabled:YES];
+                [importPlaylistName setEnabled:YES];
+                [labelPlaylist setEnabled:YES];
 		[playFile setEnabled:YES];
                 [playFileIfNoFile setEnabled:YES];
 		[deleteFile setEnabled:YES];
@@ -123,6 +132,8 @@
 	{
 		[userDefaults setBool:NO forKey:@"PImportToiTunes"];
 		[importToPlaylist setEnabled:NO];
+                [importPlaylistName setEnabled:NO];
+                [labelPlaylist setEnabled:NO];
 		[playFile setEnabled:NO];
                 [playFileIfNoFile setEnabled:NO];
 		[deleteFile setEnabled:NO];
@@ -132,8 +143,18 @@
 
 - (IBAction)importPlaylistChanged:(id)sender
 {
-    if ([importToPlaylist state]==NSOnState) [userDefaults setBool:YES forKey:@"PImportToPlaylist"];
-    else [userDefaults setBool:NO forKey:@"PImportToPlaylist"];
+    if ([importToPlaylist state]==NSOnState)
+    {
+        [importPlaylistName setEnabled:YES];
+        [labelPlaylist setEnabled:YES];
+        [userDefaults setBool:YES forKey:@"PImportToPlaylist"];
+    }
+    else
+    {
+        [importPlaylistName setEnabled:NO];
+        [labelPlaylist setEnabled:NO];
+        [userDefaults setBool:NO forKey:@"PImportToPlaylist"];
+    }
 }
 
 - (IBAction)playfilePrefsChanged:(id)sender
@@ -166,6 +187,17 @@
 {
     if ([oggSupport state]==NSOnState) [userDefaults setBool:YES forKey:@"POggSupport"];
     else [userDefaults setBool:NO forKey:@"POggSupport"];
+}
+
+- (IBAction)importPlaylistNameChanged:(id)sender
+{
+    NSString *value = [importPlaylistName stringValue];
+    if ([value isEqualToString:@""]) {
+        value = @"Poisoned";
+        [importPlaylistName setStringValue:value];
+    }
+    [userDefaults setObject:value forKey:@"PImportPlaylistName"];
+    [self readConfFiles];
 }
 
 - (IBAction)switchToDownloadPrefsChanged:(id)sender

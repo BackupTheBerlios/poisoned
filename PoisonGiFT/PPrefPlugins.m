@@ -77,9 +77,9 @@
         [buttonFastTrack setState:NSOnState];
     /* not till opennap works! - ashton */
     //if ([plugins containsObject:@"OpenNap"])
-        //[buttonOpenNap setState:NSOnState];
+    //[buttonOpenNap setState:NSOnState];
     //if (plugins) [plugins autorelease];
-    [buttonOpenNap setEnabled:NO];
+        [buttonOpenNap setEnabled:NO]; /* until opennap works this remains - ashton */
 
      
     

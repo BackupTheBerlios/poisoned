@@ -47,7 +47,18 @@
 - (NSComparisonResult)PProtoIconAsc:(NSArray *)dict;
 - (NSComparisonResult)PProtoIconDesc:(NSArray *)dict;
 
-- (NSComparisonResult)availabilityAsc:(NSArray *)dict;
-- (NSComparisonResult)availabilityDesc:(NSArray *)dict;
+- (NSComparisonResult)PAvailabilityAsc:(NSArray *)dict;
+- (NSComparisonResult)PAvailabilityDesc:(NSArray *)dict;
+
+/* downloads - ashton */
+- (NSComparisonResult)PSizeAsc:(NSArray *)dict;
+- (NSComparisonResult)PSizeDesc:(NSArray *)dict;
+
+- (NSComparisonResult)PIconAsc:(NSArray *)dict;
+- (NSComparisonResult)PIconDesc:(NSArray *)dict;
+
+- (NSComparisonResult)PFileUserAsc:(NSArray *)dict;
+- (NSComparisonResult)PFileUserDesc:(NSArray *)dict;
+
 
 @end

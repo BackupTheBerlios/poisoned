@@ -36,6 +36,8 @@
     IBOutlet NSTextField *completed;
     IBOutlet NSButton *browseIn;
     IBOutlet NSButton *browseComp;
+    IBOutlet NSTextField *importPlaylistName;
+    IBOutlet NSTextField *labelPlaylist;
 
     NSUserDefaults *userDefaults;
     PGiFTConf *gift_conf;
@@ -61,5 +63,6 @@
 - (IBAction)incomingChanged:(id)sender;
 - (IBAction)browseIncoming:(id)sender;
 - (IBAction)browseCompleted:(id)sender;
+- (IBAction)importPlaylistNameChanged:(id)sender;
 
 @end

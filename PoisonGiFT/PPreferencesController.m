@@ -52,18 +52,23 @@
     NSTabViewItem *_upload = [[NSTabViewItem alloc] initWithIdentifier:@"upload"];
     NSTabViewItem *_protos = [[NSTabViewItem alloc] initWithIdentifier:@"protos"];
     NSTabViewItem *_plugins = [[NSTabViewItem alloc] initWithIdentifier:@"plugins"];
+    NSTabViewItem *_integration = [[NSTabViewItem alloc] initWithIdentifier:@"integration"];
+    
     [_general setView:generalView];
     [_daemon setView:daemonView];
     [_download setView:downloadView];
     [_upload setView:uploadView];
     [_protos setView:protoView];
     [_plugins setView:pluginView];
+    [_integration setView:integrationView];
+    
     [tabView addTabViewItem:_general];
     [tabView addTabViewItem:_daemon];
     [tabView addTabViewItem:_download];
     [tabView addTabViewItem:_upload];
     [tabView addTabViewItem:_protos];
     [tabView addTabViewItem:_plugins];
+    [tabView addTabViewItem:_integration];
     
     [tabView setDrawsBackground:NO];
     
@@ -73,23 +78,24 @@
     [_upload release];
     [_protos release];
     [_plugins release];
+    [_integration release];
 }
 
 - (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar
 {
     return [NSArray arrayWithObjects:
-        @"general",NSToolbarSeparatorItemIdentifier,@"download",@"upload",@"protos",@"daemon",@"plugins",
+        @"general",NSToolbarSeparatorItemIdentifier,@"download",@"upload",@"integration",@"protos",@"daemon",@"plugins",
         nil];
 }
 
 - (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
 {
     return [NSArray arrayWithObjects:
-        @"general",NSToolbarSeparatorItemIdentifier,@"download",@"upload",@"protos",@"daemon",@"plugins",
+        @"general",NSToolbarSeparatorItemIdentifier,@"download",@"upload",@"integration",@"protos",@"daemon",@"plugins",
         nil];
 }
 
-/* I added in the plugins tab and prefs - j.ashton */
+/* I added in the plugins tab and prefs and now Integration - j.ashton */
 - (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
 {
     NSToolbarItem *item = [[NSToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
@@ -134,6 +140,13 @@
         [item setImage:[NSImage imageNamed:@"pref_plugins.png"]];
         [item setTarget:self];
         [item setAction:@selector(switchToPlugins:)];
+    }
+    else if ([itemIdentifier isEqualToString:@"integration"]) {
+        [item setLabel:@"Integration"];
+        [item setPaletteLabel:@"Integration"];
+        [item setImage:[NSImage imageNamed:@"pref_integration.tiff"]];
+        [item setTarget:self];
+        [item setAction:@selector(switchToIntegration:)];
     }
     return [item autorelease];
 }
@@ -201,6 +214,15 @@
     [tabView selectFirstTabViewItem:self];
     [prefWindow setFrame:frame display:YES animate:YES];
     [tabView selectTabViewItemWithIdentifier:@"plugins"];
+}
+
+- (void)switchToIntegration:(id)sender
+{
+    [prefWindow setTitle:@"Integration"];
+    NSRect frame = [self calcFrame:[integrationView frame].size.height];
+    [tabView selectFirstTabViewItem:self];
+    [prefWindow setFrame:frame display:YES animate:YES];
+    [tabView selectTabViewItemWithIdentifier:@"integration"];
 }
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem

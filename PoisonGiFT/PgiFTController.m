@@ -431,7 +431,7 @@
 /* reset poisoned to original state - ashton */
 -(IBAction)resetPoisoned:(id)sender
 {
-    int button = NSRunAlertPanel(@"Would you like to reset Poisoned?",
+    int button = NSRunCriticalAlertPanel(@"Would you like to reset Poisoned?",
     [NSString stringWithFormat:@"This will destroy all saved preferences, no downloaded files will be lost."], @"OK", @"Cancel", nil);
     if (button==NSOKButton)
     {

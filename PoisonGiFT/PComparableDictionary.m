@@ -172,4 +172,42 @@
     return (-1*[self PAvailabilityAsc:dict]);
 }
 
+/* downloads - ashton
+ * SORT BY SIZE */
+- (NSComparisonResult)PSizeAsc:(NSArray *)dict
+{
+    NSString *left = [[self objectAtIndex:0] objectForKey:@"size"];
+    NSString *right = [[dict objectAtIndex:0] objectForKey:@"size"];
+    int li = [left length];
+    int ri = [right length];
+    if (li>ri) return NSOrderedDescending;
+    else if (ri>li) return NSOrderedAscending;
+    else return [left compare:right];
+}
+
+- (NSComparisonResult)PSizeDesc:(NSArray *)dict
+{
+    return (-1*[self PSizeAsc:dict]);
+}
+
+// SORT BY EXTENSION
+- (NSComparisonResult)PIconAsc:(NSArray *)dict
+{
+    return [[[[self objectAtIndex:0] objectForKey:@"file"] pathExtension] compare:[[[dict objectAtIndex:0] objectForKey:@"file"] pathExtension] options:NSCaseInsensitiveSearch];
+}
+
+- (NSComparisonResult)PIconDesc:(NSArray *)dict
+{
+    return (-1*[self PIconAsc:dict]);
+}
+
+- (NSComparisonResult)PFileUserAsc:(NSArray *)dict
+{
+
+}
+- (NSComparisonResult)PFileUserDesc:(NSArray *)dict
+{
+
+}
+
 @end

@@ -1,5 +1,5 @@
 //
-// PPreferencesController.h
+//  PSortedDownloads.h
 // -------------------------------------------------------------------------
 // Copyright (C) 2003 Poisoned Project (http://www.poisonedproject.com/)
 //
@@ -12,43 +12,24 @@
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 // ---------------------------------------------------------------------------
 
-#import <Cocoa/Cocoa.h>
-#import "PGiFTConf.h"
-#import "PUIConf.h"
-#import "POpenFTConf.h"
 
-@interface PPreferencesController : NSWindowController
-{
-    IBOutlet NSPanel *prefWindow;
-    IBOutlet NSView *daemonView;
-    IBOutlet NSView *generalView;
-    IBOutlet NSView *downloadView;
-    IBOutlet NSView *uploadView;
-    IBOutlet NSView *protoView;
-    IBOutlet NSView *pluginView;
-    IBOutlet NSView *integrationView;
-    
-    IBOutlet NSTabView *tabView;
-    
-    NSToolbar *toolbar;
-}
+#import <Foundation/Foundation.h>
+#import "PDownloadSource.h"
 
-- (void)initTabView;
+@interface PDownloadSource (PSortedDownloads)
 
-- (NSRect)calcFrame:(float)height;
+- (void)insertObject:(NSArray *)dict source:(NSMutableArray *)source;
 
-- (void)switchToGeneral:(id)sender;
-- (void)switchToDaemon:(id)sender;
-- (void)switchToDownloads:(id)sender;
-- (void)switchToUploads:(id)sender;
-- (void)switchToProtos:(id)sender;
-- (void)switchToPlugins:(id)sender;
-- (void)switchToIntegration:(id)sender;
+- (void)insertObjectAsc:(NSArray *)dict source:(NSMutableArray *)source;
+- (void)insertObjectDesc:(NSArray *)dict source:(NSMutableArray *)source;
+
+- (void)insertObjectAsc:(NSArray *)dict order:(int)order index:(int)current count:(int)tmpcount source:(NSMutableArray *)source;
+- (void)insertObjectDesc:(NSArray *)dict order:(int)order index:(int)current count:(int)tmpcount source:(NSMutableArray *)source;
 
 @end

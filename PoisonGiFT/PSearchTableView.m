@@ -24,7 +24,7 @@
 
 - (void)drawRect:(NSRect)aRect
 {
-    [super drawRect:aRect];
+     [super drawRect:aRect];
 }
 
 - (void)keyDown:(NSEvent *)theEvent
@@ -50,10 +50,8 @@
 {
     //if(![controller doMouseDown: event])
         [super rightMouseDown: event];
-
-    NSLog(@"mouseDown: %i", [event clickCount]);    
-
-    
 }
+
+
 
 @end

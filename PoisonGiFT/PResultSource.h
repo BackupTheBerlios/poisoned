@@ -51,7 +51,6 @@
     
     NSImage *downloading;
     NSSet *downloading_hashes;
-
     POutlineView *table;
     
     BOOL hidden; // this is for find more sources

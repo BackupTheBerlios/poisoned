@@ -100,6 +100,13 @@
     //if(!avail) return;
     //if([availability isEqualToString:@"0"]) return;
 
+    
+    if(!hash)
+    {
+        NSLog(@"No hash found for item %@ Poisoned is dropping this source...",[item objectForKey:@"file"]);
+        return;
+    }
+
     NSString *meta_str;
     if ([meta count]>0) {
         if (meta_str=[[[meta objectAtIndex:0] objectAtIndex:2] objectForKey:@"bitrate"])

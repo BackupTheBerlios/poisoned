@@ -33,10 +33,6 @@
 
     PDiffOutlineView *table;
     
-    NSTableColumn *selectedColumn;
-    NSImage *ascending;
-    NSImage *descending;
-    
     PIconShop *iconShop;
     
     NSMutableArray *source;
@@ -46,8 +42,14 @@
     NSMutableSet *hashes;
     
     NSUserDefaults *userDefaults;
-    
+
+    /* start sorting - ashton */
+    SEL sorting_selector;
+    NSTableColumn *selectedColumn;
     BOOL sortAscending;
+    NSImage *ascending;
+    NSImage *descending;
+    /* end sorting - ashton */
     
     NSMenu *menu;
     
@@ -110,5 +112,9 @@
 - (BOOL)validateFindMoreSources;
 
 - (void)createDockBadgeIcon;  // j.ashton
+
+// sorting ?
+- (void)cleanUpTableHeaders;
+- (void)setTableHeaders;
 
 @end

@@ -20,10 +20,11 @@
 
 #import "PDownloadSource.h"
 #import "PGiFTConf.h"
+#import "PSortedDownloads.h"
 
 #include <unistd.h>
 
-int iTunesPlaylistImport(const char *filenamewithpath, int playlistmode)
+int iTunesPlaylistImport(const char *filenamewithpath, NSString *playlistName, int playlistmode)
 {
 	NSString *scriptSource;
 
@@ -33,7 +34,7 @@ int iTunesPlaylistImport(const char *filenamewithpath, int playlistmode)
             "tell application \"iTunes\"\n"
             "   launch\n"
             "   set Tester to \"0\"\n"
-            "   set playlist_name to (\"Poisoned\")\n"
+            "   set playlist_name to (\"%@\")\n"
             "   repeat with i in playlists\n"
             "		set currentPlaylist to name of i as string\n"
             "		if currentPlaylist is equal to playlist_name then\n"
@@ -45,7 +46,7 @@ int iTunesPlaylistImport(const char *filenamewithpath, int playlistmode)
             "		set name of new_playlist to playlist_name\n"
             "   end if\n"
             "   add POSIX file \"%s\" to playlist playlist_name\n"
-            "end tell"], filenamewithpath];
+            "end tell"],playlistName, filenamewithpath];
         }
         else 
         {
@@ -139,8 +140,12 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
 	{
 		table = _table;
 
-        ascending = [NSImage imageNamed:@"NSAscendingSortIndicator"];
-        descending = [NSImage imageNamed:@"NSDescendingSortIndicator"];
+        /* start sorting code - ashton */
+        sorting_selector = nil;
+        selectedColumn = nil;
+        ascending = [[NSImage imageNamed:@"NSAscendingSortIndicator"] retain];
+        descending = [[NSImage imageNamed:@"NSDescendingSortIndicator"] retain];
+        /* end sorting code */
         
         source 	= [[NSMutableArray alloc] init];
         tickets = [[NSMutableDictionary alloc] init];
@@ -539,9 +544,8 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
     [table reloadData];
     [self CHGDOWNLOAD:data];
 
-/* deactivate auto find more sources for this release (0.41), perhaps it's best to just drop this, because it looks like this will be implemented in giFT
-
-    NSString *hash;
+/* this breaks the latest giftd - ashton */
+    /* NSString *hash;
     if (hash=[dict objectForKey:@"hash"]) {
         // if the download is active we do a find more sources
         // this seems nice to have when you start up gift and old downloads get added
@@ -551,17 +555,17 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
         }
                 
         //NSLog(@"fms: create timer");
-        // create a timer for 'auto find more sources'
+        // create a timer for 'auto find more sources
         NSTimer *fms_timer = [NSTimer
-            scheduledTimerWithTimeInterval:1800	// 30 min
+            scheduledTimerWithTimeInterval:600	// 10 min
             target:self
             selector:@selector(findMoreSourcesTimer:)
             userInfo:[NSDictionary dictionaryWithObjectsAndKeys:ticket,@"ticket",nil]
             repeats:YES
         ];
         [timers setObject:fms_timer forKey:hash];
-    }
-*/
+    }*/
+
 }
 
 
@@ -581,6 +585,7 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
     int i,sourcescount		= [sources count];
     
     NSString *state		= [new objectForKey:@"state"];
+
     
     NSString *tmpstring;
     
@@ -618,8 +623,8 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
     if ([state isEqualToString:@"Completed"])
 	{ // clean up completed downloads...
         [item setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:YES],[NSNumber numberWithBool:NO],@"Completed",nil] forKey:@"PProgress"];
-        
-        [self createDockBadgeIcon]; // add dock badge - j.ashton        
+
+        [self createDockBadgeIcon]; /* add dock badge - ashton */        
         
         [item setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:YES],@"",@"",nil] forKey:@"PTransfer"];
         [[item objectForKey:@"PSize"] replaceObjectAtIndex:1 withObject:[self calcSize:[item objectForKey:@"size"]]];
@@ -636,7 +641,7 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
         }
         [table reloadItem:item reloadChildren:YES];
                 
-        // begin iTunes code
+        /* begin iTunes code */
         if ([userDefaults boolForKey:@"PImportToiTunes"])
         {
             PGiFTConf *gift_conf = [PGiFTConf singleton];
@@ -651,9 +656,13 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
                     ext = [NSSet setWithObjects:@"mp3",@"wav",@"m4u",@"m4a",@"aif",@"aiff",@"ogg",nil];
                 else        
                     ext = [NSSet setWithObjects:@"mp3",@"wav",@"m4u",@"m4a",@"aif",@"aiff",nil];
+                /* logic for adding music to playlist based on metadata, if meta is nil then
+                 * just add it to the poisoned playlist */
+                //NSString *playlistTitle = @"Avril Lavigne";
+                
                 if ([ext containsObject:[[fileWithPath pathExtension] lowercaseString]]) 
                 {
-                    if (iTunesPlaylistImport([fileWithPath fileSystemRepresentation], 
+                    if (iTunesPlaylistImport([fileWithPath fileSystemRepresentation],[userDefaults objectForKey:@"PImportPlaylistName"],
                             [userDefaults boolForKey:@"PImportToPlaylist"])) 
                     {
                         if ([userDefaults boolForKey:@"PPlayFile"]) 
@@ -671,7 +680,7 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
                 }
             }
         }
-        // end iTunes code
+        /* end iTunes code */
 
         return;
     }
@@ -924,30 +933,46 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
 }
 
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
-{
+{  
     return [item objectForKey:[tableColumn identifier]];
 }
 
-- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectTableColumn:(NSTableColumn *)tableColumn
+/* sorting downloads its disabled because it's broke, fix it if you want -a ashton */
+/*- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectTableColumn:(NSTableColumn *)tableColumn
 {
-    return NO;
+    NSString *ident = [tableColumn identifier];
     if (selectedColumn) [outlineView setIndicatorImage:nil inTableColumn:selectedColumn];
     if (selectedColumn==tableColumn) sortAscending=!sortAscending;
     else sortAscending=YES;
     selectedColumn = tableColumn;
     [outlineView setHighlightedTableColumn:tableColumn];
-    
+
+    //NSMutableArray *source1=nil;
+    //NSMutableArray *source2=nil;
+
+       //source1 = source;
+        //source2 = source;
+
     if (sortAscending) {
         [outlineView setIndicatorImage:ascending inTableColumn:tableColumn];
+        sorting_selector = sel_getUid([
+            [NSString stringWithFormat:@"%@Asc:",ident] cString]);
+        [source sortUsingSelector:sorting_selector];
+        [outlineView reloadData];
+        //if (source2) [source2 sortUsingSelector:sorting_selector];
     }
     else {
         [outlineView setIndicatorImage:descending inTableColumn:tableColumn];
+        sorting_selector = sel_getUid([
+            [NSString stringWithFormat:@"%@Desc:",ident] cString]);
+        [source sortUsingSelector:sorting_selector];
+        [outlineView reloadData];
+        //if (source2) [source2 sortUsingSelector:sorting_selector];
     }
-    [outlineView reloadData];
     return NO;
-}
+}*/
 
-/* create and add our custom dock icon - j.ashton */
+/* create and add our custom dock icon - ashton */
 - (void)createDockBadgeIcon
 {
     /* note that this is almost ready to draw numbers into the badge for the
@@ -991,6 +1016,24 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
     
 }
 
+/* start sotring code - ashton */
+- (void)cleanUpTableHeaders
+{
+    if (selectedColumn) {
+        [table setHighlightedTableColumn:nil];
+        [table setIndicatorImage:nil inTableColumn:selectedColumn];
+    }
+}
+
+- (void)setTableHeaders
+{
+    if (selectedColumn) {
+        [table setHighlightedTableColumn:selectedColumn];
+        if (sortAscending) [table setIndicatorImage:ascending inTableColumn:selectedColumn];
+        else [table setIndicatorImage:descending inTableColumn:selectedColumn];
+    }
+}
+/* end sorting code */
 @end
 
 

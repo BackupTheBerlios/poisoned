@@ -156,7 +156,7 @@
 - (IBAction)showhideTableColumn:(id)sender
 {
     NSString *title = [sender title];
-    NSTableColumn *col;
+    NSTableColumn *col = nil;
     if ([title isEqualToString:@"File Icon"])		col = tc_fileicon;
     else if ([title isEqualToString:@"File"])		col = tc_file;
     else if ([title isEqualToString:@"Network Icon"])	col = tc_networkicon;
