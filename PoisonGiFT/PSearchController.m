@@ -556,32 +556,58 @@
 - (void)buyAtiTMS:(id)sender
 {
     if ([r_table numberOfSelectedRows]!=1) return;
-    NSString* artistTerm=@"";
-    NSString* titleTerm=@"";
-    NSString* albumTerm=@"";
+    NSString* artistTerm=@""; 		// empty string instead of (null)
+    NSString* titleTerm=@""; 
     NSURL* url;
-    NSRange beginRange, endRange;
-    NSDictionary *item = [r_table itemAtRow:[r_table selectedRow]];
+    NSRange beginRange, endRange;	
+    NSDictionary *item = [r_table itemAtRow:[r_table selectedRow]];	// information on selected item
 
+        // check for no meta tags
         if (![item objectForKey:@"artist"] && ![item objectForKey:@"title"] && ![item objectForKey:@"album"]) 
         {
+        
+            // most mp3 files downloaded will have a - before the name of the song at the end of a file name
+            // some have "02 <name of song>.mp3" due to itunes, the following 3 lines will work that all out.
+            // all followed by a .mp3 extension which is worked out at the endRange
+            
             beginRange = [[item objectForKey:@"file"] rangeOfString:@"-" options:NSBackwardsSearch];
+            if ( beginRange.length==0 && 
+                    [[[item objectForKey:@"file"] substringWithRange: NSMakeRange(0, 2)] intValue] ) 
+                    beginRange = [[item objectForKey:@"file"] rangeOfString:@" "];
+
             endRange = [[item objectForKey:@"file"] rangeOfString:@"." options:NSBackwardsSearch];
-            titleTerm=(NSString*)CFURLCreateStringByAddingPercentEscapes(0,(CFStringRef)[[item objectForKey:@"file"] substringWithRange:NSMakeRange(beginRange.location+1, (endRange.location-(beginRange.location+1)))],0,0,kCFStringEncodingISOLatin1);
-            url=[NSURL URLWithString:[NSString stringWithFormat:@"itms://phobos.apple.com/WebObjects/MZSearch.woa/wa/advancedSearchResults?songTerm=%@", titleTerm]];
+            
+            // parse the string for name of song and replace spaces for web sending. Now this is not perfect and some oddly named
+            // files will be parsed improperly but there is no control over how people name files so no parser is perfect. This 
+            // will get 90% of all files which do not have meta-tags or 99.9% of all files in total.
+            
+            titleTerm=(NSString*)CFURLCreateStringByAddingPercentEscapes(0,(CFStringRef)[
+                        [item objectForKey:@"file"] substringWithRange:
+                        NSMakeRange(beginRange.location+1,   		// eat the char we searched for, spaces ignored by itunes
+                        (endRange.location-(beginRange.location+1)))
+                        ],0,0,kCFStringEncodingISOLatin1);
+            url=[NSURL URLWithString:[NSString stringWithFormat:
+                @"itms://phobos.apple.com/WebObjects/MZSearch.woa/wa/advancedSearchResults?songTerm=%@", 
+                titleTerm]];
         } 
         else 
         {
+        
+            // parsing meta tags spaces and adding them to the url string
+            
             if ([item objectForKey:@"artist"])
-                artistTerm=(NSString*)CFURLCreateStringByAddingPercentEscapes(0,(CFStringRef)[item objectForKey:@"artist"],0,0,kCFStringEncodingISOLatin1);
+                artistTerm=(NSString*)CFURLCreateStringByAddingPercentEscapes(0,(CFStringRef)
+                    [item objectForKey:@"artist"],0,0,kCFStringEncodingISOLatin1);
             if ([item objectForKey:@"title"])
-                titleTerm=(NSString*)CFURLCreateStringByAddingPercentEscapes(0,(CFStringRef)[item objectForKey:@"title"],0,0,kCFStringEncodingISOLatin1);
-            if ([item objectForKey:@"album"])                                                                     
-                albumTerm=(NSString*)CFURLCreateStringByAddingPercentEscapes(0,(CFStringRef)[item objectForKey:@"album"],0,0,kCFStringEncodingISOLatin1);
+                titleTerm=(NSString*)CFURLCreateStringByAddingPercentEscapes(0,(CFStringRef)
+                    [item objectForKey:@"title"],0,0,kCFStringEncodingISOLatin1);
     
-            url=[NSURL URLWithString:[NSString stringWithFormat:@"itms://phobos.apple.com/WebObjects/MZSearch.woa/wa/advancedSearchResults?songTerm=%@&artistTerm=%@&albumTerm=%@", titleTerm, artistTerm, albumTerm]];
+            url=[NSURL URLWithString:[NSString stringWithFormat:
+                @"itms://phobos.apple.com/WebObjects/MZSearch.woa/wa/advancedSearchResults?songTerm=%@&artistTerm=%@",
+                titleTerm, artistTerm]];
         }
         
+        // send url to system
         [[NSWorkspace sharedWorkspace] openURL:url];
 
 }
