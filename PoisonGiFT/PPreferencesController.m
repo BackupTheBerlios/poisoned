@@ -175,7 +175,7 @@
 - (void)switchToProtos:(id)sender
 {
     [prefWindow setTitle:@"Protocols"];
-    NSRect frame = [self calcFrame:316];
+    NSRect frame = [self calcFrame:346];
     [tabView selectFirstTabViewItem:self];
     [prefWindow setFrame:frame display:YES animate:YES];
     [tabView selectTabViewItemWithIdentifier:@"protos"];
