@@ -41,7 +41,7 @@
 {
 	self = [super init];
 	
-	_ref = interface_new(command, value);
+	_ref = interface_new((char *)command, (char *)value);
 	
 	return self;
 }
@@ -65,27 +65,33 @@
 
 - (NSString *)command
 {
-	return [NSString stringWithCString:_ref->command];
+	if (_ref->command)
+		return [NSString stringWithCString:_ref->command];
+	else
+		return NULL;
 }
 
 - (NSString *)value
 {
-	return [NSString stringWithCString:_ref->value];
+	if (_ref->value)
+		return [NSString stringWithCString:_ref->value];
+	else
+		return NULL;
 }
 
 - (void)setCommand:(const char *)command
 {
-	interface_set_command(_ref, command);
+	interface_set_command(_ref, (char *)command);
 }
 
 - (void)setValue:(const char *)value
 {
-	interface_set_value(_ref, value);
+	interface_set_value(_ref, (char *)value);
 }
 
 - (NSString *)getElement:(const char *)path
 {
-	char *value = interface_get(_ref, path);
+	char *value = interface_get(_ref, (char *)path);
 	if (value)
 		return [NSString stringWithCString:value];
 	else
@@ -94,7 +100,7 @@
 
 - (BOOL)putElement:(const char *)path value:(const char *)value
 {
-	return interface_put(_ref, path, value);
+	return interface_put(_ref, (char *)path, (char *)value);
 }
 
 - (NSData *)serialize
