@@ -19,10 +19,7 @@
 // ---------------------------------------------------------------------------
 
 #import <Foundation/Foundation.h>
-
 #import "PCDispatcher.h"
-
-#include <string.h>
 
 @interface PCParser : NSObject {
     

@@ -19,20 +19,26 @@
 // ---------------------------------------------------------------------------
 
 #import "PCParser.h"
+#import <string.h>
+#import "libgift/libgift.h"
+#import "GPacket.h"
 
 @implementation PCParser
 
 - (id)init
 {
-  if (self=[super init]) {
-    buffer=nil;
-    dispatcher = [[PCDispatcher alloc] init];
-  }
-  return self;
+	if (self=[super init])
+	{
+		libgift_init("Poisoned", GLOG_STDERR, NULL);
+		buffer=nil;
+		dispatcher = [[PCDispatcher alloc] init];
+	}
+	return self;
 }
 
 - (void)dealloc
 {
+	libgift_finish();
     //[buffer release];
     [dispatcher release];
     [super dealloc];
@@ -51,6 +57,16 @@
 	if (data)
 	{
 		[dispatcher processOutput:[self parse:data]];
+		
+		// TEST CODE - jjt
+		Interface *interface = interface_unserialize(data, strlen(data));
+		if (interface)
+		{
+			GPacket *pkt = [GPacket packetWithInterface:interface];
+			NSLog(@"GPacket command: %@", [pkt command]);
+		}
+		else
+			NSLog(@"interface parse error");
 	}
 }
 
