@@ -47,9 +47,13 @@
     BOOL sortAscending;
     
     NSMenu *menu;
+    
+    id giftCommander;
 }
 
 - (id)initWithTable:(PDiffOutlineView *)_table;
+
+- (void)setCommander:(id)_giftCommander;
 
 - (void)ADDDOWNLOAD:(NSArray *)data;
 - (void)CHGDOWNLOAD:(NSArray *)data;
@@ -73,6 +77,8 @@
 - (NSString *)hashForTicket:(NSString *)ticket;
 
 - (void)disconnected;
+
+- (void)deleteEvent:(id)sender;
 
 - (void)cancel:(id)commander;
 - (void)pause:(id)commander;

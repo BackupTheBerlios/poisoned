@@ -158,6 +158,11 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
     [super dealloc];
 }
 
+- (void)setCommander:(id)_giftCommander
+{
+    giftCommander = _giftCommander;
+}
+
 - (void)disconnected
 {
     [tickets removeAllObjects];
@@ -229,6 +234,50 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
     return [[tickets objectForKey:ticket] objectForKey:@"hash"];
 }
 
+- (void)deleteEvent:(id)sender
+{
+    // this array stores the tickets of the deleted downloads
+    // so we don't have to delete their sources, if they are selected too
+    NSMutableArray *deletedDownloads = [[[NSMutableArray alloc] init] autorelease];
+        
+    // we store all commands in one string, and send it at once
+    NSMutableString *tmpcmd = [[[NSMutableString alloc] initWithString:@""] autorelease];
+    
+    NSEnumerator *enumerator = [table selectedRowEnumerator];
+    NSNumber *num;
+    NSMutableDictionary *item;
+    while (num=[enumerator nextObject]) {
+        item = [table itemAtRow:[num intValue]];
+        
+        // if it's a download -> cancel the download and remove it
+        if ([item objectForKey:@"PExpandable"]) {
+            [deletedDownloads addObject:[item objectForKey:@"PTicket"]];
+            if ([[item objectForKey:@"PStatus"] intValue]>1) {
+                [deletedDownloads addObject:[item objectForKey:@"PTicket"]];
+                [tmpcmd appendString:[NSString stringWithFormat:@";\nTRANSFER(%@) action(cancel)",[item objectForKey:@"PTicket"]]];
+            }
+        }
+        // a source is selected...
+        else if (![deletedDownloads containsObject:[item objectForKey:@"PTicket"]]) {
+            [tmpcmd appendString:[NSString stringWithFormat:@";\nDELSOURCE(%@) url(%@)",
+                [item objectForKey:@"PTicket"],
+                [giftCommander prepare:[item objectForKey:@"url"]]]];
+        }
+    }
+    
+    // now we just have to remove the deleted downloads from the table
+    // the source will be removed by DELSOURCE: as soon as gift removes the source
+    NSString *ticket;
+    int i, count = [deletedDownloads count];
+    for (i=0;i<count;i++) {
+        ticket = [deletedDownloads objectAtIndex:i];
+        [source removeObject:[tickets objectForKey:ticket]];
+        [tickets removeObjectForKey:tickets];
+        [table reloadData];
+    }
+    [giftCommander performSelector:@selector(cmd:) withObject:[tmpcmd substringFromIndex:2]];
+}
+
 - (void)cancel:(id)commander
 {
     NSEnumerator *enumerator = [table selectedRowEnumerator];
@@ -292,7 +341,9 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
     while (num=[enumerator nextObject]) {
         tmp = [table itemAtRow:[num intValue]];
         if (![tmp objectForKey:@"PExpandable"])
-            tmpcmd = [tmpcmd stringByAppendingString:[NSString stringWithFormat:@"\n;DELSOURCE(%@) url(%@)",[tmp objectForKey:@"PTicket"],[tmp objectForKey:@"url"]]];
+            // never forget to prepare a string, if it's possible that it contains characters that must
+            // be escaped ->  \ { } [ ] ( )
+            tmpcmd = [tmpcmd stringByAppendingString:[NSString stringWithFormat:@";\nDELSOURCE(%@) url(%@)",[tmp objectForKey:@"PTicket"],[commander prepare:[tmp objectForKey:@"url"]]]];
     }
     [commander performSelector:@selector(cmd:) withObject:[tmpcmd substringFromIndex:2]];
 }
@@ -632,6 +683,7 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
     NSString *ticket = [data objectAtIndex:1];
     if (!ticket) return;
     NSMutableDictionary *item = [tickets objectForKey:ticket];
+    if (!item) return;
     if ([[item objectForKey:@"PStatus"] intValue] == PCOMPLETED) {
         if ([userDefaults boolForKey:@"PRemoveCompletedDownloads"]) {
             [source removeObject:[tickets objectForKey:ticket]];
@@ -688,6 +740,7 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
     NSString *ticket	= [data objectAtIndex:1];
     NSString *url	= [[data objectAtIndex:2] objectForKey:@"url"];
     if (!ticket || !url) return;
+    if ([tickets objectForKey:ticket]) return;
     NSMutableArray *sources = [[tickets objectForKey:ticket] objectForKey:@"PSources"];
     int i, count = [sources count];
 
