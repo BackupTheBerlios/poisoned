@@ -450,7 +450,7 @@
         int button = NSRunAlertPanel(@"A New Version is Available.",
             [NSString stringWithFormat:@"A new version of Poisoned is available (version %@). Would you like to download the new version now?", version], @"OK", @"Cancel", nil);
         if(NSOKButton == button)
-            [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.poisonedproject.com/"]];
+            [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.poisonedproject.com/poisoned.php"]];
     }
     else if ([userInfo objectForKey:@"PUpToDate"])
         NSRunAlertPanel(@"Your Software is up-to-date.",
