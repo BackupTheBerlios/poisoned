@@ -288,7 +288,7 @@
 	{
 		launchPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"giFT/bin/giftd"];
 		[task setCurrentDirectoryPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"giFT/"]];
-		NSMutableDictionary *envDict = [[NSProcessInfo processInfo] environment];
+		NSMutableDictionary *envDict = [NSMutableDictionary dictionaryWithDictionary:[[NSProcessInfo processInfo] environment]];
 		[envDict setObject: [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"giFT/lib/"] forKey:@"DYLD_LIBRARY_PATH"];
 		[envDict setObject: [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"giFT/share/"] forKey: @"GIFT_DATA_DIR"];
 		[envDict setObject: [@"~/Library/Application Support/Poisoned" stringByExpandingTildeInPath] forKey: @"GIFT_LOCAL_DIR"];
