@@ -296,7 +296,7 @@
 		//[task setCurrentDirectoryPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"giFT/"]];
 		//[envDict setObject: @"lib/" forKey:@"DYLD_LIBRARY_PATH"];
 		
-		[envDict setObject: [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"giFT/share/"] forKey: @"GIFT_DATA_DIR"];
+		[envDict setObject: [@"~/Library/Application Support/Poisoned" stringByExpandingTildeInPath] forKey: @"GIFT_DATA_DIR"];
 		[envDict setObject: [@"~/Library/Application Support/Poisoned" stringByExpandingTildeInPath] forKey: @"GIFT_LOCAL_DIR"];
 		[envDict setObject: [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"giFT/lib/giFT"] forKey: @"GIFT_PLUGIN_DIR"];
 		[task setEnvironment:envDict];
