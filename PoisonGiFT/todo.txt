@@ -3,7 +3,7 @@
 
 
 **--saving searches so that people can shutdown and come back to them and 	the gift client can crash and not loose searches.
---fix the navagation text so that it is black and not grey.
+**fix the navagation text so that it is black and not grey.
 --save the drawer size
 **put new results at top of search list
 **Upload and Download throttling
