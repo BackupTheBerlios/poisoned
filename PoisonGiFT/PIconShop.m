@@ -49,8 +49,8 @@
         [protos setObject:[NSImage imageNamed:@"Donkey.tiff"] forKey:@"Donkey"];
         [protos setObject:[NSImage imageNamed:@"Donkey32.tiff"] forKey:@"Donkey"];
         /* availability icons - ashton */
-        [icons setObject:[NSImage imageNamed:@"online.tiff"] forKey:@"availGood"];
-        [icons setObject:[NSImage imageNamed:@"offline.tiff"] forKey:@"availBad"];
+        [icons setObject:[NSImage imageNamed:@"availGood.tiff"] forKey:@"availGood"];
+        [icons setObject:[NSImage imageNamed:@"availBad.tiff"] forKey:@"availBad"];
         
         unknown = [[NSImage imageNamed:@"unknown.tiff"] retain];
         unknown32 = [[NSImage imageNamed:@"unknown32.tiff"] retain];

@@ -138,7 +138,9 @@
             parent_copy = [[parent mutableCopy] autorelease];
             [parent removeObjectForKey:@"icon"];
             [parent removeObjectForKey:@"PProtoIcon"];
-            [parent removeObjectForKey:@"PAvailability"];
+            //[parent removeObjectForKey:@"PAvailability"];
+//[parent_copy setObject:[icon_shop iconForAvail:avail] forKey:@"PAvailability"];
+
             [parent_copy setObject:[NSString stringWithString:@"expandable"] forKey:@"expandable"];
             [sources setObject:parent_copy forKey:@"parent"];
             [sourcesArray insertObject:parent_copy atIndex:0];
@@ -149,7 +151,7 @@
         [sourcesArray addObject:item];
         [[attr_users mutableString] setString:[NSString stringWithFormat:@"%d Users",([sourcesArray count]-1)]];
         [parent setObject:[[attr_users copy] autorelease] forKey:@"user"];
-
+[item setObject:[icon_shop iconForAvail:avail] forKey:@"PAvailability"];
         [sources setObject:item forKey:user];
 
         if (selected_column && [[selected_column identifier] isEqualToString:@"user"]) {

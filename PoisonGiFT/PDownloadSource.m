@@ -980,7 +980,7 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
         [appImage compositeToPoint:NSMakePoint(0, [appImage size].height)
                          operation:NSCompositeSourceOver];
     // this is the green check
-    [badge compositeToPoint:NSMakePoint(80,60) operation:NSCompositeSourceOver];
+    [badge compositeToPoint:NSMakePoint(70,68) operation:NSCompositeSourceOver];
     [str drawAtPoint:p withAttributes:attrs];  //this will draw the count into the badge...
     [image unlockFocus];
     // set the new dock image

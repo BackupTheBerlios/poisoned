@@ -52,8 +52,8 @@
     
     // setting up the tables ------------------------------------------
     [s_table setRowHeight:30];
-    //[r_table setAutosaveName:@"PSearchTableAutoSave"];
-    //[r_table setAutosaveTableColumns:YES];
+    [r_table setAutosaveName:@"PSearchTableAutoSave"];
+    [r_table setAutosaveTableColumns:YES];
     [r_table setMenuDelegate:self];
     [r_table setRowHeight:16];
     [r_table setDrawsGrid:YES];
