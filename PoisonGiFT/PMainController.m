@@ -178,13 +178,20 @@
     // ---------------------------------------------------------------
     version = [userDefaults floatForKey:@"PVersion"];
     currentVersion = [[[[NSBundle bundleForClass:[self class]] infoDictionary] objectForKey:@"CFBundleVersion"] floatValue];
-
     // if the last version the user was using is 0.311 or smaller, we have to randomize port and http_port in OpenFT.conf
-    if (version<=0.311) {
+    if (version<=0.311f) {
         // probably this could be done better ;)
         [giFT checkConfFiles];
         POpenFTConf *openft_conf = [POpenFTConf singleton];
         [openft_conf setRandomValues];
+    }
+    if (version<=0.4f) {
+        // there is a new Gnutella.conf => replace the old one
+        NSFileManager *manager = [NSFileManager defaultManager];
+        if ([manager removeFileAtPath:[@"~/Library/Application Support/Poisoned/Gnutella/Gnutella.conf" stringByExpandingTildeInPath] handler:nil])
+            NSLog(@"removed old Gnutella.conf");
+        // it wouldn't be necesseary to check all files again, but it the easiest way ;)
+        [giFT checkConfFiles];
     }
 
     if (firstRun) {
@@ -195,7 +202,7 @@
     else if (version<currentVersion) {
         [userDefaults setFloat:currentVersion forKey:@"PVersion"];
 
-        if (version<=0.131) { // user updated from version <= 0.131
+        if (version<=0.131f) { // user updated from version <= 0.131
             [userDefaults setBool:NO forKey:@"PSwitchToDownloads"];
         }
         // alert panel for new preferences
