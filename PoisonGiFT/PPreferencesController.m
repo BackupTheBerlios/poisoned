@@ -139,7 +139,7 @@
 - (void)switchToGeneral:(id)sender
 {
     [prefWindow setTitle:@"General"];
-    NSRect frame = [self calcFrame:91];
+	NSRect frame = [self calcFrame:[generalView frame].size.height];
     [tabView selectFirstTabViewItem:self];
     [prefWindow setFrame:frame display:YES animate:YES];
     [tabView selectTabViewItemWithIdentifier:@"general"];
@@ -148,7 +148,7 @@
 - (void)switchToDaemon:(id)sender
 {
     [prefWindow setTitle:@"Daemon"];
-    NSRect frame = [self calcFrame:409];
+    NSRect frame = [self calcFrame:[daemonView frame].size.height];
     [tabView selectFirstTabViewItem:self];
     [prefWindow setFrame:frame display:YES animate:YES];
     [tabView selectTabViewItemWithIdentifier:@"daemon"];
@@ -157,7 +157,7 @@
 - (void)switchToDownloads:(id)sender
 {
     [prefWindow setTitle:@"Downloads"];
-    NSRect frame = [self calcFrame:331];
+    NSRect frame = [self calcFrame:[downloadView frame].size.height];
     [tabView selectFirstTabViewItem:self];
     [prefWindow setFrame:frame display:YES animate:YES];
     [tabView selectTabViewItemWithIdentifier:@"download"];
@@ -166,7 +166,7 @@
 - (void)switchToUploads:(id)sender
 {
     [prefWindow setTitle:@"Uploads"];
-    NSRect frame = [self calcFrame:373];
+    NSRect frame = [self calcFrame:[uploadView frame].size.height];
     [tabView selectFirstTabViewItem:self];
     [prefWindow setFrame:frame display:YES animate:YES];
     [tabView selectTabViewItemWithIdentifier:@"upload"];
@@ -175,7 +175,7 @@
 - (void)switchToProtos:(id)sender
 {
     [prefWindow setTitle:@"Protocols"];
-    NSRect frame = [self calcFrame:346];
+    NSRect frame = [self calcFrame:[protoView frame].size.height];
     [tabView selectFirstTabViewItem:self];
     [prefWindow setFrame:frame display:YES animate:YES];
     [tabView selectTabViewItemWithIdentifier:@"protos"];
