@@ -284,10 +284,21 @@
     
     if ([userDefaults boolForKey:@"PUseCustomDaemon"])
 		launchPath = [userDefaults stringForKey:@"PGiFTPath"];
-	else {
-            launchPath = [[NSBundle mainBundle] pathForAuxiliaryExecutable:@"giFT"];
-        }
-	[task setCurrentDirectoryPath:[launchPath stringByDeletingLastPathComponent]];
+	else
+	{
+		launchPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"giFT/bin/giftd"];
+		[task setCurrentDirectoryPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"giFT/"]];
+		NSMutableDictionary *envDict = [[NSProcessInfo processInfo] environment];
+		[envDict setObject: [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"giFT/lib/"] forKey:@"DYLD_LIBRARY_PATH"];
+		[envDict setObject: [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"giFT/share/"] forKey: @"GIFT_DATA_DIR"];
+		[envDict setObject: [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"giFT/share/"] forKey: @"GIFT_LOCAL_DIR"];
+		[envDict setObject: [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"giFT/lib/giFT"] forKey: @"GIFT_PLUGIN_DIR"];
+		//NSLog(@"environment: %@", envDict);
+		[task setEnvironment:envDict];
+		//NSArray *argArray = [NSArray arrayWithObjects:@"-V", @"--local-dir=share/", @"--data-dir=share/", @"--plugin-dir=lib/giFT/", NULL];
+		//NSLog(@"args: %@", argArray);
+		//[task setArguments:argArray];
+	}
 	[task setLaunchPath:launchPath];
 	NS_DURING
 		[task launch];
