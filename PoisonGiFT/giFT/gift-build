@@ -171,7 +171,10 @@ def main():
 			os.makedirs(os.path.join(install_root, "bin"))
 		if not os.path.exists(os.path.join(install_root, "lib", "giFT")):
 			os.makedirs(os.path.join(install_root, "lib", "giFT"))
-		
+		if not os.path.exists(os.path.join(install_root, "include")):
+			os.makedirs(os.path.join(install_root, "include"))
+		# libgift headers
+		os.spawnlp(os.P_NOWAIT, "cp", "cp", "-R", os.path.join(root,"install", "include", "libgift"), os.path.join(install_root, "include"))
 		# gift daemon
 		os.spawnlp(os.P_NOWAIT, "cp", "cp", os.path.join(root,"install", "bin", "giftd"), os.path.join(install_root, "bin", "giftd"))
 		# plugins
