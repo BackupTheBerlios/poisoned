@@ -130,7 +130,7 @@
     else if ([itemIdentifier isEqualToString:@"plugins"]) {
         [item setLabel:@"Plugins"];
         [item setPaletteLabel:@"Plugins"];
-        [item setImage:[NSImage imageNamed:@"protos.tiff"]];
+        [item setImage:[NSImage imageNamed:@"plugin.tiff"]];
         [item setTarget:self];
         [item setAction:@selector(switchToPlugins:)];
     }
