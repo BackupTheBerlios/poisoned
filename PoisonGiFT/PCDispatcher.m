@@ -59,7 +59,7 @@
             [[controllers objectForKey:@"REMOVE_UNKNOWN_COMMAND_TICKET"] performSelector:@selector(REMOVE_UNKNOWN_COMMAND_TICKET:) withObject:parsed];
         }
     }
-    [[controllers objectForKey:@"POISON_GUI_UPDATE"] performSelector:@selector(POISON_GUI_UPDATE:) withObject:nil];
+    //[[controllers objectForKey:@"POISON_GUI_UPDATE"] performSelector:@selector(POISON_GUI_UPDATE:) withObject:nil];
   }
   return;
 }
