@@ -59,7 +59,7 @@
 		[dispatcher processOutput:[self parse:data]];
 		
 		// TEST CODE - jjt
-		Interface *interface = interface_unserialize(data, strlen(data));
+		Interface *interface = interface_unserialize((char *)data, strlen(data));
 		if (interface)
 		{
 			GPacket *pkt = [GPacket packetWithInterface:interface];
