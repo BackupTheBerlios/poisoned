@@ -1,7 +1,7 @@
 //
 // PMainController.m
 // -------------------------------------------------------------------------
-// Copyright (C) 2003 Poisoned Project (http://gottsilla.net/software.php?site=poisoned)
+// Copyright (C) 2003 Poisoned Project (http://www.poisonedproject.com/)
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -450,7 +450,7 @@
         int button = NSRunAlertPanel(@"A New Version is Available.",
             [NSString stringWithFormat:@"A new version of Poisoned is available (version %@). Would you like to download the new version now?", version], @"OK", @"Cancel", nil);
         if(NSOKButton == button)
-            [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://gottsilla.net/software.php?site=poisoned"]];
+            [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.poisonedproject.com/"]];
     }
     else if ([userInfo objectForKey:@"PUpToDate"])
         NSRunAlertPanel(@"Your Software is up-to-date.",
@@ -465,7 +465,7 @@
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     NSString *running = [[[NSBundle bundleForClass:[self class]] infoDictionary] objectForKey:@"CFBundleVersion"];
-    NSDictionary *productVersionDict = [NSDictionary dictionaryWithContentsOfURL:[NSURL URLWithString:@"http://gottsilla.net/version.xml"]];
+    NSDictionary *productVersionDict = [NSDictionary dictionaryWithContentsOfURL:[NSURL URLWithString:@"http://www.poisonedproject.com/version.xml"]];
     NSString *latest = [productVersionDict objectForKey:@"Poisoned"];
     NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
     if (!latest) {
@@ -668,7 +668,7 @@
 
 - (IBAction)poisonWeb:(id)sender
 {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://gottsilla.net/software.php?site=poisoned"]];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.poisonedproject.com/"]];
 }
 
 - (IBAction)giftWeb:(id)sender

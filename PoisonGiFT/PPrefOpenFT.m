@@ -1,7 +1,7 @@
 //
 // PPrefOpenFT.m
 // -------------------------------------------------------------------------
-// Copyright (C) 2003 Poisoned Project (http://gottsilla.net/software.php?site=poisoned)
+// Copyright (C) 2003 Poisoned Project (http://www.poisonedproject.com/)
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
