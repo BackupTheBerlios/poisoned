@@ -262,6 +262,8 @@
             [[datasources objectForKey:[[searches objectAtIndex:i] objectForKey:@"ticket"]]
                 setActive:NO];
         }
+        [s_table reloadData];
+        [filter disconnected];
     }
     else { // -> remove all searches
         [self saveSearches];
@@ -305,7 +307,7 @@
             [commander freeTicket:ticket];
             [datasources removeObjectForKey:ticket];
         }
-        // reload search table....
+        [s_table reloadData];
         return;
     }
 
