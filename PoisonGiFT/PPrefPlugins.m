@@ -62,9 +62,11 @@
         [buttonGnutella setState:NSOnState];
     if ([plugins containsObject:@"FastTrack"])
         [buttonFastTrack setState:NSOnState];
-    if ([plugins containsObject:@"OpenNap"])
-        [buttonOpenNap setState:NSOnState];
+    /* not till opennap works! - ashton */
+    //if ([plugins containsObject:@"OpenNap"])
+        //[buttonOpenNap setState:NSOnState];
     //if (plugins) [plugins autorelease];
+    [buttonOpenNap setEnabled:NO];
 
      
     
