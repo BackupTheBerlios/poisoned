@@ -558,12 +558,11 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
         }
         [table reloadItem:item reloadChildren:YES];
         
-		
+		PGiFTConf *gift_conf = [PGiFTConf singleton];
+		[gift_conf read];
 		// begin iTunes code
         if ([userDefaults boolForKey:@"PImportToiTunes"])
 		{
-			PGiFTConf *gift_conf = [PGiFTConf singleton];
-			[gift_conf read];
 			NSString *path = [gift_conf optionForKey:@"completed"];
 			if (path)
 			{
@@ -591,6 +590,10 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
 			}
         }
 		// end iTunes code - jjt
+		
+		// notify the Finder and any other application using FNSubscribe API
+		// that the download completed directory has changed - jjt
+		[[NSWorkspace sharedWorkspace] noteFileSystemChanged:[gift_conf optionForKey:@"completed"]];
 		return;
     }
     else if ([state isEqualToString:@"Paused"]) {
