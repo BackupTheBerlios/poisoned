@@ -533,6 +533,8 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
     [table reloadData];
     [self CHGDOWNLOAD:data];
 
+/* deactivate auto find more sources for this release (0.41), perhaps it's best to just drop this, because it looks like this will be implemented in giFT
+
     NSString *hash;
     if (hash=[dict objectForKey:@"hash"]) {
         // if the download is active we do a find more sources
@@ -541,6 +543,7 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
             //NSLog(@"adddownload: find more sources");
             [self findMoreSources:hash];
         }
+                
         //NSLog(@"fms: create timer");
         // create a timer for 'auto find more sources'
         NSTimer *fms_timer = [NSTimer
@@ -552,6 +555,7 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
         ];
         [timers setObject:fms_timer forKey:hash];
     }
+*/
 }
 
 
