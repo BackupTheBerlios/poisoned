@@ -40,6 +40,9 @@
     [fasttrack_conf read];
     
     [alias setStringValue:[fasttrack_conf optionForKey:@"alias"]];
+    [port setIntValue:[[fasttrack_conf optionForKey:@"port"]intValue]];
+    [forwardPort setIntValue:[[fasttrack_conf optionForKey:@"forwarding"]intValue]];
+    [enableBanList setIntValue:[[fasttrack_conf optionForKey:@"banlist_filter"]intValue]];
 }
 
 - (IBAction)newAlias:(id)sender
@@ -70,4 +73,40 @@
             }
             [self readConfFiles];
         }
+
+- (IBAction)newPort:(id)sender
+{
+    [fasttrack_conf setValue:[NSNumber numberWithInt:[sender intValue]] forKey:@"port"];
+    [self readConfFiles];
+}
+- (IBAction)portForwardChanged:(id)sender
+{
+    if ([forwardPort state]==NSOnState)
+    {
+        [forwardPort setEnabled:NO];
+    }
+    else
+    {
+        [forwardPort setEnabled:YES];
+    }
+
+    [fasttrack_conf setValue:[NSNumber numberWithInt:[sender intValue]] forKey:@"forwarding"];
+
+    [self readConfFiles]; 
+}
+- (IBAction)banListChanged:(id)sender
+{
+    if ([enableBanList state]==NSOnState)
+    {
+        [enableBanList setEnabled:NO];
+    }
+    else
+    {
+        [enableBanList setEnabled:YES];
+    }
+
+    [fasttrack_conf setValue:[NSNumber numberWithInt:[sender intValue]] forKey:@"banlist_filter"];
+
+    [self readConfFiles];  
+}
 @end

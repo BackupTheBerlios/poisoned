@@ -43,6 +43,12 @@ static PFastTrackConf *singleton;
         conf = [[NSMutableDictionary alloc] init];
         lines = [[NSMutableArray alloc] init];
         file_manager = [NSFileManager defaultManager];
+
+        int_confs = [[NSArray alloc] initWithObjects:
+            @"forwarding",
+            @"banlist_filter",
+            @"port",
+            nil];
         
         string_confs = [[NSArray alloc] initWithObjects:
             @"alias",
@@ -56,7 +62,8 @@ static PFastTrackConf *singleton;
 }
 
 - (void)dealloc
-{	
+{
+    [int_confs release];
     [string_confs release];
     [colon_confs release];
     [space_confs release];
