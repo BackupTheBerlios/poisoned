@@ -40,6 +40,9 @@
     else [importToiTunes setState:NSOffState];
 
     [self importPrefsChanged:NULL];
+    
+    if ([userDefaults boolForKey:@"PImportToPlaylist"]) [importToPlaylist setState:NSOnState];
+    else [importToPlaylist setState:NSOffState];
 	
     if ([userDefaults boolForKey:@"PPlayFile"]) [playFile setState:NSOnState];
     else [playFile setState:NSOffState];    
