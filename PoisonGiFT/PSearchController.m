@@ -52,8 +52,8 @@
     
     // setting up the tables ------------------------------------------
     [s_table setRowHeight:30];
-    [r_table setAutosaveName:@"PSearchTableAutoSave"];
-    [r_table setAutosaveTableColumns:YES];
+    //[r_table setAutosaveName:@"PSearchTableAutoSave"];
+    //[r_table setAutosaveTableColumns:YES];
     [r_table setMenuDelegate:self];
     [r_table setRowHeight:16];
     [r_table setDrawsGrid:YES];
@@ -109,6 +109,16 @@
     [tc_availability retain];
 
     //tc_networkicon = [r_table tableColumnWithIdentifier:@"PProtoIcon"];
+    //tc_album = [r_table tableColumnWithIdentifier:@"album"];
+    //tc_availability = [r_table tableColumnWithIdentifier:@"album"];
+    //[r_table addTableColumn:tc_fileicon];
+    //[r_table addTableColumn:tc_file];
+    //[r_table addTableColumn:tc_networkicon];
+    //[r_table addTableColumn:tc_user];
+    //[r_table addTableColumn:tc_size];
+    //[r_table addTableColumn:tc_artist];
+    //[r_table addTableColumn:tc_album];
+    //[r_table addTableColumn:tc_availability];
 
 
 	// table refresh timer
@@ -194,6 +204,10 @@
     }
     else if ([title isEqualToString:@"Album"]) {
         if ([r_table tableColumnWithIdentifier:@"album"]) [menuItem setState:NSOnState];
+        else [menuItem setState:NSOffState];
+    }
+    else if ([title isEqualToString:@"Availability"]) {
+        if ([r_table tableColumnWithIdentifier:@"PAvailability"]) [menuItem setState:NSOnState];
         else [menuItem setState:NSOffState];
     }
     else if ([title isEqualToString:@"Download Selection(s)"]){

@@ -40,15 +40,15 @@
 
     
     //table colums
-    NSTableColumn *tc_fileicon;
+    IBOutlet NSTableColumn *tc_fileicon;
     NSTableColumn *tc_file;
-    NSTableColumn *tc_networkicon;
-    NSTableColumn *tc_user;
-    NSTableColumn *tc_size;
-    NSTableColumn *tc_bitrate;
-    NSTableColumn *tc_artist;
-    NSTableColumn *tc_album;
-    NSTableColumn *tc_availability;
+    IBOutlet NSTableColumn *tc_networkicon;
+    IBOutlet NSTableColumn *tc_user;
+    IBOutlet NSTableColumn *tc_size;
+    IBOutlet NSTableColumn *tc_bitrate;
+    IBOutlet NSTableColumn *tc_artist;
+    IBOutlet NSTableColumn *tc_album;
+    IBOutlet NSTableColumn *tc_availability;
                 
     PCommand *commander;
     id controller;

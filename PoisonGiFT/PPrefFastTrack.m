@@ -81,30 +81,12 @@
 }
 - (IBAction)portForwardChanged:(id)sender
 {
-    if ([forwardPort state]==NSOnState)
-    {
-        [forwardPort setEnabled:NO];
-    }
-    else
-    {
-        [forwardPort setEnabled:YES];
-    }
-
     [fasttrack_conf setValue:[NSNumber numberWithInt:[sender intValue]] forKey:@"forwarding"];
 
     [self readConfFiles]; 
 }
 - (IBAction)banListChanged:(id)sender
 {
-    if ([enableBanList state]==NSOnState)
-    {
-        [enableBanList setEnabled:NO];
-    }
-    else
-    {
-        [enableBanList setEnabled:YES];
-    }
-
     [fasttrack_conf setValue:[NSNumber numberWithInt:[sender intValue]] forKey:@"banlist_filter"];
 
     [self readConfFiles];  
