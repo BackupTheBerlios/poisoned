@@ -106,7 +106,7 @@
     NSMutableDictionary *item;
     while (num=[enumerator nextObject]) {
         item = [table itemAtRow:[num intValue]];
-        [hashes removeObject:[item objectForKey:@"hash"]];
+        if ([item objectForKey:@"hash"]) [hashes removeObject:[item objectForKey:@"hash"]];
     }
 
     [dataSource cancel:commander];

@@ -283,7 +283,7 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
                 // if we wait for gift to send a DELDOWNLOAD: it could happen that
                 // the cancelled download starts again if the user is doing 'find more sources'
                 // and the hash is still in the hashes set...
-                [hashes removeObject:[item objectForKey:@"hash"]];
+                if ([item objectForKey:@"hash"]) [hashes removeObject:[item objectForKey:@"hash"]];
             }
         }
         // a source is selected...

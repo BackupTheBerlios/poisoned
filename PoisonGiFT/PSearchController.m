@@ -540,8 +540,9 @@
     NSString *query;
     for (i=0;i<count;i++) {
         tmp = [sources objectAtIndex:i];
-        hash = [commander prepare:[tmp objectForKey:@"hash"]];
+        hash = [tmp objectForKey:@"hash"];
         if (hash) {
+            hash = [commander prepare:hash];
             query = [NSString stringWithFormat:@"ADDSOURCE user(%@) hash(%@) size(%@) url(%@) save(%@)",
                 [commander prepare:[tmp objectForKey:@"user"]],
                 [commander prepare:hash],
