@@ -14,4 +14,5 @@
 #import "PFilterView.h"
 #import "PBorderlessScrollView.h"
 #import "PMainTabView.h"
-
+#import "PStatsTableView.h"
+#import "PStatsTableCell.h"

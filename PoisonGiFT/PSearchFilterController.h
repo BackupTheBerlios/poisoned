@@ -21,6 +21,8 @@
 #import <Cocoa/Cocoa.h>
 #import "PResultSource.h"
 
+@class SMDoubleSlider; // dub slider - ashton
+
 @interface PSearchFilterController: NSObject
 {
     IBOutlet NSButton *collexp;
@@ -28,8 +30,6 @@
     IBOutlet NSTextField *info;
     IBOutlet NSTextField *keywordField;
     IBOutlet NSView *sizeFilter;
-    IBOutlet NSSlider *maxSize;
-    IBOutlet NSSlider *minSize;
     IBOutlet NSTextField *minText;
     IBOutlet NSTextField *maxText;
     IBOutlet NSTableView *protoTable;
@@ -39,6 +39,9 @@
     NSMutableArray *protos;
     PResultSource *datasource;
     int view_height;
+
+    /* dub slider - ashton */
+    IBOutlet SMDoubleSlider	*_sm_horzSlider;
 }
 
 - (void)disconnected;
@@ -54,8 +57,8 @@
 - (void)activate;
 - (IBAction)de_activate:(id)sender;
 - (IBAction)setKeyword:(id)sender;
-- (IBAction)maxSizeChanged:(id)sender;
-- (IBAction)minSizeChanged:(id)sender;
 - (void)setProtos:(id)sender;
+
+- (IBAction)setSlider:(id)sender; // for the dub slider - ashton
 
 @end

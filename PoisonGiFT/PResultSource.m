@@ -1,3 +1,4 @@
+
 //
 //  PResultSource.m
 // -------------------------------------------------------------------------
@@ -93,17 +94,12 @@
     NSString *user		= [item objectForKey:@"user"];
     NSString *hash		= [item objectForKey:@"hash"];
     NSArray *meta		= [data objectAtIndex:3];
-    /*if(!hash) //return;
-    {
-        hash = [NSString stringWithFormat:@"md5:%d",fakehash];
-        fakehash++;
-        //NSLog(hash);
-    }*/
-    NSLog([NSString stringWithFormat:@"User: %@ Hash: %@",user,hash]);
-    //hash = @"md5:75ABCA0465D9E6263359F64301B1D6C2";
-    //if ( ([meta count]>0) && (bitrate=[[[meta objectAtIndex:0] objectAtIndex:2] objectForKey:@"bitrate"]) )
-    //    [item setObject:bitrate forKey:@"bitrate"];
-    //else [item setObject:@"" forKey:@"bitrate"];
+    NSString *availability = [item objectForKey:@"availability"];
+
+    /* lets drop all bad sources! - ashton */
+    if(!availability) return;
+    //if([availability isEqualToString:@"0"]) return;
+
     NSString *meta_str;
     if ([meta count]>0) {
         if (meta_str=[[[meta objectAtIndex:0] objectAtIndex:2] objectForKey:@"bitrate"])
@@ -167,6 +163,7 @@
     else { //--------------------------------------------  new file
         [item setObject:[icon_shop iconForProto:proto] forKey:@"PProtoIcon"];
         [item setObject:[icon_shop iconForFileType:[[item objectForKey:@"file"] pathExtension]] forKey:@"icon"];
+        [item setObject:[icon_shop iconForAvail:availability] forKey:@"availability"];	// set up our availability icon - ashton
         NSMutableArray *newFileArray = [NSMutableArray arrayWithObjects:item,nil];
         NSMutableDictionary *newFile = [NSMutableDictionary dictionaryWithObjectsAndKeys:
             newFileArray,@"array",

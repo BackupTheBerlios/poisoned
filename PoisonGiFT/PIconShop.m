@@ -36,7 +36,7 @@
         [protos setObject:[NSImage imageNamed:@"FastTrack32.tiff"] forKey:@"FastTrack32"];
         [protos setObject:[NSImage imageNamed:@"OpenNap.tiff"] forKey:@"OpenNap"];
         [protos setObject:[NSImage imageNamed:@"OpenNap32.tiff"] forKey:@"OpenNap32"];
-		[protos setObject:[NSImage imageNamed:@"Donkey.tiff"] forKey:@"gift-donkey"];
+        [protos setObject:[NSImage imageNamed:@"Donkey.tiff"] forKey:@"gift-donkey"];
         [protos setObject:[NSImage imageNamed:@"Donkey32.tiff"] forKey:@"gift-donkey32"];
         [protos setObject:[NSImage imageNamed:@"Donkey.tiff"] forKey:@"gift-edonkey"];
         [protos setObject:[NSImage imageNamed:@"Donkey32.tiff"] forKey:@"gift-edonkey32"];
@@ -48,6 +48,10 @@
         [protos setObject:[NSImage imageNamed:@"Donkey32.tiff"] forKey:@"eDonkey"];
         [protos setObject:[NSImage imageNamed:@"Donkey.tiff"] forKey:@"Donkey"];
         [protos setObject:[NSImage imageNamed:@"Donkey32.tiff"] forKey:@"Donkey"];
+        /* availability icons - ashton */
+        [icons setObject:[NSImage imageNamed:@"goodSource.tiff"] forKey:@"availGood"];
+        [icons setObject:[NSImage imageNamed:@"badSource.tiff"] forKey:@"availBad"];
+        
         unknown = [[NSImage imageNamed:@"unknown.tiff"] retain];
         unknown32 = [[NSImage imageNamed:@"unknown32.tiff"] retain];
         workspace = [NSWorkspace sharedWorkspace];
@@ -88,6 +92,20 @@
     if (img=[protos objectForKey:name]) return img;
     else return unknown;
 }
-
+/* availability - ashton */
+- (NSImage *)iconForAvail:(NSString *)num
+{
+    NSImage *img;
+    if([num isEqualToString:@"0"])
+    {
+        num = @"availBad";
+    }
+    else
+    {
+        num = @"availGood";
+    }
+    if (img=[icons objectForKey:num]) return img;
+    else return unknown;
+}
 
 @end

@@ -72,6 +72,7 @@
     
     [[r_table tableColumnWithIdentifier:@"icon"] setDataCell:[[[NSImageCell alloc] init] autorelease]];
     [[r_table tableColumnWithIdentifier:@"PProtoIcon"] setDataCell:[[[NSImageCell alloc] init] autorelease]];
+        [[r_table tableColumnWithIdentifier:@"availability"] setDataCell:[[[NSImageCell alloc] init] autorelease]];
     
     NSButtonCell *button = [[[NSButtonCell alloc] init] autorelease];
     [button setButtonType:NSMomentaryChangeButton];
@@ -79,9 +80,13 @@
     [button setTarget:self];
     [button setAction:@selector(stop:)];
     [[s_table tableColumnWithIdentifier:@"button"] setDataCell:button];
+
     
     PSearchCell *searchCell = [[[PSearchCell alloc] init] autorelease];
     [[s_table tableColumnWithIdentifier:@"info"] setDataCell:searchCell];
+
+ 
+    
 	 
 	 // Install Column Config Table Menu
 	 [r_table setTableMenu:tableMenu];
@@ -101,6 +106,10 @@
     [tc_bitrate retain];
     [tc_artist retain];
     [tc_album retain];
+    [tc_availability retain];
+
+    //tc_networkicon = [r_table tableColumnWithIdentifier:@"PProtoIcon"];
+
 
 	// table refresh timer
 	_newItems = [[NSMutableArray alloc] init];
@@ -121,6 +130,7 @@
     [tc_bitrate release];
     [tc_artist release];
     [tc_album release];
+    [tc_availability release];
     
     [stop_img release];
     [re_img release];
@@ -145,6 +155,7 @@
     else if ([title isEqualToString:@"Bitrate"])	col = tc_bitrate;
     else if ([title isEqualToString:@"Artist"]) 	col = tc_artist;
     else if ([title isEqualToString:@"Album"])		col = tc_album;
+    else if ([title isEqualToString:@"Availability"])   col = tc_availability;
     if (!col) return;
     if ([sender state]==NSOnState) [r_table removeTableColumn:col];
     else [r_table addTableColumn:col];

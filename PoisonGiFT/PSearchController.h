@@ -48,6 +48,7 @@
     NSTableColumn *tc_bitrate;
     NSTableColumn *tc_artist;
     NSTableColumn *tc_album;
+    NSTableColumn *tc_availability;
                 
     PCommand *commander;
     id controller;

@@ -1,5 +1,5 @@
 //
-//  PIconShop.h
+//  PStatsTableCell.h
 // -------------------------------------------------------------------------
 // Copyright (C) 2003 Poisoned Project (http://www.poisonedproject.com/)
 //
@@ -12,26 +12,18 @@
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 // ---------------------------------------------------------------------------
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
 
-@interface PIconShop : NSObject {
-    NSMutableDictionary *icons;
-    NSMutableDictionary *protos;
-    NSImage *unknown;
-    NSImage *unknown32;
-    NSWorkspace *workspace;
+@interface PStatsTableCell : NSCell
+{
+    id cellValue;
 }
-
-- (NSImage *)iconForFileType:(NSString *)filetype;
-- (NSImage *)iconForProto:(NSString *)name;
-- (NSImage *)largeIconForProto:(NSString *)name;
-- (NSImage *)iconForAvail:(NSString *)num; // availability - ashton
 
 @end

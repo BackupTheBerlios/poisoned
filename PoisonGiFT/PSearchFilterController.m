@@ -19,13 +19,15 @@
 // ---------------------------------------------------------------------------
 
 #import "PSearchFilterController.h"
+#import "SMDoubleSlider.h"
+
 
 @implementation PSearchFilterController
 
 - (void)awakeFromNib
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setAvailableProtos:) name:@"PStatsProtocolsAvailable" object:nil];
-    
+
     [keywordField setDelegate:self];
     
     [protoTable setIntercellSpacing:NSMakeSize(0,0)];
@@ -38,10 +40,9 @@
     [check setFont:[NSFont systemFontOfSize:10]];
     [check setContinuous:YES];
     [[protoTable tableColumnWithIdentifier:@"proto"] setDataCell:check];
-    [minSize setToolTip:@"Use this slider to set the minimal size."];
-    [maxSize setToolTip:@"Use this slider to set the maximum size."];
     [keywordField setToolTip:@"Keyword filter"];
     [de_activate setToolTip:@"Enable/disable filtering"];
+
 }
 
 - (void)dealloc
@@ -74,8 +75,7 @@
     if (datasource==nil) {
         [de_activate setState:NSOffState];
         [keywordField setEnabled:NO];
-        [minSize setEnabled:NO];
-        [maxSize setEnabled:NO];
+        [_sm_horzSlider setEnabled:NO]; // dub slider -ashton
         [info setStringValue:@"no search selected"];
     }
     else if ([datasource isFiltered]) {
@@ -89,19 +89,18 @@
     if (datasource) {
         if ([datasource protoFilter]==nil) [datasource setProtoFilter:protos];
         [keywordField setEnabled:YES];
-        [minSize setEnabled:YES];
-        [maxSize setEnabled:YES];
-        [minText setTextColor:[NSColor blackColor]];
-        [maxText setTextColor:[NSColor blackColor]];
-        [minSize setDoubleValue:[datasource minSizeFilter]];
-        [maxSize setDoubleValue:[datasource maxSizeFilter]];
+        [_sm_horzSlider setEnabled:YES]; // dub slider - ashton
+        [minText setTextColor:[NSColor blackColor]]; // dub
+        [maxText setTextColor:[NSColor blackColor]]; // dub
+        [_sm_horzSlider setDoubleLoValue:[datasource minSizeFilter]];
+        [_sm_horzSlider setDoubleHiValue:[datasource maxSizeFilter]];
         if ([datasource keywordFilter]) [keywordField setStringValue:[datasource keywordFilter]];
         else [keywordField setStringValue:@""];
     }
     else {
         [keywordField setStringValue:@""];
-        [minSize setDoubleValue:[minSize minValue]];
-        [maxSize setDoubleValue:[maxSize maxValue]];
+        [_sm_horzSlider setDoubleLoValue:[_sm_horzSlider minValue]]; // dub
+        [_sm_horzSlider setDoubleHiValue:[_sm_horzSlider maxValue]]; // dub
         [minText setTextColor:[NSColor grayColor]];
         [maxText setTextColor:[NSColor grayColor]];
     }
@@ -122,12 +121,12 @@
     k_rect.origin.x	= 20;
     k_rect.origin.y	= y;
     k_rect.size.width	= width;
-    y -= 10 + s_rect.size.height;
+    y -= 2 + s_rect.size.height;
     s_rect.origin.x	= 16;
     s_rect.origin.y	= y;
     s_rect.size.width	= width+11;
     p_rect.size.height	= p_count * 15+1;
-    y -= 10 + p_rect.size.height;
+    y -= 2 + p_rect.size.height;
     p_rect.origin.x	= 20;
     p_rect.origin.y	= y;
     p_rect.size.width	= width;
@@ -137,6 +136,7 @@
     [collexp setEnabled:YES];
     [view setNeedsDisplay:YES];
     view_height = -y +5;
+
 }
 
 - (void)setAvailableProtos:(NSNotification *)notification
@@ -199,20 +199,15 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"PFilterDeAcitivated" object:self userInfo:nil];
 }
 
-- (IBAction)maxSizeChanged:(id)sender
-{
-    [self activate];
-    if ([sender doubleValue]<[minSize doubleValue]) [sender setDoubleValue:[minSize doubleValue]];
-    [datasource setMaxSizeFilter:[sender doubleValue]];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"PFilterDeAcitivated" object:self userInfo:nil];
-}
 
-- (IBAction)minSizeChanged:(id)sender
+
+/* dub slider - ashton */
+- (IBAction)setSlider:(id)sender
 {
-    [self activate];
-    if ([sender doubleValue]>[maxSize doubleValue]) [sender setDoubleValue:[maxSize doubleValue]];
-    [datasource setMinSizeFilter:[sender doubleValue]];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"PFilterDeAcitivated" object:self userInfo:nil];
+        [self activate];
+        [datasource setMinSizeFilter:[sender doubleLoValue]];
+        [datasource setMaxSizeFilter:[sender doubleHiValue]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"PFilterDeAcitivated" object:self userInfo:nil];
 }
 
 - (void)setProtos:(id)sender
