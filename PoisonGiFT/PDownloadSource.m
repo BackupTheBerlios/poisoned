@@ -25,12 +25,12 @@
 
 int iTunesPlaylistImport(const char *filenamewithpath, int playlistmode)
 {
-        NSString *playstring;
+	NSString *playstring;
 
-        if (playlistmode) 
-           playstring=@"Poisoned";
-        else 
-           playstring=@"Library";
+	if (playlistmode) 
+		playstring=@"Poisoned";
+	else 
+		playstring=@"Library";
 
 	NSString *scriptSource = [NSString stringWithFormat:[NSString stringWithCString:
 	"tell application \"iTunes\"\n"
@@ -50,7 +50,7 @@ int iTunesPlaylistImport(const char *filenamewithpath, int playlistmode)
 	"   add POSIX file \"%s\" to playlist playlist_name\n"
 	"end tell"], playstring, filenamewithpath];
         
-        NSLog(@"scriptSource: %@", scriptSource);
+    //    NSLog(@"scriptSource: %@", scriptSource);
     
 	NSAppleScript *script = [[[NSAppleScript alloc] initWithSource:scriptSource] autorelease];
 	NSDictionary *status = NULL;
@@ -74,25 +74,25 @@ int iTunesPlaylistImport(const char *filenamewithpath, int playlistmode)
 
 void playsonginitunes(int playlistmode, int noplaywhenplaying)
 {
-        NSString *playstring;
-        NSString *noplaystring;
+	NSString *playstring;
+	NSString *noplaystring;
 
-        if (playlistmode) 
-           playstring=@"Poisoned";
-        else 
-           playstring=@"Library";
-           
-        if (noplaywhenplaying)
-           noplaystring=@"if player state is not playing then\n";
-        else 
-           noplaystring=@"if stash is 0 then\n";
-        
-        NSString *scriptSource = [NSString stringWithFormat:[NSString stringWithCString:
-        "set cd to (get current date)\n"
-        "set stash to 0\n"
-        "tell application \"iTunes\"\n"
-        "launch\n"
-        "%@"
+	if (playlistmode) 
+		playstring=@"Poisoned";
+	else 
+		playstring=@"Library";
+		
+	if (noplaywhenplaying)
+		noplaystring=@"if player state is not playing then\n";
+	else 
+		noplaystring=@"if stash is 0 then\n";
+	
+	NSString *scriptSource = [NSString stringWithFormat:[NSString stringWithCString:
+	"set cd to (get current date)\n"
+	"set stash to 0\n"
+	"tell application \"iTunes\"\n"
+	"launch\n"
+	"%@"
 	"set theLib to playlist \"%@\"\n"
 	"repeat with t from 1 to (count every track of theLib)\n"
 	"	tell track t of theLib\n"
@@ -107,7 +107,7 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
         "end if\n"
 	"end tell"], noplaystring, playstring];
         
-        NSLog(@"scriptSource: %@", scriptSource);
+    //    NSLog(@"scriptSource: %@", scriptSource);
         
 	NSAppleScript *script = [[[NSAppleScript alloc] initWithSource:scriptSource] autorelease];
 	NSDictionary *status = NULL;
@@ -526,16 +526,16 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
 					[pathExtension isEqualToString:@"aif"] ||
 					[pathExtension isEqualToString:@"aiff"])
 				{
-                                    importGood=iTunesPlaylistImport([path fileSystemRepresentation], [userDefaults boolForKey:@"PImportToPlaylist"]);
-                                    if (importGood && [userDefaults boolForKey:@"PPlayFile"]) 
-                                        playsonginitunes([userDefaults boolForKey:@"PImportToPlaylist"], [userDefaults boolForKey:@"PNoFilePlayFile"]);
-                                    if (importGood && [userDefaults boolForKey:@"PDeleteFile"])
-                                    {
-                                        if (unlink([path fileSystemRepresentation])==0)
-                                            NSLog(@"deleting: %s", [path fileSystemRepresentation]);
-                                        else
-                                            NSLog(@"could not delete file: %s", [path fileSystemRepresentation]);
-                                    }
+					importGood=iTunesPlaylistImport([path fileSystemRepresentation], [userDefaults boolForKey:@"PImportToPlaylist"]);
+					if (importGood && [userDefaults boolForKey:@"PPlayFile"]) 
+						playsonginitunes([userDefaults boolForKey:@"PImportToPlaylist"], [userDefaults boolForKey:@"PNoFilePlayFile"]);
+					if (importGood && [userDefaults boolForKey:@"PDeleteFile"])
+					{
+						if (unlink([path fileSystemRepresentation])==0)
+							NSLog(@"deleting: %s", [path fileSystemRepresentation]);
+						else
+							NSLog(@"could not delete file: %s", [path fileSystemRepresentation]);
+					}
 				}
 			}
         }
