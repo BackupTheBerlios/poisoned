@@ -21,3 +21,6 @@
 --make textfields in download prefs editable. this will require code to save the pref after the textfield has been edited
 --allow people to sort search results by two (or more?) columns, for example, first you sort by artist and then you sort by album
 --save search terms
+--fix itunes importing into classic version of itunes
+--make poisoned localizable
+--fix downloading files with international character file names
