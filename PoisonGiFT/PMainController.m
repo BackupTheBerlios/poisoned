@@ -178,6 +178,14 @@
     version = [userDefaults floatForKey:@"PVersion"];
     currentVersion = [[[[NSBundle bundleForClass:[self class]] infoDictionary] objectForKey:@"CFBundleVersion"] floatValue];
 
+    // if the last version the user was using is 0.311 or smaller, we have to randomize port and http_port in OpenFT.conf
+    if (version<=0.311) {
+        // probably this could be done better ;)
+        [giFT checkConfFiles];
+        POpenFTConf *openft_conf = [POpenFTConf singleton];
+        [openft_conf setRandomValues];
+    }
+
     if (firstRun) {
         [giFT checkConfFiles];
         [self openPrefs:self];

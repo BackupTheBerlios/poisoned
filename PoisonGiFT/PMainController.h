@@ -26,6 +26,7 @@
 #import "PCommand.h"
 #import "PPoisonCommands.h"
 #import "PPreferencesController.h"
+#import "POpenFTConf.h"
 
 @interface PMainController : NSObject <PPoisonCommands>
 {    
