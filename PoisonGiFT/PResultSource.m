@@ -104,6 +104,8 @@
             [item setObject:meta_str forKey:@"artist"];
         if (meta_str=[[[meta objectAtIndex:0] objectAtIndex:2] objectForKey:@"album"])
             [item setObject:meta_str forKey:@"album"];
+        if (meta_str=[[[meta objectAtIndex:0] objectAtIndex:2] objectForKey:@"title"])
+            [item setObject:meta_str forKey:@"title"];
     }
         
     
