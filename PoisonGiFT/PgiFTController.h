@@ -26,6 +26,7 @@
 #import "PGiFTConf.h"
 #import "PUIConf.h"
 #import "POpenFTConf.h"
+#import "PGnutellaConf.h"
 
 @interface PgiFTController : NSObject <PControllerProto,PgiFTCommands>
 {

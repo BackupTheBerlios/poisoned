@@ -296,7 +296,8 @@
 		//[task setCurrentDirectoryPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"giFT/"]];
 		//[envDict setObject: @"lib/" forKey:@"DYLD_LIBRARY_PATH"];
 		
-		[envDict setObject: [@"~/Library/Application Support/Poisoned" stringByExpandingTildeInPath] forKey: @"GIFT_DATA_DIR"];
+                // data dir should be Resources/giFT/share
+                [envDict setObject: [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"giFT/share"] forKey: @"GIFT_DATA_DIR"];
 		[envDict setObject: [@"~/Library/Application Support/Poisoned" stringByExpandingTildeInPath] forKey: @"GIFT_LOCAL_DIR"];
 		[envDict setObject: [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"giFT/lib/giFT"] forKey: @"GIFT_PLUGIN_DIR"];
 		[task setEnvironment:envDict];
@@ -483,31 +484,41 @@
 
 - (void)checkConfFiles
 {
-    BOOL setRandomPorts=NO;
-    if (![self check:@""]) setRandomPorts=YES;	// -> ~/Library/Application Support/Poisoned
+    BOOL setRandomOpenFTPorts=NO;
+    BOOL setRandomGnutellaPort=NO;
+    if (![self check:@""]) {	// -> ~/Library/Application Support/Poisoned
+        setRandomOpenFTPorts=YES;
+        setRandomGnutellaPort=YES;
+    }
     if (![self check:@"/giftd.conf"]) {
         // giftd.conf wasn't there already, so it's possible that the user still has an old gift.conf
         // if so, we have to save the old prefs form gift.conf into giftd.conf
         PGiFTConf *gift_conf = [PGiFTConf singleton];
         [gift_conf restoreOldPrefs];
     }
-    if (![self check:@"/OpenFT"]) setRandomPorts=YES;
-    if (![self check:@"/OpenFT/OpenFT.conf"]) setRandomPorts=YES;
-    
-    if (setRandomPorts) {
+    if (![self check:@"/OpenFT"]) setRandomOpenFTPorts=YES;
+    if (![self check:@"/OpenFT/OpenFT.conf"]) setRandomOpenFTPorts=YES;
+        
+    if (![self check:@"/Gnutella"]) setRandomGnutellaPort=YES;
+    if (![self check:@"/Gnutella/Gnutella.conf"]) setRandomGnutellaPort=YES;
+    [self check:@"/FastTrack"];
+    [self check:@"/FastTrack/FastTrack.conf"];
+    [self check:@"/ui"];
+    [self check:@"/ui/ui.conf"];
+
+    if (setRandomOpenFTPorts) {
         // OpenFT.conf wasn't there already, this means "port" and "http_port" still have the default values
         // we replace them with random values
         // we should take these two values into the prefs so the user can change these
         POpenFTConf *openft_conf = [POpenFTConf singleton];
         [openft_conf setRandomValues];
     }
-    
-    [self check:@"/Gnutella"];
-    [self check:@"/Gnutella/Gnutella.conf"];
-    [self check:@"/FastTrack"];
-    [self check:@"/FastTrack/FastTrack.conf"];
-    [self check:@"/ui"];
-    [self check:@"/ui/ui.conf"];
+    if (setRandomGnutellaPort) {
+        // same as for OpenFT.conf, here it's just port
+        PGnutellaConf *gnutella_conf = [PGnutellaConf singleton];
+        [gnutella_conf setRandomValues];
+    }
+
 }
 
 // returns YES if the file/folder was already there, NO otherwise
