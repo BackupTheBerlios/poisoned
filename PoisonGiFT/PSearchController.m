@@ -390,14 +390,17 @@
     NSString *ticket = [[[commander getTicket] copy] autorelease];
 
     NSString *user = [[r_table itemAtRow:[r_table selectedRow]] objectForKey:@"user"];
-    NSString *query = [NSString stringWithFormat:@"BROWSE(%@) query(%@)",ticket,user];
+    
+    // we should prepare: user, just in case there are any characters we should escape
+    NSString *query = [NSString stringWithFormat:@"BROWSE(%@) query(%@)",ticket,[commander prepare:user]];
     [self search:query info:[NSString stringWithFormat:@"browse %@",user] ticket:ticket hidden:NO];
 }
 
 - (void)browsehost:(NSString *)user
 {
     NSString *ticket = [[[commander getTicket] copy] autorelease];
-    NSString *query = [NSString stringWithFormat:@"BROWSE(%@) query(%@)",ticket,user];
+    // we should prepare: user, just in case there are any characters we should escape
+    NSString *query = [NSString stringWithFormat:@"BROWSE(%@) query(%@)",ticket,[commander prepare:user]];
     [self search:query info:[NSString stringWithFormat:@"browse %@",user] ticket:ticket hidden:NO];
 }
 
