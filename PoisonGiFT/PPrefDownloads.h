@@ -28,6 +28,7 @@
     IBOutlet NSButton *importToiTunes;
     IBOutlet NSButton *importToPlaylist;
     IBOutlet NSButton *playFile;
+    IBOutlet NSButton *playFileIfNoFile;
     IBOutlet NSButton *deleteFile;
     IBOutlet NSButton *switchToDownload;
     IBOutlet NSTextField *incoming;
@@ -50,6 +51,7 @@
 - (IBAction)importPrefsChanged:(id)sender;
 - (IBAction)importPlaylistChanged:(id)sender;
 - (IBAction)playfilePrefsChanged:(id)sender;
+- (IBAction)playFileIfNoFilePrefsChanged:(id)sender;
 - (IBAction)deletefilePrefsChanged:(id)sender;
 - (IBAction)switchToDownloadPrefsChanged:(id)sender;
 
