@@ -190,6 +190,11 @@
     // first check if giFT crashed]
     if (!_connectOnce) {
         if ([userDefaults boolForKey:@"PRelaunchOnCrash"] && !_userDisconnected && !_remoteDaemon && ![task isRunning]) {
+        
+            // PSearchController is an observer for this notificatoin
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"PConnectionClosedNotification" object:self
+                userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"dummy",@"crash",nil]];
+                
             [self launch:nil];	// giFT crashed....
             return;
         }
@@ -202,6 +207,11 @@
     if (!_userDisconnected) {
         [self connectionFailed];
     }
+    
+    // PSearchController is an observer for this notificatoin
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"PConnectionClosedNotification" object:self
+        userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"dummy",@"userDisconnected",nil]];
+
     _startingDaemon = NO;
     _connectOnce=NO;
 
