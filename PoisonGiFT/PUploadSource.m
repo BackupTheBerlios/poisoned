@@ -146,7 +146,7 @@
         [tickets removeObjectForKey:tickets];
         [table reloadData];
     }
-    [giftCommander performSelector:@selector(cmd:) withObject:[tmpcmd substringFromIndex:2]];
+    if ([tmpcmd length]>2) [giftCommander performSelector:@selector(cmd:) withObject:[tmpcmd substringFromIndex:2]];
 }
 
 - (void)cancel:(id)commander
