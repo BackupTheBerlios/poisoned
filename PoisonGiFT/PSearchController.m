@@ -593,6 +593,7 @@
         if (row>-1 && [[datasources objectForKey:[[searches objectAtIndex:row] objectForKey:@"ticket"]] active]) return YES;
         else return NO;
     }
+    else if ([ident isEqualToString:@"iTMS"]) return [self validateBuyAtiTMS];
     else return YES;
     
 }
@@ -778,6 +779,16 @@
         // send url to system
         [[NSWorkspace sharedWorkspace] openURL:url];
 
+}
+
+- (BOOL)validateBuyAtiTMS
+{
+    if ([r_table numberOfSelectedRows]!=1) return NO;
+    
+    NSSet *ext = [NSSet setWithObjects:@"mp3",@"ogg",@"m4u",@"m4a",@"wma",@"aiff",nil];
+    NSString *file_ext = [[[r_table itemAtRow:[r_table selectedRow]] objectForKey:@"file"] pathExtension];
+    if ([ext containsObject:file_ext]) return YES;
+    else return NO;
 }
 
 @end

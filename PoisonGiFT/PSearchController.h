@@ -99,5 +99,6 @@
 
 // FOR TESTING
 - (void)buyAtiTMS:(id)sender;
+- (BOOL)validateBuyAtiTMS;
 
 @end
