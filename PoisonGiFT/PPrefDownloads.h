@@ -26,6 +26,7 @@
     IBOutlet NSButton *removeCancelled;
     IBOutlet NSButton *removeCompleted;
     IBOutlet NSButton *importToiTunes;
+    IBOutlet NSButton *importToPlaylist;
     IBOutlet NSButton *playFile;
     IBOutlet NSButton *deleteFile;
     IBOutlet NSButton *switchToDownload;
@@ -47,6 +48,7 @@
 - (IBAction)cancelledPrefsChanged:(id)sender;
 - (IBAction)completedPrefsChanged:(id)sender;
 - (IBAction)importPrefsChanged:(id)sender;
+- (IBAction)importPlaylistChanged:(id)sender;
 - (IBAction)playfilePrefsChanged:(id)sender;
 - (IBAction)deletefilePrefsChanged:(id)sender;
 - (IBAction)switchToDownloadPrefsChanged:(id)sender;

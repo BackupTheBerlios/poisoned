@@ -24,47 +24,82 @@
 
 #include <unistd.h>
 
-void itunesimport(char *filenamewithpath)
-{
-	// TODO: need to check for errors
+int iTunesPlaylistImport(const char *filenamewithpath)
+{    
 	NSString *scriptSource = [NSString stringWithFormat:@"tell application \"iTunes\"\n"
 	"activate\n"
 	"set Tester to \"0\"\n"
+        "set playlist_name to (\"Poisoned\")\n"
 	"   repeat with i in playlists\n"
 	"		set currentPlaylist to name of i as string\n"
-	"		if currentPlaylist is equal to (\"Poisoned\") then\n"
+	"		if currentPlaylist is equal to playlist_name then\n"
 	"			set Tester to \"1\"\n"
 	"		end if\n"
 	"	end repeat\n"
-	"	set playlist_name to (\"Poisoned\")\n"
 	"	if Tester is equal to \"0\" then\n"
 	"		set new_playlist to (make new playlist)\n"
 	"		set name of new_playlist to playlist_name\n"
 	"	end if\n"
-	"	set new_playlist to playlist (playlist_name)\n"
-	"	add POSIX file \"%s\" to new_playlist\n"
+	"	add POSIX file \"%s\" to playlist playlist_name\n"
 	"end tell", filenamewithpath];
-	
+    
 	NSLog(@"scriptSource: %@", scriptSource);
 	
 	NSAppleScript *script = [[[NSAppleScript alloc] initWithSource:scriptSource] autorelease];
 	NSDictionary *status = NULL;
 	NSAppleEventDescriptor *descriptor = [script executeAndReturnError:&status];
+        if ([descriptor descriptorType])
+           NSLog(@"Import to iTunes Poisoned run successfully.");
+        else {
+           NSLog(@"Import to iTunes Poisoned script returned error: %@", [status objectForKey: @"NSAppleScriptErrorMessage"]);
+           return 0;
+        }
+        
+    return 1;
+}
+
+int iTunesLibraryImport(const char *filenamewithpath)
+{    
+        
+        NSString *scriptSource = [NSString stringWithFormat:@"tell application \"iTunes\"\n"
+	"activate\n"
+	"	add POSIX file \"%s\" to playlist \"Library\"\n"
+	"end tell", filenamewithpath];
+    
+	NSLog(@"scriptSource: %@", scriptSource);
+	
+	NSAppleScript *script = [[[NSAppleScript alloc] initWithSource:scriptSource] autorelease];
+	NSDictionary *status = NULL;
+	NSAppleEventDescriptor *descriptor = [script executeAndReturnError:&status];
+        if ([descriptor descriptorType])
+           NSLog(@"Import to iTunes Library script run successfully.");
+        else {
+           NSLog(@"Import to iTunes Library script returned error: %@", [status objectForKey: @"NSAppleScriptErrorMessage"]);
+           return 0;
+        }
+        
+    return 1;
 }
 
 void playsonginitunes(void)
 {
-	// TODO: need to check for errors
 	NSString *scriptSource = @"tell application \"iTunes\"\n"
 	"activate\n"
         "set new_playlist to playlist (\"Poisoned\")\n"
         "set the_total to count tracks in new_playlist\n"
 	"play track the_total of new_playlist\n"
 	"end tell";
-	
+        
+	NSLog(@"scriptSource: %@", scriptSource);
+        
 	NSAppleScript *script = [[[NSAppleScript alloc] initWithSource:scriptSource] autorelease];
 	NSDictionary *status = NULL;
 	NSAppleEventDescriptor *descriptor = [script executeAndReturnError:&status];
+        if ([descriptor descriptorType])
+           NSLog(@"Play iTunes script run successfully.");
+        else
+           NSLog(@"Play iTunes script returned error: %@", [status objectForKey: @"NSAppleScriptErrorMessage"]);
+        // non destructive if error is returned so no need to check at this time
 }
 
 @implementation PDownloadSource
@@ -399,6 +434,7 @@ void playsonginitunes(void)
     NSMutableDictionary *item	= [tickets objectForKey:ticket];			// already saved item...
     NSNumber *_stateobj = [item objectForKey:@"PStatus"];
     int _state = 0;
+    int importGood=0;
     if (_stateobj) _state=[_stateobj intValue];
 
     NSMutableDictionary *new	= [data objectAtIndex:2];
@@ -460,24 +496,32 @@ void playsonginitunes(void)
 				NSString *fileName = [[item objectForKey:@"PFileUser"] objectAtIndex:1];
 				path = [path stringByAppendingPathComponent:fileName];
 				path = [path stringByStandardizingPath];
-				NSString *pathExtension = [[path pathExtension] uppercaseString];
+                                NSString *pathExtension = [[path pathExtension] lowercaseString];
 				if ([pathExtension isEqualToString:@"mp3"] ||
 					[pathExtension isEqualToString:@"wav"] ||
 					[pathExtension isEqualToString:@"aac"] ||
 					[pathExtension isEqualToString:@"aif"] ||
 					[pathExtension isEqualToString:@"aiff"])
 				{
-					itunesimport([path fileSystemRepresentation]);
-                                        // check for error in playsong script
-					if ([userDefaults boolForKey:@"PPlayFile"])
+                                
+                                     if ([userDefaults boolForKey:@"PImportToPlaylist"])
+                                        importGood=iTunesPlaylistImport([path fileSystemRepresentation]);
+                                     else 
+                                        importGood=iTunesLibraryImport([path fileSystemRepresentation]);
+                                        
+                                        if (importGood)
+                                        {
+                                        
+                                            if ([userDefaults boolForKey:@"PPlayFile"])
 						playsonginitunes();
-					if ([userDefaults boolForKey:@"PDeleteFile"])
-					{
+                                            if ([userDefaults boolForKey:@"PDeleteFile"])
+                                            {
 						if (unlink([path fileSystemRepresentation])==0)
 							NSLog(@"deleteing: %s", [path fileSystemRepresentation]);
 						else
 							NSLog(@"could not delete file: %s", [path fileSystemRepresentation]);
-					}
+                                            }
+                                        }
 				}
 							
 			}
