@@ -492,7 +492,12 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
     else return [NSString stringWithFormat:@"%.2f GB",(s/1073741824.0)];
 }
 
-
+// ADDDOWNLOAD, CHGDOWNLOAD, etc.
+// is quite messed up right now, sorry ;)
+// i changed it so that it doesn't rely anymore on duplicated data from CHGDOWNLOAD (size,start,total...). 
+// this is only temporarily to ensure that poisoned works with a future version of gift,
+// which doesn't include duplicated data anymore in CHGDOWNLOAD.
+// - rizzi
 - (void)ADDDOWNLOAD:(NSArray *)data
 {
     NSString *ticket = [data objectAtIndex:1];
@@ -520,7 +525,8 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
         [dict setObject:[NSNumber numberWithInt:PPAUSED] forKey:@"PStatus"];
     else
         [dict setObject:[NSNumber numberWithInt:PACTIVE] forKey:@"PStatus"];
-    [dict setObject:[NSMutableDictionary dictionary] forKey:@"PSources"];
+    [dict setObject:[NSMutableArray array] forKey:@"PSources"];
+    [dict setObject:[NSMutableDictionary dictionary] forKey:@"PSourcesDict"];
     
     [source addObject:dict];
     [tickets setObject:dict forKey:ticket];
@@ -567,19 +573,30 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
     
     NSString *state		= [new objectForKey:@"state"];
     
-    NSMutableDictionary* tmp;
     NSString *tmpstring;
     
     if ([[item objectForKey:@"PStatus"] intValue] <= PCANCELLED) return;	// PCANCELLED OR PCOMPLETED
     
-    NSMutableArray *tmpsrc = [NSMutableArray array];
+    //NSMutableArray *tmpsrc = [NSMutableArray array];
     //NSLog(@"%d",[tmpsrc count]);
+    NSMutableDictionary *storedSource;
+    NSMutableDictionary *updatedSource;
+    NSMutableDictionary *sourcesDict = [item objectForKey:@"PSourcesDict"];
     for (i=0;i<sourcescount;i++) {
-        tmp = [[sources objectAtIndex:i] objectAtIndex:2];
-        [tmp setObject:ticket forKey:@"PTicket"];
-        [tmpsrc addObject:tmp];
+        updatedSource = [[sources objectAtIndex:i] objectAtIndex:2];
+        storedSource  = [sourcesDict objectForKey:[updatedSource objectForKey:@"url"]];
+        if ([updatedSource objectForKey:@"url"] && !storedSource) {
+            [self ADDSOURCE:[NSArray arrayWithObjects:
+                @"ADDSOURCE",
+                ticket,
+                updatedSource,
+                nil]
+            ];
+        }
+        if ([updatedSource objectForKey:@"total"]) {
+            [storedSource setObject:[updatedSource objectForKey:@"total"] forKey:@"total"];
+        }
     }
-    [item setObject:tmpsrc forKey:@"PSources"];
 
     if (sourcescount>0) {
         NSScanner *scanner = [NSScanner scannerWithString:[[[sources objectAtIndex:0] objectAtIndex:2] objectForKey:@"url"]];
@@ -596,13 +613,13 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
         [[item objectForKey:@"PSize"] replaceObjectAtIndex:1 withObject:[self calcSize:[item objectForKey:@"size"]]];
         [item setObject:[NSNumber numberWithInt:PCOMPLETED] forKey:@"PStatus"];
         for (i=0;i<sourcescount;i++) {
-            tmp = [[sources objectAtIndex:i] objectAtIndex:2];
-            [tmp setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:NO],[tmp objectForKey:@"user"],nil] forKey:@"PFileUser"];
-            [tmp setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:NO],[NSNumber numberWithBool:NO],@"",nil]
+            updatedSource = [[sources objectAtIndex:i] objectAtIndex:2];
+            storedSource  = [sourcesDict objectForKey:[updatedSource objectForKey:@"url"]];
+            [storedSource setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:NO],[NSNumber numberWithBool:NO],@"",nil]
                 forKey:@"PProgress"];
-            [tmp setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:NO],@"",nil]
+            [storedSource setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:NO],@"",nil]
                 forKey:@"PTransfer"];
-            [tmp setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:NO],@"",nil]
+            [storedSource setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:NO],@"",nil]
                 forKey:@"PSize"];
         }
         [table reloadItem:item reloadChildren:YES];
@@ -654,13 +671,13 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
             [[item objectForKey:@"PSize"] replaceObjectAtIndex:1 withObject:[self calcSize:tmpstring]];
         [item setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:YES],@"",@"",nil] forKey:@"PTransfer"];
         for (i=0;i<sourcescount;i++) {
-            tmp = [[sources objectAtIndex:i] objectAtIndex:2];
-            [tmp setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:NO],[tmp objectForKey:@"user"],nil] forKey:@"PFileUser"];
-            [tmp setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:NO],[NSNumber numberWithBool:NO],@"",nil]
+            updatedSource = [[sources objectAtIndex:i] objectAtIndex:2];
+            storedSource  = [sourcesDict objectForKey:[updatedSource objectForKey:@"url"]];
+            [storedSource setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:NO],[NSNumber numberWithBool:NO],@"",nil]
                 forKey:@"PProgress"];
-            [tmp setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:NO],@"",nil]
+            [storedSource setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:NO],@"",nil]
                 forKey:@"PTransfer"];
-            [tmp setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:NO],@"",nil]
+            [storedSource setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:NO],@"",nil]
                 forKey:@"PSize"];
         }
         [table reloadItem:item reloadChildren:YES];
@@ -672,41 +689,41 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
     
     BOOL downloading=NO;
     for (i=0;i<sourcescount;i++) {
-        tmp = [[sources objectAtIndex:i] objectAtIndex:2];
-        tmpstring = [tmp objectForKey:@"status"];
+        updatedSource = [[sources objectAtIndex:i] objectAtIndex:2];
+        storedSource  = [sourcesDict objectForKey:[updatedSource objectForKey:@"url"]];
+        tmpstring = [updatedSource objectForKey:@"status"];
         if ([tmpstring isEqualToString:@"Active"]) {
             downloading=YES;
-            [tmp setObject:[NSArray arrayWithObjects:
+            [storedSource setObject:[NSArray arrayWithObjects:
                     [NSNumber numberWithBool:NO],
                     [NSNumber numberWithBool:YES],
-                    [self transmit:[tmp objectForKey:@"transmit"] total:[tmp objectForKey:@"total"]],nil]
+                    [self transmit:[updatedSource objectForKey:@"transmit"] total:[storedSource objectForKey:@"total"]],nil]
                 forKey:@"PProgress"];
         }
         else {
-            [tmp setObject:[NSArray arrayWithObjects:
+            [storedSource setObject:[NSArray arrayWithObjects:
                     [NSNumber numberWithBool:NO],
                     [NSNumber numberWithBool:NO],
                     tmpstring,nil]
                 forKey:@"PProgress"];
         }
         
-        if (tmpstring=[tmp objectForKey:@"transmit"]) {
-            [tmp setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:NO],
-                    [NSString stringWithFormat:@"%@ of %@",[self calcSize:tmpstring],[self calcSize:[tmp objectForKey:@"total"]]],nil]
+        if (tmpstring=[updatedSource objectForKey:@"transmit"]) {
+            [storedSource setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:NO],
+                    [NSString stringWithFormat:@"%@ of %@",[self calcSize:tmpstring],[self calcSize:[storedSource objectForKey:@"total"]]],nil]
                 forKey:@"PSize"];
         }
         else {
-            [tmp setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:NO],@"",nil] forKey:@"PSize"];
+            [storedSource setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:NO],@"",nil] forKey:@"PSize"];
         }
-        [tmp setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:NO],@"",nil] forKey:@"PTransfer"];
-        [tmp setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:NO],[tmp objectForKey:@"user"],nil] forKey:@"PFileUser"];
+        [storedSource setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:NO],@"",nil] forKey:@"PTransfer"];
     }
     NSString *transmit		= [new objectForKey:@"transmit"];
     [[item objectForKey:@"PSize"] replaceObjectAtIndex:1 withObject:[self calcSize:transmit]];
         
     if (_state==PPAUSING) ;
     else if (downloading) {
-        NSString *size		= [new objectForKey:@"size"];
+        NSString *size		= [item objectForKey:@"size"];
         NSString *transmit	= [new objectForKey:@"transmit"];
         NSString *throughput	= [new objectForKey:@"throughput"];
         NSString *elapsed	= [new objectForKey:@"elapsed"];
@@ -794,6 +811,36 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
 
 - (void)ADDSOURCE:(NSArray *)data
 {
+    NSString *ticket 		= [data objectAtIndex:1];
+    NSMutableDictionary *new    = [data objectAtIndex:2];
+    if (!ticket || !new) return;
+    
+    // getting the download where the source needs to be added
+    NSMutableDictionary *item = [tickets objectForKey:ticket];
+    if (!item) return;
+    // the sources of the download
+    NSMutableDictionary *sourcesDict = [item objectForKey:@"PSourcesDict"];
+    NSMutableArray *sources = [item objectForKey:@"PSources"];
+    if ([sourcesDict objectForKey:[new objectForKey:@"url"]]) return; // source already there
+    
+    [new setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:NO],[new objectForKey:@"user"],nil] forKey:@"PFileUser"];
+    [new setObject:[item objectForKey:@"PTicket"] forKey:@"PTicket"];
+    
+    [sourcesDict setObject:new forKey:[new objectForKey:@"url"]];
+    [[item objectForKey:@"PSources"] addObject:new];
+    
+    // users count
+    NSString *tmpstring;
+    int count = [sources count];
+    if (count>0) {
+        NSScanner *scanner = [NSScanner scannerWithString:[[sources objectAtIndex:0] objectForKey:@"url"]];
+        [scanner scanUpToString:@"://" intoString:&tmpstring];
+        tmpstring = [tmpstring stringByAppendingString:@" - "];
+    }
+    else tmpstring=@"";
+    [[[tickets objectForKey:ticket] objectForKey:@"PFileUser"] replaceObjectAtIndex:2 withObject:[NSString stringWithFormat:@"%@%@",tmpstring,[self stringForUsers:count]]];
+
+    [table reloadItem:item reloadChildren:YES];
 }
 
 - (void)DELSOURCE:(NSArray *)data
@@ -801,9 +848,10 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
     NSString *ticket	= [data objectAtIndex:1];
     NSString *url	= [[data objectAtIndex:2] objectForKey:@"url"];
     if (!ticket || !url) return;
-    if ([tickets objectForKey:ticket]) return;
+    if (![tickets objectForKey:ticket])  return;
     NSMutableArray *sources = [[tickets objectForKey:ticket] objectForKey:@"PSources"];
-    int i, count = [sources count];
+    NSMutableDictionary *sourcesDict = [[tickets objectForKey:ticket] objectForKey:@"PSourcesDict"];
+    int count = [sources count];
 
     NSString *tmpstring;
     if (count>0) {
@@ -813,15 +861,12 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
     }
     else tmpstring=@"";
 
-    for (i=0;i<count;i++) {
-        if ([[[sources objectAtIndex:i] objectForKey:@"url"] isEqualToString:url]) {
-            [sources removeObjectAtIndex:i];
-            count--;
-        }
-    }
+    [sources removeObject:[sourcesDict objectForKey:url]];
+    [sourcesDict removeObjectForKey:url];
+
     count = [sources count];
     [[[tickets objectForKey:ticket] objectForKey:@"PFileUser"] replaceObjectAtIndex:2 withObject:[NSString stringWithFormat:@"%@%@",tmpstring,[self stringForUsers:count]]];
-    //[table reloadData];
+
     [table reloadItem:[tickets objectForKey:ticket] reloadChildren:YES];
 }
 
