@@ -56,7 +56,7 @@
                 @"giFTConnect",@"giFTLaunch",nil],
             [NSArray arrayWithObjects:
                 @"navigation",@"drawer",
-                @"searchField",@"searchRealm",@"searchBrowse",@"searchDownload",@"searchStop",/*@"iTMS" only for testing */,nil],
+                @"searchField",@"searchRealm",@"searchBrowse",@"searchDownload",@"searchStop"/*,@"iTMS" only for testing */,nil],
             [NSArray arrayWithObjects:@"navigation",@"drawer",
                 @"downExpand",@"downCollapse",
                 @"downCancel",@"downPause",@"downResume",@"downDelSource",@"downBrowseHost",@"downClean",nil],
