@@ -212,7 +212,14 @@
             else {
             if (key[0] && arg[0]) {
                 keystring = [NSString stringWithCString:key];
-                argstring = [NSString stringWithCString:arg];
+                //argstring = [NSString stringWithCString:arg];
+                
+                // when using NSNonLossyASCIIStringEncoding also umlauts etc. get displayed correctly in the results
+                argstring = [[[NSString alloc] 
+                    initWithData:[NSData dataWithBytes:arg length:strlen(arg)]
+                    encoding:NSNonLossyASCIIStringEncoding
+                ] autorelease];
+                
                 [[parsed objectAtIndex:2] setObject:argstring forKey:keystring];
                 if ([keystring isEqualToString:@"size"])
                     [[parsed objectAtIndex:2] setObject:[self calcSize:argstring] forKey:@"calcsize"];

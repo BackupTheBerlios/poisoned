@@ -118,7 +118,12 @@
 - (void)cmd:(NSString *)cmd
 {
 	// TODO: is this string encoding correct? - jjt
-    [socket writeString:[cmd stringByAppendingString:@";\n"] encoding:NSASCIIStringEncoding];
+    //[socket writeString:[cmd stringByAppendingString:@";\n"] encoding:NSASCIIStringEncoding];
+    
+    // allowing lossy conversion has the effect that we're loosing umlauts etc. in filenames
+    // but on the other hand it now is possible to download files with such chars in the name
+    // better this than nothing ;)
+    [socket writeData:[[cmd stringByAppendingString:@";\n"] dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES]];
 }
 
 - (void)command:(NSNotification *)notification
