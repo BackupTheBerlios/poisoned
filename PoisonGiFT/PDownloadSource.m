@@ -79,13 +79,13 @@ int iTunesPlaylistImport(const char *filenamewithpath, NSString *playlistName, i
 
 
 
-void playsonginitunes(int playlistmode, int noplaywhenplaying)
+void playsonginitunes(int playlistmode, NSString *playlistName, int noplaywhenplaying)
 {
         
 	NSString *playstring, *noplaystring;
         
-	if (playlistmode) 
-		playstring=@"playlist \"Poisoned\"";
+	if (playlistmode)
+		playstring=playlistName;
 	else 
 		playstring=@"library playlist 1";
                 
@@ -662,11 +662,13 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
                 
                 if ([ext containsObject:[[fileWithPath pathExtension] lowercaseString]]) 
                 {
-                    if (iTunesPlaylistImport([fileWithPath fileSystemRepresentation],[userDefaults objectForKey:@"PImportPlaylistName"],
+                    if (iTunesPlaylistImport([fileWithPath fileSystemRepresentation],
+                            [userDefaults objectForKey:@"PImportPlaylistName"],
                             [userDefaults boolForKey:@"PImportToPlaylist"])) 
                     {
                         if ([userDefaults boolForKey:@"PPlayFile"]) 
-                            playsonginitunes([userDefaults boolForKey:@"PImportToPlaylist"], 
+                            playsonginitunes([userDefaults boolForKey:@"PImportToPlaylist"],
+                                    [userDefaults objectForKey:@"PImportPlaylistName"],
                                     [userDefaults boolForKey:@"PNoFilePlayFile"]);
                         if ([userDefaults boolForKey:@"PDeleteFile"])
                         {
