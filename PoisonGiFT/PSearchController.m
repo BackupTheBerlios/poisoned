@@ -20,6 +20,7 @@
 
 #import "PSearchController.h"
 #import "PMainController.h"
+#import "PTableMenu.h"
 
 @implementation PSearchController
 
@@ -76,6 +77,10 @@
     
     PSearchCell *searchCell = [[[PSearchCell alloc] init] autorelease];
     [[s_table tableColumnWithIdentifier:@"info"] setDataCell:searchCell];
+	 
+	 // Install Column Config Table Menu
+	 [r_table setTableMenu:tableMenu];
+	 
     // ----------------------------------------------------------------
     
     [[NSNotificationCenter defaultCenter] addObserver:r_table selector:@selector(reloadData) name:@"PTransferSetChanged" object:nil];
@@ -390,17 +395,14 @@
     NSString *ticket = [[[commander getTicket] copy] autorelease];
 
     NSString *user = [[r_table itemAtRow:[r_table selectedRow]] objectForKey:@"user"];
-    
-    // we should prepare: user, just in case there are any characters we should escape
-    NSString *query = [NSString stringWithFormat:@"BROWSE(%@) query(%@)",ticket,[commander prepare:user]];
+    NSString *query = [NSString stringWithFormat:@"BROWSE(%@) query(%@)",ticket,user];
     [self search:query info:[NSString stringWithFormat:@"browse %@",user] ticket:ticket hidden:NO];
 }
 
 - (void)browsehost:(NSString *)user
 {
     NSString *ticket = [[[commander getTicket] copy] autorelease];
-    // we should prepare: user, just in case there are any characters we should escape
-    NSString *query = [NSString stringWithFormat:@"BROWSE(%@) query(%@)",ticket,[commander prepare:user]];
+    NSString *query = [NSString stringWithFormat:@"BROWSE(%@) query(%@)",ticket,user];
     [self search:query info:[NSString stringWithFormat:@"browse %@",user] ticket:ticket hidden:NO];
 }
 

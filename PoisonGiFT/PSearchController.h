@@ -36,6 +36,7 @@
     IBOutlet PSearchTableView *s_table;
     
     IBOutlet NSMenu *contextualMenu;
+	IBOutlet NSMenu *tableMenu;
     
     //table colums
     NSTableColumn *tc_fileicon;
