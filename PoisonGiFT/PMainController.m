@@ -211,6 +211,11 @@
                 handler:nil];
     }
     [userDefaults setBool:YES forKey:@"PCheckedForOldGiFTFolder"];
+
+	// right now the timer just always fires, but really it should only start firing
+	// after a PoisonConnectedToCore notification and disable itself after PoisonConnectionClosed
+	// i can fix that in a later release - jjt
+	[[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTransferFieldTimer:) userInfo:NULL repeats:YES] retain];
 }
 
 - (void)dealloc
@@ -232,6 +237,11 @@
     if (prefs) [prefs release];
     
     [super dealloc];
+}
+
+- (int)currentView
+{
+	return currentView;
 }
 
 - (void)controlTintChanged:(id)sender
@@ -291,15 +301,30 @@
 
 - (oneway void)POISON_GUI_UPDATE:(in id)sender
 {
-    int dl = [download speed];
+	// this is a very bad function, it was slowing down the entire app
+	// by refreshing every item in the gui whenver any packet arrived
+	// i have disabled it in an attempt to only update the parts of the
+	// gui that need updating after a packet arrives - jjt
+    /*
+	int dl = [download speed];
     int ul = [upload speed];
     [transferField setStringValue:[NSString stringWithFormat:@"DL %d kB/s   UL %d kB/s",dl,ul]];
     [giFT gui_update:(currentView==0)];
     [search gui_update:(currentView==1)];
     [download gui_update:(currentView==2)];
     [upload gui_update:(currentView==3)];
+	*/
 }
 
+- (void)updateTransferFieldTimer:(NSTimer *)inTimer
+{
+	if ([commander connected])
+	{
+		int dl = [download speed];
+		int ul = [upload speed];
+		[transferField setStringValue:[NSString stringWithFormat:@"DL %d kB/s   UL %d kB/s",dl,ul]];
+	}
+}
 
 // unknown command with an id -> "mark" the id as used
 // --------------------------------------------------------------------------------------------------
