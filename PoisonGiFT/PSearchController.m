@@ -239,6 +239,7 @@
         [datasources setObject:new forKey:ticket];
         [searches addObject:search];
         
+        [new release];
         [search release];
     }
     [s_table reloadData];
@@ -414,6 +415,7 @@
         [s_table selectRow:0 byExtendingSelection:NO];
         [self loadResultTable];
     }
+    [_new release];
 }
 
 - (IBAction)search:(id)sender
@@ -536,9 +538,15 @@
 
 - (void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
+    // first deselect table column header
+    NSTableColumn *selected = [r_table highlightedTableColumn];
+    if (selected) {
+        [r_table setIndicatorImage:nil inTableColumn:selected];
+        [r_table setHighlightedTableColumn:nil];
+    }
+    
     int row = [s_table selectedRow];
     if (row>-1 && [s_table numberOfSelectedRows]==1) {
-        if (current_src) [current_src cleanUpTableHeaders];
         current_src = [datasources objectForKey:[[searches objectAtIndex:row] objectForKey:@"ticket"]];
         [r_table setDataSource:current_src];
         [r_table setDelegate:current_src];
@@ -546,7 +554,6 @@
         [current_src setTableHeaders];
     }
     else {
-        if (current_src) [current_src cleanUpTableHeaders];
         [r_table setDataSource:self];
         [r_table setDelegate:self];
         [filter setDataSource:nil];
