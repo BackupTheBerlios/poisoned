@@ -19,26 +19,11 @@
 			name = Classes;
 			refType = 4;
 		};
-		089C165CFE840E0CC02AAC07 = {
-			children = (
-				089C165DFE840E0CC02AAC07,
-			);
-			isa = PBXVariantGroup;
-			name = InfoPlist.strings;
-			refType = 4;
-		};
 		089C165DFE840E0CC02AAC07 = {
 			fileEncoding = 10;
 			isa = PBXFileReference;
-			name = English;
-			path = English.lproj/InfoPlist.strings;
+			path = InfoPlist.strings;
 			refType = 4;
-		};
-		089C165EFE840E0CC02AAC07 = {
-			fileRef = 089C165CFE840E0CC02AAC07;
-			isa = PBXBuildFile;
-			settings = {
-			};
 		};
 //080
 //081
@@ -746,6 +731,7 @@
 		};
 		1D7D5EBB0423AF0C0021667D = {
 			children = (
+				FF8C3A450529E78000000038,
 				1DC10DA1043F03A900000002,
 				1DDA9C2A04BB6DE400000002,
 				1DDA9C2904BB6DE400000002,
@@ -781,6 +767,10 @@
 				1DAB5FC9049CC3F800000002,
 				1D9F35F604B6E3FD00000002,
 				1D9F35F704B6E3FE00000002,
+				FF24478D0529326F00000038,
+				FF24478E0529326F00000038,
+				FF2447910529328800000038,
+				FF2447920529328800000038,
 			);
 			isa = PBXGroup;
 			name = AppKit;
@@ -1081,7 +1071,7 @@
 				1D099A1C04C7819D00000002,
 				96C77C0B04DAF43E00BC13BF,
 				FFED4EB1051802B800E8282B,
-				FFFF2ECE05277E0F00000038,
+				FFAEA725052E7DE90000003A,
 			);
 			isa = PBXGroup;
 			name = Icons;
@@ -2173,6 +2163,8 @@
 				1D6717BD04BB98A100000002,
 				1D099A2304C786FC00000002,
 				1D099A2404C786FC00000002,
+				FFAEA3AF052E7CDB0000003A,
+				FFAEA3B0052E7CDB0000003A,
 			);
 			isa = PBXGroup;
 			name = Protos;
@@ -2534,8 +2526,7 @@
 			children = (
 				29B97319FDCFA39411CA2CEA,
 				1D49BBA9046D61EF00000002,
-				089C165CFE840E0CC02AAC07,
-				FF5C5CE80514415100000037,
+				089C165DFE840E0CC02AAC07,
 			);
 			isa = PBXGroup;
 			name = Resources;
@@ -2543,6 +2534,7 @@
 			refType = 4;
 		};
 		29B97319FDCFA39411CA2CEA = {
+			comments = updated...;
 			isa = PBXFileReference;
 			path = MainMenu.nib;
 			refType = 4;
@@ -2585,6 +2577,7 @@
 				96E0C07604F1FA2500F5F23B,
 				96B87E2D04D7267600A24CA2,
 				960E70CC04E1A14900C14DDB,
+				FFD7A878052BDA7E00000038,
 			);
 			buildSettings = {
 				CC = "/usr/bin/gcc-3.3";
@@ -2619,7 +2612,7 @@
 	<key>CFBundleExecutable</key>
 	<string>Poisoned</string>
 	<key>CFBundleIconFile</key>
-	<string>poison.icns</string>
+	<string>poison</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.poisonedproject.Poisoned</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -2627,11 +2620,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.481</string>
+	<string>0.492</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>0.481</string>
+	<string>0.492</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
@@ -2704,6 +2697,10 @@
 				FF04F43705148FF200000037,
 				FF04F43B0514925F00000037,
 				FFAE2C140517632300F19E33,
+				FF24478F0529326F00000038,
+				FF2447930529328800000038,
+				FF8C3A560529EEA900000038,
+				FF8C3A5A0529F28900000038,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2711,7 +2708,7 @@
 		29B97328FDCFA39411CA2CEA = {
 			buildActionMask = 2147483647;
 			files = (
-				089C165EFE840E0CC02AAC07,
+				FF47E8F30534FFA80000003B,
 				1DEEE19C0427474A0021667D,
 				1DACDEFC0428DBC10021667D,
 				1DACDEFD0428DBC10021667D,
@@ -2787,12 +2784,16 @@
 				1DCEE6E504D863FF00000002,
 				96C77C0C04DAF43E00BC13BF,
 				1D8963F804F3F9A700000002,
-				FF5C5CE90514415100000037,
 				FFED4EAD051801B200E8282B,
 				FFED4EAF051801D700E8282B,
 				FFED4EB2051802B800E8282B,
 				FFFE3BA80528923B00A211DF,
-				FFFF2ECF05277E0F00000038,
+				FFCFD5E8052B944700000038,
+				FFCFD5E9052B944700000038,
+				FFCFD5EA052B944A00000038,
+				FFAEA3B1052E7CDB0000003A,
+				FFAEA3B2052E7CDB0000003A,
+				FFAEA726052E7DE90000003A,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2854,6 +2855,10 @@
 				FF04F438051491C600000037,
 				FF04F43C0514925F00000037,
 				FFAE2C150517632300F19E33,
+				FF2447900529326F00000038,
+				FF2447940529328800000038,
+				FF8C3A570529EEA900000038,
+				FF8C3A5B0529F28900000038,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2871,6 +2876,7 @@
 			files = (
 				1058C7A3FEA54F0111CA2CBB,
 				960E70C004E19AC800C14DDB,
+				FFCFD5EF052B9E7300000038,
 			);
 			isa = PBXFrameworksBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2987,23 +2993,12 @@
 		};
 		96211DB904D858E2004C44A8 = {
 			children = (
-				96211DBA04D858E2004C44A8,
-				96211DBB04D858E2004C44A8,
+				FFCFD5E5052B93F300000038,
+				FFCFD5E6052B944700000038,
+				FFCFD5E7052B944700000038,
 			);
 			isa = PBXGroup;
 			path = FastTrack;
-			refType = 4;
-		};
-		96211DBA04D858E2004C44A8 = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			path = FastTrack.conf;
-			refType = 4;
-		};
-		96211DBB04D858E2004C44A8 = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			path = nodes;
 			refType = 4;
 		};
 		96211DC004D85904004C44A8 = {
@@ -3011,23 +3006,12 @@
 			dstPath = giFT/share/FastTrack;
 			dstSubfolderSpec = 7;
 			files = (
-				96211DC304D85919004C44A8,
-				96211DC404D8591D004C44A8,
+				FFCFD5EB052B94B100000038,
+				FFCFD5EC052B94B100000038,
+				FFCFD5ED052B94B100000038,
 			);
 			isa = PBXCopyFilesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
-		};
-		96211DC304D85919004C44A8 = {
-			fileRef = 96211DBA04D858E2004C44A8;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		96211DC404D8591D004C44A8 = {
-			fileRef = 96211DBB04D858E2004C44A8;
-			isa = PBXBuildFile;
-			settings = {
-			};
 		};
 		964786FE04E370ED0063CED0 = {
 			fileEncoding = 4;
@@ -3195,7 +3179,7 @@
 				96B87DDD04D7231100A24CA2,
 				96B0387E04D7A988004FA6C4,
 				96B0387F04D7A988004FA6C4,
-				FFFF2F5D0528014B00000038,
+				FFCFD5EE052B9E7300000038,
 			);
 			isa = PBXGroup;
 			path = lib;
@@ -3314,6 +3298,7 @@
 				96B87E1204D7254C00A24CA2,
 				96B0388604D7A9A1004FA6C4,
 				96B0388704D7A9A5004FA6C4,
+				FFCFD5F0052B9E8100000038,
 			);
 			isa = PBXCopyFilesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3584,47 +3569,118 @@
 			settings = {
 			};
 		};
-		FF5C5CE60514414100000037 = {
-			fileEncoding = 4;
+		FF24478D0529326F00000038 = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
-			name = English;
-			path = English.lproj/Localizable.strings;
+			path = SMDoubleSlider.h;
 			refType = 4;
 		};
-		FF5C5CE80514415100000037 = {
-			children = (
-				FF5C5CE60514414100000037,
-				FF5C5CEA0514416100000037,
-				FF5C5CEB0514417000000037,
-				FF5C5CEC0514417C00000037,
-			);
-			isa = PBXVariantGroup;
-			name = Localizable.strings;
+		FF24478E0529326F00000038 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			path = SMDoubleSlider.m;
 			refType = 4;
 		};
-		FF5C5CE90514415100000037 = {
-			fileRef = FF5C5CE80514415100000037;
+		FF24478F0529326F00000038 = {
+			fileRef = FF24478D0529326F00000038;
 			isa = PBXBuildFile;
 			settings = {
 			};
 		};
-		FF5C5CEA0514416100000037 = {
+		FF2447900529326F00000038 = {
+			fileRef = FF24478E0529326F00000038;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		FF2447910529328800000038 = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
-			name = German;
-			path = German.lproj/Localizable.strings;
+			path = SMDoubleSliderCell.h;
 			refType = 4;
 		};
-		FF5C5CEB0514417000000037 = {
+		FF2447920529328800000038 = {
+			fileEncoding = 30;
 			isa = PBXFileReference;
-			name = French;
-			path = French.lproj/Localizable.strings;
+			path = SMDoubleSliderCell.m;
 			refType = 4;
 		};
-		FF5C5CEC0514417C00000037 = {
-			isa = PBXFileReference;
-			name = Spanish;
-			path = Spanish.lproj/Localizable.strings;
+		FF2447930529328800000038 = {
+			fileRef = FF2447910529328800000038;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		FF2447940529328800000038 = {
+			fileRef = FF2447920529328800000038;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		FF47E8F30534FFA80000003B = {
+			fileRef = 089C165DFE840E0CC02AAC07;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		FF8C3A450529E78000000038 = {
+			children = (
+				FF8C3A540529EEA900000038,
+				FF8C3A550529EEA900000038,
+				FF8C3A580529F28900000038,
+				FF8C3A590529F28900000038,
+			);
+			isa = PBXGroup;
+			name = Drawer;
 			refType = 4;
+		};
+		FF8C3A540529EEA900000038 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = PStatsTableView.h;
+			refType = 4;
+		};
+		FF8C3A550529EEA900000038 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = PStatsTableView.m;
+			refType = 4;
+		};
+		FF8C3A560529EEA900000038 = {
+			fileRef = FF8C3A540529EEA900000038;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		FF8C3A570529EEA900000038 = {
+			fileRef = FF8C3A550529EEA900000038;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		FF8C3A580529F28900000038 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = PStatsTableCell.h;
+			refType = 4;
+		};
+		FF8C3A590529F28900000038 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = PStatsTableCell.m;
+			refType = 4;
+		};
+		FF8C3A5A0529F28900000038 = {
+			fileRef = FF8C3A580529F28900000038;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		FF8C3A5B0529F28900000038 = {
+			fileRef = FF8C3A590529F28900000038;
+			isa = PBXBuildFile;
+			settings = {
+			};
 		};
 		FF9C489605142A9000000037 = {
 			fileEncoding = 30;
@@ -3698,6 +3754,121 @@
 			settings = {
 			};
 		};
+		FFAEA3AF052E7CDB0000003A = {
+			isa = PBXFileReference;
+			path = availBad.tiff;
+			refType = 4;
+		};
+		FFAEA3B0052E7CDB0000003A = {
+			isa = PBXFileReference;
+			path = availGood.tiff;
+			refType = 4;
+		};
+		FFAEA3B1052E7CDB0000003A = {
+			fileRef = FFAEA3AF052E7CDB0000003A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		FFAEA3B2052E7CDB0000003A = {
+			fileRef = FFAEA3B0052E7CDB0000003A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		FFAEA725052E7DE90000003A = {
+			isa = PBXFileReference;
+			path = poison.icns;
+			refType = 4;
+		};
+		FFAEA726052E7DE90000003A = {
+			fileRef = FFAEA725052E7DE90000003A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		FFCFD5E5052B93F300000038 = {
+			isa = PBXFileReference;
+			path = banlist;
+			refType = 4;
+		};
+		FFCFD5E6052B944700000038 = {
+			isa = PBXFileReference;
+			path = FastTrack.conf;
+			refType = 4;
+		};
+		FFCFD5E7052B944700000038 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			path = nodes;
+			refType = 4;
+		};
+		FFCFD5E8052B944700000038 = {
+			fileRef = FFCFD5E6052B944700000038;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		FFCFD5E9052B944700000038 = {
+			fileRef = FFCFD5E7052B944700000038;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		FFCFD5EA052B944A00000038 = {
+			fileRef = FFCFD5E5052B93F300000038;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		FFCFD5EB052B94B100000038 = {
+			fileRef = FFCFD5E5052B93F300000038;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		FFCFD5EC052B94B100000038 = {
+			fileRef = FFCFD5E6052B944700000038;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		FFCFD5ED052B94B100000038 = {
+			fileRef = FFCFD5E7052B944700000038;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		FFCFD5EE052B9E7300000038 = {
+			isa = PBXFileReference;
+			path = libxml2.2.dylib;
+			refType = 4;
+		};
+		FFCFD5EF052B9E7300000038 = {
+			fileRef = FFCFD5EE052B9E7300000038;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		FFCFD5F0052B9E8100000038 = {
+			fileRef = FFCFD5EE052B9E7300000038;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		FFD7A878052BDA7E00000038 = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			generatedFileNames = (
+			);
+			isa = PBXShellScriptBuildPhase;
+			neededFileNames = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /usr/bin/python;
+			shellScript = "import os, sys, string\n\nbinary = os.environ['BUILD_DIR'] + \"/\" + os.environ['INNER_PRODUCT_SUBPATH']\nfd = os.popen(\"otool -L \" + binary)\nlines = fd.readlines()\nfd.close()\nfor line in lines:\n\tlibname = \"libxml2.2.dylib\"\n\tpos = string.find(line, libname)\n\tif pos is not -1:\n\t\tstartpos = string.find(line, \"/\")\n\t\told_install_name = line[startpos:pos + len(libname)]\n\t\tnew_install_name = \"@executable_path/../Resources/giFT/lib/libxml2.2.dylib\"\n\t\tos.spawnlp(os.P_WAIT, \"install_name_tool\", \"install_name_tool\", \"-change\", old_install_name, new_install_name, binary)\n\t\tbreak";
+		};
 		FFED4EAC051801B200E8282B = {
 			isa = PBXFileReference;
 			path = network.tiff;
@@ -3742,22 +3913,6 @@
 			isa = PBXBuildFile;
 			settings = {
 			};
-		};
-		FFFF2ECE05277E0F00000038 = {
-			isa = PBXFileReference;
-			path = poison.icns;
-			refType = 4;
-		};
-		FFFF2ECF05277E0F00000038 = {
-			fileRef = FFFF2ECE05277E0F00000038;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		FFFF2F5D0528014B00000038 = {
-			isa = PBXFileReference;
-			path = libxml2.2.dylib;
-			refType = 4;
 		};
 	};
 	rootObject = 29B97313FDCFA39411CA2CEA;
