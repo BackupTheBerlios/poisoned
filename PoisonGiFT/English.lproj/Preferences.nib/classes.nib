@@ -71,10 +71,13 @@
                 browseDBLocation = id; 
                 changeDBLocation = id; 
                 helpClasses = id; 
+                helpPorts = id; 
                 helpSEARCH = id; 
                 newAlias = id; 
+                "newHTTP_port" = id; 
                 newMaxChilds = id; 
                 newNodeClass = id; 
+                newPort = id; 
                 newPrivate = id; 
                 newTotalCacheSize = id; 
             }; 
@@ -86,8 +89,10 @@
                 dbLocation = NSTextField; 
                 helpPanel = NSPanel; 
                 helpTextView = NSTextView; 
+                "http_port" = NSTextField; 
                 maxChilds = NSTextField; 
                 nodeClass = NSPopUpButton; 
+                port = NSTextField; 
                 "private_env" = NSButton; 
                 tabView = NSTabView; 
                 totalCacheSize = NSSlider; 
