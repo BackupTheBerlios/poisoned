@@ -590,8 +590,10 @@
 - (void)windowDidBecomeKey:(NSNotification *)aNotification
 {
     // this is a workaround for the drawer becoming white when we open the window...
-    [drawer toggle:nil];
-    [drawer toggle:nil];
+    if ([drawer state]==NSDrawerOpenState) {
+        [drawer close];
+        [drawer open];
+    }
 }
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
