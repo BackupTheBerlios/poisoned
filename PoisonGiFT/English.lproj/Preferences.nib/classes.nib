@@ -69,6 +69,13 @@
             SUPERCLASS = NSObject; 
         }, 
         {
+            ACTIONS = {newPort = id; newProxy = id; }; 
+            CLASS = PPrefGnutella; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {port = NSTextField; proxy = NSTextField; }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
             ACTIONS = {
                 browseDBLocation = id; 
                 changeDBLocation = id; 
