@@ -86,6 +86,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:r_table selector:@selector(reloadData) name:@"PTransferSetChanged" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadSearchTable) name:@"PFilterDeAcitivated" object:filter];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(findMoreSources:) name:@"PFindMoreSources" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connected) name:@"PoisonConnectedToCore" object:NULL];
 
     [tc_fileicon retain];
     [tc_file retain];
@@ -123,7 +124,6 @@
     [datasources release];
     [super dealloc];
 }
-
 
 // contextual menu ----------------------------------------------------------
 - (IBAction)showhideTableColumn:(id)sender
@@ -204,11 +204,50 @@
     downloading_hashes = _hashes;
 }
 
+// respond to PoisonToCore Notification
+- (void)connected
+{
+    // if searches is not empty => giftd crashed
+    // this means searches are already saved (including results)
+    if ([searches count]>0) return;
+    
+    NSArray *oldSearches = [userDefaults arrayForKey:@"PSavedSearches"];
+    int i, count = [oldSearches count];
+    
+    NSString *ticket;
+    NSMutableDictionary *search;
+    PResultSource *new;
+    for (i=0;i<count;i++) {
+        search	= [[oldSearches objectAtIndex:i] mutableCopy];
+        
+        // we need a new ticket, the old one was freed when we disconnected
+        ticket = [[[commander getTicket] copy] autorelease];
+        
+        // create the result source for this search
+        new 	= [[PResultSource alloc] initWithHashes:downloading_hashes andTable:r_table hidden:NO];
+        [new setActive:NO];
+        
+        [search setObject:ticket forKey:@"ticket"];
+        [search setObject:@"0" forKey:@"count"];
+        
+        // replace the old ticket in the query with the new one
+        NSMutableArray *tmp = [[[search objectForKey:@"query"] componentsSeparatedByString:@")"] mutableCopy];
+        [tmp replaceObjectAtIndex:0 withObject:[NSString stringWithFormat:@"SEARCH(%@",ticket]];
+        [search setObject:[tmp componentsJoinedByString:@")"] forKey:@"query"];
+        [tmp release];
+        
+        [datasources setObject:new forKey:ticket];
+        [searches addObject:search];
+        
+        [search release];
+    }
+    [s_table reloadData];
+}
+
 - (void)disconnected:(id)sender
 {
     NSDictionary *userInfo = [(NSNotification *)sender userInfo];
     id crash = [userInfo objectForKey:@"crash"];
-    id userDisconnected = [userInfo objectForKey:@"userDisconnected"];
     if (crash) { // giftd crashed -> set all search inactive
         int i,count=[searches count];
         for (i=count-1;i>=0;i--) {
@@ -216,7 +255,8 @@
                 setActive:NO];
         }
     }
-    else if (userDisconnected) { // -> remove all searches
+    else { // -> remove all searches
+        [self saveSearches];
         if (current_src) [current_src cleanUpTableHeaders];
         current_src = nil;
         int i,count=[searches count];
@@ -232,6 +272,11 @@
         [filter setDataSource:nil];
         [filter disconnected];
     }
+}
+
+- (void)saveSearches
+{
+    [userDefaults setObject:searches forKey:@"PSavedSearches"];
 }
 
 // process ITEM from the daemon
@@ -388,6 +433,7 @@
             [[search_realm title] lowercaseString]
             ];
     [self search:query info:[search_field stringValue] ticket:ticket hidden:NO];
+    [search_field selectText:self];
 }
 
 - (IBAction)browse:(id)sender

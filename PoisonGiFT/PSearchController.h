@@ -67,6 +67,9 @@
 	NSTimer *_refreshTimer;
 }
 
+- (void)saveSearches;
+- (void)connected;
+
 - (IBAction)showhideTableColumn:(id)sender;
 - (NSMenu *)tableView:(NSOutlineView *)_table menuForTableColumn:(NSTableColumn *)_column row:(int)_row;
 
