@@ -23,9 +23,8 @@
 @implementation PgiFTController
 
 - (void)awakeFromNib
-{    
-    _userDisconnected = NO;
-    _startDaemon = NO;
+{
+	_startDaemon = NO;
     shouldBeConnected = NO;
     remoteDaemon = NO;
     [self checkConfFiles];
@@ -56,11 +55,8 @@
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connected) name:@"PoisonConnectedToCore" object:NULL];
 	
-	if ([userDefaults boolForKey:@"PAutoLaunch"]) {
-                // we want to start the daemon so we set this to YES
-                //_startDaemon=YES;
-		[self launch:self];
-        }
+	if ([userDefaults boolForKey:@"PAutoLaunch"])
+		[self startDaemon];
 	// NOTE: i moved checking of PAutoConnect to setCommander:andController
 	// because the commander is needed before it can attempt a connect - jjt
 }
@@ -94,14 +90,12 @@
 
 - (void)connectionTimedOut
 {
-    // if we're launching the daemon, we're just ignoring such error ;)
-    if (!_startDaemon)
-        NSBeginCriticalAlertSheet(
-            @"Connection failed.",
-            @"OK", nil, nil,
-            [[NSApplication sharedApplication] mainWindow],
-            nil, nil, nil, nil,
-            [NSString stringWithFormat:@"Make sure a giFT daemon is running."]);
+    NSBeginCriticalAlertSheet(
+        @"Connection failed.",
+        @"OK", nil, nil,
+        [[NSApplication sharedApplication] mainWindow],
+        nil, nil, nil, nil,
+        [NSString stringWithFormat:@"Make sure a giFT daemon is running."]);
 }
 
 - (void)disconnected:(id)sender
@@ -110,32 +104,23 @@
     protosSend=NO;
     [timer invalidate];
     timer = nil;
+    [protocolSource removeAllObjects];
+    [protocolSource addObject:
+        [NSDictionary dictionaryWithObjectsAndKeys:
+            [NSImage imageNamed:@"poisoned.tiff"],@"icon",
+            [NSArray arrayWithObjects:
+                [NSNumber numberWithBool:YES],@"Not connected.",@"",nil],@"protocol",
+        nil]
+    ];
+    [protocolTable reloadData];
     [connectMenu setAction:@selector(connect:)];
     [remoteConnectMenu setAction:@selector(runConnectionSheet:)];
     [statusImage setImage:[NSImage imageNamed:@"offline.tiff"]];
     [statusImage setNeedsDisplay:YES];
-    if ([userDefaults boolForKey:@"PRelaunchOnCrash"] && shouldBeConnected && !remoteDaemon) {
-        if (!_daemonLaunching) _startDaemon=YES;
+    if ([userDefaults boolForKey:@"PRelaunchOnCrash"] && shouldBeConnected && !remoteDaemon) 
         [self startDaemon];	// giFT crashed....
-    }
-    //else if (_startDaemon)
-    //        [self startDaemon];
-    else {
-        // the user didn't disconnect, just use the same error panel as in connectionTimedOut
-        if (!_userDisconnected) [self connectionTimedOut];
-
-        _daemonLaunching=NO;
-        _userDisconnected=NO;
-        [protocolSource removeAllObjects];
-        [protocolSource addObject:
-            [NSDictionary dictionaryWithObjectsAndKeys:
-                [NSImage imageNamed:@"poisoned.tiff"],@"icon",
-                [NSArray arrayWithObjects:
-                    [NSNumber numberWithBool:YES],@"Not connected.",@"",nil],@"protocol",
-            nil]
-        ];
-        [protocolTable reloadData];
-    }
+	else if (_startDaemon)
+		[self startDaemon];
 }
 
 - (NSView *)view
@@ -211,12 +196,7 @@
     else
 	{
 		// we've started the connection process, so we SHOULD be connected
-                // ---
-                // only set shouldBeConnected if we're launching the daemon, otherwise when we 
-                // try to connect a daemon which isn't running, it gets launched.
-                // the problem seems to be, that after launch the daemon needs some time until it accepts connectsions
-                // (which isn't a problem if you just connect).
-		if (_startDaemon) shouldBeConnected=YES;
+		shouldBeConnected=YES;
         if (remote)
 		{
             [userDefaults setObject:address forKey:@"PRemoteAddress"];
@@ -232,7 +212,6 @@
 {
 	// set _startDaemon to NO because the daemon is obviously already running
 	_startDaemon = NO;
-        _daemonLaunching=NO;
 	shouldBeConnected=YES;
     [controller validate];
     [connectMenu setAction:nil];
@@ -254,30 +233,13 @@
 {
     if ([commander connected])
 	{
-        _userDisconnected=YES;
-        [protocolSource removeAllObjects];
-        [protocolSource addObject:[NSDictionary dictionaryWithObjectsAndKeys:
-            [NSImage imageNamed:@"disconnect.tiff"],@"icon",
-            [NSArray arrayWithObjects:[NSNumber numberWithBool:YES],
-                @"Disconnecting From the daemon...", // protocol name
-                @"",nil],@"protocol",nil]
-        ];
-        [protocolTable reloadData];
-        
 		// user wants to disconnect from the daemon
         shouldBeConnected=NO;
         [commander closeConnection];
         shouldBeConnected=NO;
         return;
     }
-        [protocolSource removeAllObjects];
-        [protocolSource addObject:[NSDictionary dictionaryWithObjectsAndKeys:
-            [NSImage imageNamed:@"connect.tiff"],@"icon",
-            [NSArray arrayWithObjects:[NSNumber numberWithBool:YES],
-                @"Connecting to the daemon...", // protocol name
-                @"",nil],@"protocol",nil]
-        ];
-        [protocolTable reloadData];
+    
     BOOL _connected;
     if (sender)
 		_connected = [self connectLocal:YES];
@@ -294,6 +256,8 @@
 {
     if ([commander connected])
 	{
+        shouldBeConnected=NO;
+        [commander cmd:@"QUIT"];
         [protocolSource removeAllObjects];
         [protocolSource addObject:[NSDictionary dictionaryWithObjectsAndKeys:
             [NSImage imageNamed:@"stopgift.tiff"],@"icon",
@@ -302,22 +266,9 @@
                 @"This may take a while...",nil],@"protocol",nil]
         ];
         [protocolTable reloadData];
-
-        _userDisconnected=YES;
-        shouldBeConnected=NO;
-        [commander cmd:@"QUIT"];
     }
     else
 	{
-        [protocolSource removeAllObjects];
-        [protocolSource addObject:[NSDictionary dictionaryWithObjectsAndKeys:
-            [NSImage imageNamed:@"startgift.tiff"],@"icon",
-            [NSArray arrayWithObjects:[NSNumber numberWithBool:YES],
-                @"Launching giFT", // protocol name
-                @"",nil],@"protocol",nil]
-        ];
-        [protocolTable reloadData];
-
 		// first try to connect to the daemon
 		// if we can't connect to the daemon then
 		// it needs to be launched and we need to try to connect again
@@ -329,7 +280,7 @@
 - (void)startDaemon
 {
 	// set _startDaemon to NO because we're trying to start it right now
-	//_startDaemon = NO; moved to the launching code -sr
+	_startDaemon = NO;
 	
 	BOOL customDaemon = [userDefaults boolForKey:@"PUseCustomDaemon"];
 	if (customDaemon && ![[NSFileManager defaultManager] contentsAtPath:[userDefaults stringForKey:@"PGiFTPath"]])
@@ -343,7 +294,7 @@
 		return;
 	}
 	
-	NSTask *task = [[[NSTask alloc] init] autorelease];
+	NSTask *task = [[NSTask alloc] init];
 	NSString *launchPath;
 	
 	if (customDaemon)
@@ -354,12 +305,8 @@
 	[task setCurrentDirectoryPath:[launchPath stringByDeletingLastPathComponent]];
 	[task setLaunchPath:launchPath];
 	NS_DURING
-                if (_startDaemon) [task launch];
-                // else... daemon launched already, but needs time to get ready for connections (?)
-                // so we don't try to launch it again, instead we're trying to just connect again -sr
-                _startDaemon=NO;
+		[task launch];
 		remoteDaemon = NO;
-                
 	NS_HANDLER
 		NSBeginCriticalAlertSheet(
 			@"Could not start the daemon.",
@@ -369,8 +316,6 @@
 			[NSString stringWithFormat:@"Make sure \"%@\" exists.",[userDefaults stringForKey:@"PGiFTPath"]]);
 	NS_ENDHANDLER
 	
-        if ([task isRunning]) _daemonLaunching=YES;
-        
 	if (shouldBeConnected)
 		[self connectLocal:YES];
 }

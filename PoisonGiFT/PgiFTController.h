@@ -48,7 +48,7 @@
     
     NSTimer *timer;	// timer for the STATS command
     NSString *attach;
-        
+    
     PIconShop *icon_shop;
     
     BOOL protosSend;
@@ -56,8 +56,6 @@
     BOOL shouldBeConnected;	// if this is YES and disconnected gets called -> giFT crashed
     BOOL remoteDaemon;
     BOOL _startDaemon;
-    BOOL _daemonLaunching;
-    BOOL _userDisconnected;
 	
     BOOL synchronizing;
 }
