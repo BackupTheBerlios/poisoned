@@ -119,7 +119,7 @@
 
     [item setObject:proto forKey:@"PProto"];
 
-    
+
     if (sources) { //------------------------------------- new source for existing file
         NSMutableArray *sourcesArray = [sources objectForKey:@"array"];
         int sourceCount = [sourcesArray count];
@@ -135,6 +135,8 @@
             [sources setObject:parent_copy forKey:@"parent"];
             [sourcesArray insertObject:parent_copy atIndex:0];
         }
+        
+
         parent = [sourcesArray objectAtIndex:0];
         [sourcesArray addObject:item];
         [[attr_users mutableString] setString:[NSString stringWithFormat:@"%d Users",([sourcesArray count]-1)]];
@@ -161,7 +163,9 @@
             item,@"parent",
             item,user,
             nil];
-        [hashes setObject:newFile forKey:hash];
+        // we have to test for a hash here since there isn't always one
+        // this fixes the bug where searching doesn't work anymore, after this happened
+        if (hash) [hashes setObject:newFile forKey:hash];
         
         [sources setObject:item forKey:user];
         
