@@ -192,6 +192,9 @@
             NSLog(@"removed old Gnutella.conf");
         // it wouldn't be necesseary to check all files again, but it the easiest way ;)
         [giFT checkConfFiles];
+        
+        // set max length for recent searches list to 15
+        [userDefaults setInteger:15 forKey:@"PMaxRecentSearchesListCount"];
     }
 
     if (firstRun) {
