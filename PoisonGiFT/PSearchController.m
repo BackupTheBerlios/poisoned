@@ -19,6 +19,7 @@
 // ---------------------------------------------------------------------------
 
 #import "PSearchController.h"
+#import "PMainController.h"
 
 @implementation PSearchController
 
@@ -89,6 +90,10 @@
     [tc_bitrate retain];
     [tc_artist retain];
     [tc_album retain];
+
+	// table refresh timer
+	_newItems = [[NSMutableArray alloc] init];
+	_refreshTimer = NULL;
 }
 
 - (void)dealloc
@@ -226,7 +231,7 @@
             [commander freeTicket:ticket];
             [datasources removeObjectForKey:ticket];
         }
-        // reload serach table....
+        // reload search table....
         return;
     }
 
@@ -244,11 +249,36 @@
     }
 
     if (hidden) return; // we're looking for more sources...
-    PResultSource *_source = [datasources objectForKey:ticket];
-    if (_source) [_source addItem:data];
+    PResultSource *source = [datasources objectForKey:ticket];
+    if (source)
+	{
+		// delay the refresh for 1 second to give a chance for more results to come in
+		// this way we add items in chunks and the table gets refreshed less - jjt
+		[_newItems addObject:data];
+		if (![_refreshTimer isValid])
+		{
+			// the timer is not valid, so we need to schedule it
+			_refreshTimer = [[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(refreshTimer:) userInfo:NULL repeats:NO] retain];
+		}
+	}
 }
 // --------------------------------------------------------------------------------------------------
 
+- (void)refreshTimer:(NSTimer *)timer
+{
+	NSEnumerator *iter = [_newItems objectEnumerator];
+	NSArray *data = NULL;
+	while (data = [iter nextObject])
+	{
+		PResultSource *source = [datasources objectForKey:[data objectAtIndex:1]];
+		[source addItem:data];
+	}
+	[_newItems removeAllObjects];
+	[self gui_update:([((PMainController *)controller) currentView] == 1)];
+	// this is a single shot timer, so after this fire, it isn't scheduled anymore
+	[_refreshTimer release];
+	_refreshTimer = NULL;
+}
 
 - (void)deleteEvent:(id)sender
 {

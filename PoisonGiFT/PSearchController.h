@@ -61,6 +61,9 @@
     
     IBOutlet PSearchFilterController *filter;
     NSSet *downloading_hashes;
+
+	NSMutableArray *_newItems;
+	NSTimer *_refreshTimer;
 }
 
 - (IBAction)showhideTableColumn:(id)sender;
