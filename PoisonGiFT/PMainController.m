@@ -273,14 +273,7 @@
 // DO is setup, so it's time to register some commands
 // --------------------------------------------------------------------------------------------------
 - (void)activate:(id)sender
-{
-
-	if ([[[NSBundle mainBundle] bundlePath] rangeOfString:@":"].location != NSNotFound)
-	{
-		NSRunCriticalAlertPanel(@"Bad Launch Path", [NSString stringWithFormat:@"You have launched Poisoned from a path that contains a \":\". Poisoned cannot operate from this location, please move it to another location and try again.\n\nLaunch Path:%@", [[NSBundle mainBundle] bundlePath]], @"Quit", NULL, NULL);
-		[[NSApplication sharedApplication] terminate:self];
-	}
-	
+{	
     [commander registerController:self forCommands:
         [NSArray arrayWithObjects:
             @"POISON_GUI_UPDATE",
