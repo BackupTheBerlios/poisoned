@@ -724,7 +724,6 @@
     return menu;
 }
 
-// FOR TESTING...
 - (void)buyAtiTMS:(id)sender
 {
     if ([r_table numberOfSelectedRows]!=1) return;
@@ -788,8 +787,8 @@
 {
     if ([r_table numberOfSelectedRows]!=1) return NO;
     
-    NSSet *ext = [NSSet setWithObjects:@"mp3",@"ogg",@"m4u",@"m4a",@"wma",@"aiff",nil];
-    NSString *file_ext = [[[r_table itemAtRow:[r_table selectedRow]] objectForKey:@"file"] pathExtension];
+    NSSet *ext = [NSSet setWithObjects:@"mp3",@"wav",@"ogg",@"m4u",@"m4a",@"wma",@"aif",@"aiff",nil];
+    NSString *file_ext = [[[[r_table itemAtRow:[r_table selectedRow]] objectForKey:@"file"] pathExtension] lowercaseString];
     if ([ext containsObject:file_ext]) return YES;
     else return NO;
 }
