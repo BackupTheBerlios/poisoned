@@ -31,6 +31,7 @@
     IBOutlet NSView *downloadView;
     IBOutlet NSView *uploadView;
     IBOutlet NSView *protoView;
+    IBOutlet NSView *pluginView;
     
     IBOutlet NSTabView *tabView;
     
@@ -46,5 +47,6 @@
 - (void)switchToDownloads:(id)sender;
 - (void)switchToUploads:(id)sender;
 - (void)switchToProtos:(id)sender;
+- (void)switchToPlugins:(id)sender;
 
 @end

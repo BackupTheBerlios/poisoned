@@ -51,16 +51,19 @@
     NSTabViewItem *_download = [[NSTabViewItem alloc] initWithIdentifier:@"download"];
     NSTabViewItem *_upload = [[NSTabViewItem alloc] initWithIdentifier:@"upload"];
     NSTabViewItem *_protos = [[NSTabViewItem alloc] initWithIdentifier:@"protos"];
+    NSTabViewItem *_plugins = [[NSTabViewItem alloc] initWithIdentifier:@"plugins"];
     [_general setView:generalView];
     [_daemon setView:daemonView];
     [_download setView:downloadView];
     [_upload setView:uploadView];
     [_protos setView:protoView];
+    [_plugins setView:pluginView];
     [tabView addTabViewItem:_general];
     [tabView addTabViewItem:_daemon];
     [tabView addTabViewItem:_download];
     [tabView addTabViewItem:_upload];
     [tabView addTabViewItem:_protos];
+    [tabView addTabViewItem:_plugins];
     
     [tabView setDrawsBackground:NO];
     
@@ -69,19 +72,20 @@
     [_download release];
     [_upload release];
     [_protos release];
+    [_plugins release];
 }
 
 - (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar
 {
     return [NSArray arrayWithObjects:
-        @"general",NSToolbarSeparatorItemIdentifier,@"download",@"upload",@"protos",@"daemon",
+        @"general",NSToolbarSeparatorItemIdentifier,@"download",@"upload",@"protos",@"daemon",@"plugins",
         nil];
 }
 
 - (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
 {
     return [NSArray arrayWithObjects:
-        @"general",NSToolbarSeparatorItemIdentifier,@"download",@"upload",@"protos",@"daemon",
+        @"general",NSToolbarSeparatorItemIdentifier,@"download",@"upload",@"protos",@"daemon",@"plugins",
         nil];
 }
 
@@ -122,6 +126,13 @@
         [item setImage:[NSImage imageNamed:@"protos.tiff"]];
         [item setTarget:self];
         [item setAction:@selector(switchToProtos:)];
+    }
+    else if ([itemIdentifier isEqualToString:@"plugins"]) {
+        [item setLabel:@"Plugins"];
+        [item setPaletteLabel:@"Plugins"];
+        [item setImage:[NSImage imageNamed:@"protos.tiff"]];
+        [item setTarget:self];
+        [item setAction:@selector(switchToPlugins:)];
     }
     return [item autorelease];
 }
@@ -180,6 +191,15 @@
     [prefWindow setFrame:frame display:YES animate:YES];
     [tabView selectTabViewItemWithIdentifier:@"protos"];
 
+}
+
+- (void)switchToPlugins:(id)sender
+{
+    [prefWindow setTitle:@"Plugins"];
+    NSRect frame = [self calcFrame:[pluginView frame].size.height];
+    [tabView selectFirstTabViewItem:self];
+    [prefWindow setFrame:frame display:YES animate:YES];
+    [tabView selectTabViewItemWithIdentifier:@"plugins"];
 }
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem
