@@ -502,6 +502,7 @@
     else {
         if (current_src) [current_src cleanUpTableHeaders];
         [r_table setDataSource:self];
+        [r_table setDelegate:self];
         [filter setDataSource:nil];
         current_src = nil;
     }
@@ -511,7 +512,8 @@
 
 - (void)loadResultTable
 {
-    [controller performSelector:@selector(switchToSearch:)];
+    if ([s_table numberOfSelectedRows]==1)
+        [controller performSelector:@selector(switchToSearch:)];
     [self tableViewSelectionDidChange:nil];
 }
 
