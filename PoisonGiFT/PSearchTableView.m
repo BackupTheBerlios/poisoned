@@ -46,4 +46,14 @@
 	}
 }
 
+- (void) rightMouseDown:(NSEvent*)event
+{
+    //if(![controller doMouseDown: event])
+        [super rightMouseDown: event];
+
+    NSLog(@"mouseDown: %i", [event clickCount]);    
+
+    
+}
+
 @end

@@ -2663,17 +2663,17 @@
 	<key>CFBundleIconFile</key>
 	<string>poison.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>net.gottsilla.Poisoned</string>
+	<string>com.poisonedproject.Poisoned</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.41</string>
+	<string>0.48</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>0.41</string>
+	<string>0.48</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
