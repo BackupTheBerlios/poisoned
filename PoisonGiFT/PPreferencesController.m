@@ -166,7 +166,7 @@
 - (void)switchToUploads:(id)sender
 {
     [prefWindow setTitle:@"Uploads"];
-    NSRect frame = [self calcFrame:310];
+    NSRect frame = [self calcFrame:373];
     [tabView selectFirstTabViewItem:self];
     [prefWindow setFrame:frame display:YES animate:YES];
     [tabView selectTabViewItemWithIdentifier:@"upload"];

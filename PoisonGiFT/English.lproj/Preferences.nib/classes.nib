@@ -103,16 +103,22 @@
                 addShare = id; 
                 cancelledPrefsChanged = id; 
                 completedPrefsChanged = id; 
+                maxDownloadSpeedChanged = id; 
                 maxPerUserChanged = id; 
+                maxUploadSpeedChanged = id; 
                 maxUploadsChanged = id; 
+                myAction = id; 
+                myAction1 = id; 
                 removeShare = id; 
             }; 
             CLASS = PPrefUploads; 
             LANGUAGE = ObjC; 
             OUTLETS = {
                 addButton = NSButton; 
+                maxDownstream = NSTextField; 
                 maxPerUser = NSTextField; 
                 maxUploads = NSTextField; 
+                maxUpstream = NSTextField; 
                 removeButton = NSButton; 
                 removeCancelled = NSButton; 
                 removeCompleted = NSButton; 

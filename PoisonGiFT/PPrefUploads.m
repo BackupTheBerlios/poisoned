@@ -107,6 +107,10 @@
     [maxUploads setIntValue:[[gift_conf optionForKey:@"max_uploads"] intValue]];
     
     [maxPerUser setIntValue:[[gift_conf optionForKey:@"max_peruser_uploads"] intValue]];
+    
+    [maxUpstream setIntValue:[[gift_conf optionForKey:@"upstream"] intValue]];
+    
+    [maxDownstream setIntValue:[[gift_conf optionForKey:@"downstream"] intValue]];
 }
 
 - (IBAction)cancelledPrefsChanged:(id)sender
@@ -177,6 +181,19 @@
     [gift_conf setValue:[NSNumber numberWithInt:[sender intValue]] forKey:@"max_peruser_uploads"];
     [self readConfFiles];
 }
+
+- (IBAction)maxUploadSpeedChanged:(id)sender
+{
+    [gift_conf setValue:[NSNumber numberWithInt:[sender intValue]] forKey:@"upstream"];
+    [self readConfFiles];
+}
+
+- (IBAction)maxDownloadSpeedChanged:(id)sender
+{
+    [gift_conf setValue:[NSNumber numberWithInt:[sender intValue]] forKey:@"downstream"];
+    [self readConfFiles];
+}
+
 
 // ---------------------------------------------------------------
 - (int)numberOfRowsInTableView:(NSTableView *)aTableView

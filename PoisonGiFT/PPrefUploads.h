@@ -32,6 +32,8 @@
     
     IBOutlet NSTextField *maxUploads;
     IBOutlet NSTextField *maxPerUser;
+    IBOutlet NSTextField *maxUpstream;
+    IBOutlet NSTextField *maxDownstream;
     
     NSUserDefaults *userDefaults;
     PGiFTConf *gift_conf;
@@ -52,6 +54,8 @@
 - (IBAction)removeShare:(id)sender;
 - (IBAction)maxUploadsChanged:(id)sender;
 - (IBAction)maxPerUserChanged:(id)sender;
+- (IBAction)maxUploadSpeedChanged:(id)sender;
+- (IBAction)maxDownloadSpeedChanged:(id)sender;
 
 - (void)completedDirectoryChanged:(NSNotification *)notification;
 
