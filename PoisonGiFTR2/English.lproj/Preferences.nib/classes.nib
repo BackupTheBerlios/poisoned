@@ -1,0 +1,171 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {
+                addressChanged = id; 
+                autoConnectPrefsChanged = id; 
+                autoLaunchPrefsChanged = id; 
+                customDaemonPrefsChanged = id; 
+                pathChanged = id; 
+                portChanged = id; 
+                relaunchOnCrashPrefsChanged = id; 
+                stoppingPrefsChanged = id; 
+                timeoutChanged = id; 
+            }; 
+            CLASS = PPrefDaemon; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                address = NSTextField; 
+                autoConnect = NSButton; 
+                autoLaunch = NSButton; 
+                customDaemon = NSButton; 
+                path = NSTextField; 
+                port = NSTextField; 
+                relaunchOnCrash = NSButton; 
+                stopGiFT = NSButton; 
+                timeout = NSTextField; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {
+                browseCompleted = id; 
+                browseIncoming = id; 
+                cancelledPrefsChanged = id; 
+                completedChanged = id; 
+                completedPrefsChanged = id; 
+                deletefilePrefsChanged = id; 
+                importPlaylistChanged = id; 
+                importPrefsChanged = id; 
+                incomingChanged = id; 
+                oggSupportChanged = id; 
+                playFileIfNoFilePrefsChanged = id; 
+                playfilePrefsChanged = id; 
+                switchToDownloadPrefsChanged = id; 
+            }; 
+            CLASS = PPrefDownloads; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                browseComp = NSButton; 
+                browseIn = NSButton; 
+                completed = NSTextField; 
+                deleteFile = NSButton; 
+                importToPlaylist = NSButton; 
+                importToiTunes = NSButton; 
+                incoming = NSTextField; 
+                oggSupport = NSButton; 
+                playFile = NSButton; 
+                playFileIfNoFile = NSButton; 
+                removeCancelled = NSButton; 
+                removeCompleted = NSButton; 
+                switchToDownload = NSButton; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {clearNodesFile = id; newAlias = id; }; 
+            CLASS = PPrefFastTrack; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {alias = NSTextField; clearNodes = NSButton; }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {autoVersionPrefsChanged = id; switchAppearance = id; }; 
+            CLASS = PPrefGeneral; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {appearance = NSPopUpButton; autoVersion = NSButton; prefWindow = NSPanel; }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {newPort = id; newProxy = id; }; 
+            CLASS = PPrefGnutella; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {port = NSTextField; proxy = NSTextField; }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {
+                browseDBLocation = id; 
+                changeDBLocation = id; 
+                helpClasses = id; 
+                helpPorts = id; 
+                helpSEARCH = id; 
+                newAlias = id; 
+                "newHTTP_port" = id; 
+                newMaxChilds = id; 
+                newNodeClass = id; 
+                newPort = id; 
+                newPrivate = id; 
+                newTotalCacheSize = id; 
+            }; 
+            CLASS = PPrefOpenFT; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                alias = NSTextField; 
+                cacheSize = NSTextField; 
+                dbLocation = NSTextField; 
+                helpPanel = NSPanel; 
+                helpTextView = NSTextView; 
+                "http_port" = NSTextField; 
+                maxChilds = NSTextField; 
+                nodeClass = NSPopUpButton; 
+                port = NSTextField; 
+                "private_env" = NSButton; 
+                tabView = NSTabView; 
+                totalCacheSize = NSSlider; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            CLASS = PPrefProtocols; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {openftPrefs = PPrefOpenFT; tabView = NSTabView; }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {
+                addShare = id; 
+                cancelledPrefsChanged = id; 
+                completedPrefsChanged = id; 
+                maxDownloadSpeedChanged = id; 
+                maxPerUserChanged = id; 
+                maxUploadSpeedChanged = id; 
+                maxUploadsChanged = id; 
+                myAction = id; 
+                myAction1 = id; 
+                removeShare = id; 
+            }; 
+            CLASS = PPrefUploads; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                addButton = NSButton; 
+                maxDownstream = NSTextField; 
+                maxPerUser = NSTextField; 
+                maxUploads = NSTextField; 
+                maxUpstream = NSTextField; 
+                removeButton = NSButton; 
+                removeCancelled = NSButton; 
+                removeCompleted = NSButton; 
+                shareTable = PTableView; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            CLASS = PPreferencesController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                daemonView = NSView; 
+                downloadView = NSView; 
+                generalView = NSView; 
+                prefWindow = NSPanel; 
+                protoView = NSView; 
+                tabView = NSTabView; 
+                uploadView = NSView; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {CLASS = PTableView; LANGUAGE = ObjC; SUPERCLASS = NSTableView; }
+    ); 
+    IBVersion = 1; 
+}

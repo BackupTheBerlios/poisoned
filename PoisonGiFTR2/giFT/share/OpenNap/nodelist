@@ -1,0 +1,6 @@
+# $Id: nodelist,v 1.1 2003/10/27 21:53:18 jashton Exp $
+
+# Syntax: ip:port
+# Lines starting with a hash are treated as comments.
+#127.0.0.1:8888
+
