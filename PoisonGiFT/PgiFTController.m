@@ -503,6 +503,8 @@
     if (![self check:@"/Gnutella/Gnutella.conf"]) setRandomGnutellaPort=YES;
     [self check:@"/FastTrack"];
     [self check:@"/FastTrack/FastTrack.conf"];
+    [self check:@"/OpenNap"];
+    [self check:@"/OpenNap/OpenNap.conf"];
     [self check:@"/ui"];
     [self check:@"/ui/ui.conf"];
 
