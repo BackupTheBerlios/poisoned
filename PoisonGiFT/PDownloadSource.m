@@ -150,6 +150,8 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
         userDefaults = [NSUserDefaults standardUserDefaults];
         
         menu = [[NSMenu alloc] init];
+        
+        timers = [[NSMutableDictionary alloc] init];
     }
 	
     return self;
@@ -161,6 +163,7 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
     [iconShop release];
     [source release];
     [tickets release];
+    [timers release];
     [super dealloc];
 }
 
@@ -169,8 +172,22 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
     giftCommander = _giftCommander;
 }
 
+- (void)setHashes:(NSMutableSet *)_hashes
+{
+    hashes = _hashes;
+}
+
+
 - (void)disconnected
 {
+    // invalidate all timers
+    NSEnumerator *keyEnumerator = [timers keyEnumerator];
+    id key;
+    while (key = [keyEnumerator nextObject]) {
+        [[timers objectForKey:key] invalidate];
+        [timers removeObjectForKey:key];
+    }
+    
     [tickets removeAllObjects];
     [source removeAllObjects];
     [table reloadData];
@@ -261,6 +278,12 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
             if ([[item objectForKey:@"PStatus"] intValue]>1) {
                 [deletedDownloads addObject:[item objectForKey:@"PTicket"]];
                 [tmpcmd appendString:[NSString stringWithFormat:@";\nTRANSFER(%@) action(cancel)",[item objectForKey:@"PTicket"]]];
+                
+                // we have to remove the hash form the hashes set.
+                // if we wait for gift to send a DELDOWNLOAD: it could happen that
+                // the cancelled download starts again if the user is doing 'find more sources'
+                // and the hash is still in the hashes set...
+                [hashes removeObject:[item objectForKey:@"hash"]];
             }
         }
         // a source is selected...
@@ -503,6 +526,26 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
     [tickets setObject:dict forKey:ticket];
     [table reloadData];
     [self CHGDOWNLOAD:data];
+
+    NSString *hash;
+    if (hash=[dict objectForKey:@"hash"]) {
+        // if the download is active we do a find more sources
+        // this seems nice to have when you start up gift and old downloads get added
+        if ([[dict objectForKey:@"PStatus"] intValue]==PACTIVE) {
+            //NSLog(@"adddownload: find more sources");
+            [self findMoreSources:hash];
+        }
+        //NSLog(@"fms: create timer");
+        // create a timer for 'auto find more sources'
+        NSTimer *fms_timer = [NSTimer
+            scheduledTimerWithTimeInterval:1800	// 30 min
+            target:self
+            selector:@selector(findMoreSourcesTimer:)
+            userInfo:[NSDictionary dictionaryWithObjectsAndKeys:ticket,@"ticket",nil]
+            repeats:YES
+        ];
+        [timers setObject:fms_timer forKey:hash];
+    }
 }
 
 
@@ -693,6 +736,15 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
     if (!ticket) return;
     NSMutableDictionary *item = [tickets objectForKey:ticket];
     if (!item) return;
+    
+    NSString *hash;
+    if (hash=[item objectForKey:@"hash"]) {
+        //NSLog(@"fms: invalidate timer");
+        // remove the timer from the timers dictionary
+        [[timers objectForKey:hash] invalidate];
+        [timers removeObjectForKey:hash];
+    }
+    
     if ([[item objectForKey:@"PStatus"] intValue] == PCOMPLETED) {
         if ([userDefaults boolForKey:@"PRemoveCompletedDownloads"]) {
             [source removeObject:[tickets objectForKey:ticket]];
@@ -773,6 +825,24 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
     [table reloadItem:[tickets objectForKey:ticket] reloadChildren:YES];
 }
 
+- (void)findMoreSourcesTimer:(NSTimer *)timer
+{
+    //NSLog(@"fms: fired");
+    NSString *ticket = [[timer userInfo] objectForKey:@"ticket"];
+    
+    // only find more sources if the download is active
+    if ([[[tickets objectForKey:ticket] objectForKey:@"PStatus"] intValue] != PACTIVE) return;
+    
+    [self findMoreSources:[[tickets objectForKey:ticket] objectForKey:@"hash"]];
+}
+
+- (void)findMoreSources:(NSString *)hash
+{
+    //NSLog(@"fms: send notification > %@",hash);
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"PFindMoreSources" object:self
+        userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+            hash,@"hash",nil]];
+}
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(int)index ofItem:(id)item
 {

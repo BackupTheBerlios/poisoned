@@ -42,6 +42,9 @@
     NSMutableArray *source;
     NSMutableDictionary *tickets;
     
+    // this set stores the hashes of active or paused downloads
+    NSMutableSet *hashes;
+    
     NSUserDefaults *userDefaults;
     
     BOOL sortAscending;
@@ -49,11 +52,16 @@
     NSMenu *menu;
     
     id giftCommander;
+    
+    // we use an dictionary to store the timers for 'auto find more sources'
+    // key is the hash of the file
+    NSMutableDictionary *timers;
 }
 
 - (id)initWithTable:(PDiffOutlineView *)_table;
 
 - (void)setCommander:(id)_giftCommander;
+- (void)setHashes:(NSMutableSet *)_hashes;
 
 - (void)ADDDOWNLOAD:(NSArray *)data;
 - (void)CHGDOWNLOAD:(NSArray *)data;
@@ -63,6 +71,9 @@
 
 - (void)ADDSOURCE:(NSArray *)data;
 - (void)DELSOURCE:(NSArray *)data;
+
+- (void)findMoreSourcesTimer:(NSTimer *)timer;
+- (void)findMoreSources:(NSString *)hash;
 
 - (NSString *)stringForUsers:(int)users;
 - (NSString *)timeStringFromInt:(int)sec;
