@@ -28,12 +28,17 @@
 {    
     userDefaults = [NSUserDefaults standardUserDefaults];
     
+    if (recentSearches = [userDefaults objectForKey:@"PRecentSearches"])
+        recentSearches = [recentSearches mutableCopy];
+    else recentSearches = [[NSMutableArray alloc] init];
+    
     stop_img = [[NSImage imageNamed:@"stop_search.tiff"] retain];
     re_img = [[NSImage imageNamed:@"re_search.tiff"] retain];
     
     // setting up the search text field -------------------------------
     [search_field setImage:[NSImage imageNamed:@"search_field.tiff"]];
     [search_field setTarget:self];
+    [search_field setDelegate:self];
     [search_field setAction:@selector(search:)];
     // ----------------------------------------------------------------
     
@@ -119,6 +124,8 @@
     
     [stop_img release];
     [re_img release];
+    
+    [recentSearches release];
     
     [searches release];
     [datasources release];
@@ -278,6 +285,7 @@
 - (void)saveSearches
 {
     [userDefaults setObject:searches forKey:@"PSavedSearches"];
+    [userDefaults setObject:recentSearches forKey:@"PRecentSearches"];
 }
 
 // process ITEM from the daemon
@@ -369,6 +377,32 @@
     if (activeView) [r_table reloadData];
 }
 
+- (void)clearRecentSearches
+{
+    [recentSearches removeAllObjects];
+}
+
+- (void)addRecentSearch:(NSString *)search withRealm:(NSString *)realm
+{
+    unsigned int max = [userDefaults integerForKey:@"PMaxRecentSearchesListCount"];
+    // 0 -> menu item title (just needed for the menu item)
+    // 1 -> search term
+    // 2 -> realm
+    NSMutableArray *item = [NSMutableArray array];
+    if (realm) [item addObject:[NSString stringWithFormat:@"  %@ (%@)",search,realm]];
+    else [item addObject:[NSString stringWithFormat:@"  %@",search]];
+    [item addObject:search];
+    if (realm) [item addObject:realm];
+    
+    // if this search is already stored in the list, remove it
+    // and insert it again at the top of the list
+    if ([recentSearches containsObject:item]) [recentSearches removeObject:item];
+    [recentSearches insertObject:item atIndex:0];
+    
+    // check if the list is already bigger than allowed
+    if ([recentSearches count]>max) [recentSearches removeObjectAtIndex:max];
+}
+
 - (void)reloadSearchTable
 {
     int i,count = [searches count];
@@ -421,21 +455,62 @@
 - (IBAction)search:(id)sender
 {
     if (![commander connected]) return;
+    
+    
     NSString *ticket = [[[commander getTicket] copy] autorelease];
     NSString *query;
-    if ([[search_realm title] isEqualToString:@"Everything"]) 
+    if ([[search_realm title] isEqualToString:@"Everything"]) {
         query = [NSString stringWithFormat:@"SEARCH(%@) query(%@)",
             ticket,
             [commander prepare:[search_field stringValue]]
             ];
-    else 
+        // add to the list of recent searches
+        [self addRecentSearch:[sender stringValue] withRealm:nil];
+    }
+    else { 
         query = [NSString stringWithFormat:@"SEARCH(%@) query(%@) realm(%@)",
             ticket,
             [commander prepare:[search_field stringValue]],
             [[search_realm title] lowercaseString]
             ];
+        // add to the list of recent searches
+        [self addRecentSearch:[sender stringValue] withRealm:[search_realm title]];
+    }
     [self search:query info:[search_field stringValue] ticket:ticket hidden:NO];
     [search_field selectText:self];
+}
+
+- (void)searchRecent:(id)sender
+{
+    NSArray *rep_obj = [[sender representedObject] retain];
+    NSString *ticket = [[[commander getTicket] copy] autorelease];
+    NSString *term = [rep_obj objectAtIndex:1];
+    NSString *query;
+    if ([rep_obj count]==3) {
+        query = [NSString stringWithFormat:@"SEARCH(%@) query(%@) realm(%@)",
+                    ticket,
+                    [commander prepare:term],
+                    [rep_obj objectAtIndex:2]
+                ];
+    }
+    else {
+        query = [NSString stringWithFormat:@"SEARCH(%@) query(%@)",
+                    ticket,
+                    [commander prepare:term]
+                ];
+    }
+
+    // start the search
+    [self search:query info:term ticket:ticket hidden:NO];
+    
+    // set the search field
+    [search_field setStringValue:term];
+    [search_field selectText:self];
+
+    // finally move this search to the top of the recent searches list
+    [recentSearches removeObject:rep_obj];
+    [recentSearches insertObject:rep_obj atIndex:0];
+    [rep_obj release];
 }
 
 - (IBAction)browse:(id)sender
@@ -605,6 +680,44 @@
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectTableColumn:(NSTableColumn *)tableColumn
 {
     return NO;
+}
+
+// search field delegate
+- (NSMenu *)willPopUpMenuForTextField:(PTextField *)textfield
+{
+    // NOTE: didn't find a way to make the menu items display small (???) - rizzi
+    
+    NSMenu *menu = [[[NSMenu alloc] init] autorelease];
+    NSMenuItem *mitem;
+    int i, count = [recentSearches count];
+
+    if (count==0) {
+        [menu addItemWithTitle:@"No recent searches" action:nil keyEquivalent:@""];
+        return menu;
+    }
+    
+    [menu addItemWithTitle:@"Recent Searches" action:nil keyEquivalent:@""];
+    
+    for (i=0;i<count;i++) {
+        mitem = [[NSMenuItem alloc] 
+            initWithTitle:[[recentSearches objectAtIndex:i] objectAtIndex:0] 
+            action:@selector(searchRecent:) 
+            keyEquivalent:@""];
+        [mitem setRepresentedObject:[recentSearches objectAtIndex:i]];
+        [mitem setTarget:self];
+        [menu addItem:mitem];
+        [mitem release];
+    }
+    
+    [menu addItem:[NSMenuItem separatorItem]];
+    
+    mitem = [[NSMenuItem alloc] initWithTitle:@"Clear Entries" action:@selector(clearRecentSearches) keyEquivalent:@""];
+    [mitem setTarget:self];
+    [menu addItem:mitem];
+    [mitem release];
+    
+    
+    return menu;
 }
 
 // FOR TESTING...

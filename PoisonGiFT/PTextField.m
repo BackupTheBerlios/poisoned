@@ -20,41 +20,43 @@
 
 #import "PTextField.h"
 
+@protocol PTextFieldDelegate <NSObject>
+
+- (void)willPopUpMenuForTextField:(PTextField *)textfield;
+
+@end
+
+
 @implementation PTextField
+
++ (void)initialize
+{
+    [PTextField setCellClass:[PTextFieldCell class]];
+}
+
+- (id)initWithFrame:(NSRect)frameRect
+{
+    if (self = [super initWithFrame:frameRect]) {
+        [self setBezelStyle:NSTextFieldRoundedBezel];
+    }
+    return self;
+}
 
 - (void)setImage:(NSImage *)image
 {
-  [self setEnabled:NO];
-  if (image) {
-    if ([[self cell] isMemberOfClass:[PTextFieldCell class]]) {
-        [[self cell] setImage:image];
+  [[self cell] setImage:image];
+}
+
+- (void)mouseDown:(NSEvent *)theEvent
+{
+    NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+    if (point.x<[[[self cell] image] size].width) {
+        id <PTextFieldDelegate> delegate = [self delegate];
+        if (delegate && [delegate respondsToSelector:@selector(willPopUpMenuForTextField:)])
+            [delegate performSelector:@selector(willPopUpMenuForTextField:)];
+            [NSMenu popUpContextMenu:[delegate willPopUpMenuForTextField:self] withEvent:theEvent forView:self];
     }
-    else {
-        PTextFieldCell *cell = [[PTextFieldCell alloc] init];
-        [cell setBordered:NO];
-        [cell setBezeled:YES];
-        [cell setBezelStyle:NSTextFieldRoundedBezel];
-        [cell setStringValue:@""];
-        [cell setEditable:YES];
-        [cell setScrollable:YES];
-        [cell setImage:image];
-        [self setCell:cell];
-        [cell release];
-    }
-  }
-  else {
-        NSTextFieldCell *cell = [[NSTextFieldCell alloc] init];
-        [cell setBordered:NO];
-        [cell setBezeled:YES];
-        [cell setBezelStyle:NSTextFieldRoundedBezel];
-        [cell setStringValue:@""];
-        [cell setEditable:YES];
-        [cell setScrollable:YES];
-        [cell setImage:image];
-        [self setCell:cell];
-        [cell release];
-  }
-  [self setEnabled:YES];
+    else [super mouseDown:theEvent];
 }
 
 @end

@@ -62,6 +62,8 @@
     
     IBOutlet PSearchFilterController *filter;
     NSSet *downloading_hashes;
+    
+    NSMutableArray *recentSearches;
 
 	NSMutableArray *_newItems;
 	NSTimer *_refreshTimer;
@@ -82,6 +84,7 @@
 
 - (void)search:(NSString *)_query info:(NSString *)_info ticket:(NSString *)_ticket hidden:(BOOL)_hidden;
 - (IBAction)search:(id)sender;
+- (void)searchRecent:(id)sender;
 - (IBAction)browse:(id)sender;
 - (void)browsehost:(NSString *)user;
 - (void)findMoreSources:(NSNotification *)notification;
@@ -90,6 +93,9 @@
 - (IBAction)download:(id)sender;
 
 - (void)gui_update:(BOOL)activeView;
+
+- (void)clearRecentSearches;
+- (void)addRecentSearch:(NSString *)search withRealm:(NSString *)realm;
 
 // FOR TESTING
 - (void)buyAtiTMS:(id)sender;

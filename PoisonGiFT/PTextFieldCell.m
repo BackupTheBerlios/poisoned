@@ -22,6 +22,15 @@
 
 @implementation PTextFieldCell
 
+- (id)init
+{
+    if (self = [super init]) {
+        [self setWraps:NO];
+        [self setScrollable:YES];
+    }
+    return self;
+}
+
 - (void)dealloc {
     [image release];
     image = nil;
@@ -61,15 +70,15 @@
 - (NSRect)drawingRectForBounds:(NSRect)theRect
 {
     theRect = [super drawingRectForBounds:theRect];
-    theRect.origin.x += 10;
-    theRect.size.width -= 10;
+    theRect.origin.x += [image size].width-9;
+    theRect.size.width -= [image size].width-9;
     return theRect;
 }
 
 - (void)resetCursorRect:(NSRect)cellFrame inView:(NSView *)controlView
 {
-    cellFrame.origin.x += 100;
-    cellFrame.size.width -= 100;
+    cellFrame.origin.x += [image size].width;
+    cellFrame.size.width -= [image size].width;
     [super resetCursorRect:cellFrame inView:controlView];
 }
 
@@ -98,7 +107,6 @@
 
         [image compositeToPoint:imageFrame.origin operation:NSCompositeSourceOver];
     }
-    ;
 }
 
 - (NSSize)cellSize {
