@@ -28,4 +28,6 @@
 
 + (id)singleton;
 
+- (void)setRandomValues;
+
 @end

@@ -57,8 +57,10 @@ static PGnutellaConf *singleton;
         file_manager = [NSFileManager defaultManager];
         
         int_confs = [[NSArray alloc] initWithObjects:
+            @"port",
             nil];
         string_confs = [[NSArray alloc] initWithObjects:
+            @"proxy",
             nil];
         colon_confs = [[NSArray alloc] initWithObjects:
             nil];
@@ -75,6 +77,14 @@ static PGnutellaConf *singleton;
     [colon_confs release];
     [space_confs release];
     [super dealloc];
+}
+
+- (void)setRandomValues
+{
+    [self read];
+    srandom((long)[[NSDate date] timeIntervalSinceReferenceDate]);
+    // port 	    : random (3312, 4312)
+    [self setValue:[NSNumber numberWithInt:(random()%1000)+3312] forKey:@"port"];
 }
 
 @end
