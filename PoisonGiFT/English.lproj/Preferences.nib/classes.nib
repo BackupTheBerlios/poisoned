@@ -37,6 +37,7 @@
                 deletefilePrefsChanged = id; 
                 importPlaylistChanged = id; 
                 importPrefsChanged = id; 
+                playFileIfNoFilePrefsChanged = id; 
                 playfilePrefsChanged = id; 
                 switchToDownloadPrefsChanged = id; 
             }; 
@@ -51,6 +52,7 @@
                 importToiTunes = NSButton; 
                 incoming = NSTextField; 
                 playFile = NSButton; 
+                playFileIfNoFile = NSButton; 
                 removeCancelled = NSButton; 
                 removeCompleted = NSButton; 
                 switchToDownload = NSButton; 
