@@ -259,12 +259,12 @@
     
     // THIS IS ONLY FOR TESTING...
     else if ([itemIdentifier isEqualToString:@"iTMS"]) {
-        [item setLabel:@"iTMS"];
-        [item setPaletteLabel:@"iTMS"];
+        [item setLabel:@"Buy"];
+        [item setPaletteLabel:@"Buy"];
         [item setImage:[currentTool objectForKey:@"resume"]];
         [item setTarget:search];
         [item setAction:@selector(buyAtiTMS:)];
-        [item setToolTip:@"Buy at the iTunes Music Store (only for testing)"];
+        [item setToolTip:@"Buy at the iTunes Music Store"];
     }
     return [item autorelease];
 }
