@@ -85,10 +85,11 @@ void playsonginitunes(int playlistmode, NSString *playlistName, int noplaywhenpl
 	NSString *playstring, *noplaystring;
         
 	if (playlistmode)
-		playstring=playlistName;
+		playstring = [NSString stringWithFormat:@"playlist \"%@\"", playlistName];
 	else 
 		playstring=@"library playlist 1";
-                
+
+        NSLog(@"playstring: %@", playstring);
 	if (noplaywhenplaying)
 		noplaystring=@"if player state is not playing then\n";
 	else 
