@@ -92,7 +92,7 @@
     [tc_album retain];
 
 	// table refresh timer
-	_newItems = [[NSMutableArray alloc] init];
+	//_newItems = [[NSMutableArray alloc] init];
 	_refreshTimer = NULL;
 }
 
@@ -254,7 +254,13 @@
 	{
 		// delay the refresh for 1 second to give a chance for more results to come in
 		// this way we add items in chunks and the table gets refreshed less - jjt
-		[_newItems addObject:data];
+		//[_newItems addObject:data];
+                
+                // isn't it better to add the item already here?
+                // otherwise we have to do all the work at once
+                // this seems to make it a little bit more responsive ;)
+                // addItem: doesn't refresh the table -sr
+                [source addItem:data];
 		if (![_refreshTimer isValid])
 		{
 			// the timer is not valid, so we need to schedule it
@@ -266,15 +272,16 @@
 
 - (void)refreshTimer:(NSTimer *)timer
 {
-	NSEnumerator *iter = [_newItems objectEnumerator];
+        // moved this back to ITEM:        
+	/*NSEnumerator *iter = [_newItems objectEnumerator];
 	NSArray *data = NULL;
 	while (data = [iter nextObject])
 	{
 		PResultSource *source = [datasources objectForKey:[data objectAtIndex:1]];
 		[source addItem:data];
 	}
-	[_newItems removeAllObjects];
-	[self gui_update:([((PMainController *)controller) currentView] == 1)];
+	[_newItems removeAllObjects];*/
+        [self gui_update:([((PMainController *)controller) currentView] == 1)];
 	// this is a single shot timer, so after this fire, it isn't scheduled anymore
 	[_refreshTimer release];
 	_refreshTimer = NULL;
