@@ -51,7 +51,7 @@
 - (IBAction)clearNodesFile:(id)sender
 {
  int button = NSRunAlertPanel(@"FastTrack Nodes File",
- @"Are you sure you want to clear the FastTrack Nodes File now?", @"Yes", @"No", nil);
+ @"Are you sure you want to clear the FastTrack Nodes File now?", @"OK", @"Cancel", nil);
     if(NSOKButton == button)
         {
             NSString *nodesFile = 
