@@ -392,7 +392,7 @@ void playsonginitunes(int playlistmode, NSString *playlistName, int noplaywhenpl
 
 - (void)cleanUp:(id)commander
 {
-    //* remove dock badge - j.ashton*//
+    /* remove dock badge - ashton */
     [NSApp setApplicationIconImage:[NSImage imageNamed: @"poison.icns"]];
 
     int i, count = [source count];
@@ -657,9 +657,10 @@ void playsonginitunes(int playlistmode, NSString *playlistName, int noplaywhenpl
                     ext = [NSSet setWithObjects:@"mp3",@"wav",@"m4u",@"m4a",@"aif",@"aiff",@"ogg",nil];
                 else        
                     ext = [NSSet setWithObjects:@"mp3",@"wav",@"m4u",@"m4a",@"aif",@"aiff",nil];
+                
                 /* logic for adding music to playlist based on metadata, if meta is nil then
-                 * just add it to the poisoned playlist */
-                //NSString *playlistTitle = @"Avril Lavigne";
+                 * just add it to the poisoned playlist - this is just an idea - ashton
+                 * NSString *playlistTitle = @"Avril Lavigne"; */
                 
                 if ([ext containsObject:[[fileWithPath pathExtension] lowercaseString]]) 
                 {
@@ -792,7 +793,7 @@ void playsonginitunes(int playlistmode, NSString *playlistName, int noplaywhenpl
             [source removeObject:[tickets objectForKey:ticket]];
             [tickets removeObjectForKey:tickets];
             [table reloadData];
-            //* remove dock badge - j.ashton*//
+            /* remove dock badge - ashton */
             [NSApp setApplicationIconImage:[NSImage imageNamed: @"poison.icns"]];
             return;
         }
@@ -978,40 +979,42 @@ void playsonginitunes(int playlistmode, NSString *playlistName, int noplaywhenpl
 /* create and add our custom dock icon - ashton */
 - (void)createDockBadgeIcon
 {
-    /* note that this is almost ready to draw numbers into the badge for the
-    number of completions, will finish it later */
+    /* note that this is ready to draw numbers into the badge for the
+     * number of completions, will finish it later - edit I just need to add
+     * the logic for centering in the rect of the badge - ashton */
     NSImage *appImage, *image;
     NSDictionary *attrs;
     NSString *str;
     NSSize iconSize, strSize;
     NSPoint p;
     bool showApp = YES;
-    // get the app's icon
+    /* get the app's icon */
     appImage = [NSImage imageNamed:@"NSApplicationIcon"];
     image = [[NSImage alloc] initWithSize:[appImage size]];
     NSImage *badge = [NSImage imageNamed: @"badge.tiff"];
-    // get size
+    /* get size */
     iconSize = [appImage size];
-    // set up font attributes based on size of icon
+    /* set up font attributes based on size of icon */
     attrs = [NSDictionary dictionaryWithObjectsAndKeys:
         [NSFont boldSystemFontOfSize:22], NSFontAttributeName,
         [NSColor whiteColor], NSForegroundColorAttributeName, nil];
     str = @"";
-    // define point to draw string based on string bounding box
+    /* define point to draw string based on string bounding box */
     strSize = [str sizeWithAttributes:attrs];
     p = NSMakePoint(99,20);
-    // create the dock image
+    /* create the dock image */
     [image setFlipped:YES];
     [image lockFocus];
-    // display original application image if desired
+    /* display original application image if desired */
     if ( showApp == YES )
         [appImage compositeToPoint:NSMakePoint(0, [appImage size].height)
                          operation:NSCompositeSourceOver];
-    // this is the green check
+    /* this is the green check */
     [badge compositeToPoint:NSMakePoint(70,68) operation:NSCompositeSourceOver];
-    [str drawAtPoint:p withAttributes:attrs];  //this will draw the count into the badge...
+    /* this will draw the count into the badge */
+    [str drawAtPoint:p withAttributes:attrs];  
     [image unlockFocus];
-    // set the new dock image
+    /* set the new dock image */
     [NSApp setApplicationIconImage:image];
     [image release];
     [appImage release];
