@@ -191,9 +191,8 @@
             return YES;
     }
     else if ([title isEqualToString:@"Browse Host..."]){
-        if ([r_table numberOfSelectedRows]<=0) return NO;
-        else
-            return YES;
+        if ([r_table numberOfSelectedRows]==1 && ![[r_table itemAtRow:[r_table selectedRow]] objectForKey:@"PExpandable"]) return YES;
+        else return NO;
     }
     else if ([title isEqualToString:@"Buy at iTMS!"]){
         return [self validateBuyAtiTMS];

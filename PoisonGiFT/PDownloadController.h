@@ -47,6 +47,7 @@
     IBOutlet NSMenuItem *m_browse;
     IBOutlet NSMenuItem *m_cleanup;
     IBOutlet NSMenuItem *m_reveal;
+    IBOutlet NSMenuItem *m_openFile;
 }
 
 - (NSSet *)hashes;
@@ -70,6 +71,7 @@
 
 - (IBAction)findMoreSources:(id)sender;
 
-- (NSMenu *)tableView:(NSOutlineView *)_table menuForTableColumn:(NSTableColumn *)_column row:(int)_row;
+    /* j.ashton */
+- (IBAction)openFile:(id)sender;
 
 @end

@@ -277,6 +277,18 @@
     else if (menuItem==m_delsource) {
         return [dataSource validateDelSource];
     }
+    else if (menuItem==m_openFile){
+        if ([table numberOfSelectedRows] > 0)
+        {
+            int row = [table selectedRow];
+            while (row>=0 && ![[table itemAtRow:row] objectForKey:@"PExpandable"]) row--;
+            int status = [[[table itemAtRow:row] objectForKey:@"PStatus"] intValue];
+            if (status == PCOMPLETED)
+                return YES;
+        }
+        return NO;
+
+    }
     else if (menuItem==m_browse) {
         if ([table numberOfSelectedRows]==1 && ![[table itemAtRow:[table selectedRow]] objectForKey:@"PExpandable"]) return YES;
         else return NO;
@@ -311,5 +323,27 @@
         }
     }
 }
+
+/* opens a file with it's default app - ashton */
+- (void)openFile:(id)sender
+{
+    int row = [table selectedRow];
+    while (row>=0 && ![[table itemAtRow:row] objectForKey:@"PExpandable"]) row--;
+
+    int status = [[[table itemAtRow:row] objectForKey:@"PStatus"] intValue];
+    if (status == PCOMPLETED)
+    {
+        PGiFTConf *gift_conf = [PGiFTConf singleton];
+        [gift_conf read];
+        NSString *fileName = [[[table itemAtRow:row] objectForKey:@"PFileUser"] objectAtIndex:1];
+        NSString *path = [gift_conf optionForKey:@"completed"];
+        if(path)
+        {
+        path = [[path stringByAppendingPathComponent:fileName] stringByExpandingTildeInPath];
+        [[NSWorkspace sharedWorkspace] openFile:path];
+        }
+    }
+}
+
 
 @end
