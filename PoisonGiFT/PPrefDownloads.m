@@ -114,13 +114,13 @@
 		[playFile setEnabled:YES];
                 [playFileIfNoFile setEnabled:YES];
 		[deleteFile setEnabled:YES];
-    }
+        }
 	else
 	{
 		[userDefaults setBool:NO forKey:@"PImportToiTunes"];
 		[importToPlaylist setEnabled:NO];
 		[playFile setEnabled:NO];
-                [playFileIfNoFile setEnabled:YES];
+                [playFileIfNoFile setEnabled:NO];
 		[deleteFile setEnabled:NO];
 	}
 }
@@ -133,8 +133,16 @@
 
 - (IBAction)playfilePrefsChanged:(id)sender
 {
-    if ([playFile state]==NSOnState) [userDefaults setBool:YES forKey:@"PPlayFile"];
-    else [userDefaults setBool:NO forKey:@"PPlayFile"];
+    if ([playFile state]==NSOnState) 
+    {
+        [userDefaults setBool:YES forKey:@"PPlayFile"];
+        [playFileIfNoFile setEnabled:YES];
+    } 
+    else 
+    {
+        [userDefaults setBool:NO forKey:@"PPlayFile"];
+        [playFileIfNoFile setEnabled:NO];
+    }
 }
 
 - (IBAction)playFileIfNoFilePrefsChanged:(id)sender

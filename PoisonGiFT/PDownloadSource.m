@@ -92,6 +92,31 @@ int iTunesLibraryImport(const char *filenamewithpath)
 void playsongifnotplaying(void)
 {
 	//enter in the applescript for playing a song if a current song isnt playing.
+
+	NSString *scriptSource = [NSString stringWithCString:
+	"tell application \"iTunes\"\n"
+	"  launch\n"
+        "  if player state is not playing then\n"
+	"    set new_playlist to playlist (\"Poisoned\")\n"
+	"    set the_total to count tracks in new_playlist\n"
+	"    play track the_total of new_playlist\n"
+        "  end if\n"
+	"end tell"];
+        
+	NSAppleScript *script = [[[NSAppleScript alloc] initWithSource:scriptSource] autorelease];
+	NSDictionary *status = NULL;
+	NSAppleEventDescriptor *descriptor = [script executeAndReturnError:&status];
+	if ([descriptor descriptorType] == 'obj ')
+		NSLog(@"Play in iTunes script run successfully");
+	else if ([descriptor descriptorType] == typeNull)
+	{
+		NSLog(@"Play in iTunes failed");
+	}
+	else
+	{
+		NSLog(@"Play in iTunes script returned error: %@", [status objectForKey: @"NSAppleScriptErrorMessage"]);
+	}
+	// non destructive if error is returned so no need to check at this time
 }
 
 void playsonginitunes(void)
@@ -527,8 +552,13 @@ void playsonginitunes(void)
 						importGood=iTunesLibraryImport([path fileSystemRepresentation]);
 					if (importGood)
 					{
-						if ([userDefaults boolForKey:@"PPlayFile"])
+						if ([userDefaults boolForKey:@"PPlayFile"]) 
+                                                {
+                                                    if ([userDefaults boolForKey:@"PNoFilePlayFile"])
+                                                        playsongifnotplaying();
+                                                    else
 							playsonginitunes();
+                                                }
                                                 if ([userDefaults boolForKey:@"PNoFilePlayFile"])
                                                         playsongifnotplaying();
 						if ([userDefaults boolForKey:@"PDeleteFile"])
