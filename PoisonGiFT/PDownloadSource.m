@@ -152,6 +152,8 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
         menu = [[NSMenu alloc] init];
         
         timers = [[NSMutableDictionary alloc] init];
+
+        completedCount = "6";
     }
 	
     return self;
@@ -164,6 +166,7 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
     [source release];
     [tickets release];
     [timers release];
+    [completedCount release];
     [super dealloc];
 }
 
@@ -625,7 +628,6 @@ NSDictionary *attrs;
 NSString *str;
 NSSize iconSize, strSize;
 NSPoint p;
-unichar c;
 bool showApp = YES;
 // get the app's icon
 appImage = [NSImage imageNamed:@"NSApplicationIcon"];
@@ -635,14 +637,13 @@ NSImage *badge = [NSImage imageNamed: @"badge.tiff"];
 iconSize = [appImage size];
 // set up font attributes based on size of icon
 attrs = [NSDictionary dictionaryWithObjectsAndKeys:
-[NSFont systemFontOfSize:iconSize.height], NSFontAttributeName,
-[NSColor redColor], NSForegroundColorAttributeName, nil];
-// retrieve character and convert to string
-c = '!';
-str = [NSString stringWithCharacters:&c length:1];
+[NSFont boldSystemFontOfSize:22], NSFontAttributeName,
+[NSColor whiteColor], NSForegroundColorAttributeName, nil];
+str = @"1";
 // define point to draw string based on string bounding box
 strSize = [str sizeWithAttributes:attrs];
-p = NSMakePoint(iconSize.width,iconSize.height);
+//p = NSMakePoint((iconSize.width - strSize.width)/2.0,(iconSize.height - strSize.height)/2.0);
+p = NSMakePoint(99,20);
 // create the dock image
 [image setFlipped:YES];
 [image lockFocus];
@@ -651,8 +652,8 @@ if ( showApp == YES )
 [appImage compositeToPoint:NSMakePoint(0, [appImage size].height)
 operation:NSCompositeSourceOver];
 // this is the green check
-[badge compositeToPoint:NSMakePoint(76,56) operation:NSCompositeSourceOver];
-//[str drawAtPoint:p withAttributes:attrs];
+[badge compositeToPoint:NSMakePoint(80,60) operation:NSCompositeSourceOver];
+[str drawAtPoint:p withAttributes:attrs];
 [image unlockFocus];
 // set the new dock image
 [NSApp setApplicationIconImage:image];

@@ -58,6 +58,7 @@
     [[table tableColumnWithIdentifier:@"PIcon"] setDataCell:
         [[[NSImageCell alloc] init] autorelease]
     ];
+
 }
 
 - (void)dealloc

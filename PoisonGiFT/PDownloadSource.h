@@ -56,6 +56,8 @@
     // we use an dictionary to store the timers for 'auto find more sources'
     // key is the hash of the file
     NSMutableDictionary *timers;
+
+    NSString *completedCount; // for the badge - j.ashton
 }
 
 - (id)initWithTable:(PDiffOutlineView *)_table;
