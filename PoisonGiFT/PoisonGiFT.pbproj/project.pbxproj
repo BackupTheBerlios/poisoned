@@ -147,6 +147,7 @@
 				1DA96F8D0497E61B00000002,
 				FFED4EAC051801B200E8282B,
 				FFED4EAE051801D700E8282B,
+				48B5B8C6053F769600B3E883,
 			);
 			isa = PBXGroup;
 			name = Preferences;
@@ -2586,7 +2587,7 @@
 				GCC_VERSION = 3.3;
 				HEADER_SEARCH_PATHS = giFT/include;
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = "giFT/lib /Users/jayashton/PoisonGiFT/giFT/lib /Users/jayashton/PoisonGiFT/giFT/lib/giFT";
+				LIBRARY_SEARCH_PATHS = "giFT/lib \"~/PoisonGiFT/giFT/lib\" \"~/PoisonGiFT/giFT/lib/giFT\"";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-headerpad_max_install_names";
 				PRECOMPILE_PREFIX_HEADER = YES;
@@ -2620,11 +2621,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.492</string>
+	<string>0.493</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>0.492</string>
+	<string>0.493</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
@@ -2794,6 +2795,7 @@
 				FFAEA3B1052E7CDB0000003A,
 				FFAEA3B2052E7CDB0000003A,
 				FFAEA726052E7DE90000003A,
+				48B5B8C7053F769600B3E883,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2908,6 +2910,27 @@
 //322
 //323
 //324
+//480
+//481
+//482
+//483
+//484
+		48B5B8C6053F769600B3E883 = {
+			isa = PBXFileReference;
+			path = pref_integration.tiff;
+			refType = 4;
+		};
+		48B5B8C7053F769600B3E883 = {
+			fileRef = 48B5B8C6053F769600B3E883;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+//480
+//481
+//482
+//483
+//484
 //4A0
 //4A1
 //4A2
@@ -3857,7 +3880,7 @@
 			};
 		};
 		FFD7A878052BDA7E00000038 = {
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			generatedFileNames = (
