@@ -287,9 +287,13 @@
 	else
 	{
 		launchPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"giFT/bin/giftd"];
-		//[task setCurrentDirectoryPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"giFT/"]];
 		NSMutableDictionary *envDict = [NSMutableDictionary dictionaryWithDictionary:[[NSProcessInfo processInfo] environment]];
-		[envDict setObject: [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"giFT/lib/"] forKey:@"DYLD_LIBRARY_PATH"];
+		
+		// i set the current working directory and use a relative path for DYLD_LIBRARY_PATH because DYLD_LIBRARY_PATH
+		// is a colon separated list of paths, but OS X allows colons in paths. - jjt
+		[task setCurrentDirectoryPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"giFT/"]];
+		[envDict setObject: @"lib/" forKey:@"DYLD_LIBRARY_PATH"];
+		
 		[envDict setObject: [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"giFT/share/"] forKey: @"GIFT_DATA_DIR"];
 		[envDict setObject: [@"~/Library/Application Support/Poisoned" stringByExpandingTildeInPath] forKey: @"GIFT_LOCAL_DIR"];
 		[envDict setObject: [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"giFT/lib/giFT"] forKey: @"GIFT_PLUGIN_DIR"];
