@@ -77,9 +77,11 @@
         {
             ACTIONS = {
                 browse = id; 
+                buyAtiTMS = id; 
                 deleteEvent = id; 
                 download = id; 
                 search = id; 
+                searchRecent = id; 
                 showhideTableColumn = id; 
                 stop = id; 
             }; 
@@ -87,20 +89,13 @@
             LANGUAGE = ObjC; 
             OUTLETS = {
                 contextualMenu = NSMenu; 
+                controller = id; 
                 filter = PSearchFilterController; 
                 "r_table" = POutlineView; 
                 "s_table" = PSearchTableView; 
                 "search_field" = PTextField; 
                 "search_realm" = NSPopUpButton; 
                 tableMenu = NSMenu; 
-                "tc_album" = NSTableColumn; 
-                "tc_artist" = NSTableColumn; 
-                "tc_bitrate" = NSTableColumn; 
-                "tc_file" = NSTableColumn; 
-                "tc_fileicon" = NSTableColumn; 
-                "tc_networkicon" = NSTableColumn; 
-                "tc_size" = NSTableColumn; 
-                "tc_user" = NSTableColumn; 
                 view = NSView; 
             }; 
             SUPERCLASS = NSObject; 
@@ -156,17 +151,18 @@
                 connectRemote = id; 
                 launch = id; 
                 runConnectionSheet = id; 
-                switchLocalRemote = id; 
             }; 
             CLASS = PgiFTController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
                 connectMenu = NSMenuItem; 
                 connectionSheet = NSPanel; 
+                controller = id; 
                 protocolTable = PSearchTableView; 
                 remoteAddress = NSTextField; 
                 remoteConnectMenu = NSMenuItem; 
                 remotePort = NSTextField; 
+                "stats_field" = NSTextField; 
                 statusImage = NSImageView; 
                 view = NSView; 
             }; 
