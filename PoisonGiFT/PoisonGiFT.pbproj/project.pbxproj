@@ -427,27 +427,8 @@
 		};
 		1D49BBA9046D61EF00000002 = {
 			isa = PBXFileReference;
-			name = English;
-			path = English.lproj/Preferences.nib;
+			path = Preferences.nib;
 			refType = 4;
-		};
-		1D49BBAB046D626F00000002 = {
-			children = (
-				1D49BBA9046D61EF00000002,
-				FF5C5CED0514441700000037,
-				FF5C5CEE0514442000000037,
-				FF5C5CEF0514442B00000037,
-			);
-			comments = "Preferences are the first thing to get localized, i am working on it. ashton";
-			isa = PBXVariantGroup;
-			name = Preferences.nib;
-			refType = 4;
-		};
-		1D49BBAC046D626F00000002 = {
-			fileRef = 1D49BBAB046D626F00000002;
-			isa = PBXBuildFile;
-			settings = {
-			};
 		};
 		1D4AE1D0043342310021667D = {
 			children = (
@@ -2552,7 +2533,7 @@
 		29B97317FDCFA39411CA2CEA = {
 			children = (
 				29B97319FDCFA39411CA2CEA,
-				1D49BBAB046D626F00000002,
+				1D49BBA9046D61EF00000002,
 				089C165CFE840E0CC02AAC07,
 				FF5C5CE80514415100000037,
 			);
@@ -2750,7 +2731,7 @@
 				1DFC7E930458815400000002,
 				1DFC7E9504588CCC00000002,
 				1D49BBA6046D182C00000002,
-				1D49BBAC046D626F00000002,
+				FFFE3BA90528A22F00A211DF,
 				1D059B2A04793FDC00000002,
 				1D059B3104796EB200000002,
 				1D63F03E048159E100000002,
@@ -3645,26 +3626,6 @@
 			path = Spanish.lproj/Localizable.strings;
 			refType = 4;
 		};
-		FF5C5CED0514441700000037 = {
-			isa = PBXFileReference;
-			name = French;
-			path = French.lproj/Preferences.nib;
-			refType = 4;
-		};
-		FF5C5CEE0514442000000037 = {
-			comments = Geraman;
-			isa = PBXFileReference;
-			name = German;
-			path = German.lproj/Preferences.nib;
-			refType = 4;
-		};
-		FF5C5CEF0514442B00000037 = {
-			comments = Spanish;
-			isa = PBXFileReference;
-			name = Spanish;
-			path = Spanish.lproj/Preferences.nib;
-			refType = 4;
-		};
 		FF9C489605142A9000000037 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
@@ -3772,6 +3733,12 @@
 		};
 		FFFE3BA80528923B00A211DF = {
 			fileRef = 29B97319FDCFA39411CA2CEA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		FFFE3BA90528A22F00A211DF = {
+			fileRef = 1D49BBA9046D61EF00000002;
 			isa = PBXBuildFile;
 			settings = {
 			};
