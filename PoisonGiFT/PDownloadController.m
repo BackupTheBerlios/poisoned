@@ -139,20 +139,19 @@
 
 - (IBAction)reveal:(id)sender
 {
-	int status = [[[table itemAtRow:[table selectedRow]] objectForKey:@"PStatus"] intValue];
+	// first we have to look for a parent item to get the filename and status from
+	int row = [table selectedRow];
+	while (row>=0 && ![[table itemAtRow:row] objectForKey:@"PExpandable"]) row--;
+	int status = [[[table itemAtRow:row] objectForKey:@"PStatus"] intValue];
 	if (status == PCOMPLETED)
 	{
-                // first we have to look for a parent item to get the filename from
-                int row = [table selectedRow];
-                while (row>=0 && ![[table itemAtRow:row] objectForKey:@"PExpandable"]) row--;
-                
 		PGiFTConf *gift_conf = [PGiFTConf singleton];
 		[gift_conf read];
 		NSString *path = [gift_conf optionForKey:@"completed"];
 		if (path)
 		{
 			NSString *fileName = [[[table itemAtRow:row] objectForKey:@"PFileUser"] objectAtIndex:1];
-                        // selectFile:... only accepts full path's
+			// selectFile:... only accepts full path's
 			path = [[path stringByAppendingPathComponent:fileName] stringByExpandingTildeInPath];
 			[[NSWorkspace sharedWorkspace] selectFile:path inFileViewerRootedAtPath:NULL];
 		}
@@ -278,15 +277,16 @@
     }
 	else if (menuItem==m_reveal)
 	{
-                // first we have to look for a parent item to get the status from
-                int row = [table selectedRow];
-                while (row>=0 && ![[table itemAtRow:row] objectForKey:@"PExpandable"]) row--;
-
-		int status = [[[table itemAtRow:row] objectForKey:@"PStatus"] intValue];
-		if ( ([table numberOfSelectedRows]>0) && (status == PCOMPLETED) )
-			return YES;
-		else
-			return NO;
+		// first we have to look for a parent item to get the status from
+		if ([table numberOfSelectedRows] > 0)
+		{
+			int row = [table selectedRow];
+			while (row>=0 && ![[table itemAtRow:row] objectForKey:@"PExpandable"]) row--;
+			int status = [[[table itemAtRow:row] objectForKey:@"PStatus"] intValue];
+			if (status == PCOMPLETED)
+				return YES;
+		}
+		return NO;
 	}
     else return YES;
 }
