@@ -228,6 +228,7 @@
     [connectMenu setAction:@selector(connect:)];
     [remoteConnectMenu setAction:@selector(runConnectionSheet:)];
     [statusImage setImage:[NSImage imageNamed:@"offline.tiff"]];
+    [stats_field setStringValue:@"Not Connected"];
     [statusImage setNeedsDisplay:YES];
 }
 
