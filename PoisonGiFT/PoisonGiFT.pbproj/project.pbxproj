@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 38;
+	objectVersion = 39;
 	objects = {
 		080E96DCFE201CFB7F000001 = {
 			fileRef = 29B97318FDCFA39411CA2CEA;
@@ -24,6 +24,7 @@
 			isa = PBXGroup;
 			name = Classes;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		089C165CFE840E0CC02AAC07 = {
 			children = (
@@ -32,13 +33,16 @@
 			isa = PBXVariantGroup;
 			name = InfoPlist.strings;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		089C165DFE840E0CC02AAC07 = {
+			expectedFileType = text.plist.strings;
 			fileEncoding = 10;
 			isa = PBXFileReference;
 			name = English;
 			path = English.lproj/InfoPlist.strings;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		089C165EFE840E0CC02AAC07 = {
 			fileRef = 089C165CFE840E0CC02AAC07;
@@ -63,12 +67,16 @@
 			isa = PBXGroup;
 			name = "Linked Frameworks";
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1058C7A1FEA54F0111CA2CBB = {
+			expectedFileType = wrapper.framework;
+			fallbackIsa = PBXFileReference;
 			isa = PBXFrameworkReference;
 			name = Cocoa.framework;
 			path = /System/Library/Frameworks/Cocoa.framework;
 			refType = 0;
+			sourceTree = "<absolute>";
 		};
 		1058C7A2FEA54F0111CA2CBB = {
 			children = (
@@ -78,6 +86,7 @@
 			isa = PBXGroup;
 			name = "Other Frameworks";
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1058C7A3FEA54F0111CA2CBB = {
 			fileRef = 1058C7A1FEA54F0111CA2CBB;
@@ -96,9 +105,12 @@
 //173
 //174
 		17587328FF379C6511CA2CBB = {
+			expectedFileType = wrapper.application;
+			fallbackIsa = PBXFileReference;
 			isa = PBXApplicationReference;
 			path = Poisoned.app;
 			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 //170
 //171
@@ -117,6 +129,7 @@
 			isa = PBXGroup;
 			name = Products;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 //190
 //191
@@ -146,11 +159,14 @@
 			isa = PBXGroup;
 			name = Preferences;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D059B2904793FDC00000002 = {
+			expectedFileType = image.icns;
 			isa = PBXFileReference;
 			path = daemon.icns;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D059B2A04793FDC00000002 = {
 			fileRef = 1D059B2904793FDC00000002;
@@ -169,18 +185,23 @@
 			isa = PBXGroup;
 			name = Preferences;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D059B2C047966CF00000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PPreferencesController.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D059B2D047966CF00000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PPreferencesController.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D059B2E047966CF00000002 = {
 			fileRef = 1D059B2C047966CF00000002;
@@ -195,9 +216,11 @@
 			};
 		};
 		1D059B3004796EB200000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = general.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D059B3104796EB200000002 = {
 			fileRef = 1D059B3004796EB200000002;
@@ -206,16 +229,20 @@
 			};
 		};
 		1D059B320479FC2000000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PPrefGeneral.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D059B330479FC2000000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PPrefGeneral.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D059B340479FC2000000002 = {
 			fileRef = 1D059B320479FC2000000002;
@@ -230,16 +257,20 @@
 			};
 		};
 		1D059B36047A625B00000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PPrefDownloads.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D059B37047A625B00000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PPrefDownloads.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D059B38047A625B00000002 = {
 			fileRef = 1D059B36047A625B00000002;
@@ -254,16 +285,20 @@
 			};
 		};
 		1D059B3A047A64BA00000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PPrefUploads.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D059B3B047A64BA00000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PPrefUploads.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D059B3C047A64BA00000002 = {
 			fileRef = 1D059B3A047A64BA00000002;
@@ -278,14 +313,18 @@
 			};
 		};
 		1D099A1B04C7819D00000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = filter_hide.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D099A1C04C7819D00000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = filter_show.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D099A1D04C7819D00000002 = {
 			fileRef = 1D099A1B04C7819D00000002;
@@ -300,14 +339,18 @@
 			};
 		};
 		1D099A1F04C7855A00000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = Donkey.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D099A2004C7855A00000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = Donkey32.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D099A2104C7855A00000002 = {
 			fileRef = 1D099A1F04C7855A00000002;
@@ -322,14 +365,18 @@
 			};
 		};
 		1D099A2304C786FC00000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = OpenNap.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D099A2404C786FC00000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = OpenNap32.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D099A2504C786FC00000002 = {
 			fileRef = 1D099A2304C786FC00000002;
@@ -361,35 +408,23 @@
 			isa = PBXGroup;
 			name = Navigation;
 			refType = 4;
-		};
-		1D28787904CF54E400000002 = {
-			isa = PBXExecutableFileReference;
-			path = giFT;
-			refType = 4;
-		};
-		1D28787A04CF54E400000002 = {
-			fileRef = 1D28787904CF54E400000002;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		1D28787B04CF54F700000002 = {
-			fileRef = 1D28787904CF54E400000002;
-			isa = PBXBuildFile;
-			settings = {
-			};
+			sourceTree = "<group>";
 		};
 		1D3C450E0448247400000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PCParser.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D3C450F0448247400000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PCParser.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D3C45100448247400000002 = {
 			fileRef = 1D3C450E0448247400000002;
@@ -404,16 +439,20 @@
 			};
 		};
 		1D3C45120448248500000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PCDispatcher.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D3C45130448248500000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PCDispatcher.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D3C45140448248500000002 = {
 			fileRef = 1D3C45120448248500000002;
@@ -428,10 +467,12 @@
 			};
 		};
 		1D49BBA5046D182C00000002 = {
+			expectedFileType = text.html;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = Credits.html;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D49BBA6046D182C00000002 = {
 			fileRef = 1D49BBA5046D182C00000002;
@@ -440,10 +481,12 @@
 			};
 		};
 		1D49BBA9046D61EF00000002 = {
+			expectedFileType = wrapper.nib;
 			isa = PBXFileReference;
 			name = English;
 			path = English.lproj/Preferences.nib;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D49BBAB046D626F00000002 = {
 			children = (
@@ -452,6 +495,7 @@
 			isa = PBXVariantGroup;
 			name = Preferences.nib;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D49BBAC046D626F00000002 = {
 			fileRef = 1D49BBAB046D626F00000002;
@@ -473,18 +517,23 @@
 			isa = PBXGroup;
 			name = DataSources;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D4AE1D504336A2A0021667D = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PIconShop.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D4AE1D604336A2A0021667D = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PIconShop.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D4AE1D704336A2A0021667D = {
 			fileRef = 1D4AE1D504336A2A0021667D;
@@ -499,10 +548,12 @@
 			};
 		};
 		1D4E455404CEDB5000000002 = {
+			expectedFileType = text;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = History.txt;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D4E455504CEDB5000000002 = {
 			fileRef = 1D4E455404CEDB5000000002;
@@ -510,142 +561,12 @@
 			settings = {
 			};
 		};
-		1D4E455704CEE12500000002 = {
-			fileRef = 1DF450E104C8200100000002;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		1D4E455804CEE12600000002 = {
-			fileRef = 1DF450E204C8200100000002;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		1D4E455904CEE12600000002 = {
-			fileRef = 1DF450E704C8206400000002;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		1D4E455A04CEE12700000002 = {
-			fileRef = 1DF450E804C8206400000002;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		1D4E455B04CEE12700000002 = {
-			fileRef = 1DF450E904C8206400000002;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		1D4E455C04CEE12800000002 = {
-			fileRef = 1DF450ED04C8208200000002;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		1D4E455D04CEE12900000002 = {
-			fileRef = 1DF450EE04C8208200000002;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		1D4E455E04CEE12900000002 = {
-			fileRef = 1DF4510204C8249C00000002;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		1D4E455F04CEE14500000002 = {
-			fileRef = 1DF450F104C8209D00000002;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		1D4E456004CEE14500000002 = {
-			fileRef = 1DF450F204C8209D00000002;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		1D4E456104CEE14600000002 = {
-			fileRef = 1DF450F504C820B300000002;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		1D4E456304CEE16D00000002 = {
-			fileRef = 1DF450E104C8200100000002;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		1D4E456404CEE16D00000002 = {
-			fileRef = 1DF450E204C8200100000002;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		1D4E456504CEE17D00000002 = {
-			fileRef = 1DF450E704C8206400000002;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		1D4E456604CEE17D00000002 = {
-			fileRef = 1DF450E804C8206400000002;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		1D4E456704CEE17D00000002 = {
-			fileRef = 1DF450E904C8206400000002;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		1D4E456804CEE18800000002 = {
-			fileRef = 1DF450ED04C8208200000002;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		1D4E456904CEE18800000002 = {
-			fileRef = 1DF450EE04C8208200000002;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		1D4E456A04CEE18800000002 = {
-			fileRef = 1DF4510204C8249C00000002;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		1D4E456B04CEE19200000002 = {
-			fileRef = 1DF450F104C8209D00000002;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		1D4E456C04CEE19200000002 = {
-			fileRef = 1DF450F204C8209D00000002;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		1D4E456D04CEE19700000002 = {
-			fileRef = 1DF450F504C820B300000002;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		1D52959E0439022600FE4B33 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = resume_graphite.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D52959F0439022600FE4B33 = {
 			fileRef = 1D52959E0439022600FE4B33;
@@ -654,9 +575,11 @@
 			};
 		};
 		1D5295A00439030800FE4B33 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = pause_graphite.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D5295A10439030800FE4B33 = {
 			fileRef = 1D5295A00439030800FE4B33;
@@ -665,9 +588,11 @@
 			};
 		};
 		1D5295A20439035100FE4B33 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = cancel_graphite.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D5295A30439035100FE4B33 = {
 			fileRef = 1D5295A20439035100FE4B33;
@@ -676,9 +601,11 @@
 			};
 		};
 		1D5FF41304585C1F00000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = delsource.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D5FF41404585C1F00000002 = {
 			fileRef = 1D5FF41304585C1F00000002;
@@ -687,14 +614,18 @@
 			};
 		};
 		1D5FF415045860EF00000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = connect.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D5FF416045860EF00000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = disconnect.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D5FF417045860EF00000002 = {
 			fileRef = 1D5FF415045860EF00000002;
@@ -709,9 +640,11 @@
 			};
 		};
 		1D5FF4190458693900000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = stopgift.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D5FF41A0458693900000002 = {
 			fileRef = 1D5FF4190458693900000002;
@@ -720,9 +653,11 @@
 			};
 		};
 		1D63F03C048159E100000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = expand.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D63F03E048159E100000002 = {
 			fileRef = 1D63F03C048159E100000002;
@@ -731,9 +666,11 @@
 			};
 		};
 		1D63F0450481665600000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = collapse.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D63F0460481665600000002 = {
 			fileRef = 1D63F0450481665600000002;
@@ -742,16 +679,20 @@
 			};
 		};
 		1D63F04B04820EA000000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PUploadSource.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D63F04C04820EA000000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PUploadSource.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D63F04F0482198D00000002 = {
 			fileRef = 1D63F04B04820EA000000002;
@@ -766,16 +707,20 @@
 			};
 		};
 		1D63F05304824BF200000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PTableProgressCell.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D63F05404824BF200000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PTableProgressCell.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D63F05504824BF200000002 = {
 			fileRef = 1D63F05304824BF200000002;
@@ -790,16 +735,20 @@
 			};
 		};
 		1D63F05704824F2800000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PTableTitleDescriptionCell.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D63F05804824F2800000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PTableTitleDescriptionCell.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D63F05904824F2800000002 = {
 			fileRef = 1D63F05704824F2800000002;
@@ -814,24 +763,32 @@
 			};
 		};
 		1D6717BA04BB98A100000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = Gnutella.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D6717BB04BB98A100000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = Gnutella32.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D6717BC04BB98A100000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = unknown.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D6717BD04BB98A100000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = unknown32.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D6717BE04BB98A100000002 = {
 			fileRef = 1D6717BA04BB98A100000002;
@@ -858,16 +815,20 @@
 			};
 		};
 		1D73A0D704CB51AE00000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PCommand.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D73A0D804CB51AE00000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PCommand.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D73A0D904CB51AE00000002 = {
 			fileRef = 1D73A0D704CB51AE00000002;
@@ -882,16 +843,20 @@
 			};
 		};
 		1D73A0DB04CB51CE00000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = NetSocket.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D73A0DC04CB51CE00000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = NetSocket.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D73A0DD04CB51CE00000002 = {
 			fileRef = 1D73A0DB04CB51CE00000002;
@@ -944,30 +909,39 @@
 			isa = PBXGroup;
 			name = AppKit;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D7D5EBC0423AF320021667D = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PTextField.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D7D5EBD0423AF320021667D = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PTextField.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D7D5EBE0423AF320021667D = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PTextFieldCell.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D7D5EBF0423AF320021667D = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PTextFieldCell.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D7D5EC00423AF320021667D = {
 			fileRef = 1D7D5EBC0423AF320021667D;
@@ -982,16 +956,20 @@
 			};
 		};
 		1D7D5EC40423B0350021667D = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PTableView.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D7D5EC50423B0350021667D = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PTableView.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D7D5EC60423B0350021667D = {
 			fileRef = 1D7D5EC40423B0350021667D;
@@ -1006,16 +984,20 @@
 			};
 		};
 		1D7D5EC80423B0500021667D = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = POutlineView.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D7D5EC90423B0500021667D = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = POutlineView.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D7D5ECA0423B0500021667D = {
 			fileRef = 1D7D5EC80423B0500021667D;
@@ -1030,16 +1012,20 @@
 			};
 		};
 		1D7D5EDE042404460021667D = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PMainController.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D7D5EDF042404460021667D = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PMainController.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D7D5EE0042404460021667D = {
 			fileRef = 1D7D5EDE042404460021667D;
@@ -1073,18 +1059,23 @@
 			isa = PBXGroup;
 			name = Controllers;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D7D5EF604242CB60021667D = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PDownloadController.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D7D5EF704242CB60021667D = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PDownloadController.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D7D5EF804242CB60021667D = {
 			fileRef = 1D7D5EF604242CB60021667D;
@@ -1099,16 +1090,20 @@
 			};
 		};
 		1D7D5EFA04242CBC0021667D = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PgiFTController.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D7D5EFB04242CBC0021667D = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PgiFTController.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D7D5EFD04242CBC0021667D = {
 			fileRef = 1D7D5EFB04242CBC0021667D;
@@ -1117,16 +1112,20 @@
 			};
 		};
 		1D7D5EFE04242CC30021667D = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PSearchController.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D7D5EFF04242CC30021667D = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PSearchController.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D7D5F0004242CC30021667D = {
 			fileRef = 1D7D5EFE04242CC30021667D;
@@ -1141,16 +1140,20 @@
 			};
 		};
 		1D7D5F0204242CCA0021667D = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PUploadController.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D7D5F0304242CCA0021667D = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PUploadController.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D7D5F0404242CCA0021667D = {
 			fileRef = 1D7D5F0204242CCA0021667D;
@@ -1165,9 +1168,11 @@
 			};
 		};
 		1D87096C049DE47C00000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = online.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D87096E049DE47C00000002 = {
 			fileRef = 1D87096C049DE47C00000002;
@@ -1176,9 +1181,11 @@
 			};
 		};
 		1D87096F049DE81F00000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = offline.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D870970049DE81F00000002 = {
 			fileRef = 1D87096F049DE81F00000002;
@@ -1209,18 +1216,23 @@
 			name = Icons;
 			path = "";
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D9F35F204B58E3400000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PSearchFilterController.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D9F35F304B58E3400000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PSearchFilterController.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D9F35F404B58E3400000002 = {
 			fileRef = 1D9F35F204B58E3400000002;
@@ -1235,16 +1247,20 @@
 			};
 		};
 		1D9F35F604B6E3FD00000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PBorderlessScrollView.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D9F35F704B6E3FE00000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PBorderlessScrollView.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1D9F35F804B6E3FE00000002 = {
 			fileRef = 1D9F35F604B6E3FD00000002;
@@ -1259,16 +1275,20 @@
 			};
 		};
 		1DA96F690497131A00000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PSearchTableView.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DA96F6A0497131A00000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PSearchTableView.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DA96F6B0497131A00000002 = {
 			fileRef = 1DA96F690497131A00000002;
@@ -1283,14 +1303,18 @@
 			};
 		};
 		1DA96F81049771A000000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = re_search.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DA96F82049771A000000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = stop_search.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DA96F83049771A000000002 = {
 			fileRef = 1DA96F81049771A000000002;
@@ -1311,14 +1335,18 @@
 			};
 		};
 		1DA96F8C0497E61B00000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = pref_download.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DA96F8D0497E61B00000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = pref_upload.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DA96F8E0497E61B00000002 = {
 			fileRef = 1DA96F8C0497E61B00000002;
@@ -1333,9 +1361,11 @@
 			};
 		};
 		1DA96F900498938200000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = downloading.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DA96F910498938200000002 = {
 			fileRef = 1DA96F900498938200000002;
@@ -1353,11 +1383,14 @@
 			isa = PBXGroup;
 			name = giFT;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DA96F940499FCDA00000002 = {
+			expectedFileType = image.icns;
 			isa = PBXFileReference;
 			path = public.icns;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DA96F960499FCDA00000002 = {
 			fileRef = 1DA96F940499FCDA00000002;
@@ -1366,9 +1399,11 @@
 			};
 		};
 		1DAB5FC6049C09C400000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = poisoned.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DAB5FC7049C09C400000002 = {
 			fileRef = 1DAB5FC6049C09C400000002;
@@ -1377,16 +1412,20 @@
 			};
 		};
 		1DAB5FC8049CC3F800000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PFilterView.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DAB5FC9049CC3F800000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PFilterView.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DAB5FCA049CC3F800000002 = {
 			fileRef = 1DAB5FC8049CC3F800000002;
@@ -1401,14 +1440,18 @@
 			};
 		};
 		1DAB5FCC049CCF5100000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = filter_off.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DAB5FCD049CCF5100000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = filter_on.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DAB5FCE049CCF5100000002 = {
 			fileRef = 1DAB5FCC049CCF5100000002;
@@ -1423,19 +1466,25 @@
 			};
 		};
 		1DAB5FD4049D0B7800000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = drawer_aqua.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DAB5FD5049D0B7800000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = drawer_graphite.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DAB5FD6049D0B7800000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = drawer_hidden.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DAB5FD7049D0B7800000002 = {
 			fileRef = 1DAB5FD4049D0B7800000002;
@@ -1463,31 +1512,42 @@
 			isa = PBXGroup;
 			name = SearchTable;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DACDEF70428DBC00021667D = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = downloads_graphite.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DACDEF80428DBC00021667D = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = giFT_graphite.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DACDEF90428DBC00021667D = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = navigation.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DACDEFA0428DBC10021667D = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = search_graphite.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DACDEFB0428DBC10021667D = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = uploads_graphite.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DACDEFC0428DBC10021667D = {
 			fileRef = 1DACDEF70428DBC00021667D;
@@ -1532,16 +1592,20 @@
 			};
 		};
 		1DB72B000441F3F400000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PProgressCell.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DB72B010441F3F400000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PProgressCell.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DB72B020441F3F400000002 = {
 			fileRef = 1DB72B000441F3F400000002;
@@ -1556,16 +1620,20 @@
 			};
 		};
 		1DB9BAEE04457B9A00000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PSizeCell.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DB9BAEF04457B9A00000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PSizeCell.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DB9BAF004457B9A00000002 = {
 			fileRef = 1DB9BAEE04457B9A00000002;
@@ -1580,16 +1648,20 @@
 			};
 		};
 		1DC00F9A0440E72200000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PDiffOutlineView.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DC00F9B0440E72200000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PDiffOutlineView.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DC00F9C0440E72200000002 = {
 			fileRef = 1DC00F9A0440E72200000002;
@@ -1604,16 +1676,20 @@
 			};
 		};
 		1DC10D9D043F01C600000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PTitleDescriptionCell.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DC10D9E043F01C600000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PTitleDescriptionCell.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DC10D9F043F01C600000002 = {
 			fileRef = 1DC10D9D043F01C600000002;
@@ -1628,10 +1704,12 @@
 			};
 		};
 		1DC10DA1043F03A900000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PAppKit.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DC10DA2043F03A900000002 = {
 			fileRef = 1DC10DA1043F03A900000002;
@@ -1640,16 +1718,20 @@
 			};
 		};
 		1DC10DA3043F054700000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PDownloadSource.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DC10DA4043F054700000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PDownloadSource.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DC10DA5043F054700000002 = {
 			fileRef = 1DC10DA3043F054700000002;
@@ -1664,24 +1746,32 @@
 			};
 		};
 		1DCB2A040482910900000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = downloads_aqua.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DCB2A050482910900000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = giFT_aqua.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DCB2A060482910900000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = search_aqua.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DCB2A070482910900000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = uploads_aqua.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DCB2A080482910900000002 = {
 			fileRef = 1DCB2A040482910900000002;
@@ -1708,29 +1798,39 @@
 			};
 		};
 		1DCB2A0C04829C6900000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = cancel_aqua.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DCB2A0D04829C6900000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = download_aqua.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DCB2A0E04829C6900000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = pause_aqua.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DCB2A0F04829C6900000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = resume_aqua.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DCB2A1004829C6900000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = stop_aqua.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DCB2A1104829C6900000002 = {
 			fileRef = 1DCB2A0C04829C6900000002;
@@ -1763,9 +1863,11 @@
 			};
 		};
 		1DDA9BFA04B9936300000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = protos.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDA9BFB04B9936300000002 = {
 			fileRef = 1DDA9BFA04B9936300000002;
@@ -1774,16 +1876,20 @@
 			};
 		};
 		1DDA9BFC04B99C0C00000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PConfigurationEditor.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDA9BFD04B99C0C00000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PConfigurationEditor.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDA9BFE04B99C0C00000002 = {
 			fileRef = 1DDA9BFC04B99C0C00000002;
@@ -1798,16 +1904,20 @@
 			};
 		};
 		1DDA9C0004B9ACE100000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PGiFTConf.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDA9C0104B9ACE100000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PGiFTConf.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDA9C0204B9ACE100000002 = {
 			fileRef = 1DDA9C0004B9ACE100000002;
@@ -1822,16 +1932,20 @@
 			};
 		};
 		1DDA9C0404B9ACEA00000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = POpenFTConf.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDA9C0504B9ACEA00000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = POpenFTConf.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDA9C0604B9ACEA00000002 = {
 			fileRef = 1DDA9C0404B9ACEA00000002;
@@ -1846,16 +1960,20 @@
 			};
 		};
 		1DDA9C0804B9ACF200000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PGnutellaConf.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDA9C0904B9ACF200000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PGnutellaConf.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDA9C0A04B9ACF200000002 = {
 			fileRef = 1DDA9C0804B9ACF200000002;
@@ -1870,16 +1988,20 @@
 			};
 		};
 		1DDA9C0C04B9E0B000000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PUIConf.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDA9C0D04B9E0B000000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PUIConf.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDA9C0E04B9E0B000000002 = {
 			fileRef = 1DDA9C0C04B9E0B000000002;
@@ -1909,11 +2031,14 @@
 			isa = PBXGroup;
 			name = Conf.Files;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDA9C1104BA3F8200000002 = {
+			expectedFileType = image.icns;
 			isa = PBXFileReference;
 			path = poison.icns;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDA9C1204BA3F8200000002 = {
 			fileRef = 1DDA9C1104BA3F8200000002;
@@ -1922,16 +2047,20 @@
 			};
 		};
 		1DDA9C1504BA55B000000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PPrefProtocols.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDA9C1604BA55B000000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PPrefProtocols.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDA9C1704BA55B000000002 = {
 			fileRef = 1DDA9C1504BA55B000000002;
@@ -1956,18 +2085,23 @@
 			isa = PBXGroup;
 			name = Protocols;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDA9C1A04BA5A8800000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PPrefOpenFT.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDA9C1B04BA5A8800000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PPrefOpenFT.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDA9C1C04BA5A8800000002 = {
 			fileRef = 1DDA9C1A04BA5A8800000002;
@@ -1989,11 +2123,14 @@
 			isa = PBXGroup;
 			name = docs;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDA9C1F04BAFEA400000002 = {
+			expectedFileType = text.rtf;
 			isa = PBXFileReference;
 			path = OpenFTConfNodeClasses.rtf;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDA9C2004BAFEA400000002 = {
 			fileRef = 1DDA9C1F04BAFEA400000002;
@@ -2002,9 +2139,11 @@
 			};
 		};
 		1DDA9C2504BB1C3900000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = help.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDA9C2604BB1C3900000002 = {
 			fileRef = 1DDA9C2504BB1C3900000002;
@@ -2013,9 +2152,11 @@
 			};
 		};
 		1DDA9C2704BB213F00000002 = {
+			expectedFileType = text.rtf;
 			isa = PBXFileReference;
 			path = OpenFTSEARCH.rtf;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDA9C2804BB213F00000002 = {
 			fileRef = 1DDA9C2704BB213F00000002;
@@ -2024,16 +2165,20 @@
 			};
 		};
 		1DDA9C2904BB6DE400000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PMainTabView.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDA9C2A04BB6DE400000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PMainTabView.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDA9C2B04BB6DE400000002 = {
 			fileRef = 1DDA9C2904BB6DE400000002;
@@ -2048,24 +2193,32 @@
 			};
 		};
 		1DDA9C2D04BB8C4400000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = FastTrack.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDA9C2E04BB8C4400000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = FastTrack32.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDA9C3104BB8C4400000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = OpenFT.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDA9C3204BB8C4400000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = OpenFT32.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDA9C3504BB8C4400000002 = {
 			fileRef = 1DDA9C2D04BB8C4400000002;
@@ -2092,16 +2245,20 @@
 			};
 		};
 		1DDED5D7047A668700000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PPrefDaemon.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDED5D8047A668700000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PPrefDaemon.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DDED5D9047A668700000002 = {
 			fileRef = 1DDED5D7047A668700000002;
@@ -2116,16 +2273,20 @@
 			};
 		};
 		1DE1026C04A30DBC00000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PResultSource.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DE1026D04A30DBC00000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PResultSource.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DE1026E04A30DBC00000002 = {
 			fileRef = 1DE1026C04A30DBC00000002;
@@ -2146,11 +2307,14 @@
 			isa = PBXGroup;
 			name = "about box";
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DE1027104A31E3F00000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = user.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DE1027204A31E3F00000002 = {
 			fileRef = 1DE1027104A31E3F00000002;
@@ -2159,10 +2323,12 @@
 			};
 		};
 		1DE1029104A4A6FD00000002 = {
+			expectedFileType = text;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = COPYING;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DE5B889043A015C0021667D = {
 			children = (
@@ -2172,18 +2338,23 @@
 			isa = PBXGroup;
 			name = Foundation;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DE5B88A043A01750021667D = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PComparableDictionary.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DE5B88B043A01750021667D = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PComparableDictionary.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DE5B88C043A01750021667D = {
 			fileRef = 1DE5B88A043A01750021667D;
@@ -2198,10 +2369,12 @@
 			};
 		};
 		1DE5B88E043C86FB0021667D = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PSearchCommands.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DE5B890043C86FB0021667D = {
 			fileRef = 1DE5B88E043C86FB0021667D;
@@ -2210,10 +2383,12 @@
 			};
 		};
 		1DE5B892043C881D0021667D = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PgiFTCommands.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DE5B893043C881D0021667D = {
 			fileRef = 1DE5B892043C881D0021667D;
@@ -2222,10 +2397,12 @@
 			};
 		};
 		1DE5B894043C88280021667D = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PDownloadCommands.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DE5B895043C88280021667D = {
 			fileRef = 1DE5B894043C88280021667D;
@@ -2234,10 +2411,12 @@
 			};
 		};
 		1DE5B896043C882F0021667D = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PUploadCommands.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DE5B897043C882F0021667D = {
 			fileRef = 1DE5B896043C882F0021667D;
@@ -2246,10 +2425,12 @@
 			};
 		};
 		1DE5B898043C89130021667D = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PPoisonCommands.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DE5B899043C89130021667D = {
 			fileRef = 1DE5B898043C89130021667D;
@@ -2258,16 +2439,20 @@
 			};
 		};
 		1DE5B89A043C8B9C0021667D = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PSortedSearchResults.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DE5B89B043C8B9C0021667D = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PSortedSearchResults.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DE5B89E043CA2A90021667D = {
 			fileRef = 1DE5B89A043C8B9C0021667D;
@@ -2299,18 +2484,23 @@
 			isa = PBXGroup;
 			name = Protos;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DEB2E9C0495D6D500000002 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PSearchCell.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DEB2E9D0495D6D500000002 = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PSearchCell.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DEB2E9E0495D6D500000002 = {
 			fileRef = 1DEB2E9C0495D6D500000002;
@@ -2325,9 +2515,11 @@
 			};
 		};
 		1DECEEEE048D420100000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = startgift.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DECEEEF048D420100000002 = {
 			fileRef = 1DECEEEE048D420100000002;
@@ -2336,9 +2528,11 @@
 			};
 		};
 		1DEEE19B0427474A0021667D = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = search_field.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DEEE19C0427474A0021667D = {
 			fileRef = 1DEEE19B0427474A0021667D;
@@ -2347,16 +2541,20 @@
 			};
 		};
 		1DF30FA50431C8420021667D = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PToolbarCategory.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DF30FA60431C8420021667D = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PToolbarCategory.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DF30FA70431C8420021667D = {
 			fileRef = 1DF30FA50431C8420021667D;
@@ -2395,11 +2593,14 @@
 			isa = PBXGroup;
 			name = Toolbar;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DF30FBA043222280021667D = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = stop_graphite.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DF30FBB043222280021667D = {
 			fileRef = 1DF30FBA043222280021667D;
@@ -2408,9 +2609,11 @@
 			};
 		};
 		1DF30FC0043227B30021667D = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = browse.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DF30FC1043227B30021667D = {
 			fileRef = 1DF30FC0043227B30021667D;
@@ -2419,9 +2622,11 @@
 			};
 		};
 		1DF30FC20432282D0021667D = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = download_graphite.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DF30FC30432282D0021667D = {
 			fileRef = 1DF30FC20432282D0021667D;
@@ -2445,6 +2650,7 @@
 			isa = PBXGroup;
 			name = Core;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DF30FD704322A0A0021667D = {
 			children = (
@@ -2458,24 +2664,31 @@
 			isa = PBXGroup;
 			name = Protocols;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DF30FE404322F030021667D = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PTicketCenter.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DF30FE504322F030021667D = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = PTicketCenter.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DF30FEA0432418C0021667D = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PControllerProto.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DF30FEB0432418C0021667D = {
 			fileRef = 1DF30FEA0432418C0021667D;
@@ -2501,89 +2714,36 @@
 			settings = {
 			};
 		};
-		1DF450E104C8200100000002 = {
-			isa = PBXFileReference;
-			path = gift.conf;
-			refType = 4;
-		};
-		1DF450E204C8200100000002 = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			path = mime.types;
-			refType = 4;
-		};
-		1DF450E704C8206400000002 = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			path = nodes;
-			refType = 4;
-		};
-		1DF450E804C8206400000002 = {
-			isa = PBXFileReference;
-			path = OpenFT.conf;
-			refType = 4;
-		};
-		1DF450E904C8206400000002 = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			path = robots.txt;
-			refType = 4;
-		};
-		1DF450ED04C8208200000002 = {
-			isa = PBXFileReference;
-			path = Gnutella.conf;
-			refType = 4;
-		};
-		1DF450EE04C8208200000002 = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			path = gwebcaches;
-			refType = 4;
-		};
-		1DF450F104C8209D00000002 = {
-			isa = PBXFileReference;
-			path = FastTrack.conf;
-			refType = 4;
-		};
-		1DF450F204C8209D00000002 = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			path = nodes;
-			refType = 4;
-		};
-		1DF450F504C820B300000002 = {
-			isa = PBXFileReference;
-			path = ui.conf;
-			refType = 4;
-		};
-		1DF4510204C8249C00000002 = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			path = hostiles.txt;
-			refType = 4;
-		};
 		1DF4510504C833E800000002 = {
+			expectedFileType = text;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = "License (Libvorbis).txt";
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DF4510604C833E800000002 = {
+			expectedFileType = text;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = "License (Sleepycat).txt";
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DF4510704C833E800000002 = {
+			expectedFileType = text;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = License.txt;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DF4510804C833E800000002 = {
+			expectedFileType = text.rtf;
 			isa = PBXFileReference;
 			path = ReadMe.rtf;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DF4510904C833E800000002 = {
 			fileRef = 1DF4510504C833E800000002;
@@ -2609,135 +2769,12 @@
 			settings = {
 			};
 		};
-		1DF78C2004C5D70900000002 = {
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 6;
-			files = (
-				1D28787B04CF54F700000002,
-			);
-			isa = PBXCopyFilesBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1DF78C3604C5D74000000002 = {
-			children = (
-				1D28787904CF54E400000002,
-				1DF78C3904C5D74000000002,
-			);
-			isa = PBXGroup;
-			path = giFT;
-			refType = 4;
-		};
-		1DF78C3904C5D74000000002 = {
-			children = (
-				1DF450E104C8200100000002,
-				1DF450E204C8200100000002,
-				1DF78C4704C5D74000000002,
-				1DF78C4004C5D74000000002,
-				1DF78C3B04C5D74000000002,
-				1DF78C4F04C5D74000000002,
-			);
-			isa = PBXGroup;
-			path = share;
-			refType = 4;
-		};
-		1DF78C3B04C5D74000000002 = {
-			children = (
-				1DF450F104C8209D00000002,
-				1DF450F204C8209D00000002,
-			);
-			isa = PBXGroup;
-			path = FastTrack;
-			refType = 4;
-		};
-		1DF78C4004C5D74000000002 = {
-			children = (
-				1DF450ED04C8208200000002,
-				1DF450EE04C8208200000002,
-				1DF4510204C8249C00000002,
-			);
-			isa = PBXGroup;
-			path = Gnutella;
-			refType = 4;
-		};
-		1DF78C4704C5D74000000002 = {
-			children = (
-				1DF450E704C8206400000002,
-				1DF450E804C8206400000002,
-				1DF450E904C8206400000002,
-			);
-			isa = PBXGroup;
-			path = OpenFT;
-			refType = 4;
-		};
-		1DF78C4F04C5D74000000002 = {
-			children = (
-				1DF450F504C820B300000002,
-			);
-			isa = PBXGroup;
-			path = ui;
-			refType = 4;
-		};
-		1DF78C6804C5D77D00000002 = {
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 12;
-			files = (
-				1D4E456304CEE16D00000002,
-				1D4E456404CEE16D00000002,
-			);
-			isa = PBXCopyFilesBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1DF78C6904C5D78100000002 = {
-			buildActionMask = 2147483647;
-			dstPath = OpenFT;
-			dstSubfolderSpec = 12;
-			files = (
-				1D4E456504CEE17D00000002,
-				1D4E456604CEE17D00000002,
-				1D4E456704CEE17D00000002,
-			);
-			isa = PBXCopyFilesBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1DF78C6A04C5D79800000002 = {
-			buildActionMask = 2147483647;
-			dstPath = Gnutella;
-			dstSubfolderSpec = 12;
-			files = (
-				1D4E456804CEE18800000002,
-				1D4E456904CEE18800000002,
-				1D4E456A04CEE18800000002,
-			);
-			isa = PBXCopyFilesBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1DF78C6B04C5D7A000000002 = {
-			buildActionMask = 2147483647;
-			dstPath = FastTrack;
-			dstSubfolderSpec = 12;
-			files = (
-				1D4E456B04CEE19200000002,
-				1D4E456C04CEE19200000002,
-			);
-			isa = PBXCopyFilesBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1DF78C6C04C5D7A900000002 = {
-			buildActionMask = 2147483647;
-			dstPath = ui;
-			dstSubfolderSpec = 12;
-			files = (
-				1D4E456D04CEE19700000002,
-			);
-			isa = PBXCopyFilesBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1DFC7E920458815400000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = tinysearch.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DFC7E930458815400000002 = {
 			fileRef = 1DFC7E920458815400000002;
@@ -2746,9 +2783,11 @@
 			};
 		};
 		1DFC7E9404588CCC00000002 = {
+			expectedFileType = image.tiff;
 			isa = PBXFileReference;
 			path = clean.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1DFC7E9504588CCC00000002 = {
 			fileRef = 1DFC7E9404588CCC00000002;
@@ -2794,12 +2833,13 @@
 				29B97323FDCFA39411CA2CEA,
 				19C28FACFE9D520D11CA2CBB,
 				1D49BBA5046D182C00000002,
-				1DF78C3604C5D74000000002,
+				96B87DD604D7231100A24CA2,
 			);
 			isa = PBXGroup;
 			name = PoisonGiFT;
 			path = "";
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		29B97315FDCFA39411CA2CEA = {
 			children = (
@@ -2810,12 +2850,15 @@
 			name = "Other Sources";
 			path = "";
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		29B97316FDCFA39411CA2CEA = {
+			expectedFileType = sourcecode.c.objc;
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = main.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		29B97317FDCFA39411CA2CEA = {
 			children = (
@@ -2827,6 +2870,7 @@
 			name = Resources;
 			path = "";
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		29B97318FDCFA39411CA2CEA = {
 			children = (
@@ -2836,12 +2880,15 @@
 			name = MainMenu.nib;
 			path = "";
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		29B97319FDCFA39411CA2CEA = {
+			expectedFileType = wrapper.nib;
 			isa = PBXFileReference;
 			name = English;
 			path = English.lproj/MainMenu.nib;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		29B97323FDCFA39411CA2CEA = {
 			children = (
@@ -2852,18 +2899,25 @@
 			name = Frameworks;
 			path = "";
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		29B97324FDCFA39411CA2CEA = {
+			expectedFileType = wrapper.framework;
+			fallbackIsa = PBXFileReference;
 			isa = PBXFrameworkReference;
 			name = AppKit.framework;
 			path = /System/Library/Frameworks/AppKit.framework;
 			refType = 0;
+			sourceTree = "<absolute>";
 		};
 		29B97325FDCFA39411CA2CEA = {
+			expectedFileType = wrapper.framework;
+			fallbackIsa = PBXFileReference;
 			isa = PBXFrameworkReference;
 			name = Foundation.framework;
 			path = /System/Library/Frameworks/Foundation.framework;
 			refType = 0;
+			sourceTree = "<absolute>";
 		};
 		29B97326FDCFA39411CA2CEA = {
 			buildPhases = (
@@ -2871,12 +2925,12 @@
 				29B97328FDCFA39411CA2CEA,
 				29B9732BFDCFA39411CA2CEA,
 				29B9732DFDCFA39411CA2CEA,
-				1DF78C2004C5D70900000002,
-				1DF78C6804C5D77D00000002,
-				1DF78C6904C5D78100000002,
-				1DF78C6A04C5D79800000002,
-				1DF78C6B04C5D7A000000002,
-				1DF78C6C04C5D7A900000002,
+				96B87DC704D7220600A24CA2,
+				96B87E1004D7252A00A24CA2,
+				96B87E1E04D7255D00A24CA2,
+				96B87E2104D725EE00A24CA2,
+				96B87E2804D7260D00A24CA2,
+				96B87E2D04D7267600A24CA2,
 			);
 			buildSettings = {
 				CC = "/usr/bin/gcc-3.3";
@@ -2886,7 +2940,7 @@
 				GCC_VERSION = 3.3;
 				HEADER_SEARCH_PATHS = "";
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = /Volumes/code/PoisonGiFT/giFT/lib;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				PRECOMPILE_PREFIX_HEADER = YES;
@@ -3072,18 +3126,6 @@
 				1DF4510B04C833E800000002,
 				1DF4510C04C833E800000002,
 				1D4E455504CEDB5000000002,
-				1D4E455704CEE12500000002,
-				1D4E455804CEE12600000002,
-				1D4E455904CEE12600000002,
-				1D4E455A04CEE12700000002,
-				1D4E455B04CEE12700000002,
-				1D4E455C04CEE12800000002,
-				1D4E455D04CEE12900000002,
-				1D4E455E04CEE12900000002,
-				1D4E455F04CEE14500000002,
-				1D4E456004CEE14500000002,
-				1D4E456104CEE14600000002,
-				1D28787A04CF54E400000002,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3168,10 +3210,12 @@
 //323
 //324
 		32CA4F630368D1EE00C91783 = {
+			expectedFileType = sourcecode.c.h;
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			path = PoisonGiFT_Prefix.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		32CA4F650368D2AA00C91783 = {
 			fileRef = 32CA4F630368D1EE00C91783;
@@ -3214,6 +3258,319 @@
 			};
 			isa = PBXBuildStyle;
 			name = Deployment;
+		};
+//4A0
+//4A1
+//4A2
+//4A3
+//4A4
+//960
+//961
+//962
+//963
+//964
+		96B0387E04D7A988004FA6C4 = {
+			expectedFileType = "compiled.mach-o.dylib";
+			isa = PBXFileReference;
+			path = libgift.0.dylib;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		96B0387F04D7A988004FA6C4 = {
+			expectedFileType = "compiled.mach-o.dylib";
+			isa = PBXFileReference;
+			path = libgiftproto.0.dylib;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		96B0388604D7A9A1004FA6C4 = {
+			fileRef = 96B0387E04D7A988004FA6C4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		96B0388704D7A9A5004FA6C4 = {
+			fileRef = 96B0387F04D7A988004FA6C4;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		96B87DC704D7220600A24CA2 = {
+			buildActionMask = 2147483647;
+			dstPath = giFT/bin;
+			dstSubfolderSpec = 7;
+			files = (
+				96B87E0B04D7236000A24CA2,
+			);
+			isa = PBXCopyFilesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96B87DD604D7231100A24CA2 = {
+			children = (
+				96B87DD704D7231100A24CA2,
+				96B87DD904D7231100A24CA2,
+				96B87DE904D7231100A24CA2,
+			);
+			isa = PBXGroup;
+			path = giFT;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		96B87DD704D7231100A24CA2 = {
+			children = (
+				96B87DD804D7231100A24CA2,
+			);
+			isa = PBXGroup;
+			path = bin;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		96B87DD804D7231100A24CA2 = {
+			expectedFileType = "compiled.mach-o.executable";
+			isa = PBXFileReference;
+			path = giftd;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		96B87DD904D7231100A24CA2 = {
+			children = (
+				96B87DDA04D7231100A24CA2,
+				96B87DDD04D7231100A24CA2,
+				96B0387E04D7A988004FA6C4,
+				96B0387F04D7A988004FA6C4,
+			);
+			isa = PBXGroup;
+			path = lib;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		96B87DDA04D7231100A24CA2 = {
+			children = (
+				96B87DDB04D7231100A24CA2,
+				96B87DDC04D7231100A24CA2,
+			);
+			isa = PBXGroup;
+			path = giFT;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		96B87DDB04D7231100A24CA2 = {
+			expectedFileType = text;
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			path = libOpenFT.la;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		96B87DDC04D7231100A24CA2 = {
+			expectedFileType = "compiled.mach-o.bundle";
+			isa = PBXFileReference;
+			path = libOpenFT.so;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		96B87DDD04D7231100A24CA2 = {
+			expectedFileType = "compiled.mach-o.dylib";
+			isa = PBXFileReference;
+			path = "libdb-4.1.dylib";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		96B87DE904D7231100A24CA2 = {
+			children = (
+				96B87DEA04D7231100A24CA2,
+				96B87DEC04D7231100A24CA2,
+				96B87DED04D7231100A24CA2,
+				96B87DF204D7231100A24CA2,
+			);
+			isa = PBXGroup;
+			path = share;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		96B87DEA04D7231100A24CA2 = {
+			expectedFileType = text;
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			path = giftd.conf;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		96B87DEC04D7231100A24CA2 = {
+			expectedFileType = text;
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			path = mime.types;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		96B87DED04D7231100A24CA2 = {
+			children = (
+				96B87DEE04D7231100A24CA2,
+				96B87DEF04D7231100A24CA2,
+				96B87DF004D7231100A24CA2,
+			);
+			isa = PBXGroup;
+			path = OpenFT;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		96B87DEE04D7231100A24CA2 = {
+			expectedFileType = text;
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			path = nodes;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		96B87DEF04D7231100A24CA2 = {
+			expectedFileType = text;
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			path = OpenFT.conf;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		96B87DF004D7231100A24CA2 = {
+			expectedFileType = text;
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			path = robots.txt;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		96B87DF204D7231100A24CA2 = {
+			children = (
+				96B87DF304D7231100A24CA2,
+			);
+			isa = PBXGroup;
+			path = ui;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		96B87DF304D7231100A24CA2 = {
+			expectedFileType = text;
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			path = ui.conf;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		96B87E0B04D7236000A24CA2 = {
+			fileRef = 96B87DD804D7231100A24CA2;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		96B87E1004D7252A00A24CA2 = {
+			buildActionMask = 2147483647;
+			dstPath = giFT/lib;
+			dstSubfolderSpec = 7;
+			files = (
+				96B87E1204D7254C00A24CA2,
+				96B0388604D7A9A1004FA6C4,
+				96B0388704D7A9A5004FA6C4,
+			);
+			isa = PBXCopyFilesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96B87E1204D7254C00A24CA2 = {
+			fileRef = 96B87DDD04D7231100A24CA2;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		96B87E1E04D7255D00A24CA2 = {
+			buildActionMask = 2147483647;
+			dstPath = giFT/lib/giFT;
+			dstSubfolderSpec = 7;
+			files = (
+				96B87E1F04D7257700A24CA2,
+				96B87E2004D7257700A24CA2,
+			);
+			isa = PBXCopyFilesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96B87E1F04D7257700A24CA2 = {
+			fileRef = 96B87DDB04D7231100A24CA2;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		96B87E2004D7257700A24CA2 = {
+			fileRef = 96B87DDC04D7231100A24CA2;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		96B87E2104D725EE00A24CA2 = {
+			buildActionMask = 2147483647;
+			dstPath = giFT/share;
+			dstSubfolderSpec = 7;
+			files = (
+				96B87E2404D7260600A24CA2,
+				96B87E2604D7260600A24CA2,
+			);
+			isa = PBXCopyFilesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96B87E2404D7260600A24CA2 = {
+			fileRef = 96B87DEA04D7231100A24CA2;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		96B87E2604D7260600A24CA2 = {
+			fileRef = 96B87DEC04D7231100A24CA2;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		96B87E2804D7260D00A24CA2 = {
+			buildActionMask = 2147483647;
+			dstPath = giFT/share/OpenFT;
+			dstSubfolderSpec = 7;
+			files = (
+				96B87E2A04D7266600A24CA2,
+				96B87E2B04D7266600A24CA2,
+				96B87E2C04D7266600A24CA2,
+			);
+			isa = PBXCopyFilesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96B87E2A04D7266600A24CA2 = {
+			fileRef = 96B87DEE04D7231100A24CA2;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		96B87E2B04D7266600A24CA2 = {
+			fileRef = 96B87DEF04D7231100A24CA2;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		96B87E2C04D7266600A24CA2 = {
+			fileRef = 96B87DF004D7231100A24CA2;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		96B87E2D04D7267600A24CA2 = {
+			buildActionMask = 2147483647;
+			dstPath = giFT/share/ui;
+			dstSubfolderSpec = 7;
+			files = (
+				96B87E2E04D7269500A24CA2,
+			);
+			isa = PBXCopyFilesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96B87E2E04D7269500A24CA2 = {
+			fileRef = 96B87DF304D7231100A24CA2;
+			isa = PBXBuildFile;
+			settings = {
+			};
 		};
 	};
 	rootObject = 29B97313FDCFA39411CA2CEA;

@@ -4,6 +4,9 @@
 		activeBuildStyle = 4A9504CCFFE6A4B311CA0CBA;
 		activeExecutable = 96B545AC04CB9421007DC9E1;
 		activeTarget = 29B97326FDCFA39411CA2CEA;
+		addToTargets = (
+			29B97326FDCFA39411CA2CEA,
+		);
 		breakpoints = (
 			9634C47304CBE4D300B53C75,
 			96A483C004CBF16C001A8A71,
@@ -13,7 +16,7 @@
 			96B545AC04CB9421007DC9E1,
 		);
 		perUserDictionary = {
-			PBXPerProjectTemplateStateSaveDate = 80474215;
+			PBXPerProjectTemplateStateSaveDate = 81242444;
 			PBXWorkspaceContents = (
 				{
 				},
@@ -30,16 +33,16 @@
 			};
 			"PBXWorkspaceContents:PBXConfiguration.PBXModule.PBXNavigatorGroup" = {
 				NavContent0 = {
-					bookmark = 96B8CCEF04CBD9B800CF8CD7;
+					bookmark = 96B0388904D7AA7E004FA6C4;
 					history = (
-						96B8CCD804CBCA8C00CF8CD7,
+						96B0388804D7AA7E004FA6C4,
 					);
 				};
 				NavCount = 1;
 				NavGeometry0 = {
 					Frame = "{{0, 0}, {750, 460}}";
 					NavBarVisible = YES;
-					WindowFrame = "{{337, 174}, {750, 502}}";
+					WindowFrame = "{{38, 218}, {750, 502}}";
 				};
 				NavSplitVertical = NO;
 			};
@@ -50,7 +53,7 @@
 			PBXWorkspaceGeometries = (
 				{
 					Frame = "{{0, 0}, {1031, 609}}";
-					WindowFrame = "{{107, 72}, {1031, 671}}";
+					WindowFrame = "{{85, 75}, {1031, 671}}";
 				},
 			);
 			"PBXWorkspaceGeometries:PBXConfiguration.PBXModule.PBXBatchFindModule" = {
@@ -81,21 +84,21 @@
 				DebugConsoleWindowFrame = "{{5, 158}, {587, 478}}";
 				DebugSTDIOWindowFrame = "{{200, 200}, {500, 300}}";
 				Frame = "{{0, 0}, {749, 531}}";
-				WindowFrame = "{{73, 81}, {749, 609}}";
+				WindowFrame = "{{85, 47}, {749, 609}}";
 			};
 			"PBXWorkspaceGeometries:PBXConfiguration.PBXModule.PBXNavigatorGroup" = {
 				Frame = "{{0, 0}, {750, 480}}";
-				WindowFrame = "{{337, 174}, {750, 502}}";
+				WindowFrame = "{{38, 218}, {750, 502}}";
 			};
 			"PBXWorkspaceGeometries:PBXConfiguration.PBXModule.PBXProjectWorkspaceModule" = {
 				Frame = "{{0, 0}, {1031, 609}}";
-				WindowFrame = "{{107, 72}, {1031, 671}}";
+				WindowFrame = "{{85, 75}, {1031, 671}}";
 			};
 			"PBXWorkspaceGeometries:PBXConfiguration.PBXModule.PBXRunSessionModule" = {
 				Frame = "{{0, 0}, {745, 442}}";
 				WindowFrame = "{{203, 272}, {745, 464}}";
 			};
-			PBXWorkspaceStateSaveDate = 80474215;
+			PBXWorkspaceStateSaveDate = 81242444;
 		};
 		projectwideBuildSettings = {
 		};
