@@ -34,7 +34,9 @@
         [protos setObject:[NSImage imageNamed:@"Gnutella32.tiff"] forKey:@"Gnutella32"];
         [protos setObject:[NSImage imageNamed:@"FastTrack.tiff"] forKey:@"FastTrack"];
         [protos setObject:[NSImage imageNamed:@"FastTrack32.tiff"] forKey:@"FastTrack32"];
-        [protos setObject:[NSImage imageNamed:@"Donkey.tiff"] forKey:@"gift-donkey"];
+        [protos setObject:[NSImage imageNamed:@"OpenNap.tiff"] forKey:@"OpenNap"];
+        [protos setObject:[NSImage imageNamed:@"OpenNap32.tiff"] forKey:@"OpenNap32"];
+		[protos setObject:[NSImage imageNamed:@"Donkey.tiff"] forKey:@"gift-donkey"];
         [protos setObject:[NSImage imageNamed:@"Donkey32.tiff"] forKey:@"gift-donkey32"];
         [protos setObject:[NSImage imageNamed:@"Donkey.tiff"] forKey:@"gift-edonkey"];
         [protos setObject:[NSImage imageNamed:@"Donkey32.tiff"] forKey:@"gift-edonkey32"];
