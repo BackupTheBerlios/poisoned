@@ -76,6 +76,8 @@
         [NSArray arrayWithObjects:@"ADDDOWNLOAD",@"CHGDOWNLOAD",@"DELDOWNLOAD",nil]
     ];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disconnected:) name:@"PoisonConnectionClosed" object:commander];
+    // datasource needs the commander for cancelling downloads etc...
+    [dataSource setCommander:commander];
 }
 
 - (NSView *)view
