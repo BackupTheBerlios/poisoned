@@ -127,8 +127,18 @@
 
 - (IBAction)importPlaylistChanged:(id)sender
 {
-    if ([importToPlaylist state]==NSOnState) [userDefaults setBool:YES forKey:@"PImportToPlaylist"];
-    else [userDefaults setBool:NO forKey:@"PImportToPlaylist"];
+    if ([importToPlaylist state]==NSOnState)
+    {
+        [userDefaults setBool:YES forKey:@"PImportToPlaylist"];
+        [playFile setEnabled:YES];
+        [playFileIfNoFile setEnabled:YES];
+    }
+    else 
+    { 
+        [userDefaults setBool:NO forKey:@"PImportToPlaylist"];
+        [playFile setEnabled:NO];
+        [playFileIfNoFile setEnabled:NO];
+    }
 }
 
 - (IBAction)playfilePrefsChanged:(id)sender
