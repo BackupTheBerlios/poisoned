@@ -637,7 +637,11 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
             {
                 NSString *fileWithPath = [[path stringByAppendingPathComponent: 
                         [[item objectForKey:@"PFileUser"] objectAtIndex:1]] stringByStandardizingPath];
-                NSSet *ext = [NSSet setWithObjects:@"mp3",@"wav",@"m4u",@"m4a",@"aif",@"aiff",nil];
+                NSSet *ext;
+                if ([userDefaults boolForKey:@"POggSupport"])
+                    ext = [NSSet setWithObjects:@"mp3",@"wav",@"m4u",@"m4a",@"aif",@"aiff",@"ogg",nil];
+                else        
+                    ext = [NSSet setWithObjects:@"mp3",@"wav",@"m4u",@"m4a",@"aif",@"aiff",nil];
                 if ([ext containsObject:[[fileWithPath pathExtension] lowercaseString]]) 
                 {
                     if (iTunesPlaylistImport([fileWithPath fileSystemRepresentation], 

@@ -29,6 +29,7 @@
     IBOutlet NSButton *importToPlaylist;
     IBOutlet NSButton *playFile;
     IBOutlet NSButton *playFileIfNoFile;
+    IBOutlet NSButton *oggSupport;
     IBOutlet NSButton *deleteFile;
     IBOutlet NSButton *switchToDownload;
     IBOutlet NSTextField *incoming;
@@ -52,6 +53,7 @@
 - (IBAction)importPlaylistChanged:(id)sender;
 - (IBAction)playfilePrefsChanged:(id)sender;
 - (IBAction)playFileIfNoFilePrefsChanged:(id)sender;
+- (IBAction)oggSupportChanged:(id)sender;
 - (IBAction)deletefilePrefsChanged:(id)sender;
 - (IBAction)switchToDownloadPrefsChanged:(id)sender;
 

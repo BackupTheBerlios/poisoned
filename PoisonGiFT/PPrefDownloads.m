@@ -53,6 +53,9 @@
     if ([userDefaults boolForKey:@"PDeleteFile"]) [deleteFile setState:NSOnState];
     else [deleteFile setState:NSOffState];   
     
+    if ([userDefaults boolForKey:@"POggSupport"]) [oggSupport setState:NSOnState];
+    else [oggSupport setState:NSOffState]; 
+    
     if ([userDefaults boolForKey:@"PSwitchToDownloads"]) [switchToDownload setState:NSOnState];
     else [switchToDownload setState:NSOffState];   
      
@@ -114,6 +117,7 @@
 		[playFile setEnabled:YES];
                 [playFileIfNoFile setEnabled:YES];
 		[deleteFile setEnabled:YES];
+                [oggSupport setEnabled:YES];
         }
 	else
 	{
@@ -122,6 +126,7 @@
 		[playFile setEnabled:NO];
                 [playFileIfNoFile setEnabled:NO];
 		[deleteFile setEnabled:NO];
+                [oggSupport setEnabled:NO];
 	}
 }
 
@@ -155,6 +160,12 @@
 {
     if ([deleteFile state]==NSOnState) [userDefaults setBool:YES forKey:@"PDeleteFile"];
     else [userDefaults setBool:NO forKey:@"PDeleteFile"];
+}
+
+- (IBAction)oggSupportChanged:(id)sender
+{
+    if ([oggSupport state]==NSOnState) [userDefaults setBool:YES forKey:@"POggSupport"];
+    else [userDefaults setBool:NO forKey:@"POggSupport"];
 }
 
 - (IBAction)switchToDownloadPrefsChanged:(id)sender
