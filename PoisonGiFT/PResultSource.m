@@ -94,10 +94,10 @@
     NSString *user		= [item objectForKey:@"user"];
     NSString *hash		= [item objectForKey:@"hash"];
     NSArray *meta		= [data objectAtIndex:3];
-    NSString *availability = [item objectForKey:@"availability"];
+    NSString *avail = [item objectForKey:@"availability"];
 
     /* lets drop all bad sources! - ashton */
-    if(!availability) return;
+    //if(!avail) return;
     //if([availability isEqualToString:@"0"]) return;
 
     NSString *meta_str;
@@ -124,6 +124,7 @@
     [scanner scanUpToString:@"://" intoString:&proto];
 
     [item setObject:proto forKey:@"PProto"];
+    [item setObject:avail forKey:@"PAvail"];
     BOOL matchesFilter = [self matchesFilter:item];
 
     if (sources) { //------------------------------------- new source for existing file
@@ -137,6 +138,7 @@
             parent_copy = [[parent mutableCopy] autorelease];
             [parent removeObjectForKey:@"icon"];
             [parent removeObjectForKey:@"PProtoIcon"];
+            [parent removeObjectForKey:@"PAvailability"];
             [parent_copy setObject:[NSString stringWithString:@"expandable"] forKey:@"expandable"];
             [sources setObject:parent_copy forKey:@"parent"];
             [sourcesArray insertObject:parent_copy atIndex:0];
@@ -163,7 +165,7 @@
     else { //--------------------------------------------  new file
         [item setObject:[icon_shop iconForProto:proto] forKey:@"PProtoIcon"];
         [item setObject:[icon_shop iconForFileType:[[item objectForKey:@"file"] pathExtension]] forKey:@"icon"];
-        [item setObject:[icon_shop iconForAvail:availability] forKey:@"availability"];	// set up our availability icon - ashton
+        [item setObject:[icon_shop iconForAvail:avail] forKey:@"PAvailability"];	// set up our availability icon - ashton
         NSMutableArray *newFileArray = [NSMutableArray arrayWithObjects:item,nil];
         NSMutableDictionary *newFile = [NSMutableDictionary dictionaryWithObjectsAndKeys:
             newFileArray,@"array",
@@ -420,7 +422,7 @@
     NSString *ident = [tableColumn identifier];
     if (selected_column) [outlineView setIndicatorImage:nil inTableColumn:selected_column];
     if (selected_column==tableColumn) sortAscending=!sortAscending;
-    else if ([ident isEqualToString:@"calcsize"] || [ident isEqualToString:@"user"] || [ident isEqualToString:@"bitrate"]) sortAscending=NO;
+    else if ([ident isEqualToString:@"calcsize"] || [ident isEqualToString:@"user"] || [ident isEqualToString:@"bitrate"] ) sortAscending=NO;
     else sortAscending=YES;
     selected_column = tableColumn;
     [outlineView setHighlightedTableColumn:tableColumn];

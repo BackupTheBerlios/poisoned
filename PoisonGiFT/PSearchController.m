@@ -72,7 +72,7 @@
     
     [[r_table tableColumnWithIdentifier:@"icon"] setDataCell:[[[NSImageCell alloc] init] autorelease]];
     [[r_table tableColumnWithIdentifier:@"PProtoIcon"] setDataCell:[[[NSImageCell alloc] init] autorelease]];
-        [[r_table tableColumnWithIdentifier:@"availability"] setDataCell:[[[NSImageCell alloc] init] autorelease]];
+    [[r_table tableColumnWithIdentifier:@"PAvailability"] setDataCell:[[[NSImageCell alloc] init] autorelease]];
     
     NSButtonCell *button = [[[NSButtonCell alloc] init] autorelease];
     [button setButtonType:NSMomentaryChangeButton];

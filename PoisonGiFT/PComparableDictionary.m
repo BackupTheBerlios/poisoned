@@ -161,4 +161,15 @@
     return (-1*[self PProtoIconAsc:dict]);
 }
 
+// SORT BY BIT AVAILABILITY
+- (NSComparisonResult)PAvailabilityAsc:(NSArray *)dict
+{
+    return [[[self objectAtIndex:0] objectForKey:@"PAvail"] compare:[[dict objectAtIndex:0] objectForKey:@"PAvail"] options:NSCaseInsensitiveSearch];
+}
+
+- (NSComparisonResult)PAvailabilityDesc:(NSArray *)dict
+{
+    return (-1*[self PAvailabilityAsc:dict]);
+}
+
 @end

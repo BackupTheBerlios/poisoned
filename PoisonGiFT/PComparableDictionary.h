@@ -47,4 +47,7 @@
 - (NSComparisonResult)PProtoIconAsc:(NSArray *)dict;
 - (NSComparisonResult)PProtoIconDesc:(NSArray *)dict;
 
+- (NSComparisonResult)availabilityAsc:(NSArray *)dict;
+- (NSComparisonResult)availabilityDesc:(NSArray *)dict;
+
 @end
