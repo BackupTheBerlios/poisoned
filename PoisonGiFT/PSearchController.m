@@ -185,6 +185,19 @@
         if ([r_table tableColumnWithIdentifier:@"album"]) [menuItem setState:NSOnState];
         else [menuItem setState:NSOffState];
     }
+    else if ([title isEqualToString:@"Download Selection(s)"]){
+        if ([r_table numberOfSelectedRows]<=0) return NO;
+        else
+            return YES;
+    }
+    else if ([title isEqualToString:@"Browse Host..."]){
+        if ([r_table numberOfSelectedRows]<=0) return NO;
+        else
+            return YES;
+    }
+    else if ([title isEqualToString:@"Buy at iTMS!"]){
+        return [self validateBuyAtiTMS];
+    }
     return YES;
 }
 
@@ -690,8 +703,16 @@
 - (NSMenu *)willPopUpMenuForTextField:(PTextField *)textfield
 {
     // NOTE: didn't find a way to make the menu items display small (???) - rizzi
+    // NOTE: I did - j.ashton
     
     NSMenu *menu = [[[NSMenu alloc] init] autorelease];
+    /* set this menu small - j.ashton */
+    [menu setMenuRepresentation: [[[NSMenuView alloc]
+    initWithFrame: NSZeroRect] autorelease]];
+    [[menu menuRepresentation] setFont: [NSFont menuFontOfSize:
+    [NSFont smallSystemFontSize]]];
+    [menu sizeToFit];
+    /* end set small menu */
     NSMenuItem *mitem;
     int i, count = [recentSearches count];
 

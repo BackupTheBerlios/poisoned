@@ -582,14 +582,34 @@
             totalSize += [[[tmp objectAtIndex:2] objectForKey:@"size"] doubleValue];
             totalUsers += (long)[[[tmp objectAtIndex:2] objectForKey:@"users"] intValue];
             totalFiles += (long)[[[tmp objectAtIndex:2] objectForKey:@"files"] intValue];
+            
+            /* hack for commaize - j.ashton*/
+            /* there must be a better way, this us ugly -j.ashton */
+            double tmpSize = 0.0;
+            tmpSize = [[[tmp objectAtIndex:2] objectForKey:@"size"] doubleValue];
+            
+            NSString *Size = [self CommaizeDouble:tmpSize];
+            NSLog(Size);
+            
+            long tmpUsers = 0;
+            tmpUsers = (long)[[[tmp objectAtIndex:2] objectForKey:@"users"] intValue];
+            NSString *Users = [self Commaize:tmpUsers];
+            NSLog(Users);
+            
+            long tmpFiles = 0;
+            tmpFiles = (long)[[[tmp objectAtIndex:2] objectForKey:@"files"] intValue];
+            NSString *Files = [self Commaize:tmpFiles];
+            NSLog(Files);
+            /* end commaize hack */
+        
+                    
             [protocolSource addObject:[NSDictionary dictionaryWithObjectsAndKeys:
                 [icon_shop largeIconForProto:[tmp objectAtIndex:0]],@"icon",
                 [NSArray arrayWithObjects:[NSNumber numberWithBool:YES],
                     [tmp objectAtIndex:0], // protocol name
                     [NSString stringWithFormat:@"%@ Users - %@ Files - %@ GB",
-                        [[tmp objectAtIndex:2] objectForKey:@"users"],
-                        [[tmp objectAtIndex:2] objectForKey:@"files"],
-                        [[tmp objectAtIndex:2] objectForKey:@"size"]],
+                       Users,Files,
+                        Size],
                 nil],@"protocol",nil]
             ];
         }
@@ -611,8 +631,9 @@
             atIndex:0];
         }
     }
-    NSString *total = [NSString stringWithFormat:@"%d Users - %d Files - %.2f GB",totalUsers,totalFiles,totalSize];
+    NSString *total = [NSString stringWithFormat:@"%@ Users - %@ Files - %@ GB",[self Commaize:totalUsers],[self Commaize:totalFiles],[self CommaizeDouble:totalSize]];
     [protocolSource insertObject:[NSDictionary dictionaryWithObjectsAndKeys:
+    [NSImage imageNamed:@"OpenFT32.icns"],@"icon",
                 [NSArray arrayWithObjects:[NSNumber numberWithBool:YES],
                     attach,	// giFT & version
                     total,	// total stats for all networks
@@ -621,6 +642,8 @@
     atIndex:1];
     [protocolSource insertObject:[NSDictionary dictionary] atIndex:1];
     [protocolTable reloadData];
+    /* total stats to the status bar - j.ashton */
+    [stats_field setStringValue:total];
     
     if (!_protosSend) {
         // send notification with availabe protocols, but only if we didn't do so yet
@@ -647,6 +670,36 @@
         }
         else _synchronizing=YES;
     }
+}
+
+/* insert commas into long's and return an NSString - j.ashton */
+- (NSString *)Commaize:(long)data
+{
+    NSNumber *number=[NSNumber numberWithLong:data];
+    NSNumberFormatter *formatter=[[[NSNumberFormatter alloc] init] autorelease];
+    NSString *string;
+
+    [formatter setThousandSeparator:@","];
+    [formatter setHasThousandSeparators:YES];
+    [formatter setFormat:@"#,###"];
+    string = [formatter stringForObjectValue:number];
+    
+    return string;
+}
+
+/* insert commas into doubles and return an NSString - j.ashton */
+- (NSString *)CommaizeDouble:(double)data
+{
+    NSNumber *number=[NSNumber numberWithDouble:data];
+    NSNumberFormatter *formatter=[[[NSNumberFormatter alloc] init] autorelease];
+    NSString *string;
+
+    [formatter setThousandSeparator:@","];
+    [formatter setHasThousandSeparators:YES];
+    [formatter setFormat:@"#,###0.00"];
+    string = [formatter stringForObjectValue:number];
+
+    return string;
 }
 
 @end

@@ -70,6 +70,8 @@
         
     int currentView;
     
+    
+    
     NSMutableDictionary *navImages;
     NSArray *currentNav;
     int navimg;

@@ -643,6 +643,8 @@
     // we add 1 to the state so we always have values > 0
     // and 0 then just would mean that we don't have set this pref yet
     [userDefaults setInteger:([drawer state]+1) forKey:@"PDrawerState"];
+    //* remove dock badge - j.ashton*//
+    [NSApp setApplicationIconImage:[NSImage imageNamed: @"poison.icns"]];
     
     [mainWindow saveFrameUsingName:@"theMainWindow"];
     [self saveToolbarConfiguration];

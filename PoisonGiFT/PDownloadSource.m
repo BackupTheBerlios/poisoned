@@ -383,6 +383,9 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
 
 - (void)cleanUp:(id)commander
 {
+    //* remove dock badge - j.ashton*//
+    [NSApp setApplicationIconImage:[NSImage imageNamed: @"poison.icns"]];
+
     int i, count = [source count];
     NSDictionary *tmp;
     int state;
@@ -612,6 +615,52 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
     if ([state isEqualToString:@"Completed"])
 	{ // clean up completed downloads...
         [item setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:YES],[NSNumber numberWithBool:NO],@"Completed",nil] forKey:@"PProgress"];
+        
+        
+//* add dock badge - j.ashton*//
+/* note that this is almost ready to draw numbers into the badge for the
+number of completions, will finish it later */
+NSImage *appImage, *image;
+NSDictionary *attrs;
+NSString *str;
+NSSize iconSize, strSize;
+NSPoint p;
+unichar c;
+bool showApp = YES;
+// get the app's icon
+appImage = [NSImage imageNamed:@"NSApplicationIcon"];
+image = [[NSImage alloc] initWithSize:[appImage size]];
+NSImage *badge = [NSImage imageNamed: @"badge.tiff"];
+// get size
+iconSize = [appImage size];
+// set up font attributes based on size of icon
+attrs = [NSDictionary dictionaryWithObjectsAndKeys:
+[NSFont systemFontOfSize:iconSize.height], NSFontAttributeName,
+[NSColor redColor], NSForegroundColorAttributeName, nil];
+// retrieve character and convert to string
+c = '!';
+str = [NSString stringWithCharacters:&c length:1];
+// define point to draw string based on string bounding box
+strSize = [str sizeWithAttributes:attrs];
+p = NSMakePoint(iconSize.width,iconSize.height);
+// create the dock image
+[image setFlipped:YES];
+[image lockFocus];
+// display original application image if desired
+if ( showApp == YES )
+[appImage compositeToPoint:NSMakePoint(0, [appImage size].height)
+operation:NSCompositeSourceOver];
+// this is the green check
+[badge compositeToPoint:NSMakePoint(76,56) operation:NSCompositeSourceOver];
+//[str drawAtPoint:p withAttributes:attrs];
+[image unlockFocus];
+// set the new dock image
+[NSApp setApplicationIconImage:image];
+[image release];
+[appImage release];
+[badge release];
+        
+        
         [item setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:YES],@"",@"",nil] forKey:@"PTransfer"];
         [[item objectForKey:@"PSize"] replaceObjectAtIndex:1 withObject:[self calcSize:[item objectForKey:@"size"]]];
         [item setObject:[NSNumber numberWithInt:PCOMPLETED] forKey:@"PStatus"];
@@ -771,6 +820,8 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
             [source removeObject:[tickets objectForKey:ticket]];
             [tickets removeObjectForKey:tickets];
             [table reloadData];
+            //* remove dock badge - j.ashton*//
+            [NSApp setApplicationIconImage:[NSImage imageNamed: @"poison.icns"]];
             return;
         }
         else return;

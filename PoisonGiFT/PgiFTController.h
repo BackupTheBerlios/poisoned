@@ -44,6 +44,8 @@
     
     IBOutlet NSImageView *statusImage;
         
+    IBOutlet NSTextField *stats_field; // total stats for status bar - j.ashton
+        
     PCommand *commander;
     id controller;		// PMainController
     
@@ -93,5 +95,9 @@
 // conf files
 - (void)checkConfFiles;
 - (BOOL)check:(NSString *)path;
+
+// Formatting - j.ashton
+- (NSString *)Commaize:(long)data;
+- (NSString *)CommaizeDouble:(double)data;
 
 @end
