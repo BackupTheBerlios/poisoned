@@ -732,7 +732,7 @@
     NSDictionary *item = [r_table itemAtRow:[r_table selectedRow]];	// information on selected item
 
         // check for no meta tags
-        if (![item objectForKey:@"artist"] && ![item objectForKey:@"title"] && ![item objectForKey:@"album"]) 
+        if (![item objectForKey:@"artist"] && ![item objectForKey:@"title"]) 
         {
         
             // most mp3 files downloaded will have a - before the name of the song at the end of a file name
@@ -750,12 +750,12 @@
             // files will be parsed improperly but there is no control over how people name files so no parser is perfect. This 
             // will get 90% of all files which do not have meta-tags or 99.9% of all files in total.
             
-            titleTerm=(NSString*)CFURLCreateStringByAddingPercentEscapes(0,(CFStringRef)[
+            titleTerm = (NSString*)CFURLCreateStringByAddingPercentEscapes(0,(CFStringRef)[
                         [item objectForKey:@"file"] substringWithRange:
                         NSMakeRange(beginRange.location+1,   		// eat the char we searched for, spaces ignored by itunes
                         (endRange.location-(beginRange.location+1)))
                         ],0,0,kCFStringEncodingISOLatin1);
-            url=[NSURL URLWithString:[NSString stringWithFormat:
+            url = [NSURL URLWithString:[NSString stringWithFormat:
                 @"itms://phobos.apple.com/WebObjects/MZSearch.woa/wa/advancedSearchResults?songTerm=%@", 
                 titleTerm]];
         } 
@@ -765,13 +765,13 @@
             // parsing meta tags spaces and adding them to the url string
             
             if ([item objectForKey:@"artist"])
-                artistTerm=(NSString*)CFURLCreateStringByAddingPercentEscapes(0,(CFStringRef)
+                artistTerm = (NSString*)CFURLCreateStringByAddingPercentEscapes(0,(CFStringRef)
                     [item objectForKey:@"artist"],0,0,kCFStringEncodingISOLatin1);
             if ([item objectForKey:@"title"])
-                titleTerm=(NSString*)CFURLCreateStringByAddingPercentEscapes(0,(CFStringRef)
+                titleTerm = (NSString*)CFURLCreateStringByAddingPercentEscapes(0,(CFStringRef)
                     [item objectForKey:@"title"],0,0,kCFStringEncodingISOLatin1);
     
-            url=[NSURL URLWithString:[NSString stringWithFormat:
+            url = [NSURL URLWithString:[NSString stringWithFormat:
                 @"itms://phobos.apple.com/WebObjects/MZSearch.woa/wa/advancedSearchResults?songTerm=%@&artistTerm=%@",
                 titleTerm, artistTerm]];
         }
