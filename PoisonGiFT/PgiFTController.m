@@ -428,6 +428,40 @@
     [remoteConnectMenu setAction:@selector(runConnectionSheet:)];
 }
 
+/* reset poisoned to original state - ashton */
+-(IBAction)resetPoisoned:(id)sender
+{
+    int button = NSRunAlertPanel(@"Would you like to reset Poisoned?",
+    [NSString stringWithFormat:@"This will destroy all saved preferences, no downloaded files will be lost."], @"OK", @"Cancel", nil);
+    if (button==NSOKButton)
+    {
+        NSFileManager *manager = [NSFileManager defaultManager];
+        
+        NSString *poisonedDir =	[[[NSHomeDirectory()
+                                    stringByAppendingPathComponent:@"Library"]
+                                    stringByAppendingPathComponent:@"Application Support"]
+                                    stringByAppendingPathComponent:@"Poisoned"];
+        if ([manager removeFileAtPath:poisonedDir handler:nil])
+            NSLog(@"Removing %@...",poisonedDir);
+
+        NSString *poisonedPrefs = [[[[[NSHomeDirectory()
+                                    stringByAppendingPathComponent:@"Library"]
+                                    stringByAppendingPathComponent:@"Preferences"]
+                                    stringByAppendingPathComponent: [[NSBundle mainBundle] bundleIdentifier]]
+                                    stringByAppendingString:@".plist"] retain ];
+        
+        if ([manager removeFileAtPath:poisonedPrefs handler:nil])
+            NSLog(@"Removing %@...",poisonedPrefs);
+
+        /* quit poisoned so the user can resart fresh - ashton*/
+        [[NSApplication sharedApplication] terminate: self];
+
+        /* TODO: is there a way to have poiosned relaunch itself? - ashton */
+
+    }
+    
+}
+
 - (int)numberOfRowsInTableView:(NSTableView *)aTableView
 {
     return [protocolSource count];
@@ -702,5 +736,7 @@
 
     return string;
 }
+
+
 
 @end

@@ -94,7 +94,7 @@
     NSString *user		= [item objectForKey:@"user"];
     NSString *hash		= [item objectForKey:@"hash"];
     NSArray *meta		= [data objectAtIndex:3];
-    NSString *avail = [item objectForKey:@"availability"];
+    NSString *avail             = [item objectForKey:@"availability"];
 
     /* lets drop all bad sources! - ashton */
     //if(!avail) return;

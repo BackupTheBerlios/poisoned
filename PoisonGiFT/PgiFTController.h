@@ -96,8 +96,12 @@
 - (void)checkConfFiles;
 - (BOOL)check:(NSString *)path;
 
-// Formatting - j.ashton
+/* Formatting - ashton */
 - (NSString *)Commaize:(long)data;
 - (NSString *)CommaizeDouble:(double)data;
+
+/* reset poisoned... -  ashton */
+- (IBAction)resetPoisoned:(id)sender;
+
 
 @end

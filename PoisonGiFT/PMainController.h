@@ -111,4 +111,7 @@
 - (IBAction)poisonWeb:(id)sender;
 - (IBAction)giftWeb:(id)sender;
 
+/* set poisoned defaults */
+-(void)setDefaults;
+
 @end

@@ -606,7 +606,7 @@
                 [commander prepare:[tmp objectForKey:@"file"]]
                 ];
         }
-        //NSLog(query);
+        NSLog(@"%@",query);
         [commander cmd:query];
     }
 }

@@ -109,37 +109,7 @@
     //BOOL firstRun;
     if (![userDefaults objectForKey:@"PFirstRun"]) firstRun=YES;
     else firstRun=NO;
-    if (firstRun) { // set some preferences...
-        [userDefaults setBool:NO forKey:@"PFirstRun"];
-        [userDefaults setInteger:AQUAFIED forKey:@"PAppearance"];
-
-        [userDefaults setBool:YES forKey:@"PStopGiFT"];  // Automatically stop gift -> no
-        [userDefaults setObject:@"127.0.0.1" forKey:@"PDaemonAddress"];	// this isn't really used
-        [userDefaults setInteger:1213 forKey:@"PDaemonPort"];
-        [userDefaults setObject:@"/usr/local/bin/giFT" forKey:@"PGiFTPath"];
-        [userDefaults setInteger:3 forKey:@"PConnectToDaemonTimeout"];
-        [userDefaults setBool:YES forKey:@"PAutoConnect"];
-        [userDefaults setBool:YES forKey:@"PAutoLaunch"];
-        [userDefaults setBool:YES forKey:@"PRelaunchOnCrash"];
-        
-        [userDefaults setBool:NO forKey:@"PUseCustomDaemon"];
-
-        [userDefaults setBool:NO forKey:@"PRemoveCompletedDownloads"];
-        [userDefaults setBool:NO forKey:@"PRemoveCancelledDownloads"];
-        [userDefaults setBool:NO forKey:@"PImportToiTunes"];
-        [userDefaults setBool:NO forKey:@"PImportToPlaylist"];
-        [userDefaults setBool:NO forKey:@"PPlayFile"];
-        [userDefaults setBool:NO forKey:@"PNoFilePlayFile"];
-        [userDefaults setBool:NO forKey:@"PDeleteFile"];
-        [userDefaults setBool:NO forKey:@"PSwitchToDownloads"];
-        
-        [userDefaults setBool:NO forKey:@"PRemoveCompletedUploads"];
-        [userDefaults setBool:NO forKey:@"PRemoveCancelledUploads"];
-        
-        [userDefaults setBool:YES forKey:@"PAutoVersionCheck"];
-    }
-    // ---------------------------------------------------------------
-
+    if (firstRun)[self setDefaults];
 
     // setting up the window
     // ---------------------------------------------------------------
@@ -185,7 +155,7 @@
         POpenFTConf *openft_conf = [POpenFTConf singleton];
         [openft_conf setRandomValues];
     }
-    if (version<=0.4f) {
+    if (version<=0.49f) {
         // there is a new Gnutella.conf => replace the old one
         NSFileManager *manager = [NSFileManager defaultManager];
         if ([manager removeFileAtPath:[@"~/Library/Application Support/Poisoned/Gnutella/Gnutella.conf" stringByExpandingTildeInPath] handler:nil])
@@ -195,6 +165,10 @@
         // one so that connection to the new network will not have to scan
         if ([manager removeFileAtPath:[@"~/Library/Application Support/Poisoned/OpenFT/nodes" stringByExpandingTildeInPath] handler:nil])
             NSLog(@"removed OpenFT nodes cache");
+
+        /* update the fasttrack.conf to the new and improved - ashton */
+        if ([manager removeFileAtPath:[@"~/Library/Application Support/Poisoned/FasttTrack/FasttTrack.conf" stringByExpandingTildeInPath] handler:nil])
+            NSLog(@"removed old FastTrack.conf");
 
         // it wouldn't be necesseary to check all files again, but it the easiest way ;)
         [giFT checkConfFiles];
@@ -684,6 +658,38 @@
 - (void)drawerDidClose:(NSNotification *)notification
 {
     [drawerButton setState:NSOffState];
+}
+
+/* set our application defaults, used for first run or poisoned reset - ashton */
+-(void)setDefaults
+{
+    [userDefaults setBool:NO forKey:@"PFirstRun"];
+    [userDefaults setInteger:AQUAFIED forKey:@"PAppearance"];
+
+    [userDefaults setBool:YES forKey:@"PStopGiFT"];  // Automatically stop gift -> no
+    [userDefaults setObject:@"127.0.0.1" forKey:@"PDaemonAddress"];	// this isn't really used
+    [userDefaults setInteger:1213 forKey:@"PDaemonPort"];
+    [userDefaults setObject:@"/usr/local/bin/giFT" forKey:@"PGiFTPath"];
+    [userDefaults setInteger:3 forKey:@"PConnectToDaemonTimeout"];
+    [userDefaults setBool:YES forKey:@"PAutoConnect"];
+    [userDefaults setBool:YES forKey:@"PAutoLaunch"];
+    [userDefaults setBool:YES forKey:@"PRelaunchOnCrash"];
+
+    [userDefaults setBool:NO forKey:@"PUseCustomDaemon"];
+
+    [userDefaults setBool:NO forKey:@"PRemoveCompletedDownloads"];
+    [userDefaults setBool:NO forKey:@"PRemoveCancelledDownloads"];
+    [userDefaults setBool:NO forKey:@"PImportToiTunes"];
+    [userDefaults setBool:NO forKey:@"PImportToPlaylist"];
+    [userDefaults setBool:NO forKey:@"PPlayFile"];
+    [userDefaults setBool:NO forKey:@"PNoFilePlayFile"];
+    [userDefaults setBool:NO forKey:@"PDeleteFile"];
+    [userDefaults setBool:NO forKey:@"PSwitchToDownloads"];
+
+    [userDefaults setBool:NO forKey:@"PRemoveCompletedUploads"];
+    [userDefaults setBool:NO forKey:@"PRemoveCancelledUploads"];
+
+    [userDefaults setBool:YES forKey:@"PAutoVersionCheck"];
 }
 
 @end
