@@ -558,12 +558,12 @@
 {
     if ([r_table numberOfSelectedRows]!=1) return;
     char *filename;
-    NSString* artistTerm;
-    NSString* titleTerm;
-    NSString* albumTerm;
+    NSString* artistTerm=@"";
+    NSString* titleTerm=@"";
+    NSString* albumTerm=@"";
     NSString* title;
     NSURL* url;
-    int i,i1=0;
+    unsigned int i,i1=0;
     NSDictionary *item = [r_table itemAtRow:[r_table selectedRow]];
 
         filename = (char *)[[item objectForKey:@"file"] cString];
@@ -579,15 +579,18 @@
                     filename[i]=0;
                 title=[NSString stringWithFormat:@"%s", &filename[i1]];
             }
-            titleTerm=(NSString*)CFURLCreateStringByAddingPercentEscapes(0, title,0,0,kCFStringEncodingISOLatin1);
+            titleTerm=(NSString*)CFURLCreateStringByAddingPercentEscapes(0,(CFStringRef)title,0,0,kCFStringEncodingISOLatin1);
             url=[NSURL URLWithString:[NSString stringWithFormat:@"itms://phobos.apple.com/WebObjects/MZSearch.woa/wa/advancedSearchResults?songTerm=%@", titleTerm]];
         } else {
         
-            artistTerm=(NSString*)CFURLCreateStringByAddingPercentEscapes(0,[item objectForKey:@"artist"],0,0,kCFStringEncodingISOLatin1);
-            titleTerm=(NSString*)CFURLCreateStringByAddingPercentEscapes(0,[item objectForKey:@"title"],0,0,kCFStringEncodingISOLatin1);                                                                        
-            albumTerm=(NSString*)CFURLCreateStringByAddingPercentEscapes(0,[item objectForKey:@"album"],0,0,kCFStringEncodingISOLatin1);
+        if ([item objectForKey:@"artist"])
+            artistTerm=(NSString*)CFURLCreateStringByAddingPercentEscapes(0,(CFStringRef)[item objectForKey:@"artist"],0,0,kCFStringEncodingISOLatin1);
+        if ([item objectForKey:@"title"])
+            titleTerm=(NSString*)CFURLCreateStringByAddingPercentEscapes(0,(CFStringRef)[item objectForKey:@"title"],0,0,kCFStringEncodingISOLatin1);
+        if ([item objectForKey:@"album"])                                                                     
+            albumTerm=(NSString*)CFURLCreateStringByAddingPercentEscapes(0,(CFStringRef)[item objectForKey:@"album"],0,0,kCFStringEncodingISOLatin1);
     
-            url=[NSURL URLWithString:[NSString stringWithFormat:@"itms://phobos.apple.com/WebObjects/MZSearch.woa/wa/advancedSearchResults?songTerm=%@&artistTerm=%@&albumTerm=%@", titleTerm, artistTerm, albumTerm]];
+        url=[NSURL URLWithString:[NSString stringWithFormat:@"itms://phobos.apple.com/WebObjects/MZSearch.woa/wa/advancedSearchResults?songTerm=%@&artistTerm=%@&albumTerm=%@", titleTerm, artistTerm, albumTerm]];
         }
         
         [[NSWorkspace sharedWorkspace] openURL:url];
