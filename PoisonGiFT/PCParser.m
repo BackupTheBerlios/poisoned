@@ -20,8 +20,8 @@
 
 #import "PCParser.h"
 #import <string.h>
-#import "libgift/libgift.h"
-#import "GPacket.h"
+//#import "libgift/libgift.h"
+//#import "GPacket.h"
 
 @implementation PCParser
 
@@ -29,7 +29,8 @@
 {
 	if (self=[super init])
 	{
-		libgift_init("Poisoned", GLOG_STDERR, NULL);
+                // commented out for release
+		//libgift_init("Poisoned", GLOG_STDERR, NULL);
 		buffer=nil;
 		dispatcher = [[PCDispatcher alloc] init];
 	}
@@ -38,7 +39,9 @@
 
 - (void)dealloc
 {
-	libgift_finish();
+    // commented out for release
+    //libgift_finish();
+        
     //[buffer release];
     [dispatcher release];
     [super dealloc];
@@ -56,13 +59,14 @@
 {
         // we use a custom autoreleasepool
         // to make sure data we don't need anymore gets released immediatly
+        // hopefully this helps - rizzi
         pool = [[NSAutoreleasePool alloc] init];
         
         if (data)
 	{
 		[dispatcher processOutput:[self parse:data]];
 		
-                // commented out the test code -> preparing for a release ;)
+                // // commented out for release
 		// TEST CODE - jjt
 		/*Interface *interface = interface_unserialize((char *)data, strlen(data));
 		if (interface)
