@@ -29,21 +29,21 @@ static PGiFTConf *singleton;
     BOOL test;
     test = [[NSFileManager defaultManager] fileExistsAtPath:
         [[PConfigurationEditor giFThome]
-            stringByAppendingPathComponent:@"gift.conf"]
+            stringByAppendingPathComponent:@"giftd.conf"]
     ];
     if (!singleton && test) {
         singleton = [[PGiFTConf alloc] init];
     }
     if (test) return singleton;
     else {
-        NSLog(@"gift.conf not found");
+        NSLog(@"giftd.conf not found");
         return nil;
     }
 }
 
 - (NSString *)path
 {
-    return [[PConfigurationEditor giFThome] stringByAppendingPathComponent:@"gift.conf"];
+    return [[PConfigurationEditor giFThome] stringByAppendingPathComponent:@"giftd.conf"];
 }
 
 - (id)init
@@ -92,6 +92,40 @@ static PGiFTConf *singleton;
 - (void)setup
 {
     [self setValue:[NSNumber numberWithInt:1] forKey:@"setup"];
+}
+
+- (void)restoreOldPrefs
+{
+    NSString *oldPrefFile = [[PConfigurationEditor giFThome] stringByAppendingPathComponent:@"gift.conf"];
+    
+    // if there's no gift.conf file we don't have to do anything...
+    if (![file_manager fileExistsAtPath:oldPrefFile]) return;
+    
+    NSLog(@"saving old prefs from gift.conf into giftd.conf");
+    
+    NSString *content = [NSString stringWithContentsOfFile:
+                            [[PConfigurationEditor giFThome] stringByAppendingPathComponent:@"gift.conf"]];
+    
+    [lines autorelease];
+    lines = [[content componentsSeparatedByString:@"\n"] mutableCopy];
+    
+    int i,count = [lines count];
+    NSString *_line;
+    for (i=0;i<count;i++) {
+        _line = [self skipWhitespace:[lines objectAtIndex:i]];
+        [lines replaceObjectAtIndex:i withObject:_line];
+        [self readConfLine:i];
+    }
+    
+    NSDictionary *oldprefs = [conf copy];
+    [self read];
+    NSEnumerator *keyEnum = [oldprefs keyEnumerator];
+    NSString *key;
+    while (key = [keyEnum nextObject])
+        [self setValue:[[oldprefs objectForKey:key] objectAtIndex:1] forKey:key];
+        
+    // we now can savely delete the old gift.conf file...
+    [file_manager removeFileAtPath:oldPrefFile handler:nil];
 }
 
 @end

@@ -30,4 +30,8 @@
 
 - (void)setup;
 
+// if the user doesn't have a giftd.conf file yet, but an old gift.conf
+// we just read the old prefs form gift.conf and save them to the new giftd.conf
+- (void)restoreOldPrefs;
+
 @end
