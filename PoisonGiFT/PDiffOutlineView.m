@@ -28,6 +28,13 @@ static NSColor *sStripeColor = nil;
 
 @implementation PDiffOutlineView
 
+- (void)keyDown:(NSEvent *)theEvent
+{
+    NSString *keys = [theEvent characters];
+    if ([keys length]==1 && [keys characterAtIndex:0]==NSDeleteCharacter && [[self delegate] respondsToSelector:@selector(deleteEvent:)]) [[self delegate] performSelector:@selector(deleteEvent:)];
+    else [super keyDown:theEvent];
+}
+
 - (void)setMenuDelegate:(id)new_menu_delegate
 {
     _menu_delegate = new_menu_delegate;
