@@ -127,6 +127,7 @@
         [userDefaults setBool:NO forKey:@"PRemoveCompletedDownloads"];
         [userDefaults setBool:NO forKey:@"PRemoveCancelledDownloads"];
         [userDefaults setBool:NO forKey:@"PImportToiTunes"];
+        [userDefaults setBool:NO forKey:@"PImportToPlaylist"];
         [userDefaults setBool:NO forKey:@"PPlayFile"];
         [userDefaults setBool:NO forKey:@"PDeleteFile"];
         [userDefaults setBool:NO forKey:@"PSwitchToDownloads"];
