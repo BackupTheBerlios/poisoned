@@ -2,17 +2,20 @@
 ** = completed
 
 
-**--saving searches so that people can shutdown and come back to them and 	the gift client can crash and not loose searches.
+**saving searches so that people can shutdown and come back to them and 	the gift client can crash and not loose searches.
 **fix the navagation text so that it is black and not grey.
 **save the drawer size
 **put new results at top of search list
 **Upload and Download throttling
 **fixing the with drawer after hiding the window
 --a slider with two knobs for the size filter
---update to 0.11.2 of gift
+**update to 0.11.3 of gift
 **fix filtering for incoming search results
 **changed default position of the realm menu in the toolbar
 **added play music only if itunes is not playing option
 **rewrite to the itunes scripting so it works a little better
 **randomize port and http_port in OpenFT.conf
 **add port and http_port to the OpenFT prefs
+--make textfields in download prefs editable. this will require code to save the pref after the textfield has been edited
+--allow people to sort search results by two (or more?) columns, for example, first you sort by artist and then you sort by album
+--save search terms
