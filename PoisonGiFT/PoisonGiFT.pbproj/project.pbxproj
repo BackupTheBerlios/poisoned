@@ -5,12 +5,6 @@
 	};
 	objectVersion = 38;
 	objects = {
-		080E96DCFE201CFB7F000001 = {
-			fileRef = 29B97318FDCFA39411CA2CEA;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		080E96DDFE201D6D7F000001 = {
 			children = (
 				1DF30FD704322A0A0021667D,
@@ -444,6 +438,7 @@
 				FF5C5CEE0514442000000037,
 				FF5C5CEF0514442B00000037,
 			);
+			comments = "Preferences are the first thing to get localized, i am working on it. ashton";
 			isa = PBXVariantGroup;
 			name = Preferences.nib;
 			refType = 4;
@@ -2758,7 +2753,6 @@
 		29B97328FDCFA39411CA2CEA = {
 			buildActionMask = 2147483647;
 			files = (
-				080E96DCFE201CFB7F000001,
 				089C165EFE840E0CC02AAC07,
 				1DEEE19C0427474A0021667D,
 				1DACDEFC0428DBC10021667D,
@@ -2840,6 +2834,7 @@
 				FFED4EAD051801B200E8282B,
 				FFED4EAF051801D700E8282B,
 				FFED4EB2051802B800E8282B,
+				FFD9AC5E0519B2BC00668C5C,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3697,12 +3692,14 @@
 			refType = 4;
 		};
 		FF5C5CEE0514442000000037 = {
+			comments = Geraman;
 			isa = PBXFileReference;
 			name = German;
 			path = German.lproj/Preferences.nib;
 			refType = 4;
 		};
 		FF5C5CEF0514442B00000037 = {
+			comments = Spanish;
 			isa = PBXFileReference;
 			name = Spanish;
 			path = Spanish.lproj/Preferences.nib;
@@ -3776,6 +3773,12 @@
 		};
 		FFAE2C150517632300F19E33 = {
 			fileRef = FFAE2C130517632300F19E33;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		FFD9AC5E0519B2BC00668C5C = {
+			fileRef = 29B97318FDCFA39411CA2CEA;
 			isa = PBXBuildFile;
 			settings = {
 			};
