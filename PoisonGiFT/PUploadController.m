@@ -108,7 +108,10 @@
 
 - (NSString *)browsehost;
 {
-    return [[[dataSource itemAtRow:[table selectedRow]] objectForKey:@"PFileUser"] objectAtIndex:2];
+    return [[[[dataSource itemAtRow:[table selectedRow]] 
+                objectForKey:@"PSources"]
+                objectAtIndex:0]
+                objectForKey:@"user"];
 }
 
 - (IBAction)upbrowsehost:(id)sender
