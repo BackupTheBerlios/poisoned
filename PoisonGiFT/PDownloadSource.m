@@ -89,6 +89,11 @@ int iTunesLibraryImport(const char *filenamewithpath)
     return 1;
 }
 
+void playsongifnotplaying(void)
+{
+	//enter in the applescript for playing a song if a current song isnt playing.
+}
+
 void playsonginitunes(void)
 {
 	NSString *scriptSource = [NSString stringWithCString:
@@ -524,6 +529,8 @@ void playsonginitunes(void)
 					{
 						if ([userDefaults boolForKey:@"PPlayFile"])
 							playsonginitunes();
+                                                if ([userDefaults boolForKey:@"PNoFilePlayFile"])
+                                                        playsongifnotplaying();
 						if ([userDefaults boolForKey:@"PDeleteFile"])
 						{
 							if (unlink([path fileSystemRepresentation])==0)
