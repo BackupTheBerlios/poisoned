@@ -88,4 +88,7 @@
 
 - (void)gui_update:(BOOL)activeView;
 
+// FOR TESTING
+- (void)buyAtiTMS:(id)sender;
+
 @end

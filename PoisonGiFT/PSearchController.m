@@ -22,6 +22,10 @@
 #import "PMainController.h"
 #import "PTableMenu.h"
 
+void buysong(char *artist, char *title, char *album, char *filename)
+{
+}
+
 @implementation PSearchController
 
 - (void)awakeFromNib
@@ -550,6 +554,33 @@
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectTableColumn:(NSTableColumn *)tableColumn
 {
     return NO;
+}
+
+// FOR TESTING...
+- (void)buyAtiTMS:(id)sender
+{
+    if ([r_table numberOfSelectedRows]!=1) return;
+    NSString *title = nil;	char *c_title=NULL;
+    NSString *artist = nil;	char *c_artist=NULL;
+    NSString *album = nil;	char *c_album=NULL;
+    NSString *filename = nil;	char *c_filename=NULL;
+    NSDictionary *item = [r_table itemAtRow:[r_table selectedRow]];
+        
+    title	= [item objectForKey:@"title"];
+    artist	= [item objectForKey:@"artist"];
+    album	= [item objectForKey:@"album"];
+    filename	= [item objectForKey:@"file"];
+    
+    if (filename) 
+        c_filename	= (char *)[filename cString];
+    if (artist)
+        c_artist	= (char *)[artist cString];
+    if (title)
+        c_title		= (char *)[title cString];
+    if (album)
+        c_album		= (char *)[album cString];
+    
+    buysong(c_title,c_artist,c_album,c_filename);
 }
 
 @end
