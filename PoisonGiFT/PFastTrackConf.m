@@ -57,7 +57,6 @@ static PFastTrackConf *singleton;
 
 - (void)dealloc
 {	
-    [int_confs release];
     [string_confs release];
     [colon_confs release];
     [space_confs release];
