@@ -67,6 +67,8 @@
         [NSArray arrayWithObjects:@"ADDUPLOAD",@"CHGUPLOAD",@"DELUPLOAD",nil]
     ];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disconnected:) name:@"PoisonConnectionClosed" object:commander];
+    // datasource needs the commander for cancelling uploads
+    [dataSource setCommander:commander];
 }
 
 - (void)disconnected:(id)sender
