@@ -2671,6 +2671,8 @@
 				1DF30FE504322F030021667D,
 				1D73A0DB04CB51CE00000002,
 				1D73A0DC04CB51CE00000002,
+				964786FE04E370ED0063CED0,
+				964786FF04E370ED0063CED0,
 			);
 			isa = PBXGroup;
 			name = Core;
@@ -3073,6 +3075,7 @@
 				1D73A0D904CB51AE00000002,
 				1D73A0DD04CB51CE00000002,
 				96C77C1104DB09AA00BC13BF,
+				9647870004E370ED0063CED0,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3212,6 +3215,7 @@
 				1D73A0DA04CB51AE00000002,
 				1D73A0DE04CB51CE00000002,
 				96C77C1204DB09AA00BC13BF,
+				9647870104E370ED0063CED0,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3394,6 +3398,34 @@
 		};
 		96211DC404D8591D004C44A8 = {
 			fileRef = 96211DBB04D858E2004C44A8;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		964786FE04E370ED0063CED0 = {
+			expectedFileType = sourcecode.c.h;
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = GPacket.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		964786FF04E370ED0063CED0 = {
+			expectedFileType = sourcecode.c.objc;
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = GPacket.m;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		9647870004E370ED0063CED0 = {
+			fileRef = 964786FE04E370ED0063CED0;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		9647870104E370ED0063CED0 = {
+			fileRef = 964786FF04E370ED0063CED0;
 			isa = PBXBuildFile;
 			settings = {
 			};

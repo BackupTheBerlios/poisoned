@@ -14,7 +14,7 @@
 			96B545AC04CB9421007DC9E1,
 		);
 		perUserDictionary = {
-			PBXPerProjectTemplateStateSaveDate = 81893514;
+			PBXPerProjectTemplateStateSaveDate = 81999031;
 			PBXWorkspaceContents = (
 				{
 				},
@@ -89,14 +89,14 @@
 				WindowFrame = "{{191, 128}, {750, 502}}";
 			};
 			"PBXWorkspaceGeometries:PBXConfiguration.PBXModule.PBXProjectWorkspaceModule" = {
-				Frame = "{{0, 0}, {1031, 609}}";
-				WindowFrame = "{{105, 75}, {1031, 671}}";
+				Frame = "{{0, 0}, {600, 321}}";
+				WindowFrame = "{{21, 363}, {600, 383}}";
 			};
 			"PBXWorkspaceGeometries:PBXConfiguration.PBXModule.PBXRunSessionModule" = {
 				Frame = "{{0, 0}, {745, 442}}";
-				WindowFrame = "{{203, 272}, {745, 464}}";
+				WindowFrame = "{{7, 208}, {745, 464}}";
 			};
-			PBXWorkspaceStateSaveDate = 81893514;
+			PBXWorkspaceStateSaveDate = 81999031;
 		};
 		projectwideBuildSettings = {
 		};
