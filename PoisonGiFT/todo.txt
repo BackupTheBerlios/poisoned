@@ -24,3 +24,4 @@
 --fix itunes importing into classic version of itunes
 --make poisoned localizable
 **fix downloading files with international character file names
+--quote:"Just thought I'd give you a heads-up - I'm not sure which version of iTunes added this, maybe it's always been there, but you can rename the Library to anything you want... then when the songs import from Poisoned they are added to a playlist called 'Library' instead of the library, since the name is different. The songs are still in the library, too, so it's not really that big of a deal, so this is  a pretty minor bug."
