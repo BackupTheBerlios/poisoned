@@ -109,4 +109,6 @@
 - (BOOL)validateResume;
 - (BOOL)validateFindMoreSources;
 
+- (void)createDockBadgeIcon;  // j.ashton
+
 @end

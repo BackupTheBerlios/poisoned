@@ -49,11 +49,11 @@ static POpenNapConf *singleton;
             @"max_connections",
             @"random_alias",
             @"use_napigator",
-            @"napigator_ip",
             nil];
         
         string_confs = [[NSArray alloc] initWithObjects:
             @"alias",
+    @"napigator_ip",
             nil];
         colon_confs = [[NSArray alloc] initWithObjects:
             nil];

@@ -619,48 +619,7 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
 	{ // clean up completed downloads...
         [item setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:YES],[NSNumber numberWithBool:NO],@"Completed",nil] forKey:@"PProgress"];
         
-        
-//* add dock badge - j.ashton*//
-/* note that this is almost ready to draw numbers into the badge for the
-number of completions, will finish it later */
-NSImage *appImage, *image;
-NSDictionary *attrs;
-NSString *str;
-NSSize iconSize, strSize;
-NSPoint p;
-bool showApp = YES;
-// get the app's icon
-appImage = [NSImage imageNamed:@"NSApplicationIcon"];
-image = [[NSImage alloc] initWithSize:[appImage size]];
-NSImage *badge = [NSImage imageNamed: @"badge.tiff"];
-// get size
-iconSize = [appImage size];
-// set up font attributes based on size of icon
-attrs = [NSDictionary dictionaryWithObjectsAndKeys:
-[NSFont boldSystemFontOfSize:22], NSFontAttributeName,
-[NSColor whiteColor], NSForegroundColorAttributeName, nil];
-str = @"1";
-// define point to draw string based on string bounding box
-strSize = [str sizeWithAttributes:attrs];
-//p = NSMakePoint((iconSize.width - strSize.width)/2.0,(iconSize.height - strSize.height)/2.0);
-p = NSMakePoint(99,20);
-// create the dock image
-[image setFlipped:YES];
-[image lockFocus];
-// display original application image if desired
-if ( showApp == YES )
-[appImage compositeToPoint:NSMakePoint(0, [appImage size].height)
-operation:NSCompositeSourceOver];
-// this is the green check
-[badge compositeToPoint:NSMakePoint(80,60) operation:NSCompositeSourceOver];
-[str drawAtPoint:p withAttributes:attrs];
-[image unlockFocus];
-// set the new dock image
-[NSApp setApplicationIconImage:image];
-[image release];
-[appImage release];
-[badge release];
-        
+        [self createDockBadgeIcon]; // add dock badge - j.ashton        
         
         [item setObject:[NSArray arrayWithObjects:[NSNumber numberWithBool:YES],@"",@"",nil] forKey:@"PTransfer"];
         [[item objectForKey:@"PSize"] replaceObjectAtIndex:1 withObject:[self calcSize:[item objectForKey:@"size"]]];
@@ -986,6 +945,50 @@ operation:NSCompositeSourceOver];
     }
     [outlineView reloadData];
     return NO;
+}
+
+/* create and add our custom dock icon - j.ashton */
+- (void)createDockBadgeIcon
+{
+    /* note that this is almost ready to draw numbers into the badge for the
+    number of completions, will finish it later */
+    NSImage *appImage, *image;
+    NSDictionary *attrs;
+    NSString *str;
+    NSSize iconSize, strSize;
+    NSPoint p;
+    bool showApp = YES;
+    // get the app's icon
+    appImage = [NSImage imageNamed:@"NSApplicationIcon"];
+    image = [[NSImage alloc] initWithSize:[appImage size]];
+    NSImage *badge = [NSImage imageNamed: @"badge.tiff"];
+    // get size
+    iconSize = [appImage size];
+    // set up font attributes based on size of icon
+    attrs = [NSDictionary dictionaryWithObjectsAndKeys:
+        [NSFont boldSystemFontOfSize:22], NSFontAttributeName,
+        [NSColor whiteColor], NSForegroundColorAttributeName, nil];
+    str = @"";
+    // define point to draw string based on string bounding box
+    strSize = [str sizeWithAttributes:attrs];
+    p = NSMakePoint(99,20);
+    // create the dock image
+    [image setFlipped:YES];
+    [image lockFocus];
+    // display original application image if desired
+    if ( showApp == YES )
+        [appImage compositeToPoint:NSMakePoint(0, [appImage size].height)
+                         operation:NSCompositeSourceOver];
+    // this is the green check
+    [badge compositeToPoint:NSMakePoint(80,60) operation:NSCompositeSourceOver];
+    [str drawAtPoint:p withAttributes:attrs];  //this will draw the count into the badge...
+    [image unlockFocus];
+    // set the new dock image
+    [NSApp setApplicationIconImage:image];
+    [image release];
+    [appImage release];
+    [badge release];
+    
 }
 
 @end
