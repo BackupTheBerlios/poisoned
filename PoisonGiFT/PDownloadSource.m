@@ -56,7 +56,7 @@ int iTunesPlaylistImport(const char *filenamewithpath, int playlistmode)
                 "end tell"], filenamewithpath];
         }
         
-    //    NSLog(@"scriptSource: %@", scriptSource);
+        // NSLog(@"scriptSource: %@", scriptSource);
     
 	NSAppleScript *script = [[[NSAppleScript alloc] initWithSource:scriptSource] autorelease];
 	NSDictionary *status = NULL;
@@ -80,19 +80,19 @@ int iTunesPlaylistImport(const char *filenamewithpath, int playlistmode)
 
 void playsonginitunes(int playlistmode, int noplaywhenplaying)
 {
-	NSString *playstring;
-	NSString *noplaystring;
-
+        
+	NSString *playstring, *noplaystring;
+        
 	if (playlistmode) 
 		playstring=@"playlist \"Poisoned\"";
 	else 
 		playstring=@"library playlist 1";
-		
+                
 	if (noplaywhenplaying)
 		noplaystring=@"if player state is not playing then\n";
 	else 
 		noplaystring=@"if stash is 0 then\n";
-	
+
 	NSString *scriptSource = [NSString stringWithFormat:[NSString stringWithCString:
 	"set cd to (get current date)\n"
 	"set stash to 0\n"
@@ -105,15 +105,15 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
 	"		set tDif to (cd - (get date added))\n"
 	"		if stash is 0 or stash is greater than tDif then\n"
 	"			copy tDif to stash\n"
-	"			set theLoc to location\n"
+	"			set theLoc to t\n"
 	"		end if\n"
 	"	end tell\n"
 	"end repeat\n"
-	"play theLoc\n"
+	"play track theLoc of theLib\n"
         "end if\n"
 	"end tell"], noplaystring, playstring];
         
-    //    NSLog(@"scriptSource: %@", scriptSource);
+        // NSLog(@"scriptSource: %@", scriptSource);
         
 	NSAppleScript *script = [[[NSAppleScript alloc] initWithSource:scriptSource] autorelease];
 	NSDictionary *status = NULL;
@@ -567,7 +567,6 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
     NSMutableDictionary *item	= [tickets objectForKey:ticket];			// already saved item...
     NSNumber *_stateobj = [item objectForKey:@"PStatus"];
     int _state = 0;
-    int importGood=0;
     if (_stateobj) _state=[_stateobj intValue];
 
     NSMutableDictionary *new	= [data objectAtIndex:2];
@@ -627,44 +626,41 @@ void playsonginitunes(int playlistmode, int noplaywhenplaying)
                 forKey:@"PSize"];
         }
         [table reloadItem:item reloadChildren:YES];
-        
-		PGiFTConf *gift_conf = [PGiFTConf singleton];
-		[gift_conf read];
-		// begin iTunes code
+                
+        // begin iTunes code
         if ([userDefaults boolForKey:@"PImportToiTunes"])
-		{
-			NSString *path = [gift_conf optionForKey:@"completed"];
-			if (path)
-			{
-				NSString *fileName = [[item objectForKey:@"PFileUser"] objectAtIndex:1];
-				path = [path stringByAppendingPathComponent:fileName];
-				path = [path stringByStandardizingPath];
-                                NSString *pathExtension = [[path pathExtension] lowercaseString];
-				if ([pathExtension isEqualToString:@"mp3"] ||
-					[pathExtension isEqualToString:@"wav"] ||
-					[pathExtension isEqualToString:@"aac"] ||
-					[pathExtension isEqualToString:@"aif"] ||
-					[pathExtension isEqualToString:@"aiff"])
-				{
-					importGood=iTunesPlaylistImport([path fileSystemRepresentation], [userDefaults boolForKey:@"PImportToPlaylist"]);
-					if (importGood && [userDefaults boolForKey:@"PPlayFile"]) 
-						playsonginitunes([userDefaults boolForKey:@"PImportToPlaylist"], [userDefaults boolForKey:@"PNoFilePlayFile"]);
-					if (importGood && [userDefaults boolForKey:@"PDeleteFile"])
-					{
-						if (unlink([path fileSystemRepresentation])==0)
-							NSLog(@"deleting: %s", [path fileSystemRepresentation]);
-						else
-							NSLog(@"could not delete file: %s", [path fileSystemRepresentation]);
-					}
-				}
-			}
+        {
+            PGiFTConf *gift_conf = [PGiFTConf singleton];
+            [gift_conf read];
+            NSString *path = [gift_conf optionForKey:@"completed"];
+            if (path)
+            {
+                NSString *fileWithPath = [[path stringByAppendingPathComponent: 
+                        [[item objectForKey:@"PFileUser"] objectAtIndex:1]] stringByStandardizingPath];
+                NSSet *ext = [NSSet setWithObjects:@"mp3",@"wav",@"m4u",@"m4a",@"aif",@"aiff",nil];
+                if ([ext containsObject:[[fileWithPath pathExtension] lowercaseString]]) 
+                {
+                    if (iTunesPlaylistImport([fileWithPath fileSystemRepresentation], 
+                            [userDefaults boolForKey:@"PImportToPlaylist"])) 
+                    {
+                        if ([userDefaults boolForKey:@"PPlayFile"]) 
+                            playsonginitunes([userDefaults boolForKey:@"PImportToPlaylist"], 
+                                    [userDefaults boolForKey:@"PNoFilePlayFile"]);
+                        if ([userDefaults boolForKey:@"PDeleteFile"])
+                        {
+                            if (unlink([fileWithPath fileSystemRepresentation])==0) 
+                                NSLog(@"deleting: %s", [fileWithPath fileSystemRepresentation]);
+                            else
+                                NSLog(@"could not delete file: %s", [fileWithPath fileSystemRepresentation]);
+                        }
+                        [[NSWorkspace sharedWorkspace] noteFileSystemChanged:[gift_conf optionForKey:@"completed"]];
+                    }
+                }
+            }
         }
-		// end iTunes code - jjt
-		
-		// notify the Finder and any other application using FNSubscribe API
-		// that the download completed directory has changed - jjt
-		[[NSWorkspace sharedWorkspace] noteFileSystemChanged:[gift_conf optionForKey:@"completed"]];
-		return;
+        // end iTunes code
+
+        return;
     }
     else if ([state isEqualToString:@"Paused"]) {
         if (_state!=PRESUMING) { // if resuming... => don't display status as paused!!!
