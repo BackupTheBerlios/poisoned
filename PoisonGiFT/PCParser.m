@@ -54,20 +54,27 @@
 // GETTING THE DATA
 - (void)processOutput:(const char *)data
 {
-	if (data)
+        // we use a custom autoreleasepool
+        // to make sure data we don't need anymore gets released immediatly
+        pool = [[NSAutoreleasePool alloc] init];
+        
+        if (data)
 	{
 		[dispatcher processOutput:[self parse:data]];
 		
+                // commented out the test code -> preparing for a release ;)
 		// TEST CODE - jjt
-		Interface *interface = interface_unserialize((char *)data, strlen(data));
+		/*Interface *interface = interface_unserialize((char *)data, strlen(data));
 		if (interface)
 		{
 			GPacket *pkt = [GPacket packetWithInterface:interface];
 			NSLog(@"GPacket command: %@", [pkt command]);
 		}
 		else
-			NSLog(@"interface parse error");
+			NSLog(@"interface parse error");*/
 	}
+        
+        [pool release];
 }
 
 - (NSArray *)parse:(const char *)data

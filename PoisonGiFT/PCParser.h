@@ -35,6 +35,9 @@
         
     // job done, dispatch the parsed data
     PCDispatcher *dispatcher;
+    
+    // custom autoreleasepool for parsing
+    NSAutoreleasePool *pool;
 }
 
 - (void)registerController:(id)controller forCommands:(NSArray *)cmd;
