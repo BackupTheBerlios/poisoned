@@ -93,6 +93,14 @@
     NSString *user		= [item objectForKey:@"user"];
     NSString *hash		= [item objectForKey:@"hash"];
     NSArray *meta		= [data objectAtIndex:3];
+    /*if(!hash) //return;
+    {
+        hash = [NSString stringWithFormat:@"md5:%d",fakehash];
+        fakehash++;
+        //NSLog(hash);
+    }*/
+    NSLog([NSString stringWithFormat:@"User: %@ Hash: %@",user,hash]);
+    //hash = @"md5:75ABCA0465D9E6263359F64301B1D6C2";
     //if ( ([meta count]>0) && (bitrate=[[[meta objectAtIndex:0] objectAtIndex:2] objectForKey:@"bitrate"]) )
     //    [item setObject:bitrate forKey:@"bitrate"];
     //else [item setObject:@"" forKey:@"bitrate"];
