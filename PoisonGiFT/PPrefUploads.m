@@ -108,9 +108,9 @@
     
     [maxPerUser setIntValue:[[gift_conf optionForKey:@"max_peruser_uploads"] intValue]];
     
-    [maxUpstream setIntValue:[[gift_conf optionForKey:@"upstream"] intValue]];
+    [maxUpstream setIntValue:[[gift_conf optionForKey:@"upstream"] intValue]/1024];
     
-    [maxDownstream setIntValue:[[gift_conf optionForKey:@"downstream"] intValue]];
+    [maxDownstream setIntValue:[[gift_conf optionForKey:@"downstream"] intValue]/1024];
 }
 
 - (IBAction)cancelledPrefsChanged:(id)sender
@@ -184,13 +184,13 @@
 
 - (IBAction)maxUploadSpeedChanged:(id)sender
 {
-    [gift_conf setValue:[NSNumber numberWithInt:[sender intValue]] forKey:@"upstream"];
+    [gift_conf setValue:[NSNumber numberWithInt:[sender intValue]*1024] forKey:@"upstream"];
     [self readConfFiles];
 }
 
 - (IBAction)maxDownloadSpeedChanged:(id)sender
 {
-    [gift_conf setValue:[NSNumber numberWithInt:[sender intValue]] forKey:@"downstream"];
+    [gift_conf setValue:[NSNumber numberWithInt:[sender intValue]*1024] forKey:@"downstream"];
     [self readConfFiles];
 }
 
