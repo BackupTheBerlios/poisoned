@@ -22,8 +22,67 @@
 #import "PMainController.h"
 #import "PTableMenu.h"
 
-void buysong(char *artist, char *title, char *album, char *filename)
+// this code is from
+
+void buysong(char *title, char *artist, char *album, char *filename)
 {
+        int i,i1=0;
+        
+        if (artist=="" && title=="" && album=="") 
+        {
+            for (i=0;i<strlen(filename);i++) 
+              if (filename[i]=='-') 
+                 i1=i+1;
+            for (i=0;i<strlen(filename);i++) 
+            {
+                if (filename[i]=='.')
+                    filename[i]=0;
+                title=&filename[i1];
+            }
+        }
+        
+
+        NSString *scriptSource = [NSString stringWithFormat:[NSString stringWithCString:
+        "to parse_spaces_in(x)\n"
+        "	set a to text of x\n"
+        "	set b to {}\n"
+        "	repeat with i from 1 to length of a\n"
+        "		if character i of a is space then\n"
+        "			copy \"%%20\" to end of b\n"
+        "		else\n"
+        "			copy character i of a to end of b\n"
+        "		end if\n"
+        "	end repeat\n"
+        "	return b as string\n"
+        "end parse_spaces_in\n"
+        "tell application \"iTunes\"\n"
+        "       copy my parse_spaces_in(\"%s\") to theParsedArtist\n"
+        "	copy my parse_spaces_in(\"%s\") to theParsedTrack\n"
+        "       copy my parse_spaces_in(\"%s\") to theParsedAlbum\n"
+        "	set searchpage to \"itms://phobos.apple.com/WebObjects/MZSearch.woa/wa/advancedSearchResults?\"\n"
+        "       set searchpage to searchpage & \"songTerm=\" & theParsedTrack & \"&\"\n"
+        "       set searchpage to searchpage & \"artistTerm=\" & theParsedArtist & \"&\"\n"
+        "       set searchpage to searchpage & \"albumTerm=\" & theParsedAlbum & \"&\"\n"        
+        "end tell\n"
+        "open location searchpage\n"], artist, title, album];
+	
+        
+        NSLog(@"scriptSource: %@", scriptSource);
+        
+	NSAppleScript *script = [[[NSAppleScript alloc] initWithSource:scriptSource] autorelease];
+	NSDictionary *status = NULL;
+	NSAppleEventDescriptor *descriptor = [script executeAndReturnError:&status];
+	if ([descriptor descriptorType] == 'obj ')
+		NSLog(@"Buysong in iTunes script run successfully");
+	else if ([descriptor descriptorType] == typeNull)
+	{
+		NSLog(@"Buysong in iTunes script is still running");
+	}
+	else
+	{
+		NSLog(@"Buysong in iTunes script returned error: %@", [status objectForKey: @"NSAppleScriptErrorMessage"]);
+	}
+	// non destructive if error is returned so no need to check at this time
 }
 
 @implementation PSearchController
@@ -560,10 +619,10 @@ void buysong(char *artist, char *title, char *album, char *filename)
 - (void)buyAtiTMS:(id)sender
 {
     if ([r_table numberOfSelectedRows]!=1) return;
-    NSString *title = nil;	char *c_title=NULL;
-    NSString *artist = nil;	char *c_artist=NULL;
-    NSString *album = nil;	char *c_album=NULL;
-    NSString *filename = nil;	char *c_filename=NULL;
+    NSString *title = nil;	char *c_title="";
+    NSString *artist = nil;	char *c_artist="";
+    NSString *album = nil;	char *c_album="";
+    NSString *filename = nil;	char *c_filename="";
     NSDictionary *item = [r_table itemAtRow:[r_table selectedRow]];
         
     title	= [item objectForKey:@"title"];
