@@ -48,6 +48,7 @@
 
 - (IBAction)cancelledPrefsChanged:(id)sender;
 - (IBAction)completedPrefsChanged:(id)sender;
+- (IBAction)incomingPrefsChanged:(id)sender;
 - (IBAction)importPrefsChanged:(id)sender;
 - (IBAction)importPlaylistChanged:(id)sender;
 - (IBAction)playfilePrefsChanged:(id)sender;
@@ -55,6 +56,8 @@
 - (IBAction)deletefilePrefsChanged:(id)sender;
 - (IBAction)switchToDownloadPrefsChanged:(id)sender;
 
+- (IBAction)completedChanged:(id)sender;
+- (IBAction)incomingChanged:(id)sender;
 - (IBAction)browseIncoming:(id)sender;
 - (IBAction)browseCompleted:(id)sender;
 

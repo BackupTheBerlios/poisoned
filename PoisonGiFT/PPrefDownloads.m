@@ -163,6 +163,20 @@
     else [userDefaults setBool:NO forKey:@"PSwitchToDownloads"];
 }
 
+- (IBAction)completedChanged:(id)sender
+{
+    [gift_conf setValue:[[sender stringValue] stringByAbbreviatingWithTildeInPath] forKey:@"completed"];
+    [self readConfFiles];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"PCompletedDirectoryChanged" object:self userInfo:nil];
+}
+
+- (IBAction)incomingChanged:(id)sender
+{
+    [gift_conf setValue:[[sender stringValue] stringByAbbreviatingWithTildeInPath] forKey:@"incoming"];
+    [self readConfFiles];
+}
+
+
 - (IBAction)browseIncoming:(id)sender
 {
     NSOpenPanel *open = [NSOpenPanel openPanel];

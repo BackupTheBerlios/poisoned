@@ -33,10 +33,12 @@
                 browseCompleted = id; 
                 browseIncoming = id; 
                 cancelledPrefsChanged = id; 
+                completedChanged = id; 
                 completedPrefsChanged = id; 
                 deletefilePrefsChanged = id; 
                 importPlaylistChanged = id; 
                 importPrefsChanged = id; 
+                incomingChanged = id; 
                 playFileIfNoFilePrefsChanged = id; 
                 playfilePrefsChanged = id; 
                 switchToDownloadPrefsChanged = id; 

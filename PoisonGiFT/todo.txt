@@ -6,7 +6,7 @@
 **fix the navagation text so that it is black and not grey.
 **save the drawer size
 **put new results at top of search list
-** Upload and Download throttling
+**Upload and Download throttling
 **fixing the with drawer after hiding the window
 --a slider with two knobs for the size filter
 **update to 0.11.3 of gift
@@ -18,10 +18,10 @@
 **add port and http_port to the OpenFT prefs
 **fix delete gnutella sources
 **delete sources/downloads/uploads with the delete key
---make textfields in download prefs editable. this will require code to save the pref after the textfield has been edited
+**make textfields in download prefs editable. this will require code to save the pref after the textfield has been edited
 --allow people to sort search results by two (or more?) columns, for example, first you sort by artist and then you sort by album
 --save search terms
---fix itunes importing into classic version of itunes
+++fix itunes importing into classic version of itunes "this is a situation caued by people who use both classic and cocoa itunes we can only called the application the OS knows to be itunes. these users should stop using OS9, its dead. Or just stop using itunes in OS9 at the very least. This is like asking us to fix loading of classic IE when they have classic IE as their default browser."
 --make poisoned localizable
 **fix downloading files with international character file names
---quote:"Just thought I'd give you a heads-up - I'm not sure which version of iTunes added this, maybe it's always been there, but you can rename the Library to anything you want... then when the songs import from Poisoned they are added to a playlist called 'Library' instead of the library, since the name is different. The songs are still in the library, too, so it's not really that big of a deal, so this is  a pretty minor bug."
+**quote:"Just thought I'd give you a heads-up - I'm not sure which version of iTunes added this, maybe it's always been there, but you can rename the Library to anything you want... then when the songs import from Poisoned they are added to a playlist called 'Library' instead of the library, since the name is different. The songs are still in the library, too, so it's not really that big of a deal, so this is  a pretty minor bug."
