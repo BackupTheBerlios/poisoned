@@ -14,7 +14,7 @@
 			96B545AC04CB9421007DC9E1,
 		);
 		perUserDictionary = {
-			PBXPerProjectTemplateStateSaveDate = 81999031;
+			PBXPerProjectTemplateStateSaveDate = 82965794;
 			PBXWorkspaceContents = (
 				{
 				},
@@ -31,16 +31,16 @@
 			};
 			"PBXWorkspaceContents:PBXConfiguration.PBXModule.PBXNavigatorGroup" = {
 				NavContent0 = {
-					bookmark = 960E70E504E1AECA00C14DDB;
+					bookmark = 96E0C07704F1FA3400F5F23B;
 					history = (
-						960E70E204E1AEBF00C14DDB,
+						96E0C07404F1FA0200F5F23B,
 					);
 				};
 				NavCount = 1;
 				NavGeometry0 = {
 					Frame = "{{0, 0}, {750, 460}}";
 					NavBarVisible = YES;
-					WindowFrame = "{{191, 128}, {750, 502}}";
+					WindowFrame = "{{426, 148}, {750, 502}}";
 				};
 				NavSplitVertical = NO;
 			};
@@ -51,7 +51,7 @@
 			PBXWorkspaceGeometries = (
 				{
 					Frame = "{{0, 0}, {1031, 609}}";
-					WindowFrame = "{{105, 75}, {1031, 671}}";
+					WindowFrame = "{{50, 75}, {1031, 671}}";
 				},
 			);
 			"PBXWorkspaceGeometries:PBXConfiguration.PBXModule.PBXBatchFindModule" = {
@@ -79,24 +79,24 @@
 			"PBXWorkspaceGeometries:PBXConfiguration.PBXModule.PBXDebugSessionModule" = {
 				DebugConsoleDrawerSize = "{100, 120}";
 				DebugConsoleVisible = None;
-				DebugConsoleWindowFrame = "{{446, 120}, {587, 478}}";
+				DebugConsoleWindowFrame = "{{6, 139}, {587, 478}}";
 				DebugSTDIOWindowFrame = "{{200, 200}, {500, 300}}";
 				Frame = "{{0, 0}, {749, 531}}";
 				WindowFrame = "{{29, 72}, {749, 609}}";
 			};
 			"PBXWorkspaceGeometries:PBXConfiguration.PBXModule.PBXNavigatorGroup" = {
 				Frame = "{{0, 0}, {750, 480}}";
-				WindowFrame = "{{191, 128}, {750, 502}}";
+				WindowFrame = "{{426, 148}, {750, 502}}";
 			};
 			"PBXWorkspaceGeometries:PBXConfiguration.PBXModule.PBXProjectWorkspaceModule" = {
-				Frame = "{{0, 0}, {600, 321}}";
-				WindowFrame = "{{21, 363}, {600, 383}}";
+				Frame = "{{0, 0}, {1031, 609}}";
+				WindowFrame = "{{50, 75}, {1031, 671}}";
 			};
 			"PBXWorkspaceGeometries:PBXConfiguration.PBXModule.PBXRunSessionModule" = {
 				Frame = "{{0, 0}, {745, 442}}";
 				WindowFrame = "{{7, 208}, {745, 464}}";
 			};
-			PBXWorkspaceStateSaveDate = 81999031;
+			PBXWorkspaceStateSaveDate = 82965794;
 		};
 		projectwideBuildSettings = {
 		};
