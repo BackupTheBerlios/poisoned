@@ -42,39 +42,50 @@
     IBOutlet NSImageView *statusImage;
         
     PCommand *commander;
-    id controller;
+    id controller;		// PMainController
     
     NSUserDefaults *userDefaults;
     
-    NSTimer *timer;	// timer for the STATS command
-    NSString *attach;
+    NSTask *task;
+    NSTimer *timer;		// timer for the STATS command
+    NSString *attach;		// giFT & version
     
-    PIconShop *icon_shop;
-    
-    BOOL protosSend;
-    
-    BOOL shouldBeConnected;	// if this is YES and disconnected gets called -> giFT crashed
-    BOOL remoteDaemon;
-    BOOL _startDaemon;
+    PIconShop *icon_shop;	// protcol icons
+        
+    //BOOL shouldBeConnected;	// if this is YES and disconnected gets called -> giFT crashed
+    //BOOL remoteDaemon;
+    //BOOL _startDaemon;
 	
-    BOOL synchronizing;
+    BOOL _protosSend;
+    BOOL _synchronizing;
+    
+    // we need this when we get the PoisonConnectionClosed notification
+    // YES -> the user closed the connection
+    // NO  -> connection closed	=> error
+    BOOL _userDisconnected;
+    BOOL _startingDaemon;
+    BOOL _remoteDaemon;
+    BOOL _connectOnce;
 }
 
 - (void)periodicalUpdate;
 
 - (void)gui_update:(BOOL)activeView;
 
-- (BOOL)connectLocal:(BOOL)local;
 - (void)connected;
-- (void)connectionTimedOut;
+- (void)connectionFailed;
+// - (void)disconnected:(id)sender
+
+- (IBAction)launch:(id)sender;			// startgift button
 - (void)startDaemon;
 
-- (IBAction)connect:(id)sender;
-- (IBAction)connectRemote:(id)sender;
+- (IBAction)connect:(id)sender;			// connect button
+- (BOOL)connectToLocalDaemon;
+
+// remote connections
 - (IBAction)runConnectionSheet:(id)sender;
+- (IBAction)connectRemote:(id)sender;
 - (IBAction)cancelSheet:(id)sender;
-- (IBAction)launch:(id)sender;
-- (void)disconnected:(id)sender;
 
 - (void)checkConfFiles;
 - (void)check:(NSString *)path;
